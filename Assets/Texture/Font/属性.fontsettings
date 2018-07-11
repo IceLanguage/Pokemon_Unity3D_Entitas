@@ -1,0 +1,317 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!128 &12800000
+Font:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: "\u5C5E\u6027"
+  serializedVersion: 5
+  m_LineSpacing: 0.1
+  m_DefaultMaterial: {fileID: 2100000, guid: fa1e0e2dc95220c4db88e119a1012fea, type: 2}
+  m_FontSize: 0
+  m_Texture: {fileID: 0}
+  m_AsciiStartOffset: 0
+  m_Tracking: 1
+  m_CharacterSpacing: 0
+  m_CharacterPadding: 1
+  m_ConvertCase: 0
+  m_CharacterRects:
+  - serializedVersion: 2
+    index: 24694
+    uv:
+      serializedVersion: 2
+      x: 0.043
+      y: 0.87263155
+      width: 0.021000002
+      height: 0.012631595
+    vert:
+      serializedVersion: 2
+      x: 0
+      y: 12
+      width: 42
+      height: -24
+    advance: 42
+    flipped: 0
+  - serializedVersion: 2
+    index: 33324
+    uv:
+      serializedVersion: 2
+      x: 0.0075
+      y: 0.9778947
+      width: 0.021
+      height: 0.012631595
+    vert:
+      serializedVersion: 2
+      x: 0
+      y: 12
+      width: 42
+      height: -24
+    advance: 42
+    flipped: 0
+  - serializedVersion: 2
+    index: 20912
+    uv:
+      serializedVersion: 2
+      x: 0.0425
+      y: 0.9178947
+      width: 0.021000002
+      height: 0.012631595
+    vert:
+      serializedVersion: 2
+      x: 0
+      y: 12
+      width: 42
+      height: -24
+    advance: 42
+    flipped: 0
+  - serializedVersion: 2
+    index: 38754
+    uv:
+      serializedVersion: 2
+      x: 0.0075
+      y: 0.9178947
+      width: 0.021
+      height: 0.012631595
+    vert:
+      serializedVersion: 2
+      x: 0
+      y: 12
+      width: 42
+      height: -24
+    advance: 42
+    flipped: 0
+  - serializedVersion: 2
+    index: 31934
+    uv:
+      serializedVersion: 2
+      x: 0.0425
+      y: 0.8578947
+      width: 0.021000002
+      height: 0.012631595
+    vert:
+      serializedVersion: 2
+      x: 0
+      y: 12
+      width: 42
+      height: -24
+    advance: 42
+    flipped: 0
+  - serializedVersion: 2
+    index: 30707
+    uv:
+      serializedVersion: 2
+      x: 0.0075
+      y: 0.88789475
+      width: 0.021
+      height: 0.012631595
+    vert:
+      serializedVersion: 2
+      x: 0
+      y: 12
+      width: 42
+      height: -24
+    advance: 42
+    flipped: 0
+  - serializedVersion: 2
+    index: 28789
+    uv:
+      serializedVersion: 2
+      x: 0.042
+      y: 0.88736844
+      width: 0.021000002
+      height: 0.0126315355
+    vert:
+      serializedVersion: 2
+      x: 0
+      y: 12
+      width: 42
+      height: -24
+    advance: 42
+    flipped: 0
+  - serializedVersion: 2
+    index: 26007
+    uv:
+      serializedVersion: 2
+      x: 0.007
+      y: 0.9026316
+      width: 0.021000002
+      height: 0.012631595
+    vert:
+      serializedVersion: 2
+      x: 0
+      y: 12
+      width: 42
+      height: -24
+    advance: 42
+    flipped: 0
+  - serializedVersion: 2
+    index: 27602
+    uv:
+      serializedVersion: 2
+      x: 0.008
+      y: 0.94789475
+      width: 0.020999998
+      height: 0.0126315355
+    vert:
+      serializedVersion: 2
+      x: 0
+      y: 12
+      width: 42
+      height: -24
+    advance: 42
+    flipped: 0
+  - serializedVersion: 2
+    index: 27700
+    uv:
+      serializedVersion: 2
+      x: 0.0425
+      y: 0.9631579
+      width: 0.021000002
+      height: 0.012631595
+    vert:
+      serializedVersion: 2
+      x: 0
+      y: 12
+      width: 42
+      height: -24
+    advance: 42
+    flipped: 0
+  - serializedVersion: 2
+    index: 28779
+    uv:
+      serializedVersion: 2
+      x: 0.0425
+      y: 0.9778947
+      width: 0.021000002
+      height: 0.012631595
+    vert:
+      serializedVersion: 2
+      x: 0
+      y: 12
+      width: 42
+      height: -24
+    advance: 42
+    flipped: 0
+  - serializedVersion: 2
+    index: 30005
+    uv:
+      serializedVersion: 2
+      x: 0.0435
+      y: 0.94789475
+      width: 0.020999998
+      height: 0.0126315355
+    vert:
+      serializedVersion: 2
+      x: 0
+      y: 12
+      width: 42
+      height: -24
+    advance: 42
+    flipped: 0
+  - serializedVersion: 2
+    index: 33609
+    uv:
+      serializedVersion: 2
+      x: 0.0425
+      y: 0.9331579
+      width: 0.021000002
+      height: 0.0126315355
+    vert:
+      serializedVersion: 2
+      x: 0
+      y: 12
+      width: 42
+      height: -24
+    advance: 42
+    flipped: 0
+  - serializedVersion: 2
+    index: 34411
+    uv:
+      serializedVersion: 2
+      x: 0.008
+      y: 0.9631579
+      width: 0.020999998
+      height: 0.012631595
+    vert:
+      serializedVersion: 2
+      x: 0
+      y: 12
+      width: 42
+      height: -24
+    advance: 42
+    flipped: 0
+  - serializedVersion: 2
+    index: 33021
+    uv:
+      serializedVersion: 2
+      x: 0.0425
+      y: 0.9026316
+      width: 0.021000002
+      height: 0.012631595
+    vert:
+      serializedVersion: 2
+      x: 0
+      y: 12
+      width: 42
+      height: -24
+    advance: 42
+    flipped: 0
+  - serializedVersion: 2
+    index: 38050
+    uv:
+      serializedVersion: 2
+      x: 0.0075
+      y: 0.8573684
+      width: 0.021
+      height: 0.012631595
+    vert:
+      serializedVersion: 2
+      x: 0
+      y: 12
+      width: 42
+      height: -24
+    advance: 42
+    flipped: 0
+  - serializedVersion: 2
+    index: 34892
+    uv:
+      serializedVersion: 2
+      x: 0.008
+      y: 0.93210524
+      width: 0.020999998
+      height: 0.012631595
+    vert:
+      serializedVersion: 2
+      x: 0
+      y: 12
+      width: 42
+      height: -24
+    advance: 42
+    flipped: 0
+  - serializedVersion: 2
+    index: 40857
+    uv:
+      serializedVersion: 2
+      x: 0.0085
+      y: 0.8731579
+      width: 0.021
+      height: 0.0126315355
+    vert:
+      serializedVersion: 2
+      x: 0
+      y: 12
+      width: 42
+      height: -24
+    advance: 42
+    flipped: 0
+  m_KerningValues: []
+  m_PixelScale: 0.1
+  m_FontData: 
+  m_Ascent: 0
+  m_Descent: 0
+  m_DefaultStyle: 0
+  m_FontNames: []
+  m_FallbackFonts: []
+  m_FontRenderingMode: 0
+  m_UseLegacyBoundsCalculation: 0

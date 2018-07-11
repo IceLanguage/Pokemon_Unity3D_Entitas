@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84079986aa12bf4498d6e965cdbfab87, type: 3}
+  m_Name: 18
+  m_EditorClassIdentifier: 
+  RaceID: 18
+  skills:
+  - {fileID: 11400000, guid: c2ec8c42b48c7784e89ac4f90c8b8a7a, type: 2}
+  - {fileID: 11400000, guid: cfeb0233cc444bd499d6945fe4668776, type: 2}
+  - {fileID: 11400000, guid: d3ac6a7c417aa7d48ba5de6b77ebc81f, type: 2}
+  - {fileID: 11400000, guid: fe44e1fb0f8bc584b8860de0b73757d6, type: 2}
+  - {fileID: 11400000, guid: 43514ff4ee8681849806687e09641cf9, type: 2}
+  - {fileID: 11400000, guid: 3f47b63f345e7794a9f68d9a4d98bdd3, type: 2}
+  - {fileID: 11400000, guid: 975a55e51738bfc43b9bdb65b6d1546f, type: 2}
+  - {fileID: 11400000, guid: efa7b10b7691b5848a862a5f7a597195, type: 2}
+  - {fileID: 11400000, guid: fcf0c284c2cad1e4eb848ed141e14f76, type: 2}
+  - {fileID: 11400000, guid: 4b83fb16524bf3848b9d6acb2f6d1926, type: 2}

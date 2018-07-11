@@ -1,0 +1,49 @@
+fileFormatVersion: 2
+guid: 9831cc306dc8d8a4c90b56719b24c62b
+labels:
+- Android
+- iOS
+- iPhone
+- iPad
+- Touch
+- Mobile
+- Controller
+- Joystick
+- MultiTouch
+- Multi-touch
+- VirtualController
+- ControlFreak
+- Gesture
+- Gestures
+- Drag
+- Pinch
+- Stick
+- Finger
+- Fingers
+- TouchScreen
+- Screen
+- Button
+- Buttons
+- FPP
+- Platformer
+- Shooter
+- Control
+- Freak
+- WindowsPhone8
+- Phone
+- Tablet
+- cross-platform
+- crossplatform
+- Twist
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - ctrl: {instanceID: 0}
+  - player: {instanceID: 0}
+  - cam: {instanceID: 0}
+  - guiSkin: {fileID: 11400000, guid: 404786c4ec537b64c948283db90c03ac, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

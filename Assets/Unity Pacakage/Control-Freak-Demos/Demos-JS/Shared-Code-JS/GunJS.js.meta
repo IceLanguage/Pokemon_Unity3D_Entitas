@@ -1,0 +1,49 @@
+fileFormatVersion: 2
+guid: dee21959af710d240baff10df5f44dec
+labels:
+- Android
+- iOS
+- iPhone
+- iPad
+- Touch
+- Mobile
+- Controller
+- Joystick
+- MultiTouch
+- Multi-touch
+- VirtualController
+- ControlFreak
+- Gesture
+- Gestures
+- Drag
+- Pinch
+- Stick
+- Finger
+- Fingers
+- TouchScreen
+- Screen
+- Button
+- Buttons
+- FPP
+- Platformer
+- Shooter
+- Control
+- Freak
+- WindowsPhone8
+- Phone
+- Tablet
+- cross-platform
+- crossplatform
+- Twist
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - shotParticles: {instanceID: 0}
+  - shotSound: {fileID: 8300000, guid: 78e2e198b7812e745a3223f53432a3d0, type: 3}
+  - emptySound: {fileID: 8300000, guid: c5a5978b3acc10449933db192c711055, type: 3}
+  - reloadSound: {fileID: 8300000, guid: 4d1497ba37cbfc141839c4bb3cf8bdec, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

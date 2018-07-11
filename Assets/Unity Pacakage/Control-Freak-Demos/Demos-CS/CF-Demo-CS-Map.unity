@@ -1,0 +1,845 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!29 &1
+OcclusionCullingSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_OcclusionBakeSettings:
+    smallestOccluder: 5
+    smallestHole: 0.25
+    backfaceThreshold: 100
+  m_SceneGUID: 00000000000000000000000000000000
+  m_OcclusionCullingData: {fileID: 0}
+--- !u!104 &2
+RenderSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 8
+  m_Fog: 0
+  m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  m_FogMode: 3
+  m_FogDensity: 0.01
+  m_LinearFogStart: 0
+  m_LinearFogEnd: 300
+  m_AmbientSkyColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+  m_AmbientEquatorColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+  m_AmbientGroundColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+  m_AmbientIntensity: 1
+  m_AmbientMode: 3
+  m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
+  m_SkyboxMaterial: {fileID: 0}
+  m_HaloStrength: 0.5
+  m_FlareStrength: 1
+  m_FlareFadeSpeed: 3
+  m_HaloTexture: {fileID: 0}
+  m_SpotCookie: {fileID: 10001, guid: 0000000000000000e000000000000000, type: 0}
+  m_DefaultReflectionMode: 0
+  m_DefaultReflectionResolution: 128
+  m_ReflectionBounces: 1
+  m_ReflectionIntensity: 1
+  m_CustomReflection: {fileID: 0}
+  m_Sun: {fileID: 0}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+--- !u!157 &4
+LightmapSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 11
+  m_GIWorkflowMode: 1
+  m_GISettings:
+    serializedVersion: 2
+    m_BounceScale: 1
+    m_IndirectOutputScale: 1
+    m_AlbedoBoost: 1
+    m_TemporalCoherenceThreshold: 1
+    m_EnvironmentLightingMode: 0
+    m_EnableBakedLightmaps: 1
+    m_EnableRealtimeLightmaps: 0
+  m_LightmapEditorSettings:
+    serializedVersion: 9
+    m_Resolution: 1
+    m_BakeResolution: 50
+    m_TextureWidth: 1024
+    m_TextureHeight: 1024
+    m_AO: 1
+    m_AOMaxDistance: 1
+    m_CompAOExponent: 1
+    m_CompAOExponentDirect: 0
+    m_Padding: 2
+    m_LightmapParameters: {fileID: 0}
+    m_LightmapsBakeMode: 1
+    m_TextureCompression: 0
+    m_FinalGather: 0
+    m_FinalGatherFiltering: 1
+    m_FinalGatherRayCount: 256
+    m_ReflectionCompression: 2
+    m_MixedBakeMode: 1
+    m_BakeBackend: 0
+    m_PVRSampling: 1
+    m_PVRDirectSampleCount: 32
+    m_PVRSampleCount: 500
+    m_PVRBounces: 2
+    m_PVRFilterTypeDirect: 0
+    m_PVRFilterTypeIndirect: 0
+    m_PVRFilterTypeAO: 0
+    m_PVRFilteringMode: 0
+    m_PVRCulling: 1
+    m_PVRFilteringGaussRadiusDirect: 1
+    m_PVRFilteringGaussRadiusIndirect: 5
+    m_PVRFilteringGaussRadiusAO: 2
+    m_PVRFilteringAtrousPositionSigmaDirect: 0.5
+    m_PVRFilteringAtrousPositionSigmaIndirect: 2
+    m_PVRFilteringAtrousPositionSigmaAO: 1
+    m_ShowResolutionOverlay: 1
+  m_LightingDataAsset: {fileID: 0}
+  m_UseShadowmask: 0
+--- !u!196 &5
+NavMeshSettings:
+  serializedVersion: 2
+  m_ObjectHideFlags: 0
+  m_BuildSettings:
+    serializedVersion: 2
+    agentTypeID: 0
+    agentRadius: 0.5
+    agentHeight: 2
+    agentSlope: 45
+    agentClimb: 0.4
+    ledgeDropHeight: 0
+    maxJumpAcrossDistance: 0
+    minRegionArea: 2
+    manualCellSize: 0
+    cellSize: 0.16666666
+    manualTileSize: 0
+    tileSize: 256
+    accuratePlacement: 0
+    debug:
+      m_Flags: 0
+  m_NavMeshData: {fileID: 0}
+--- !u!1 &268799545
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 268799546}
+  - component: {fileID: 268799547}
+  m_Layer: 0
+  m_Name: CONTROL-FREAK
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &268799546
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 268799545}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &268799547
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 268799545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d83c5e3bf9f87004a8ccf631f8381830, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  automaticMode: 1
+  manualGui: 0
+  autoActivate: 1
+  disableWhenNoTouchScreen: 0
+  guiDepth: 10
+  guiPressedOfs: 10
+  fingerBufferCm: 0.8
+  stickMagnetAngleMargin: 10
+  stickDigitalEnterThresh: 0.5
+  stickDigitalLeaveThresh: 0.4
+  touchTapMaxTime: 0.13333334
+  doubleTapMaxGapTime: 0.33333334
+  strictMultiFingerMaxTime: 0.2
+  velPreserveTime: 0.1
+  touchTapMaxDistCm: 0.5
+  twistThresh: 5
+  pinchMinDistCm: 0.5
+  twistSafeFingerDistCm: 1
+  curTime: 0.19735639
+  deltaTime: 0.18068972
+  invDeltaTime: 5.534349
+  sticks: []
+  touchZones:
+  - initiallyDisabled: 0
+    initiallyHidden: 0
+    prio: 0
+    hitDistScale: 1
+    name: SCREEN
+    disableGui: 1
+    guiDepth: 0
+    layoutBoxId: 0
+    acceptSharedTouches: 1
+    shape: 2
+    posCm: {x: 0, y: 0}
+    sizeCm: {x: 1, y: 1}
+    regionRect:
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    enableSecondFinger: 1
+    nonExclusiveTouches: 0
+    strictTwoFingerStart: 1
+    freezeTwistWhenTooClose: 1
+    noPinchAfterDrag: 0
+    noPinchAfterTwist: 0
+    noTwistAfterDrag: 0
+    noTwistAfterPinch: 1
+    noDragAfterPinch: 0
+    noDragAfterTwist: 0
+    startPinchWhenTwisting: 1
+    startPinchWhenDragging: 0
+    startDragWhenPinching: 1
+    startDragWhenTwisting: 1
+    startTwistWhenDragging: 0
+    startTwistWhenPinching: 0
+    gestureDetectionOrder: 0
+    debugKey: 0
+    releasedImg: {fileID: 2800000, guid: 843f0fef55c05054f854712d832fc29f, type: 3}
+    pressedImg: {fileID: 2800000, guid: 843f0fef55c05054f854712d832fc29f, type: 3}
+    overrideScale: 0
+    releasedScale: 1
+    pressedScale: 1.2
+    disabledScale: 1
+    overrideColors: 0
+    releasedColor:
+      r: 0.8
+      g: 0.8
+      b: 0.8
+      a: 0.75
+    pressedColor:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    disabledColor:
+      r: 0.5
+      g: 0.5
+      b: 0.5
+      a: 0.35
+    overrideAnimDuration: 0
+    pressAnimDuration: 0.1
+    releaseAnimDuration: 0.3
+    disableAnimDuration: 0.2
+    enableAnimDuration: 0.2
+    showAnimDuration: 0
+    hideAnimDuration: 0
+    enableGetKey: 0
+    getKeyCode: 0
+    getKeyCodeAlt: 0
+    getKeyCodeMulti: 0
+    getKeyCodeMultiAlt: 0
+    enableGetButton: 0
+    getButtonName: Fire1
+    getButtonMultiName: Fire1Multi
+    emulateMouse: 0
+    mousePosFromFirstFinger: 0
+    enableGetAxis: 0
+    axisHorzName: Mouse X
+    axisVertName: Mouse Y
+    axisHorzFlip: 0
+    axisVertFlip: 0
+    axisValScale: 0.1
+    codeUniJustPressed: 0
+    codeUniPressed: 1
+    codeUniJustReleased: 1
+    codeUniJustDragged: 0
+    codeUniDragged: 0
+    codeUniReleasedDrag: 0
+    codeMultiJustPressed: 0
+    codeMultiPressed: 1
+    codeMultiJustReleased: 1
+    codeMultiJustDragged: 0
+    codeMultiDragged: 0
+    codeMultiReleasedDrag: 0
+    codeJustTwisted: 0
+    codeTwisted: 0
+    codeReleasedTwist: 0
+    codeJustPinched: 0
+    codePinched: 0
+    codeReleasedPinch: 0
+    codeSimpleTap: 0
+    codeSingleTap: 0
+    codeDoubleTap: 0
+    codeSimpleMultiTap: 0
+    codeMultiSingleTap: 0
+    codeMultiDoubleTap: 0
+    codeCustomGUI: 0
+    codeCustomLayout: 0
+  layoutBoxes:
+  - name: Full-Screen
+    anchor: 6
+    allowNonuniformScale: 0
+    ignoreLeftHandedMode: 0
+    normalizedRect:
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    horzMarginMax: 0.5
+    vertMarginMax: 0.5
+    uniformMargins: 1
+    debugColor:
+      r: 1
+      g: 1
+      b: 1
+      a: 0.2
+    debugDraw: 0
+  - name: Right-Half
+    anchor: 5
+    allowNonuniformScale: 0
+    ignoreLeftHandedMode: 0
+    normalizedRect:
+      x: 0.5
+      y: 0
+      width: 0.5
+      height: 1
+    horzMarginMax: 0.5
+    vertMarginMax: 0.5
+    uniformMargins: 1
+    debugColor:
+      r: 1
+      g: 1
+      b: 1
+      a: 0.2
+    debugDraw: 0
+  - name: Left-Half
+    anchor: 3
+    allowNonuniformScale: 0
+    ignoreLeftHandedMode: 0
+    normalizedRect:
+      x: 0
+      y: 0
+      width: 0.5
+      height: 1
+    horzMarginMax: 0.5
+    vertMarginMax: 0.5
+    uniformMargins: 1
+    debugColor:
+      r: 1
+      g: 1
+      b: 1
+      a: 0.2
+    debugDraw: 0
+  - name: Top-Half
+    anchor: 7
+    allowNonuniformScale: 0
+    ignoreLeftHandedMode: 0
+    normalizedRect:
+      x: 0
+      y: 0
+      width: 1
+      height: 0.5
+    horzMarginMax: 0.5
+    vertMarginMax: 0.5
+    uniformMargins: 1
+    debugColor:
+      r: 1
+      g: 1
+      b: 1
+      a: 0.2
+    debugDraw: 0
+  - name: Bottom-Half
+    anchor: 1
+    allowNonuniformScale: 0
+    ignoreLeftHandedMode: 0
+    normalizedRect:
+      x: 0
+      y: 0.5
+      width: 1
+      height: 0.5
+    horzMarginMax: 0.5
+    vertMarginMax: 0.5
+    uniformMargins: 1
+    debugColor:
+      r: 1
+      g: 1
+      b: 1
+      a: 0.2
+    debugDraw: 0
+  - name: Bottom-Right-Qrtr
+    anchor: 2
+    allowNonuniformScale: 0
+    ignoreLeftHandedMode: 0
+    normalizedRect:
+      x: 0.5
+      y: 0.5
+      width: 0.5
+      height: 0.5
+    horzMarginMax: 0.5
+    vertMarginMax: 0.5
+    uniformMargins: 1
+    debugColor:
+      r: 1
+      g: 1
+      b: 1
+      a: 0.2
+    debugDraw: 0
+  - name: Bottom-Left-Qrtr
+    anchor: 0
+    allowNonuniformScale: 0
+    ignoreLeftHandedMode: 0
+    normalizedRect:
+      x: 0
+      y: 0.5
+      width: 0.5
+      height: 0.5
+    horzMarginMax: 0.5
+    vertMarginMax: 0.5
+    uniformMargins: 1
+    debugColor:
+      r: 1
+      g: 1
+      b: 1
+      a: 0.2
+    debugDraw: 0
+  - name: Top-Right-Qrtr
+    anchor: 8
+    allowNonuniformScale: 0
+    ignoreLeftHandedMode: 0
+    normalizedRect:
+      x: 0.5
+      y: 0
+      width: 0.5
+      height: 0.5
+    horzMarginMax: 0.5
+    vertMarginMax: 0.5
+    uniformMargins: 1
+    debugColor:
+      r: 1
+      g: 1
+      b: 1
+      a: 0.2
+    debugDraw: 0
+  - name: Top-Left-Qrtr
+    anchor: 6
+    allowNonuniformScale: 0
+    ignoreLeftHandedMode: 0
+    normalizedRect:
+      x: 0
+      y: 0
+      width: 0.5
+      height: 0.5
+    horzMarginMax: 0.5
+    vertMarginMax: 0.5
+    uniformMargins: 1
+    debugColor:
+      r: 1
+      g: 1
+      b: 1
+      a: 0.2
+    debugDraw: 0
+  - name: User09
+    anchor: 6
+    allowNonuniformScale: 0
+    ignoreLeftHandedMode: 0
+    normalizedRect:
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    horzMarginMax: 0.5
+    vertMarginMax: 0.5
+    uniformMargins: 1
+    debugColor:
+      r: 1
+      g: 1
+      b: 1
+      a: 0.2
+    debugDraw: 0
+  - name: User10
+    anchor: 6
+    allowNonuniformScale: 0
+    ignoreLeftHandedMode: 0
+    normalizedRect:
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    horzMarginMax: 0.5
+    vertMarginMax: 0.5
+    uniformMargins: 1
+    debugColor:
+      r: 1
+      g: 1
+      b: 1
+      a: 0.2
+    debugDraw: 0
+  - name: User11
+    anchor: 6
+    allowNonuniformScale: 0
+    ignoreLeftHandedMode: 0
+    normalizedRect:
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    horzMarginMax: 0.5
+    vertMarginMax: 0.5
+    uniformMargins: 1
+    debugColor:
+      r: 1
+      g: 1
+      b: 1
+      a: 0.2
+    debugDraw: 0
+  - name: User12
+    anchor: 6
+    allowNonuniformScale: 0
+    ignoreLeftHandedMode: 0
+    normalizedRect:
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    horzMarginMax: 0.5
+    vertMarginMax: 0.5
+    uniformMargins: 1
+    debugColor:
+      r: 1
+      g: 1
+      b: 1
+      a: 0.2
+    debugDraw: 0
+  - name: User13
+    anchor: 6
+    allowNonuniformScale: 0
+    ignoreLeftHandedMode: 0
+    normalizedRect:
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    horzMarginMax: 0.5
+    vertMarginMax: 0.5
+    uniformMargins: 1
+    debugColor:
+      r: 1
+      g: 1
+      b: 1
+      a: 0.2
+    debugDraw: 0
+  - name: User14
+    anchor: 6
+    allowNonuniformScale: 0
+    ignoreLeftHandedMode: 0
+    normalizedRect:
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    horzMarginMax: 0.5
+    vertMarginMax: 0.5
+    uniformMargins: 1
+    debugColor:
+      r: 1
+      g: 1
+      b: 1
+      a: 0.2
+    debugDraw: 0
+  - name: User15
+    anchor: 6
+    allowNonuniformScale: 0
+    ignoreLeftHandedMode: 0
+    normalizedRect:
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    horzMarginMax: 0.5
+    vertMarginMax: 0.5
+    uniformMargins: 1
+    debugColor:
+      r: 1
+      g: 1
+      b: 1
+      a: 0.2
+    debugDraw: 0
+  pressAnimDuration: 0.1
+  releaseAnimDuration: 0.3
+  disableAnimDuration: 0.3
+  enableAnimDuration: 0.3
+  cancelAnimDuration: 0.3
+  showAnimDuration: 0.3
+  hideAnimDuration: 0.3
+  releasedZoneScale: 1
+  pressedZoneScale: 1.1
+  disabledZoneScale: 1
+  releasedStickHatScale: 0.75
+  pressedStickHatScale: 0.9
+  disabledStickHatScale: 0.75
+  releasedStickBaseScale: 1
+  pressedStickBaseScale: 0.9
+  disabledStickBaseScale: 1
+  defaultPressedZoneColor:
+    r: 1
+    g: 1
+    b: 1
+    a: 1
+  defaultReleasedZoneColor:
+    r: 1
+    g: 1
+    b: 1
+    a: 0.75
+  defaultDisabledZoneColor:
+    r: 0.5
+    g: 0.5
+    b: 0.5
+    a: 0.35
+  defaultPressedStickHatColor:
+    r: 1
+    g: 1
+    b: 1
+    a: 1
+  defaultReleasedStickHatColor:
+    r: 1
+    g: 1
+    b: 1
+    a: 0.75
+  defaultDisabledStickHatColor:
+    r: 0.5
+    g: 0.5
+    b: 0.5
+    a: 0.35
+  defaultPressedStickBaseColor:
+    r: 1
+    g: 1
+    b: 1
+    a: 1
+  defaultReleasedStickBaseColor:
+    r: 1
+    g: 1
+    b: 1
+    a: 0.75
+  defaultDisabledStickBaseColor:
+    r: 0.5
+    g: 0.5
+    b: 0.5
+    a: 0.35
+  debugSecondTouchDragModeKey: 304
+  debugSecondTouchPinchModeKey: 306
+  debugSecondTouchTwistModeKey: 308
+  debugDrawTouches: 1
+  debugDrawLayoutBoxes: 1
+  debugDrawAreas: 1
+  debugTouchSprite: {fileID: 2800000, guid: c1cbdf24d6f02ef408af309e17c24dd8, type: 3}
+  debugSecondTouchSprite: {fileID: 2800000, guid: 0caebb8bec4237244ade4b21110b8c26,
+    type: 3}
+  debugFirstTouchNormalColor:
+    r: 1
+    g: 1
+    b: 0.6
+    a: 0.3
+  debugFirstTouchActiveColor:
+    r: 1
+    g: 1
+    b: 0
+    a: 0.7
+  debugSecondTouchNormalColor:
+    r: 1
+    g: 1
+    b: 1
+    a: 0.3
+  debugSecondTouchActiveColor:
+    r: 1
+    g: 0
+    b: 0
+    a: 0.6
+  defaultZoneImg: {fileID: 2800000, guid: 843f0fef55c05054f854712d832fc29f, type: 3}
+  defaultStickHatImg: {fileID: 2800000, guid: e962ceca498cc184982202be7e3b25b0, type: 3}
+  defaultStickBaseImg: {fileID: 2800000, guid: 6a15efc046ec45e419e117a285098afb, type: 3}
+  debugCircleImg: {fileID: 2800000, guid: 1cc0e96f823fd6241ad74c8654ada644, type: 3}
+  debugRectImg: {fileID: 2800000, guid: 601d53dd7651e8844826dcdc691e43e8, type: 3}
+  screenEmuOn: 1
+  screenEmuPortrait: 0
+  screenEmuShrink: 0
+  screenEmuPan: {x: 0.5, y: 0.5}
+  screenEmuHwDpi: 163
+  screenEmuMode: 2
+  screenEmuHwHorzRes: 480
+  screenEmuHwVertRes: 320
+  monitorDiagonal: 15
+  screenEmuBorderColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0.75
+  screenEmuBorderBadColor:
+    r: 0.5
+    g: 0
+    b: 0
+    a: 0.75
+  rwUnit: 0
+  previewMode: 0
+  version: 6
+  twistSafeFingerDistPx: 57.488518
+  pinchMinDistPx: 28.744259
+  touchTapMaxDistPx: 28.744259
+--- !u!1 &1164622454
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1164622455}
+  - component: {fileID: 1164622456}
+  - component: {fileID: 1164622458}
+  - component: {fileID: 1164622459}
+  - component: {fileID: 1164622457}
+  m_Layer: 0
+  m_Name: Main Camera
+  m_TagString: MainCamera
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1164622455
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1164622454}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!20 &1164622456
+Camera:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1164622454}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 1
+  m_BackGroundColor: {r: 0.13725491, g: 0.13725491, b: 0.13725491, a: 0.019607844}
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.3
+  far clip plane: 1000
+  field of view: 60
+  orthographic: 0
+  orthographic size: 100
+  m_Depth: -1
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
+  m_TargetEye: 3
+  m_HDR: 0
+  m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
+  m_ForceIntoRT: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
+--- !u!81 &1164622457
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1164622454}
+  m_Enabled: 1
+--- !u!92 &1164622458
+Behaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1164622454}
+  m_Enabled: 1
+--- !u!124 &1164622459
+Behaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1164622454}
+  m_Enabled: 1
+--- !u!1 &1171800321
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1171800322}
+  - component: {fileID: 1171800323}
+  - component: {fileID: 1171800324}
+  m_Layer: 0
+  m_Name: GAME-MAIN
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1171800322
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1171800321}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1171800323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1171800321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da52cdeff373b5449aa45f9ca8b48128, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  touchCtrl: {fileID: 268799547}
+  mapTexture: {fileID: 2800000, guid: 1cc7bfd44c0077c4490c36f457811e12, type: 3}
+  mapWidth: 1800
+  mapHeight: 1050
+  mapMinScale: 0.1
+  mapMaxScale: 20
+  smoothingTime: 0.15
+  guiSkin: {fileID: 11400000, guid: 404786c4ec537b64c948283db90c03ac, type: 2}
+  popupBox: {fileID: 1171800324}
+--- !u!114 &1171800324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1171800321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4f82ced138802f49b8e6dc9e1fb9c53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  guiSkin: {fileID: 11400000, guid: 9c2a1a30b8fb26449a0a367d25e04c89, type: 2}
+  guiDepth: 100

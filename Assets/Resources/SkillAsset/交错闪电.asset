@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecc96cc98a14040419ac218a44f48b6d, type: 3}
+  m_Name: "\u4EA4\u9519\u95EA\u7535"
+  m_EditorClassIdentifier: 
+  ReleaseTargetIsSelf: 0
+  SKillID: 559
+  sname: "\u4EA4\u9519\u95EA\u7535"
+  type: 0
+  power: 100
+  hitRate: 100
+  fullPP: 5
+  att: 13
+  statusConditionsList: 050000000100000002000000
+  ScProbabilitList: 0a0000000300000001000000
+  skillActionsList: 
+  SaProbabilitList: 
+  statusConditionEffect:
+  - sc: 5
+    scProbability: 10
+  - sc: 1
+    scProbability: 3
+  - sc: 2
+    scProbability: 1
+  skillactions: []
+  skillEffect: {fileID: 11400000, guid: bb713f6577abe884e8f8e6a0f5b8aea9, type: 2}
