@@ -1,0 +1,1224 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &100000
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 400000}
+  - component: {fileID: 11400000}
+  m_Layer: 0
+  m_Name: CF-Lerpz
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &400000
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1072.9607, y: 152.60265, z: 645.0083}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d83c5e3bf9f87004a8ccf631f8381830, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  automaticMode: 1
+  manualGui: 0
+  autoActivate: 1
+  disableWhenNoTouchScreen: 0
+  guiDepth: 10
+  guiPressedOfs: 10
+  fingerBufferCm: 0.8
+  stickMagnetAngleMargin: 10
+  stickDigitalEnterThresh: 0.5
+  stickDigitalLeaveThresh: 0.4
+  touchTapMaxTime: 0.13333334
+  doubleTapMaxGapTime: 0.33333334
+  strictMultiFingerMaxTime: 0.2
+  velPreserveTime: 0.1
+  touchTapMaxDistCm: 0.5
+  twistThresh: 5
+  pinchMinDistCm: 0.5
+  twistSafeFingerDistCm: 1
+  curTime: 0.016666668
+  deltaTime: 0.016666668
+  invDeltaTime: 59.999996
+  sticks:
+  - initiallyDisabled: 0
+    initiallyHidden: 0
+    prio: 10
+    hitDistScale: 1
+    name: Walk
+    disableGui: 0
+    guiDepth: 0
+    layoutBoxId: 6
+    acceptSharedTouches: 1
+    stickVis: 0
+    smoothReturn: 1
+    posCm: {x: 0, y: 0}
+    sizeCm: 2
+    overrideAnimDuration: 0
+    pressAnimDuration: 0.1
+    releaseAnimDuration: 0.3
+    disableAnimDuration: 0.2
+    enableAnimDuration: 0.2
+    hideAnimDuration: 0
+    showAnimDuration: 0
+    keyboardEmu: 0
+    keyUp: 0
+    keyDown: 0
+    keyLeft: 0
+    keyRight: 0
+    dynamicMode: 1
+    dynamicRegionPrio: 5
+    dynamicClamp: 1
+    dynamicMaxRelativeSize: 0.3
+    dynamicMarginCm: 0.5
+    dynamicFadeOutDelay: 0
+    dynamicFadeOutDuration: 2
+    dynamicRegion:
+      x: 0
+      y: 0
+      width: 0.5
+      height: 1
+    dynamicAlwaysReset: 0
+    hatMoveScale: 0.5
+    disableX: 0
+    disableY: 0
+    releasedHatImg: {fileID: 2800000, guid: e962ceca498cc184982202be7e3b25b0, type: 3}
+    releasedBaseImg: {fileID: 2800000, guid: 6a15efc046ec45e419e117a285098afb, type: 3}
+    pressedHatImg: {fileID: 2800000, guid: e962ceca498cc184982202be7e3b25b0, type: 3}
+    pressedBaseImg: {fileID: 2800000, guid: 6a15efc046ec45e419e117a285098afb, type: 3}
+    overrideScale: 0
+    releasedHatScale: 0.75
+    pressedHatScale: 0.9
+    disabledHatScale: 0.75
+    releasedBaseScale: 1
+    pressedBaseScale: 0.9
+    disabledBaseScale: 1
+    overrideColors: 0
+    releasedHatColor:
+      r: 0.8
+      g: 0.8
+      b: 0.8
+      a: 0.75
+    releasedBaseColor:
+      r: 0.8
+      g: 0.8
+      b: 0.8
+      a: 0.75
+    pressedHatColor:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    pressedBaseColor:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    disabledHatColor:
+      r: 0.8
+      g: 0.8
+      b: 0.8
+      a: 0.35
+    disabledBaseColor:
+      r: 0.8
+      g: 0.8
+      b: 0.8
+      a: 0.35
+    enableGetKey: 1
+    getKeyCodePress: 0
+    getKeyCodePressAlt: 0
+    getKeyCodeUp: 119
+    getKeyCodeUpAlt: 273
+    getKeyCodeDown: 115
+    getKeyCodeDownAlt: 274
+    getKeyCodeLeft: 97
+    getKeyCodeLeftAlt: 276
+    getKeyCodeRight: 100
+    getKeyCodeRightAlt: 275
+    enableGetButton: 0
+    getButtonName: 
+    enableGetAxis: 1
+    axisHorzName: Horizontal
+    axisVertName: Vertical
+    axisHorzFlip: 0
+    axisVertFlip: 0
+    codeCustomGUI: 0
+    codeCustomLayout: 0
+  touchZones:
+  - initiallyDisabled: 0
+    initiallyHidden: 0
+    prio: 20
+    hitDistScale: 1
+    name: Punch
+    disableGui: 0
+    guiDepth: 0
+    layoutBoxId: 10
+    acceptSharedTouches: 1
+    shape: 0
+    posCm: {x: 0, y: 0}
+    sizeCm: {x: 1, y: 1}
+    regionRect:
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    enableSecondFinger: 0
+    nonExclusiveTouches: 0
+    strictTwoFingerStart: 1
+    freezeTwistWhenTooClose: 1
+    noPinchAfterDrag: 0
+    noPinchAfterTwist: 0
+    noTwistAfterDrag: 0
+    noTwistAfterPinch: 0
+    noDragAfterPinch: 0
+    noDragAfterTwist: 0
+    startPinchWhenTwisting: 0
+    startPinchWhenDragging: 0
+    startDragWhenPinching: 0
+    startDragWhenTwisting: 0
+    startTwistWhenDragging: 0
+    startTwistWhenPinching: 0
+    gestureDetectionOrder: 0
+    debugKey: 0
+    releasedImg: {fileID: 2800000, guid: ad64e20e5eff94440bdcc4c905d4afae, type: 3}
+    pressedImg: {fileID: 2800000, guid: ad64e20e5eff94440bdcc4c905d4afae, type: 3}
+    overrideScale: 0
+    releasedScale: 1
+    pressedScale: 1.2
+    disabledScale: 1
+    overrideColors: 0
+    releasedColor:
+      r: 0.8
+      g: 0.8
+      b: 0.8
+      a: 0.75
+    pressedColor:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    disabledColor:
+      r: 0.5
+      g: 0.5
+      b: 0.5
+      a: 0.35
+    overrideAnimDuration: 0
+    pressAnimDuration: 0.1
+    releaseAnimDuration: 0.3
+    disableAnimDuration: 0.2
+    enableAnimDuration: 0.2
+    showAnimDuration: 0
+    hideAnimDuration: 0
+    enableGetKey: 0
+    getKeyCode: 32
+    getKeyCodeAlt: 32
+    getKeyCodeMulti: 0
+    getKeyCodeMultiAlt: 0
+    enableGetButton: 1
+    getButtonName: Fire1
+    getButtonMultiName: Fire1Multi
+    emulateMouse: 0
+    mousePosFromFirstFinger: 0
+    enableGetAxis: 0
+    axisHorzName: Mouse X
+    axisVertName: Mouse Y
+    axisHorzFlip: 0
+    axisVertFlip: 0
+    axisValScale: 1
+    codeUniJustPressed: 0
+    codeUniPressed: 1
+    codeUniJustReleased: 1
+    codeUniJustDragged: 0
+    codeUniDragged: 0
+    codeUniReleasedDrag: 0
+    codeMultiJustPressed: 0
+    codeMultiPressed: 1
+    codeMultiJustReleased: 1
+    codeMultiJustDragged: 0
+    codeMultiDragged: 0
+    codeMultiReleasedDrag: 0
+    codeJustTwisted: 0
+    codeTwisted: 0
+    codeReleasedTwist: 0
+    codeJustPinched: 0
+    codePinched: 0
+    codeReleasedPinch: 0
+    codeSimpleTap: 0
+    codeSingleTap: 0
+    codeDoubleTap: 0
+    codeSimpleMultiTap: 0
+    codeMultiSingleTap: 0
+    codeMultiDoubleTap: 0
+    codeCustomGUI: 0
+    codeCustomLayout: 0
+  - initiallyDisabled: 0
+    initiallyHidden: 0
+    prio: 20
+    hitDistScale: 1
+    name: Jump
+    disableGui: 0
+    guiDepth: 0
+    layoutBoxId: 10
+    acceptSharedTouches: 1
+    shape: 0
+    posCm: {x: 0.8, y: -0.8}
+    sizeCm: {x: 1, y: 1}
+    regionRect:
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    enableSecondFinger: 0
+    nonExclusiveTouches: 0
+    strictTwoFingerStart: 1
+    freezeTwistWhenTooClose: 1
+    noPinchAfterDrag: 0
+    noPinchAfterTwist: 0
+    noTwistAfterDrag: 0
+    noTwistAfterPinch: 0
+    noDragAfterPinch: 0
+    noDragAfterTwist: 0
+    startPinchWhenTwisting: 0
+    startPinchWhenDragging: 0
+    startDragWhenPinching: 0
+    startDragWhenTwisting: 0
+    startTwistWhenDragging: 0
+    startTwistWhenPinching: 0
+    gestureDetectionOrder: 0
+    debugKey: 0
+    releasedImg: {fileID: 2800000, guid: d36cfc1405a021245853b3aff5d955f0, type: 3}
+    pressedImg: {fileID: 2800000, guid: d36cfc1405a021245853b3aff5d955f0, type: 3}
+    overrideScale: 0
+    releasedScale: 1
+    pressedScale: 1.2
+    disabledScale: 1
+    overrideColors: 0
+    releasedColor:
+      r: 0.8
+      g: 0.8
+      b: 0.8
+      a: 0.75
+    pressedColor:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    disabledColor:
+      r: 0.5
+      g: 0.5
+      b: 0.5
+      a: 0.35
+    overrideAnimDuration: 0
+    pressAnimDuration: 0.1
+    releaseAnimDuration: 0.3
+    disableAnimDuration: 0.2
+    enableAnimDuration: 0.2
+    showAnimDuration: 0
+    hideAnimDuration: 0
+    enableGetKey: 0
+    getKeyCode: 32
+    getKeyCodeAlt: 32
+    getKeyCodeMulti: 0
+    getKeyCodeMultiAlt: 0
+    enableGetButton: 1
+    getButtonName: Jump
+    getButtonMultiName: JumpMulti
+    emulateMouse: 0
+    mousePosFromFirstFinger: 0
+    enableGetAxis: 0
+    axisHorzName: Mouse X
+    axisVertName: Mouse Y
+    axisHorzFlip: 0
+    axisVertFlip: 0
+    axisValScale: 1
+    codeUniJustPressed: 0
+    codeUniPressed: 1
+    codeUniJustReleased: 1
+    codeUniJustDragged: 0
+    codeUniDragged: 0
+    codeUniReleasedDrag: 0
+    codeMultiJustPressed: 0
+    codeMultiPressed: 1
+    codeMultiJustReleased: 1
+    codeMultiJustDragged: 0
+    codeMultiDragged: 0
+    codeMultiReleasedDrag: 0
+    codeJustTwisted: 0
+    codeTwisted: 0
+    codeReleasedTwist: 0
+    codeJustPinched: 0
+    codePinched: 0
+    codeReleasedPinch: 0
+    codeSimpleTap: 0
+    codeSingleTap: 0
+    codeDoubleTap: 0
+    codeSimpleMultiTap: 0
+    codeMultiSingleTap: 0
+    codeMultiDoubleTap: 0
+    codeCustomGUI: 0
+    codeCustomLayout: 0
+  - initiallyDisabled: 0
+    initiallyHidden: 0
+    prio: 20
+    hitDistScale: 1
+    name: Run
+    disableGui: 0
+    guiDepth: 0
+    layoutBoxId: 10
+    acceptSharedTouches: 1
+    shape: 0
+    posCm: {x: -0.8, y: -0.8}
+    sizeCm: {x: 1, y: 1}
+    regionRect:
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    enableSecondFinger: 0
+    nonExclusiveTouches: 0
+    strictTwoFingerStart: 1
+    freezeTwistWhenTooClose: 1
+    noPinchAfterDrag: 0
+    noPinchAfterTwist: 0
+    noTwistAfterDrag: 0
+    noTwistAfterPinch: 0
+    noDragAfterPinch: 0
+    noDragAfterTwist: 0
+    startPinchWhenTwisting: 0
+    startPinchWhenDragging: 0
+    startDragWhenPinching: 0
+    startDragWhenTwisting: 0
+    startTwistWhenDragging: 0
+    startTwistWhenPinching: 0
+    gestureDetectionOrder: 0
+    debugKey: 0
+    releasedImg: {fileID: 2800000, guid: a364e44729c3f68448765a78df56becd, type: 3}
+    pressedImg: {fileID: 2800000, guid: a364e44729c3f68448765a78df56becd, type: 3}
+    overrideScale: 0
+    releasedScale: 1
+    pressedScale: 1.2
+    disabledScale: 1
+    overrideColors: 0
+    releasedColor:
+      r: 0.8
+      g: 0.8
+      b: 0.8
+      a: 0.75
+    pressedColor:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    disabledColor:
+      r: 0.5
+      g: 0.5
+      b: 0.5
+      a: 0.35
+    overrideAnimDuration: 0
+    pressAnimDuration: 0.1
+    releaseAnimDuration: 0.3
+    disableAnimDuration: 0.2
+    enableAnimDuration: 0.2
+    showAnimDuration: 0
+    hideAnimDuration: 0
+    enableGetKey: 0
+    getKeyCode: 306
+    getKeyCodeAlt: 0
+    getKeyCodeMulti: 0
+    getKeyCodeMultiAlt: 0
+    enableGetButton: 1
+    getButtonName: Fire3
+    getButtonMultiName: 
+    emulateMouse: 0
+    mousePosFromFirstFinger: 0
+    enableGetAxis: 0
+    axisHorzName: Mouse X
+    axisVertName: Mouse Y
+    axisHorzFlip: 0
+    axisVertFlip: 0
+    axisValScale: 1
+    codeUniJustPressed: 0
+    codeUniPressed: 1
+    codeUniJustReleased: 1
+    codeUniJustDragged: 0
+    codeUniDragged: 0
+    codeUniReleasedDrag: 0
+    codeMultiJustPressed: 0
+    codeMultiPressed: 1
+    codeMultiJustReleased: 1
+    codeMultiJustDragged: 0
+    codeMultiDragged: 0
+    codeMultiReleasedDrag: 0
+    codeJustTwisted: 0
+    codeTwisted: 0
+    codeReleasedTwist: 0
+    codeJustPinched: 0
+    codePinched: 0
+    codeReleasedPinch: 0
+    codeSimpleTap: 0
+    codeSingleTap: 0
+    codeDoubleTap: 0
+    codeSimpleMultiTap: 0
+    codeMultiSingleTap: 0
+    codeMultiDoubleTap: 0
+    codeCustomGUI: 0
+    codeCustomLayout: 0
+  - initiallyDisabled: 0
+    initiallyHidden: 0
+    prio: 20
+    hitDistScale: 1
+    name: Cam
+    disableGui: 0
+    guiDepth: 0
+    layoutBoxId: 10
+    acceptSharedTouches: 1
+    shape: 0
+    posCm: {x: 0, y: -1.6}
+    sizeCm: {x: 1, y: 1}
+    regionRect:
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    enableSecondFinger: 0
+    nonExclusiveTouches: 0
+    strictTwoFingerStart: 1
+    freezeTwistWhenTooClose: 1
+    noPinchAfterDrag: 0
+    noPinchAfterTwist: 0
+    noTwistAfterDrag: 0
+    noTwistAfterPinch: 0
+    noDragAfterPinch: 0
+    noDragAfterTwist: 0
+    startPinchWhenTwisting: 0
+    startPinchWhenDragging: 0
+    startDragWhenPinching: 0
+    startDragWhenTwisting: 0
+    startTwistWhenDragging: 0
+    startTwistWhenPinching: 0
+    gestureDetectionOrder: 0
+    debugKey: 0
+    releasedImg: {fileID: 2800000, guid: ceb1931a04c19e34e89e0d463f3b6d7a, type: 3}
+    pressedImg: {fileID: 2800000, guid: ceb1931a04c19e34e89e0d463f3b6d7a, type: 3}
+    overrideScale: 0
+    releasedScale: 1
+    pressedScale: 1.2
+    disabledScale: 1
+    overrideColors: 0
+    releasedColor:
+      r: 0.8
+      g: 0.8
+      b: 0.8
+      a: 0.75
+    pressedColor:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    disabledColor:
+      r: 0.5
+      g: 0.5
+      b: 0.5
+      a: 0.35
+    overrideAnimDuration: 0
+    pressAnimDuration: 0.1
+    releaseAnimDuration: 0.3
+    disableAnimDuration: 0.2
+    enableAnimDuration: 0.2
+    showAnimDuration: 0
+    hideAnimDuration: 0
+    enableGetKey: 0
+    getKeyCode: 32
+    getKeyCodeAlt: 32
+    getKeyCodeMulti: 0
+    getKeyCodeMultiAlt: 0
+    enableGetButton: 1
+    getButtonName: Fire2
+    getButtonMultiName: 
+    emulateMouse: 0
+    mousePosFromFirstFinger: 0
+    enableGetAxis: 0
+    axisHorzName: Mouse X
+    axisVertName: Mouse Y
+    axisHorzFlip: 0
+    axisVertFlip: 0
+    axisValScale: 1
+    codeUniJustPressed: 0
+    codeUniPressed: 1
+    codeUniJustReleased: 1
+    codeUniJustDragged: 0
+    codeUniDragged: 0
+    codeUniReleasedDrag: 0
+    codeMultiJustPressed: 0
+    codeMultiPressed: 1
+    codeMultiJustReleased: 1
+    codeMultiJustDragged: 0
+    codeMultiDragged: 0
+    codeMultiReleasedDrag: 0
+    codeJustTwisted: 0
+    codeTwisted: 0
+    codeReleasedTwist: 0
+    codeJustPinched: 0
+    codePinched: 0
+    codeReleasedPinch: 0
+    codeSimpleTap: 0
+    codeSingleTap: 0
+    codeDoubleTap: 0
+    codeSimpleMultiTap: 0
+    codeMultiSingleTap: 0
+    codeMultiDoubleTap: 0
+    codeCustomGUI: 0
+    codeCustomLayout: 0
+  - initiallyDisabled: 0
+    initiallyHidden: 0
+    prio: 0
+    hitDistScale: 1
+    name: SCREEN
+    disableGui: 1
+    guiDepth: 0
+    layoutBoxId: 0
+    acceptSharedTouches: 1
+    shape: 2
+    posCm: {x: 0, y: 0}
+    sizeCm: {x: 1, y: 1}
+    regionRect:
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    enableSecondFinger: 1
+    nonExclusiveTouches: 0
+    strictTwoFingerStart: 1
+    freezeTwistWhenTooClose: 1
+    noPinchAfterDrag: 0
+    noPinchAfterTwist: 0
+    noTwistAfterDrag: 0
+    noTwistAfterPinch: 0
+    noDragAfterPinch: 0
+    noDragAfterTwist: 0
+    startPinchWhenTwisting: 0
+    startPinchWhenDragging: 0
+    startDragWhenPinching: 0
+    startDragWhenTwisting: 0
+    startTwistWhenDragging: 0
+    startTwistWhenPinching: 0
+    gestureDetectionOrder: 0
+    debugKey: 0
+    releasedImg: {fileID: 2800000, guid: 843f0fef55c05054f854712d832fc29f, type: 3}
+    pressedImg: {fileID: 2800000, guid: 843f0fef55c05054f854712d832fc29f, type: 3}
+    overrideScale: 0
+    releasedScale: 1
+    pressedScale: 1.2
+    disabledScale: 1
+    overrideColors: 0
+    releasedColor:
+      r: 0.8
+      g: 0.8
+      b: 0.8
+      a: 0.75
+    pressedColor:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    disabledColor:
+      r: 0.5
+      g: 0.5
+      b: 0.5
+      a: 0.35
+    overrideAnimDuration: 0
+    pressAnimDuration: 0.1
+    releaseAnimDuration: 0.3
+    disableAnimDuration: 0.2
+    enableAnimDuration: 0.2
+    showAnimDuration: 0
+    hideAnimDuration: 0
+    enableGetKey: 1
+    getKeyCode: 323
+    getKeyCodeAlt: 0
+    getKeyCodeMulti: 0
+    getKeyCodeMultiAlt: 0
+    enableGetButton: 0
+    getButtonName: Fire
+    getButtonMultiName: FireMulti
+    emulateMouse: 1
+    mousePosFromFirstFinger: 0
+    enableGetAxis: 1
+    axisHorzName: Mouse X
+    axisVertName: Mouse Y
+    axisHorzFlip: 0
+    axisVertFlip: 0
+    axisValScale: 0.1
+    codeUniJustPressed: 0
+    codeUniPressed: 1
+    codeUniJustReleased: 1
+    codeUniJustDragged: 0
+    codeUniDragged: 0
+    codeUniReleasedDrag: 0
+    codeMultiJustPressed: 0
+    codeMultiPressed: 1
+    codeMultiJustReleased: 1
+    codeMultiJustDragged: 0
+    codeMultiDragged: 0
+    codeMultiReleasedDrag: 0
+    codeJustTwisted: 0
+    codeTwisted: 0
+    codeReleasedTwist: 0
+    codeJustPinched: 0
+    codePinched: 0
+    codeReleasedPinch: 0
+    codeSimpleTap: 0
+    codeSingleTap: 0
+    codeDoubleTap: 0
+    codeSimpleMultiTap: 0
+    codeMultiSingleTap: 0
+    codeMultiDoubleTap: 0
+    codeCustomGUI: 0
+    codeCustomLayout: 0
+  - initiallyDisabled: 0
+    initiallyHidden: 0
+    prio: 20
+    hitDistScale: 1
+    name: PAUSE
+    disableGui: 0
+    guiDepth: 0
+    layoutBoxId: 11
+    acceptSharedTouches: 1
+    shape: 0
+    posCm: {x: 0, y: 0}
+    sizeCm: {x: 1, y: 1}
+    regionRect:
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    enableSecondFinger: 0
+    nonExclusiveTouches: 0
+    strictTwoFingerStart: 1
+    freezeTwistWhenTooClose: 1
+    noPinchAfterDrag: 0
+    noPinchAfterTwist: 0
+    noTwistAfterDrag: 0
+    noTwistAfterPinch: 0
+    noDragAfterPinch: 0
+    noDragAfterTwist: 0
+    startPinchWhenTwisting: 0
+    startPinchWhenDragging: 0
+    startDragWhenPinching: 0
+    startDragWhenTwisting: 0
+    startTwistWhenDragging: 0
+    startTwistWhenPinching: 0
+    gestureDetectionOrder: 0
+    debugKey: 0
+    releasedImg: {fileID: 2800000, guid: af55fa5dfc0179642972adbfe916f939, type: 3}
+    pressedImg: {fileID: 2800000, guid: af55fa5dfc0179642972adbfe916f939, type: 3}
+    overrideScale: 0
+    releasedScale: 1
+    pressedScale: 1.2
+    disabledScale: 1
+    overrideColors: 0
+    releasedColor:
+      r: 0.8
+      g: 0.8
+      b: 0.8
+      a: 0.75
+    pressedColor:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    disabledColor:
+      r: 0.5
+      g: 0.5
+      b: 0.5
+      a: 0.35
+    overrideAnimDuration: 0
+    pressAnimDuration: 0.1
+    releaseAnimDuration: 0.3
+    disableAnimDuration: 0.2
+    enableAnimDuration: 0.2
+    showAnimDuration: 0
+    hideAnimDuration: 0
+    enableGetKey: 1
+    getKeyCode: 27
+    getKeyCodeAlt: 0
+    getKeyCodeMulti: 0
+    getKeyCodeMultiAlt: 0
+    enableGetButton: 0
+    getButtonName: Pause
+    getButtonMultiName: 
+    emulateMouse: 0
+    mousePosFromFirstFinger: 0
+    enableGetAxis: 0
+    axisHorzName: Mouse X
+    axisVertName: Mouse Y
+    axisHorzFlip: 0
+    axisVertFlip: 0
+    axisValScale: 1
+    codeUniJustPressed: 0
+    codeUniPressed: 1
+    codeUniJustReleased: 1
+    codeUniJustDragged: 0
+    codeUniDragged: 0
+    codeUniReleasedDrag: 0
+    codeMultiJustPressed: 0
+    codeMultiPressed: 1
+    codeMultiJustReleased: 1
+    codeMultiJustDragged: 0
+    codeMultiDragged: 0
+    codeMultiReleasedDrag: 0
+    codeJustTwisted: 0
+    codeTwisted: 0
+    codeReleasedTwist: 0
+    codeJustPinched: 0
+    codePinched: 0
+    codeReleasedPinch: 0
+    codeSimpleTap: 0
+    codeSingleTap: 0
+    codeDoubleTap: 0
+    codeSimpleMultiTap: 0
+    codeMultiSingleTap: 0
+    codeMultiDoubleTap: 0
+    codeCustomGUI: 0
+    codeCustomLayout: 0
+  layoutBoxes:
+  - name: Full-Screen
+    anchor: 6
+    allowNonuniformScale: 0
+    ignoreLeftHandedMode: 0
+    normalizedRect:
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    horzMarginMax: 0.5
+    vertMarginMax: 0.5
+    uniformMargins: 1
+    debugColor:
+      r: 1
+      g: 1
+      b: 1
+      a: 0.2
+    debugDraw: 0
+  - name: Right-Half
+    anchor: 5
+    allowNonuniformScale: 0
+    ignoreLeftHandedMode: 0
+    normalizedRect:
+      x: 0.5
+      y: 0
+      width: 0.5
+      height: 1
+    horzMarginMax: 0.5
+    vertMarginMax: 0.5
+    uniformMargins: 1
+    debugColor:
+      r: 1
+      g: 1
+      b: 1
+      a: 0.2
+    debugDraw: 0
+  - name: Left-Half
+    anchor: 3
+    allowNonuniformScale: 0
+    ignoreLeftHandedMode: 0
+    normalizedRect:
+      x: 0
+      y: 0
+      width: 0.5
+      height: 1
+    horzMarginMax: 0.5
+    vertMarginMax: 0.5
+    uniformMargins: 1
+    debugColor:
+      r: 1
+      g: 1
+      b: 1
+      a: 0.2
+    debugDraw: 0
+  - name: Top-Half
+    anchor: 7
+    allowNonuniformScale: 0
+    ignoreLeftHandedMode: 0
+    normalizedRect:
+      x: 0
+      y: 0
+      width: 1
+      height: 0.5
+    horzMarginMax: 0.5
+    vertMarginMax: 0.5
+    uniformMargins: 1
+    debugColor:
+      r: 1
+      g: 1
+      b: 1
+      a: 0.2
+    debugDraw: 0
+  - name: Bottom-Half
+    anchor: 1
+    allowNonuniformScale: 0
+    ignoreLeftHandedMode: 0
+    normalizedRect:
+      x: 0
+      y: 0.5
+      width: 1
+      height: 0.5
+    horzMarginMax: 0.5
+    vertMarginMax: 0.5
+    uniformMargins: 1
+    debugColor:
+      r: 1
+      g: 1
+      b: 1
+      a: 0.2
+    debugDraw: 0
+  - name: Bottom-Right-Qrtr
+    anchor: 2
+    allowNonuniformScale: 0
+    ignoreLeftHandedMode: 0
+    normalizedRect:
+      x: 0.5
+      y: 0.5
+      width: 0.5
+      height: 0.5
+    horzMarginMax: 0.5
+    vertMarginMax: 0.5
+    uniformMargins: 1
+    debugColor:
+      r: 1
+      g: 1
+      b: 1
+      a: 0.2
+    debugDraw: 0
+  - name: Bottom-Left-Qrtr
+    anchor: 0
+    allowNonuniformScale: 0
+    ignoreLeftHandedMode: 0
+    normalizedRect:
+      x: 0
+      y: 0.5
+      width: 0.5
+      height: 0.5
+    horzMarginMax: 0.5
+    vertMarginMax: 0.5
+    uniformMargins: 1
+    debugColor:
+      r: 1
+      g: 1
+      b: 1
+      a: 0.2
+    debugDraw: 0
+  - name: Top-Right-Qrtr
+    anchor: 8
+    allowNonuniformScale: 0
+    ignoreLeftHandedMode: 0
+    normalizedRect:
+      x: 0.5
+      y: 0
+      width: 0.5
+      height: 0.5
+    horzMarginMax: 0.5
+    vertMarginMax: 0.5
+    uniformMargins: 1
+    debugColor:
+      r: 1
+      g: 1
+      b: 1
+      a: 0.2
+    debugDraw: 0
+  - name: Top-Left-Qrtr
+    anchor: 6
+    allowNonuniformScale: 0
+    ignoreLeftHandedMode: 0
+    normalizedRect:
+      x: 0
+      y: 0
+      width: 0.5
+      height: 0.5
+    horzMarginMax: 0.5
+    vertMarginMax: 0.5
+    uniformMargins: 1
+    debugColor:
+      r: 1
+      g: 1
+      b: 1
+      a: 0.2
+    debugDraw: 0
+  - name: User09
+    anchor: 6
+    allowNonuniformScale: 0
+    ignoreLeftHandedMode: 0
+    normalizedRect:
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    horzMarginMax: 0.5
+    vertMarginMax: 0.5
+    uniformMargins: 1
+    debugColor:
+      r: 1
+      g: 1
+      b: 1
+      a: 0.2
+    debugDraw: 0
+  - name: Butons-Box
+    anchor: 2
+    allowNonuniformScale: 0
+    ignoreLeftHandedMode: 0
+    normalizedRect:
+      x: 0.5
+      y: 0.4
+      width: 0.5
+      height: 0.6
+    horzMarginMax: 0.5
+    vertMarginMax: 0.5
+    uniformMargins: 1
+    debugColor:
+      r: 1
+      g: 1
+      b: 1
+      a: 0.2
+    debugDraw: 0
+  - name: Pause-Box
+    anchor: 8
+    allowNonuniformScale: 0
+    ignoreLeftHandedMode: 0
+    normalizedRect:
+      x: 0.6
+      y: 0
+      width: 0.4
+      height: 0.4
+    horzMarginMax: 0.5
+    vertMarginMax: 0.5
+    uniformMargins: 1
+    debugColor:
+      r: 1
+      g: 1
+      b: 1
+      a: 0.2
+    debugDraw: 0
+  - name: User12
+    anchor: 6
+    allowNonuniformScale: 0
+    ignoreLeftHandedMode: 0
+    normalizedRect:
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    horzMarginMax: 0.5
+    vertMarginMax: 0.5
+    uniformMargins: 1
+    debugColor:
+      r: 1
+      g: 1
+      b: 1
+      a: 0.2
+    debugDraw: 0
+  - name: User13
+    anchor: 6
+    allowNonuniformScale: 0
+    ignoreLeftHandedMode: 0
+    normalizedRect:
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    horzMarginMax: 0.5
+    vertMarginMax: 0.5
+    uniformMargins: 1
+    debugColor:
+      r: 1
+      g: 1
+      b: 1
+      a: 0.2
+    debugDraw: 0
+  - name: User14
+    anchor: 6
+    allowNonuniformScale: 0
+    ignoreLeftHandedMode: 0
+    normalizedRect:
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    horzMarginMax: 0.5
+    vertMarginMax: 0.5
+    uniformMargins: 1
+    debugColor:
+      r: 1
+      g: 1
+      b: 1
+      a: 0.2
+    debugDraw: 0
+  - name: User15
+    anchor: 6
+    allowNonuniformScale: 0
+    ignoreLeftHandedMode: 0
+    normalizedRect:
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    horzMarginMax: 0.5
+    vertMarginMax: 0.5
+    uniformMargins: 1
+    debugColor:
+      r: 1
+      g: 1
+      b: 1
+      a: 0.2
+    debugDraw: 0
+  pressAnimDuration: 0.1
+  releaseAnimDuration: 0.3
+  disableAnimDuration: 0.3
+  enableAnimDuration: 0.3
+  cancelAnimDuration: 0.3
+  showAnimDuration: 0.3
+  hideAnimDuration: 0.3
+  releasedZoneScale: 1
+  pressedZoneScale: 1.1
+  disabledZoneScale: 1
+  releasedStickHatScale: 0.75
+  pressedStickHatScale: 0.9
+  disabledStickHatScale: 0.75
+  releasedStickBaseScale: 1
+  pressedStickBaseScale: 0.9
+  disabledStickBaseScale: 1
+  defaultPressedZoneColor:
+    r: 1
+    g: 1
+    b: 1
+    a: 1
+  defaultReleasedZoneColor:
+    r: 1
+    g: 1
+    b: 1
+    a: 1
+  defaultDisabledZoneColor:
+    r: 0.5
+    g: 0.5
+    b: 0.5
+    a: 0.35
+  defaultPressedStickHatColor:
+    r: 1
+    g: 1
+    b: 1
+    a: 1
+  defaultReleasedStickHatColor:
+    r: 1
+    g: 1
+    b: 1
+    a: 0.75
+  defaultDisabledStickHatColor:
+    r: 0.5
+    g: 0.5
+    b: 0.5
+    a: 0.35
+  defaultPressedStickBaseColor:
+    r: 1
+    g: 1
+    b: 1
+    a: 1
+  defaultReleasedStickBaseColor:
+    r: 1
+    g: 1
+    b: 1
+    a: 0.75
+  defaultDisabledStickBaseColor:
+    r: 0.5
+    g: 0.5
+    b: 0.5
+    a: 0.35
+  debugSecondTouchDragModeKey: 304
+  debugSecondTouchPinchModeKey: 306
+  debugSecondTouchTwistModeKey: 308
+  debugDrawTouches: 1
+  debugDrawLayoutBoxes: 1
+  debugDrawAreas: 1
+  debugTouchSprite: {fileID: 2800000, guid: c1cbdf24d6f02ef408af309e17c24dd8, type: 3}
+  debugSecondTouchSprite: {fileID: 2800000, guid: 0caebb8bec4237244ade4b21110b8c26,
+    type: 3}
+  debugFirstTouchNormalColor:
+    r: 1
+    g: 1
+    b: 0.6
+    a: 0.3
+  debugFirstTouchActiveColor:
+    r: 1
+    g: 1
+    b: 0
+    a: 0.7
+  debugSecondTouchNormalColor:
+    r: 1
+    g: 1
+    b: 1
+    a: 0.3
+  debugSecondTouchActiveColor:
+    r: 1
+    g: 0
+    b: 0
+    a: 0.6
+  defaultZoneImg: {fileID: 2800000, guid: 843f0fef55c05054f854712d832fc29f, type: 3}
+  defaultStickHatImg: {fileID: 2800000, guid: e962ceca498cc184982202be7e3b25b0, type: 3}
+  defaultStickBaseImg: {fileID: 2800000, guid: 6a15efc046ec45e419e117a285098afb, type: 3}
+  debugCircleImg: {fileID: 2800000, guid: 1cc0e96f823fd6241ad74c8654ada644, type: 3}
+  debugRectImg: {fileID: 2800000, guid: 601d53dd7651e8844826dcdc691e43e8, type: 3}
+  screenEmuOn: 1
+  screenEmuPortrait: 0
+  screenEmuShrink: 0
+  screenEmuPan: {x: 0.5, y: 0.5}
+  screenEmuHwDpi: 163
+  screenEmuMode: 2
+  screenEmuHwHorzRes: 480
+  screenEmuHwVertRes: 320
+  monitorDiagonal: 15
+  screenEmuBorderColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0.75
+  screenEmuBorderBadColor:
+    r: 0.5
+    g: 0
+    b: 0
+    a: 0.75
+  rwUnit: 0
+  previewMode: 0
+  version: 6
+  twistSafeFingerDistPx: 52.875122
+  pinchMinDistPx: 26.437561
+  touchTapMaxDistPx: 26.437561
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 100000}
+  m_IsPrefabParent: 1

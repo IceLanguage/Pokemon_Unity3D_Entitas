@@ -1,0 +1,199 @@
+fileFormatVersion: 2
+guid: c65fd8f521def2b408bb4b344df34048
+timeCreated: 1518712188
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: Array
+    100002: bottom
+    100004: bottom_bla
+    100006: button
+    100008: button_hol
+    100010: Camera
+    100012: Camera.target
+    100014: do_no
+    100016: do_no1
+    100018: do_no2
+    100020: do_no3
+    100022: do_not_tou
+    100024: Floor_1
+    100026: Light_1
+    100028: Light_2
+    100030: Light_3
+    100032: Light_4
+    100034: Light_5
+    100036: Light_6
+    100038: Light_7
+    100040: Light_8
+    100042: Null
+    100044: Null1
+    100046: //RootNode
+    100048: pokeball
+    100050: top_black
+    100052: top_red
+    400000: Array
+    400002: bottom
+    400004: bottom_bla
+    400006: button
+    400008: button_hol
+    400010: Camera
+    400012: Camera.target
+    400014: do_no
+    400016: do_no1
+    400018: do_no2
+    400020: do_no3
+    400022: do_not_tou
+    400024: Floor_1
+    400026: Light_1
+    400028: Light_2
+    400030: Light_3
+    400032: Light_4
+    400034: Light_5
+    400036: Light_6
+    400038: Light_7
+    400040: Light_8
+    400042: Null
+    400044: Null1
+    400046: //RootNode
+    400048: pokeball
+    400050: top_black
+    400052: top_red
+    2300000: Array
+    2300002: bottom
+    2300004: bottom_bla
+    2300006: button
+    2300008: button_hol
+    2300010: do_no
+    2300012: do_no1
+    2300014: do_no2
+    2300016: do_no3
+    2300018: do_not_tou
+    2300020: Floor_1
+    2300022: Null
+    2300024: Null1
+    2300026: pokeball
+    2300028: top_black
+    2300030: top_red
+    3300000: Array
+    3300002: bottom
+    3300004: bottom_bla
+    3300006: button
+    3300008: button_hol
+    3300010: do_no
+    3300012: do_no1
+    3300014: do_no2
+    3300016: do_no3
+    3300018: do_not_tou
+    3300020: Floor_1
+    3300022: Null
+    3300024: Null1
+    3300026: pokeball
+    3300028: top_black
+    3300030: top_red
+    4300000: Array
+    4300002: Null
+    4300004: Floor_1
+    4300006: Null1
+    4300008: pokeball
+    4300010: do_not_tou
+    4300012: do_no
+    4300014: do_no1
+    4300016: do_no2
+    4300018: do_no3
+    4300020: top_black
+    4300022: top_red
+    4300024: button_hol
+    4300026: button
+    4300028: bottom
+    4300030: bottom_bla
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat123
+    second: {fileID: 2100000, guid: f01e4588099db9748a690dbf951b977a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat1234
+    second: {fileID: 2100000, guid: b95f14b0d558c7d49bdfa45bfd746808, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 0.3
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 0
+    importBlendShapes: 1
+    importCameras: 0
+    importLights: 0
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,36 @@
+newmtl BodyA
+illum 2
+Kd 0.8 0.8 0.8
+Ka 0.8 0.8 0.8
+Ks 0.0 0.0 0.0
+Ke 0.0 0.0 0.0
+Ns 0.0
+map_Kd BodyA1_1.png
+
+newmtl BodyB00
+illum 2
+Kd 0.8 0.8 0.8
+Ka 0.8 0.8 0.8
+Ks 0.0 0.0 0.0
+Ke 0.0 0.0 0.0
+Ns 0.0
+map_Kd BodyB1_1.png
+
+newmtl BodyB01
+illum 2
+Kd 0.8 0.8 0.8
+Ka 0.8 0.8 0.8
+Ks 0.0 0.0 0.0
+Ke 0.0 0.0 0.0
+Ns 0.0
+map_Kd BodyB1_1.png
+
+newmtl Eye
+illum 2
+Kd 0.8 0.8 0.8
+Ka 0.8 0.8 0.8
+Ks 0.0 0.0 0.0
+Ke 0.0 0.0 0.0
+Ns 0.0
+map_Kd Eye1_1.png
+

@@ -1,0 +1,54 @@
+newmtl BodyAVco
+illum 2
+Kd 0.8 0.8 0.8
+Ka 0.8 0.8 0.8
+Ks 0.0 0.0 0.0
+Ke 0.0 0.0 0.0
+Ns 0.0
+map_Kd BodyA1_0.png
+
+newmtl BodyA
+illum 2
+Kd 0.8 0.8 0.8
+Ka 0.8 0.8 0.8
+Ks 0.0 0.0 0.0
+Ke 0.0 0.0 0.0
+Ns 0.0
+map_Kd BodyA1_0.png
+
+newmtl BodyB
+illum 2
+Kd 0.8 0.8 0.8
+Ka 0.8 0.8 0.8
+Ks 0.0 0.0 0.0
+Ke 0.0 0.0 0.0
+Ns 0.0
+map_Kd BodyB1_0.png
+
+newmtl LEye
+illum 2
+Kd 0.8 0.8 0.8
+Ka 0.8 0.8 0.8
+Ks 0.0 0.0 0.0
+Ke 0.0 0.0 0.0
+Ns 0.0
+map_Kd Eye1_0.png
+
+newmtl Mouth
+illum 2
+Kd 0.8 0.8 0.8
+Ka 0.8 0.8 0.8
+Ks 0.0 0.0 0.0
+Ke 0.0 0.0 0.0
+Ns 0.0
+map_Kd Mouth1_0.png
+
+newmtl REye
+illum 2
+Kd 0.8 0.8 0.8
+Ka 0.8 0.8 0.8
+Ks 0.0 0.0 0.0
+Ke 0.0 0.0 0.0
+Ns 0.0
+map_Kd Eye1_0.png
+

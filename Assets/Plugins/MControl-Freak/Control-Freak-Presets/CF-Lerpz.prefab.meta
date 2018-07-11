@@ -1,0 +1,42 @@
+fileFormatVersion: 2
+guid: 912c98b2418ce084ca2af248207a5a9c
+labels:
+- Android
+- iOS
+- iPhone
+- iPad
+- Touch
+- Mobile
+- Controller
+- Joystick
+- MultiTouch
+- Multi-touch
+- VirtualController
+- ControlFreak
+- Gesture
+- Gestures
+- Drag
+- Pinch
+- Stick
+- Finger
+- Fingers
+- TouchScreen
+- Screen
+- Button
+- Buttons
+- FPP
+- Platformer
+- Shooter
+- Control
+- Freak
+- WindowsPhone8
+- Phone
+- Tablet
+- cross-platform
+- crossplatform
+- Twist
+NativeFormatImporter:
+  mainObjectFileID: -1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

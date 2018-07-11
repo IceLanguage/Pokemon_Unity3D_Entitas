@@ -1,0 +1,219 @@
+fileFormatVersion: 2
+guid: 77cc2a215fde38f46b638546bf687778
+timeCreated: 1517152178
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: face_2c70
+    100004: face_2e10
+    100006: face_2f90
+    100008: face_30f0
+    100010: face_3250
+    100012: face_33b0
+    100014: face_3560
+    100016: face_3760
+    100018: face_3960
+    100020: face_3b60
+    100022: face_3d60
+    100024: face_3f60
+    100026: face_4160
+    400000: //RootNode
+    400002: face_2c70
+    400004: face_2e10
+    400006: face_2f90
+    400008: face_30f0
+    400010: face_3250
+    400012: face_33b0
+    400014: face_3560
+    400016: face_3760
+    400018: face_3960
+    400020: face_3b60
+    400022: face_3d60
+    400024: face_3f60
+    400026: face_4160
+    2300000: face_2c70
+    2300002: face_2e10
+    2300004: face_2f90
+    2300006: face_30f0
+    2300008: face_3250
+    2300010: face_33b0
+    2300012: face_3560
+    2300014: face_3760
+    2300016: face_3960
+    2300018: face_3b60
+    2300020: face_3d60
+    2300022: face_3f60
+    2300024: face_4160
+    3300000: face_2c70
+    3300002: face_2e10
+    3300004: face_2f90
+    3300006: face_30f0
+    3300008: face_3250
+    3300010: face_33b0
+    3300012: face_3560
+    3300014: face_3760
+    3300016: face_3960
+    3300018: face_3b60
+    3300020: face_3d60
+    3300022: face_3f60
+    3300024: face_4160
+    4300000: face_2c70
+    4300002: face_2e10
+    4300004: face_2f90
+    4300006: face_30f0
+    4300008: face_3250
+    4300010: face_33b0
+    4300012: face_3560
+    4300014: face_3760
+    4300016: face_3960
+    4300018: face_3b60
+    4300020: face_3d60
+    4300022: face_3f60
+    4300024: face_4160
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: face_2c70Mat
+    second: {fileID: 2100000, guid: 1a0bf7e005ab26a48a30ff1367481b45, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: face_2e10Mat
+    second: {fileID: 2100000, guid: 8f8e4085f7866324aa59eb1bcda9ffdf, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: face_2f90Mat
+    second: {fileID: 2100000, guid: df0d5af9ef5fa794980eb87631d0eb1d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: face_30f0Mat
+    second: {fileID: 2100000, guid: db76ff135cdf1764c9c0145da1651794, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: face_3250Mat
+    second: {fileID: 2100000, guid: 05ca2f9d400595f4da8b035360d5e5c0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: face_33b0Mat
+    second: {fileID: 2100000, guid: 15f0f24cbcd1ee445bd2d7dd99486fc5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: face_3560Mat
+    second: {fileID: 2100000, guid: 5d13d8de57b1fc940a5d4baacad0c269, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: face_3760Mat
+    second: {fileID: 2100000, guid: 3c9f68cb55fd2884eb542315a0b12fa5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: face_3960Mat
+    second: {fileID: 2100000, guid: 71c901786a5d9af4fa08caf451f5f88f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: face_3b60Mat
+    second: {fileID: 2100000, guid: 5ed7ce1c0d19e08409b9a98595a8984c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: face_3d60Mat
+    second: {fileID: 2100000, guid: d955f84b46ba16743bd2b1b9f70dd477, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: face_3f60Mat
+    second: {fileID: 2100000, guid: a8a3e82f0f6f5b44b87fdb22e8e91ca3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: face_4160Mat
+    second: {fileID: 2100000, guid: d32742d210afa7a439f4841c65636246, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 0.02
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

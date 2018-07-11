@@ -1,0 +1,55 @@
+fileFormatVersion: 2
+guid: d83c5e3bf9f87004a8ccf631f8381830
+labels:
+- Android
+- iOS
+- iPhone
+- iPad
+- Touch
+- Mobile
+- Controller
+- Joystick
+- MultiTouch
+- Multi-touch
+- VirtualController
+- ControlFreak
+- Gesture
+- Gestures
+- Drag
+- Pinch
+- Stick
+- Finger
+- Fingers
+- TouchScreen
+- Screen
+- Button
+- Buttons
+- FPP
+- Platformer
+- Shooter
+- Control
+- Freak
+- WindowsPhone8
+- Phone
+- Tablet
+- cross-platform
+- crossplatform
+- Twist
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - debugTouchSprite: {fileID: 2800000, guid: c1cbdf24d6f02ef408af309e17c24dd8, type: 3}
+  - debugSecondTouchSprite: {fileID: 2800000, guid: 0caebb8bec4237244ade4b21110b8c26,
+      type: 3}
+  - defaultZoneImg: {fileID: 2800000, guid: 843f0fef55c05054f854712d832fc29f, type: 3}
+  - defaultStickHatImg: {fileID: 2800000, guid: e962ceca498cc184982202be7e3b25b0,
+      type: 3}
+  - defaultStickBaseImg: {fileID: 2800000, guid: 6a15efc046ec45e419e117a285098afb,
+      type: 3}
+  - debugCircleImg: {fileID: 2800000, guid: 1cc0e96f823fd6241ad74c8654ada644, type: 3}
+  - debugRectImg: {fileID: 2800000, guid: 601d53dd7651e8844826dcdc691e43e8, type: 3}
+  executionOrder: -100
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
