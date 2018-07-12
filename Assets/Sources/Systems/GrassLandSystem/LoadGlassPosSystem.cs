@@ -1,0 +1,41 @@
+﻿using Entitas;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using UnityEngine;
+
+/// <summary>
+/// 加载草地配置系统
+/// </summary>
+internal class LoadGlassPosSystem : IInitializeSystem
+{
+    readonly GameContext _context;
+    public LoadGlassPosSystem(Contexts contexts)
+    {
+        _context = contexts.game;
+    }
+
+    public void Initialize()
+    {
+        TextAsset t = Resources.Load<TextAsset>("Config/GlassesPos");
+        string json = "";
+        if (t != null)
+            json = t.text;
+        else
+            Debug.LogError("无法加载草地配置信息");
+
+        GrassPosConfig grassPosConfig = JsonConvert.DeserializeObject<GrassPosConfig>(json);
+        if (null == grassPosConfig) return;
+        List<Vector3> GrassPosList = grassPosConfig.GetGrassPos();
+        GrassPosList = GrassPosList.Distinct().ToList();
+
+        foreach(Vector3 pos in GrassPosList)
+        {
+            GameEntity entity = _context.CreateEntity();
+            entity.AddGlassPos(pos);
+        }
+
+    }
+}

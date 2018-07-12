@@ -7,11 +7,9 @@ public class TOUCH_Controller : SingletonMonobehavior<TOUCH_Controller>
 	
 	public const int ZONE_SCREEN = 0;
 	public const int ZONE_PAUSE = 1;
-	public const int STICK_WALK = 0;
-	public const int STICK_ROTATE = 1;
-	//public Transform Target;
+	public const int STICK_WALK = 1;
+	public const int STICK_ROTATE = 0;
 	public TouchController ctrl;
-	//public vThirdPersonCamera cameraController;
 
 	void Start()
 	{
@@ -40,7 +38,8 @@ public class TOUCH_Controller : SingletonMonobehavior<TOUCH_Controller>
 
 	private bool IsClick()
 	{
-		if (Input.GetMouseButtonDown(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began))
+		if (Input.GetMouseButtonDown(0) || 
+			Input.touchCount > 0 && TouchPhase.Began == Input.GetTouch(0).phase)
 		{
 #if IPHONE || ANDROID
 			if (EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
@@ -88,7 +87,7 @@ public class TOUCH_Controller : SingletonMonobehavior<TOUCH_Controller>
 					rotateStick = this.ctrl.GetStick(STICK_ROTATE);
 			if(IsClick()) return;
 
-			if (walkStick.Pressed() && walkStick.disableGui == false)
+			if (walkStick.Pressed() && false == walkStick.disableGui)
 			{
 				
 				var playerController = PlayerController.Instance;
@@ -97,7 +96,7 @@ public class TOUCH_Controller : SingletonMonobehavior<TOUCH_Controller>
 				playerController.TouchMove(PremoveXZ.x, PremoveXZ.z);
 			}
 
-			else if (rotateStick.Pressed() && rotateStick.disableGui == false)
+			else if (rotateStick.Pressed() && false == rotateStick.disableGui)
 			{
 				
 				if (null == CameraController.Instance.cameraController) return;

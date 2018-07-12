@@ -8,15 +8,24 @@
 //------------------------------------------------------------------------------
 public static class GameComponentsLookup {
 
+    public const int FlagShowGlass = 0;
+    public const int GlassForces = 1;
+    public const int GlassMeshRender = 2;
+    public const int GlassPos = 3;
 
-
-    public const int TotalComponents = 0;
+    public const int TotalComponents = 4;
 
     public static readonly string[] componentNames = {
-
+        "FlagShowGlass",
+        "GlassForces",
+        "GlassMeshRender",
+        "GlassPos"
     };
 
     public static readonly System.Type[] componentTypes = {
-
+        typeof(FlagShowGlassComponent),
+        typeof(GlassForcesComponent),
+        typeof(GlassMeshRenderComponent),
+        typeof(GlassPosComponent)
     };
 }

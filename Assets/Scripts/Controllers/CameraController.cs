@@ -26,20 +26,4 @@ public class CameraController : SingletonMonobehavior<CameraController>
 
         Graphics.Blit(source, destination, mat);
     }
-
-
-
-    
-   public void SetBattleCamera()
-    {
-        cameraController.height = 5f;
-        cameraController.defaultDistance = 1.5f;
-    }
-
-    public void SetSimpleCamera()
-    {
-        cameraController.height = 3f;
-        cameraController.defaultDistance = 2.5f;
-        
-    }
 }

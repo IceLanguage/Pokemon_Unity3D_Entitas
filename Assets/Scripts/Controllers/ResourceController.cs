@@ -74,8 +74,7 @@ public partial class ResourceController : SingletonMonobehavior<ResourceControll
         LoadPokemonRacesData();
         LoadPokemonTypeInf();
         LoadCatachRateData();
-        LoadBagItemData();
-       
+        LoadBagItemData();      
         LoadCanUsePokemonList();
 
     }
