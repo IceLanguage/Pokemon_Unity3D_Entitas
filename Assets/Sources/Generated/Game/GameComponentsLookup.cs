@@ -8,24 +8,27 @@
 //------------------------------------------------------------------------------
 public static class GameComponentsLookup {
 
-    public const int FlagShowGlass = 0;
-    public const int GlassForces = 1;
-    public const int GlassMeshRender = 2;
-    public const int GlassPos = 3;
+    public const int BattleFlag = 0;
+    public const int GrassForces = 1;
+    public const int GrassMeshRender = 2;
+    public const int GrassPos = 3;
+    public const int PlayerData = 4;
 
-    public const int TotalComponents = 4;
+    public const int TotalComponents = 5;
 
     public static readonly string[] componentNames = {
-        "FlagShowGlass",
-        "GlassForces",
-        "GlassMeshRender",
-        "GlassPos"
+        "BattleFlag",
+        "GrassForces",
+        "GrassMeshRender",
+        "GrassPos",
+        "PlayerData"
     };
 
     public static readonly System.Type[] componentTypes = {
-        typeof(FlagShowGlassComponent),
-        typeof(GlassForcesComponent),
-        typeof(GlassMeshRenderComponent),
-        typeof(GlassPosComponent)
+        typeof(BattleFlagComponent),
+        typeof(GrassForcesComponent),
+        typeof(GrassMeshRenderComponent),
+        typeof(GrassPosComponent),
+        typeof(PlayerData)
     };
 }

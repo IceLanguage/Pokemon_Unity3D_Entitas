@@ -28,6 +28,7 @@ public class GameController : SingletonMonobehavior<GameController>
     protected override void OnDestroy()
     {
         _systems.TearDown();
+        Resources.UnloadUnusedAssets();
     }
 
     

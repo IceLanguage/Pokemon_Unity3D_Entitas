@@ -1,9 +1,10 @@
-﻿using Entitas;
-public sealed class GameSystem : Feature
+﻿public sealed class GameSystem : Feature
 {
     public GameSystem(Contexts contexts)
     {
-        Add(new GrassLandSystemFeature(contexts, ResourceController.Instance.glassMaterial));
+        Add(new DataSaveAndLoadFeature(contexts));
+        Add(new GrassLandSystemFeature(contexts, ResourceController.Instance.grassMaterial));
+        Add(new BattleSystemFeature(contexts));
     }
 }
    

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-public class GPUInstanceGlass:MonoBehaviour
+public class GPUInstanceGrass:MonoBehaviour
 {
     public int instanceCount = 100000;
     public Mesh instanceMesh;

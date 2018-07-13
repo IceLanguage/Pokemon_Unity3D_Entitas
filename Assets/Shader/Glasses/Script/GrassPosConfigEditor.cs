@@ -16,7 +16,7 @@ public class GrassPosConfigEditor:MonoBehaviour
 
     public LayerMask ground_layerMask = 0;
     public static Material GrassMaterial;
-    public const string GrassPosConfigPath = "Assets/Resources/Config/GlassesPos.json";
+    public const string GrassPosConfigPath = "Assets/Resources/Config/GrassesPos.json";
 #if UNITY_EDITOR
     private void OnDrawGizmos()
     {
@@ -77,7 +77,7 @@ public class GrassPosConfigEditor:MonoBehaviour
 
 #if UNITY_EDITOR
         if (null == GrassMaterial)
-            GrassMaterial = AssetDatabase.LoadAssetAtPath<Material>("Assets/Shaders/Glasses/Mat/GrassMat.mat");
+            GrassMaterial = AssetDatabase.LoadAssetAtPath<Material>("Assets/Shaders/Grasses/Mat/GrassMat.mat");
 
         if (pointList.Count < 2)
         {
@@ -86,7 +86,7 @@ public class GrassPosConfigEditor:MonoBehaviour
 
         }
         List<Vector3> allPoint = AllPointIn(pointList);
-        TextAsset t = Resources.Load<TextAsset>("Config/GlassesPos");
+        TextAsset t = Resources.Load<TextAsset>("Config/GrassesPos");
         string json = "";
         if (null != t )
         {
@@ -99,7 +99,7 @@ public class GrassPosConfigEditor:MonoBehaviour
         {
             grassPosConfig = ScriptableObject.CreateInstance<GrassPosConfig>();
         }
-        grassPosConfig.AddGlassPos(allPoint);
+        grassPosConfig.AddGrassPos(allPoint);
 
 
         json =JsonConvert.SerializeObject(grassPosConfig);

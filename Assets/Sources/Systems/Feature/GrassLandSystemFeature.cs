@@ -12,10 +12,11 @@ internal class GrassLandSystemFeature:Feature
 {
     public GrassLandSystemFeature(Contexts context,Material grassMaterial)
     {
-        Add(new UpdateForcesOnGlassSystem(context));      
-        Add(new AddGlassSystem(context, grassMaterial));
-        Add(new LoadGlassPosSystem(context));
-        Add(new CheckPlayerInGlassSystem(context, PlayerController.Instance.transform));
+        Add(new HideGrassSystem(context));
+        Add(new UpdateForcesOnGrassSystem(context));      
+        Add(new AddGrassSystem(context, grassMaterial));
+        Add(new LoadGrassPosSystem(context));
+        Add(new CheckPlayerInGrassSystem(context, PlayerController.Instance.transform));
 
     }
 }

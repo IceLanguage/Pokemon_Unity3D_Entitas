@@ -9,24 +9,29 @@ namespace PokemonBattelePokemon
 {
 
     [Serializable]
-    public class Pokemon
+    public class Pokemon:ScriptableObject
     {
 
-        public Pokemon(int raceID)
+        public void InitPokemon(int raceID)
         {
+            
             if (raceID < 1 || raceID > ResourceController.Instance.allRaceDic.Count) return;
             this.raceID = raceID;
+            skillList = new List<int>();
             isMan = UnityEngine.Random.Range(-1, 1) >= 0;
+            basestats = new Basestats();
             iv = new IndividualValues();
-            //currentLife = FullLife;
+            var nature = PokeNature;
+            var name = Ename;
+
         }
 
-        public void updataRace()
+        private void UpdataRace()
         {
             if (raceID <= 0 || raceID > ResourceController.Instance.allRaceDic.Count)
             {
-                Debug.Log("RaceID越界");
-                race = ResourceController.Instance.allRaceDic[1];
+                Debug.LogError("RaceID越界");
+                //race = ResourceController.Instance.allRaceDic[1];
             }
             else race = ResourceController.Instance.allRaceDic[raceID];
         }
@@ -144,7 +149,8 @@ namespace PokemonBattelePokemon
         /// <summary>
         /// 昵称
         /// </summary>
-        public string ename = "";
+        [SerializeField]
+        public string ename;
         public string Ename
         {
             get
@@ -168,10 +174,8 @@ namespace PokemonBattelePokemon
             }
         }
 
-        //性格
-        //[SerializeField]
-        //[FieldLabel("精灵性格")]
-        public Nature nature = null;
+        [SerializeField]
+        public Nature nature;
         public Nature PokeNature
         {
             get
@@ -204,7 +208,7 @@ namespace PokemonBattelePokemon
         }
         //种族
         public int raceID = 1;
-        private Race race = null;
+        private Race race;
 
         /// <summary>
         /// 种族
@@ -215,7 +219,7 @@ namespace PokemonBattelePokemon
             {
                 if (null == race)
                 {
-                    updataRace();
+                    UpdataRace();
                 }
                 return race;
             }
@@ -224,7 +228,7 @@ namespace PokemonBattelePokemon
                 race = value;
             }
         }
-
+        [SerializeField]
         private AbilityType abilitytype = 0;
         /// <summary>
         /// 外在表现特性
@@ -277,7 +281,8 @@ namespace PokemonBattelePokemon
             }
         }
         //可使用技能
-        public List<int> skillList = new List<int>();
+        [SerializeField]
+        public List<int> skillList;
         //public List<Skill> skillList = new List<Skill>();
         //public int FindSkillIndex(Skill skill)
         //{
@@ -290,10 +295,11 @@ namespace PokemonBattelePokemon
         //    }
         //    return -1;
         //}
-        
-        public bool isMan;//性别
+        [SerializeField]
+        public bool isMan ;
         //努力值
-        private Basestats basestats = new Basestats();
+        [SerializeField]
+        private Basestats basestats ;
         /// <summary>
         /// 努力值
         /// </summary>
@@ -310,6 +316,7 @@ namespace PokemonBattelePokemon
 
         }
         //个体值
+        [SerializeField]
         private IndividualValues iv;
         /// <summary>
         /// 个体值

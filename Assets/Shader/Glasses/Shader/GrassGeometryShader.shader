@@ -135,7 +135,7 @@
 						v[i].uv = fixed2(1, currentV);
 
 						currentV += offsetV;
-						currentVertexHeight = currentV * _Height;
+						currentVertexHeight = currentV * (_Height);
 					}
 
 					//风力影响***************************************************************************************************

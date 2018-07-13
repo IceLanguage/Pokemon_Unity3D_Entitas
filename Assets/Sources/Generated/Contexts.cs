@@ -58,21 +58,21 @@ public partial class Contexts : Entitas.IContexts {
 //------------------------------------------------------------------------------
 public partial class Contexts {
 
-    public const string GlassPos = "GlassPos";
+    public const string GrassPos = "GrassPos";
 
     [Entitas.CodeGeneration.Attributes.PostConstructor]
     public void InitializeEntityIndices() {
         game.AddEntityIndex(new Entitas.PrimaryEntityIndex<GameEntity, UnityEngine.Vector3>(
-            GlassPos,
-            game.GetGroup(GameMatcher.GlassPos),
-            (e, c) => ((GlassPosComponent)c).pos));
+            GrassPos,
+            game.GetGroup(GameMatcher.GrassPos),
+            (e, c) => ((GrassPosComponent)c).pos));
     }
 }
 
 public static class ContextsExtensions {
 
-    public static GameEntity GetEntityWithGlassPos(this GameContext context, UnityEngine.Vector3 pos) {
-        return ((Entitas.PrimaryEntityIndex<GameEntity, UnityEngine.Vector3>)context.GetEntityIndex(Contexts.GlassPos)).GetEntity(pos);
+    public static GameEntity GetEntityWithGrassPos(this GameContext context, UnityEngine.Vector3 pos) {
+        return ((Entitas.PrimaryEntityIndex<GameEntity, UnityEngine.Vector3>)context.GetEntityIndex(Contexts.GrassPos)).GetEntity(pos);
     }
 }
 //------------------------------------------------------------------------------

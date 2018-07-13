@@ -41,7 +41,7 @@ public class GrassPosConfig : ScriptableObject
         }
         
     }
-    public void AddGlassPos(List<Vector3> PosList)
+    public void AddGrassPos(List<Vector3> PosList)
     {
         List<Vector3> GrassPosList = GetGrassPos();
         for (int i = 0; i < PosList.Count; i++)
@@ -50,8 +50,7 @@ public class GrassPosConfig : ScriptableObject
 
             if (null == GrassPosList || 0 == GrassPosList.Count )
             {
-                GrassPosList = new List<Vector3>();
-                GrassPosList.Add(pos);
+                GrassPosList = new List<Vector3>() { pos };
             }
             else if (GrassPosList.Count > 0 && !GrassPosList.Contains(pos))
             {

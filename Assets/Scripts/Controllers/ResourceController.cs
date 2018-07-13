@@ -7,7 +7,7 @@ using System.Text;
 using UnityEngine;
 public partial class ResourceController : SingletonMonobehavior<ResourceController>
 {
-    public Material glassMaterial;
+    public Material grassMaterial;
     public Material DefaultMaterial;
     public ParticleSystem PokemonShowParticle;
 
@@ -19,7 +19,7 @@ public partial class ResourceController : SingletonMonobehavior<ResourceControll
     public Dictionary<int, Item> allItemDic = new Dictionary<int, Item>();
     public List<int> CanUsePokemonList = new List<int>();
     public float[,] TypeInf = new float[19, 19];
-
+    public EncounterPokemon glassPokemons;
     private const string skillAssetPath = "SkillAsset/";
     private const string skillPoolPath = "SkillPoolConfig/";
 
@@ -34,36 +34,17 @@ public partial class ResourceController : SingletonMonobehavior<ResourceControll
             return PlayerPrefs.GetString("AccountName");
         }
     }
-    public StringBuilder BagPokemonPath
+    public StringBuilder TrainerDataPath
     {
         get
         {
             if (null == UserName) return null;
             StringBuilder sb = new StringBuilder(100);
-            return sb.AppendFormat("{0}/{1}TrainerpokemonBag/{2}.json",
-                Application.persistentDataPath, Datapath, UserName);
+            return sb.AppendFormat("{0}/{1}Play.json",
+                Application.persistentDataPath, Datapath);
         }
     }
-    public StringBuilder HousePokemonPath
-    {
-        get
-        {
-            if (null == UserName) return null;
-            StringBuilder sb = new StringBuilder(100);
-            return sb.AppendFormat("{0}/{1}TrainerpokemonBox/{2}.json",
-                Application.persistentDataPath, Datapath, UserName);
-        }
-    }
-    public StringBuilder BagItemPath
-    {
-        get
-        {
-            if (null == UserName) return null;
-            StringBuilder sb = new StringBuilder(100);
-            return sb.AppendFormat("{0}/{1}BagItem/{2}.json",
-                Application.persistentDataPath, Datapath, UserName);
-        }
-    }
+    
 
 
     private void Start()
@@ -227,6 +208,8 @@ public partial class ResourceController : SingletonMonobehavior<ResourceControll
         }
         Debug.Log("属性克制数据已加载");
     }
+
+    
 
     /// <summary>
     /// 获得属性克制影响
