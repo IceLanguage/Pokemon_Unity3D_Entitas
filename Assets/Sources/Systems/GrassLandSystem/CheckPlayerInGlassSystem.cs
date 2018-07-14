@@ -47,7 +47,7 @@ class CheckPlayerInGrassSystem : IExecuteSystem
         if (0 == CheckGrassList.Count()) return;
 
         
-        GeometryDetection.Sphere play_detection = new GeometryDetection.Sphere(playPos, 1);
+        GeometryDetection.Sphere play_detection = new GeometryDetection.Sphere(playPos, 1.2f);
 
         //是否碰撞
         int DetectGrassNum = 0;
@@ -58,9 +58,9 @@ class CheckPlayerInGrassSystem : IExecuteSystem
             GeometryDetection.AABB grass_detection = 
                     new GeometryDetection.AABB(GrassPos,
                     new Vector3(
-                        GrassPos.x + 1.5f,
+                        GrassPos.x + 1f,
                         GrassPos.y + 5f,
-                        GrassPos.z + 1.5f));
+                        GrassPos.z + 1f));
             bool isDetected = GeometryDetection.Overlap_AABB_Sphere(grass_detection, play_detection);
 
             if (false == isDetected)

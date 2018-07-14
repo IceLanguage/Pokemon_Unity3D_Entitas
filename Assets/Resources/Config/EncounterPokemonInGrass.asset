@@ -8,8 +8,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 23fb78b7e7edbf54eba8d48751b1be7e, type: 3}
   m_Name: EncounterPokemonInGrass
-  m_EditorClassIdentifier: Assembly-CSharp::EncounterPokemon
+  m_EditorClassIdentifier: 
   Pokemoms: 01000000020000000300000004000000050000000f0000001200000019000000
-  EncounterProbabilities: 140000000a000000050000000c0000000600000019000000190000000f000000
+  EncounterProbabilities: 140000000a000000050000000a000000050000001e0000001900000014000000

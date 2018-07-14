@@ -36,6 +36,10 @@ public class AddGrassSystem : ReactiveSystem<GameEntity>
             Vector3 grassPos = e.grassPos.pos;
             if (!e.hasGrassForces)
                 e.AddGrassForces(new List<Force>());
+
+            
+            
+
             GenerateGrassField(grassPos, e);
         }
         
@@ -114,7 +118,8 @@ public class AddGrassSystem : ReactiveSystem<GameEntity>
         grassGo.transform.parent = GrassLand;
         //entity.AddGrass(grassGo);
 
-        grassGo.Link(entity, _context);
+        //grassGo.Link(entity, _context);
+        
 
         mf = grassGo.AddComponent<MeshFilter>();
         _renderer = grassGo.AddComponent<MeshRenderer>();

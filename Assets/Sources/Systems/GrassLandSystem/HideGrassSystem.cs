@@ -4,56 +4,20 @@ using System.Linq;
 using System.Text;
 using Entitas;
 
-class HideGrassSystem : ReactiveSystem<GameEntity>, IEndBattleEvent
+class HideGrassSystem : IEndBattleEvent,IInitializeSystem
 {
     private readonly GameContext context;
-    private bool BattleFlag = false;
-    public HideGrassSystem(Contexts contexts):base(contexts.game)
+    public HideGrassSystem(Contexts contexts)
     {
         context = contexts.game;
-        EndBattleSystem.EndBattleEvent += EndBattleEvent;
         
     }
-    protected override void Execute(List<GameEntity> entities)
-    {
-        if (BattleFlag == context.isBattleFlag) return;
-
-        var grassList = context.GetEntities(GameMatcher.GrassMeshRender);
-
-        foreach (var e in grassList)
-        {
-            e.grassMeshRender.meshRenderer.gameObject.SetActive(!context.isBattleFlag);
-
-        }
-        BattleFlag = context.isBattleFlag;
-    }
-    private void Update()
-    {
-        if (BattleFlag == context.isBattleFlag) return;
-
-        var grassList = context.GetEntities(GameMatcher.GrassMeshRender);
-
-        foreach (var e in grassList)
-        {
-            e.grassMeshRender.meshRenderer.gameObject.SetActive(!context.isBattleFlag);
-
-        }
-        BattleFlag = context.isBattleFlag;
-    }
-    protected override bool Filter(GameEntity entity)
-    {
-        return true;
-    }
-
-    protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
-    {
-        
-        return context.CreateCollector(GameMatcher.BattleFlag);
-    }
+   
+    
 
     public void EndBattleEvent()
     {
-        if (BattleFlag == context.isBattleFlag) return;
+
 
         var grassList = context.GetEntities(GameMatcher.GrassMeshRender);
 
@@ -62,6 +26,22 @@ class HideGrassSystem : ReactiveSystem<GameEntity>, IEndBattleEvent
             e.grassMeshRender.meshRenderer.gameObject.SetActive(!context.isBattleFlag);
 
         }
-        BattleFlag = context.isBattleFlag;
+    }
+
+    public void HideGlassLand()
+    {
+        var grassList = context.GetEntities(GameMatcher.GrassMeshRender);
+
+        foreach (var e in grassList)
+        {
+            e.grassMeshRender.meshRenderer.gameObject.SetActive(!context.isBattleFlag);
+
+        }
+    }
+
+    public void Initialize()
+    {
+        EndBattleSystem.EndBattleEvent += EndBattleEvent;
+        BeginBattleSystem.BeginBattleEvent += HideGlassLand;
     }
 }

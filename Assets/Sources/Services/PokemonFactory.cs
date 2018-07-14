@@ -39,6 +39,7 @@ public static class PokemonFactory{
 	{
 		Pokemon pokemom = ScriptableObject.CreateInstance<Pokemon>();
 		pokemom.InitPokemon(PokemonID);
+		new BattlePokemonData(pokemom);
 		return pokemom;
 	}
 

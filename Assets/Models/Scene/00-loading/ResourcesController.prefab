@@ -82,10 +82,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38f0655ccdf1f6a408dd40500b0fb92a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  glassMaterial: {fileID: 2100000, guid: bd6d02eb25769ea4c8da44c7caccd45b, type: 2}
+  grassMaterial: {fileID: 2100000, guid: bd6d02eb25769ea4c8da44c7caccd45b, type: 2}
   DefaultMaterial: {fileID: 2100000, guid: df5358bc628291140a3d9737afa44c3d, type: 2}
   PokemonShowParticle: {fileID: 198790632317191282}
   CanUsePokemonList: 
+  glassPokemons: {fileID: 11400000, guid: f67a23ea43f37ba4da0441309e02709d, type: 2}
 --- !u!198 &198790632317191282
 ParticleSystem:
   m_ObjectHideFlags: 1

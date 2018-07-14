@@ -49,7 +49,6 @@ public partial class ResourceController : SingletonMonobehavior<ResourceControll
 
     private void Start()
     {
-       
         LoadPokemonAbilitysData();
         LoadPokemonNaturesData();
         LoadPokemonRacesData();

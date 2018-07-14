@@ -26,17 +26,17 @@ namespace PokemonBattelePokemon
     [Serializable]
     public class PokemonBaseData
     {
-        [SerializeField]
+
         protected int health = 0;
-        [SerializeField]
+
         protected int physicPower = 0;
-        [SerializeField]
+
         protected int physicDefence = 0;
-        [SerializeField]
+
         protected int energyPower = 0;
-        [SerializeField]
+
         protected int energyDefence = 0;
-        [SerializeField]
+
         protected int speed = 0;
         /// <summary>
         /// 生命

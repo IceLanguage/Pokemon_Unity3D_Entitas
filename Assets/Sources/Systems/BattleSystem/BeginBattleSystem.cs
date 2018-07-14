@@ -9,6 +9,7 @@ using UnityEngine;
 public class BeginBattleSystem : ReactiveSystem<GameEntity>, IEndBattleEvent
 {
     readonly GameContext context;
+    public static Action BeginBattleEvent;
     public BeginBattleSystem(Contexts contexts):base (contexts.game)
     {
         context = contexts.game;
@@ -35,28 +36,25 @@ public class BeginBattleSystem : ReactiveSystem<GameEntity>, IEndBattleEvent
         //存储玩家当前位置
         new PlayerPrefs().SetVector3("playPrePos",
             PlayerController.Instance.transform.position);
-
-        
-
-        
-
         
     }
 
     private void BeginBattle()
-    {
-        //玩家进入战斗场景
-        PlayerController.Instance.transform.position =
-            BattleController.Instance.PlayerTransform.position;
-
+    {        
         //初始化战斗场景精灵信息
         List<Pokemon> playPokemons = context.playerData.scriptableObject.pokemons;
         List<Pokemon> PreBattlePokemon = playPokemons.Count >= 6 ?
             playPokemons.GetRange(0, 6) : playPokemons;
         BattleController.Instance.InitPlayerPokemons(PreBattlePokemon);
 
+       
+
         if (BattleController.Instance.CanBattle)
         {
+            BeginBattleEvent();
+            //玩家进入战斗场景
+            PlayerController.Instance.transform.position =
+                BattleController.Instance.PlayerTransform.position;
             //开始战斗
             BattleController.Instance.BeginBattle();
         }

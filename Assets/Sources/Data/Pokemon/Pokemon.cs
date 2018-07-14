@@ -155,7 +155,7 @@ namespace PokemonBattelePokemon
         {
             get
             {
-                if (ename == "") ename = Name;
+                if (ename == ""||ename == null) ename = Name;
                 return ename;
             }
 
@@ -229,7 +229,7 @@ namespace PokemonBattelePokemon
             }
         }
         [SerializeField]
-        private AbilityType abilitytype = 0;
+        private AbilityType abilitytype;
         /// <summary>
         /// 外在表现特性
         /// </summary>

@@ -6,5 +6,5 @@ using UnityEngine;
 
 public class Trainer : ScriptableObject {
 
-    public List<Pokemon> pokemons = new List<Pokemon>();
+    public List<Pokemon> pokemons;
 }
