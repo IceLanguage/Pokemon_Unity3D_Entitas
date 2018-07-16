@@ -58,10 +58,16 @@ public partial class Contexts : Entitas.IContexts {
 //------------------------------------------------------------------------------
 public partial class Contexts {
 
+    public const string BattlePokemonData = "BattlePokemonData";
     public const string GrassPos = "GrassPos";
 
     [Entitas.CodeGeneration.Attributes.PostConstructor]
     public void InitializeEntityIndices() {
+        game.AddEntityIndex(new Entitas.PrimaryEntityIndex<GameEntity, BattlePokemonData>(
+            BattlePokemonData,
+            game.GetGroup(GameMatcher.BattlePokemonData),
+            (e, c) => ((BattlePokemonDataComponent)c).data));
+
         game.AddEntityIndex(new Entitas.PrimaryEntityIndex<GameEntity, UnityEngine.Vector3>(
             GrassPos,
             game.GetGroup(GameMatcher.GrassPos),
@@ -70,6 +76,10 @@ public partial class Contexts {
 }
 
 public static class ContextsExtensions {
+
+    public static GameEntity GetEntityWithBattlePokemonData(this GameContext context, BattlePokemonData data) {
+        return ((Entitas.PrimaryEntityIndex<GameEntity, BattlePokemonData>)context.GetEntityIndex(Contexts.BattlePokemonData)).GetEntity(data);
+    }
 
     public static GameEntity GetEntityWithGrassPos(this GameContext context, UnityEngine.Vector3 pos) {
         return ((Entitas.PrimaryEntityIndex<GameEntity, UnityEngine.Vector3>)context.GetEntityIndex(Contexts.GrassPos)).GetEntity(pos);

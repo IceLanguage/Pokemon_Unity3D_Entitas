@@ -14,7 +14,7 @@ using UnityEngine;
 public class ReadPokemonConfig :Editor
 {
 
-    
+    private static Dictionary<int, Skill> allSkillDic = new Dictionary<int, Skill>();
     public static Dictionary<int, Race> allRaceDic = new Dictionary<int, Race>();
     private static Dictionary<NatureType, Nature> allNatureDic = new Dictionary<NatureType, Nature>();
     private static Dictionary<int, Ability> allAbilityDic = new Dictionary<int, Ability>();
@@ -25,21 +25,116 @@ public class ReadPokemonConfig :Editor
     ///属性克制表 key为[攻击方,防守方]
     /// </summary>
     private static float[,] TypeInf = new float[19, 19];
-    public static string SkillJsonpath = "Assets/Resources/ReadTxt/PokemonSkills.json";
-    public static string NatureJsonpath = "Assets/Resources/ReadTxt/PokemonNatures.json";
-    public static string RaceJsonpath = "Assets/Resources/ReadTxt/PokemonRaces.json";
-    public static string AbilityJsonpath = "Assets/Resources/ReadTxt/PokemonAbilitys.json";
-    private static string TypeInfoJsonpath = "Assets/Resources/ReadTxt/PokemonTypeInfos.json";
-    private static string CatchRateJsonpath = "Assets/Resources/ReadTxt/CatchRates.json";
-    private static string BagItemJsonpath= "Assets/Resources/ReadTxt/BagItems.json";
+    public static readonly string SkillJsonpath = "Assets/Resources/ReadTxt/PokemonSkills.json";
+    public static readonly string NatureJsonpath = "Assets/Resources/ReadTxt/PokemonNatures.json";
+    public static readonly string RaceJsonpath = "Assets/Resources/ReadTxt/PokemonRaces.json";
+    public static readonly string AbilityJsonpath = "Assets/Resources/ReadTxt/PokemonAbilitys.json";
+    private static readonly string TypeInfoJsonpath = "Assets/Resources/ReadTxt/PokemonTypeInfos.json";
+    private static readonly string CatchRateJsonpath = "Assets/Resources/ReadTxt/CatchRates.json";
+    private static readonly string BagItemJsonpath= "Assets/Resources/ReadTxt/BagItems.json";
 
-    private static string skillSavePath = "Assets/Resources/SkillAsset/";
-    private static string SkillConfigPath = "Assets/Skill/SkillConfig.json";
+    private static readonly string skillSavePath = "Assets/Resources/SkillAsset/";
+    private static readonly string SkillConfigPath = "Assets/Skill/SkillConfig.json";
+
+    [MenuItem("Pokemon/读取技能配置")]
+    public static void ReadPokemonSkill()
+    {
+        allSkillDic.Clear();
+        TextAsset t = Resources.Load<TextAsset>("ReadTxt/PokemonSkillstext");
+        if (null == t)
+        {
+            Debug.Log("文件不存在");
+            return;
+        }
+        string s = t.text;
+        string[] line = s.Split('\n');
+        string[] ss;
+        int size = line.Length;
+        for (int i = 0; i < size; i++)
+        {
+            //显示进度条
+            EditorUtility.DisplayCancelableProgressBar("读取精灵技能数据", i + "/" + size, (float)i / size);
+
+            ss = line[i].Split('|');
+            Skill skill;
+            int id = 0;
+            string name;
+            if (!int.TryParse(ss[0], out id))
+            {
+                return;
+            }
+            if (ss.Length < 9)
+            {
+                Debug.Log("id为" + id + "的技能添加失败");
+                continue;
+            }
+            try
+            {
+
+                name = ss[1];
+                SkillType type = (SkillType)Enum.Parse(typeof(SkillType), ss[5]);
+                int power = int.Parse(ss[6]);
+                int hitRate = int.Parse(ss[7]);
+                int pp = int.Parse(ss[8]);
+                PokemonType att = (PokemonType)Enum.Parse(typeof(PokemonType), ss[4]);
+                skill = ScriptableObject.CreateInstance<Skill>();
+                skill.SKillID = id;
+                skill.sname = name;
+                skill.type = type;
+                skill.power = power;
+                skill.hitRate = hitRate;
+                skill.FullPP = pp;
+                skill.att = att;
+
+                AssetDatabase.CreateAsset(skill, skillSavePath + skill.SKillID + ".asset");
+            }
+            catch (ArgumentException)
+            {
+                Debug.Log("要转换的类型或转换的值为空或不存在指定枚举名称");
+                Debug.Log("id为" + id + "的技能添加失败");
+
+                continue;
+            }
+            catch (FormatException)
+            {
+                Debug.Log("格式不符");
+                Debug.Log("id为" + id + "的技能添加失败");
+
+                continue;
+            }
+            catch (OverflowException)
+            {
+                Debug.Log("超出类型范围");
+                Debug.Log("id为" + id + "的技能添加失败");
+                continue;
+            }
+            Skill _skill;
+            if (allSkillDic.TryGetValue(id, out _skill) || null == skill)
+            {
+                Debug.Log("id为" + id + "的技能添加失败");
+            }
+            else
+            {
+                allSkillDic.Add(id, skill);
+            }
+
+        }
+        string json = JsonConvert.SerializeObject(allSkillDic);
+        File.WriteAllText(SkillJsonpath, json, Encoding.UTF8);
+
+        //PokemonSkillScriptableObject serializationDictionary = ScriptableObject.CreateInstance<PokemonSkillScriptableObject>();
+        //serializationDictionary.Target = allSkillDic;
+        //AssetDatabase.CreateAsset(serializationDictionary, "Assets/Resources/PokemonSkills.asset");
+
+        Debug.Log("精灵技能数据已加载");
+
+        //删除进度条
+        EditorUtility.ClearProgressBar();
+
+    }
 
 
 
-
-  
     /// <summary>
     /// 委托事件:从Excel加载数据
     /// </summary>
@@ -416,5 +511,15 @@ public class ReadPokemonConfig :Editor
         string json = JsonConvert.SerializeObject(TypeInf);
         File.WriteAllText(TypeInfoJsonpath, json, Encoding.UTF8);
         Debug.Log("属性克制数据已加载");
+    }
+
+    [MenuItem("Pokemon/导出精灵技能池")]
+    public static void ExportSkillPoolConfig()
+    {
+        var list = SearchGameObject.SearchGameObjectList<SkillPool>("Assets/Skill/SkillPoolAsset");
+        var dic = list.ToDictionary(x => x.PokemonID);
+        string json = JsonConvert.SerializeObject(dic);
+        File.WriteAllText("Assets/Resources/Config/SkillPoolConfig.json", json, Encoding.UTF8);
+        Debug.Log("精灵技能池导出成功");
     }
 }

@@ -139,6 +139,7 @@
 					}
 
 					//风力影响***************************************************************************************************
+						
 					fixed2 wind = fixed2(sin(_Time.x * UNITY_PI * 3), sin(_Time.x * UNITY_PI * 3));
 					wind.x += (sin(_Time.x + root.x / 25) + sin((_Time.x + root.x / 15) + 50)) * 0.5;
 					wind.y += cos(_Time.x + root.z / 80);

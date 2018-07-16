@@ -52,6 +52,7 @@ public class BeginBattleSystem : ReactiveSystem<GameEntity>, IEndBattleEvent
         if (BattleController.Instance.CanBattle)
         {
             BeginBattleEvent();
+
             //玩家进入战斗场景
             PlayerController.Instance.transform.position =
                 BattleController.Instance.PlayerTransform.position;

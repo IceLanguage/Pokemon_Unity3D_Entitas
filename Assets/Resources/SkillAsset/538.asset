@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8d6deb8f377a484aab2541785504324, type: 3}
+  m_Name: 538
+  m_EditorClassIdentifier: 
+  SKillID: 538
+  sname: "\u68C9\u82B1\u9632\u5B88"
+  type: 2
+  power: 0
+  hitRate: 0
+  fullPP: 10
+  att: 12
+  effect: {fileID: 11400000, guid: 516b134dae66539409347a97e6b19e0a, type: 2}

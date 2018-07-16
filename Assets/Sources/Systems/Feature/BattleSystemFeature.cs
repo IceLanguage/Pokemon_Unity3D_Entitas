@@ -9,5 +9,6 @@ class BattleSystemFeature:Feature
     {
         Add(new EndBattleSystem(contexts));
         Add(new BeginBattleSystem(contexts));
+        Add(new UpdatePokemonDataSystem(contexts));
     }
 }

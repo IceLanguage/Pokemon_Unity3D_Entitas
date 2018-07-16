@@ -23,6 +23,30 @@ namespace PokemonBattelePokemon
             iv = new IndividualValues();
             var nature = PokeNature;
             var name = Ename;
+            if(!ResourceController.Instance.PokemonSkillPoolDic.ContainsKey(raceID))
+            {
+                skillList = new List<int>();
+                return;
+            }
+            SkillPool skillPool = ResourceController.Instance.PokemonSkillPoolDic[raceID];
+            if(null == skillPool)
+            {
+                skillList = new List<int>();
+                return;
+            }
+            int skillCount = skillPool.Skills.Count;
+            if (skillCount <= 4)
+                skillList = new List<int>(skillPool.Skills);
+            else
+            {
+                skillList = new List<int>();
+                while (skillList.Count<4)
+                {
+                    int skillid = skillPool.Skills[UnityEngine.Random.Range(0, skillCount)];
+                    if (!skillList.Contains(skillid))
+                        skillList.Add(skillid);
+                }
+            }
 
         }
 
@@ -36,106 +60,7 @@ namespace PokemonBattelePokemon
             else race = ResourceController.Instance.allRaceDic[raceID];
         }
         #region 属性
-        //基础属性
 
-        //public int currentLife;//实际生命
-
-        ///// <summary>
-        ///// 当前生命
-        ///// </summary>
-        //public int CurrentLife
-        //{
-        //    get
-        //    {
-        //        return currentLife;
-        //    }
-        //    set
-        //    {
-        //        currentLife = value;
-        //    }
-        //}
-
-        ///// <summary>
-        ///// Hp能力值
-        ///// </summary>
-        //public int FullLife
-        //{
-        //    get
-        //    {
-        //        //HP能力值 ＝ （种族值×2＋基础点数÷4＋个体值）×等级÷100＋等级＋10
-        //        return CalBase(PokeRace.health, Basestats.Health, IV.Health) + 5;
-
-        //    }
-        //}
-
-        //非能力值 ＝ （（种族值×2＋基础点数÷4＋个体值）×等级÷100＋5）×性格修正
-        ///// <summary>
-        ///// 计算能力值
-        ///// 返回（种族值×2＋基础点数÷4＋个体值）×等级÷100＋5）
-        ///// </summary>
-        ///// <param name="raceVal"></param>
-        ///// <param name="BaseStatVal"></param>
-        ///// <param name="IVVal"></param>
-        ///// <returns></returns>
-        //private int CalBase(int raceVal, int BaseStatVal, int IVVal)
-        //{
-        //    float f = (float)level / 100;
-        //    return (int)((raceVal * 2 + BaseStatVal / 4 + IVVal) * f + level + 5);
-        //}
-
-        ///// <summary>
-        ///// 物攻能力值
-        ///// </summary>
-        //public int PhysicPower
-        //{
-        //    get
-        //    {
-        //        return (int)(CalBase(PokeRace.phyPower, Basestats.PhysicPower, IV.PhysicPower) * (PokeNature.PhysicPowerAffect + 1));
-        //    }
-        //}
-        ///// <summary>
-        ///// 物防能力值
-        ///// </summary>
-        //public int PhysicDefence
-        //{
-        //    get
-        //    {
-        //        return (int)(CalBase(PokeRace.phyDefence, Basestats.PhysicDefence, IV.PhysicDefence) * (1 + PokeNature.PhysicDefenceAffect));
-        //    }
-        //}
-
-        ///// <summary>
-        ///// 特攻能力值
-        ///// </summary>
-        //public int EnergyPower
-        //{
-        //    get
-        //    {
-        //        return (int)(CalBase(PokeRace.energyPower, Basestats.EnergyPower, IV.EnergyPower) * (1 + PokeNature.EnergyPowerEffect));
-        //    }
-        //}
-
-        ///// <summary>
-        ///// 特防能力值
-        ///// </summary>
-        //public int EnergyDefence
-        //{
-        //    get
-        //    {
-        //        return (int)(CalBase(PokeRace.energyDefence, Basestats.EnergyDefence, IV.EnergyDefence) * (1 + PokeNature.EnergyDefenceEffect));
-        //    }
-        //}
-
-        ///// <summary>
-        ///// 速度能力值
-        ///// </summary>
-        //public int Speed
-        //{
-        //    get
-        //    {
-        //        return (int)(CalBase(PokeRace.speed, Basestats.Speed, IV.Speed) * (1 + PokeNature.SpeedAffect));
-        //    }
-        //}
         //等级
         private const int level = 100;
         public int Level

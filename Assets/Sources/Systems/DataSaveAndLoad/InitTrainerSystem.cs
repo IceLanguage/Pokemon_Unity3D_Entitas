@@ -26,20 +26,23 @@ public class InitTrainerSystem : IInitializeSystem
         {
             trainer = JsonConvert.DeserializeObject<Trainer>(json);
         }
-
-
-       
-        if (null == trainer|| 0 == trainer.pokemons.Count )
+        if (null == trainer|| null == trainer.pokemons|| 0 == trainer.pokemons.Count )
         {
             //如果没有精灵，就给一只皮卡丘和小火龙
             Pokemon Pikaqiu = PokemonFactory.BuildPokemon(25);
 
-            Pokemon Charmander = PokemonFactory.BuildPokemon(6);
-
+            Pokemon Charmander = PokemonFactory.BuildPokemon(4);
             trainer.pokemons = new List<Pokemon>() { Pikaqiu, Charmander };
+
+        }
+        else
+        {
+            foreach (Pokemon pokemon in trainer.pokemons)
+                new BattlePokemonData(pokemon);
         }
 
         context.ReplacePlayerData(trainer);
 
     }
 }
+

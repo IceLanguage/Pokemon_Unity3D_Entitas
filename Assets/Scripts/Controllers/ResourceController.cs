@@ -11,6 +11,7 @@ public partial class ResourceController : SingletonMonobehavior<ResourceControll
     public Material DefaultMaterial;
     public ParticleSystem PokemonShowParticle;
 
+    public Dictionary<int, Skill> allSkillDic = new Dictionary<int, Skill>();
     public Dictionary<int, Race> allRaceDic = new Dictionary<int, Race>();
     public Dictionary<NatureType, Nature> allNatureDic = new Dictionary<NatureType, Nature>();
     public Dictionary<int, Ability> allAbilityDic = new Dictionary<int, Ability>();
@@ -18,8 +19,10 @@ public partial class ResourceController : SingletonMonobehavior<ResourceControll
     public Dictionary<int, Action> allBagItemEffectDic = new Dictionary<int, Action>();
     public Dictionary<int, Item> allItemDic = new Dictionary<int, Item>();
     public List<int> CanUsePokemonList = new List<int>();
+    public Dictionary<int, SkillPool> PokemonSkillPoolDic = new Dictionary<int, SkillPool>();
     public float[,] TypeInf = new float[19, 19];
     public EncounterPokemon glassPokemons;
+    public UseSkillManager useSkillManager = new UseSkillManager();
     private const string skillAssetPath = "SkillAsset/";
     private const string skillPoolPath = "SkillPoolConfig/";
 
@@ -56,12 +59,58 @@ public partial class ResourceController : SingletonMonobehavior<ResourceControll
         LoadCatachRateData();
         LoadBagItemData();      
         LoadCanUsePokemonList();
-
+        LoadPokemonSkillsData();
+        LoadPokemonSkillPools();
     }
 
-   
+    public void LoadPokemonSkillPools()
+    {
+        try
+        {
+            TextAsset t = Resources.Load<TextAsset>("Config/SkillPoolConfig");
+            Resources.UnloadUnusedAssets();
+            string json = t.text;
 
-   
+            PokemonSkillPoolDic = JsonConvert.DeserializeObject<Dictionary<int, SkillPool>>(json);
+        }
+        catch (Exception e)
+        {
+            Debug.Log("精灵技能池数据读取异常" + e.Message);
+        }
+        Debug.Log("精灵技能池数据已加载");
+    }
+    public void LoadPokemonSkillsData()
+    {
+        try
+        {
+
+
+            TextAsset t = Resources.Load<TextAsset>("ReadTxt/PokemonSkills");
+            Resources.UnloadUnusedAssets();
+            string json = t.text;
+
+            allSkillDic = JsonConvert.DeserializeObject<Dictionary<int, Skill>>(json);
+
+            
+
+        }
+        catch (Exception e)
+        {
+            Debug.Log("精灵技能数据读取异常" + e.Message);
+        }
+
+        var list = allSkillDic.Values.ToList();
+        foreach (Skill skill in list)
+        {
+            
+            Skill newskill = Resources.Load<Skill>(
+                new StringBuilder(skillAssetPath).Append(skill.SKillID.ToString()).ToString());
+            allSkillDic[skill.SKillID] = newskill;
+        }
+        Debug.Log("精灵技能数据已加载");
+    }
+
+
 
     public void LoadCanUsePokemonList()
     {
