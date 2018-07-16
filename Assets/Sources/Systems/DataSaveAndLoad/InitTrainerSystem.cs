@@ -5,12 +5,14 @@ using Entitas;
 using System.IO;
 using PokemonBattelePokemon;
 using Newtonsoft.Json;
+using System;
 
 public class InitTrainerSystem : IInitializeSystem
 {
     readonly GameContext context;
     public InitTrainerSystem(Contexts contexts)
     {
+
         context = contexts.game;
     }
     public void Initialize()
@@ -44,5 +46,7 @@ public class InitTrainerSystem : IInitializeSystem
         context.ReplacePlayerData(trainer);
 
     }
+
+
 }
 

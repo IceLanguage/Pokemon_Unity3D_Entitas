@@ -179,6 +179,7 @@ public class UI_PokemonBag : TTUIPage
     {
         pokemon = BattlePokemonData.Context
             [trainerData.pokemons[ChosePokemonIndex].GetInstanceID()];
+
         basestats = pokemon.basestats;
         Show_Icons();
         Show_Power();

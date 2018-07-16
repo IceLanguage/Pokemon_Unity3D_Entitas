@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,13 +13,16 @@ class UIController:SingletonMonobehavior<UIController>
     {
         BeginBattleSystem.BeginBattleEvent += ShowBattleUI;
         EndBattleSystem.EndBattleEvent += CloseBattleUI;
-
+        
     }
 
     private void Start()
     {
         TTUIPage.ShowPage<UI_PokemonBagIcon>();
         TTUIPage.ShowPage<UI_BagIcon>();
+
+        TTUIPage.ShowPage<UIBattle_ShowPlaySkill>();
+        TTUIPage.ShowPage<UIBattle_ShowEnemySkill>();
     }
     private void ShowBattleUI()
     {
@@ -46,4 +50,6 @@ class UIController:SingletonMonobehavior<UIController>
 
         
     }
+
+
 }

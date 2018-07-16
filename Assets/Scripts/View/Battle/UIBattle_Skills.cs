@@ -26,9 +26,11 @@ public class UIBattle_Skills:TTUIPage
     private GameContext context;
     public override void Awake(GameObject go)
     {
+        
         context = Contexts.sharedInstance.game;
         InitUnityComponents();
-       
+        NotificationCenter<int>.Get().AddEventListener("DisableSkillButton", DisableSkillButtonEvent);
+        NotificationCenter<int>.Get().AddEventListener("EnableSkillButton", EnableSkillButtonEvent);
         Refresh();
         
     }
@@ -89,6 +91,7 @@ public class UIBattle_Skills:TTUIPage
             int j = i - 1;
             button_list[i-1].onClick.AddListener(() =>
             {
+               
                 NotificationCenter<int>.Get().DispatchEvent("UseSkill", j);
             });
         }
@@ -101,9 +104,23 @@ public class UIBattle_Skills:TTUIPage
 
         BattlePokemonData pokemonData =
             BattleController.Instance.PlayerCurPokemonData;
+        if(null == pokemonData)
+        {
+            Hide();
+            return;
+        }
         if (PrePokemonData != pokemonData)
         {
+            if (null != PrePokemonData)
+            {
+                var Preentity = context.GetEntityWithBattlePokemonData(PrePokemonData);
+                var Preaction = Preentity.pokemonDataChangeEvent.Event;
+                Preaction -= Refresh;
+                Preentity.ReplacePokemonDataChangeEvent(Preaction);
+            }
+
             PrePokemonData = pokemonData;
+
             var entity = context.GetEntityWithBattlePokemonData(pokemonData);
             var action = entity.pokemonDataChangeEvent.Event;
             action += Refresh;
@@ -144,5 +161,19 @@ public class UIBattle_Skills:TTUIPage
     public void ShowSkill(RectTransform rectTransform)
     {
         rectTransform.DOAnchorPosY(-273.8f, 1);
+    }
+
+    /// <summary>
+    /// 禁止技能的使用
+    /// </summary>
+    /// <param name="notific"></param>
+    private void DisableSkillButtonEvent(Notification<int> notific)
+    {
+        button_list[notific.param].interactable = false;
+    }
+
+    private void EnableSkillButtonEvent(Notification<int> notific)
+    {
+        button_list[notific.param].interactable = true;
     }
 }

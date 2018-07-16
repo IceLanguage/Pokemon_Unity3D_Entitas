@@ -67,9 +67,25 @@ public class UIBattle_EnemyInfo:TTUIPage
     {
        
         BattlePokemonData pokemonData = BattleController.Instance.EnemyCurPokemonData;
+        if(null == pokemonData)
+        {
+            Hide();
+            return;
+            
+        }
         if (PrePokemonData != pokemonData)
         {
+            if(null!= PrePokemonData)
+            {
+                var Preentity = context.GetEntityWithBattlePokemonData(PrePokemonData);
+                var Preaction = Preentity.pokemonDataChangeEvent.Event;
+                Preaction -= Refresh;
+                Preentity.ReplacePokemonDataChangeEvent(Preaction);
+            }
+            
+
             PrePokemonData = pokemonData;
+
             var entity = context.GetEntityWithBattlePokemonData(pokemonData);
             var action = entity.pokemonDataChangeEvent.Event;
             action += Refresh;

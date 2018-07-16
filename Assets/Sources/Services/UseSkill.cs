@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using UnityEngine;
-using LHCoroutine;
+using TinyTeam.UI;
 
 namespace PokemonBattelePokemon
 {
@@ -17,7 +15,41 @@ namespace PokemonBattelePokemon
         public Dictionary<int, IUseSkillSpecialEffect> UseSkillDic =
             new Dictionary<int, IUseSkillSpecialEffect>();
     }
-    public sealed class UseSkill
+    public interface IShowUseSkillUI
+    {
+        void ShowSkillUI();
+        void ShowSkillMissUI();
+    }
+    public sealed partial class UseSkill : IShowUseSkillUI
+    {
+        
+        public void ShowSkillMissUI()
+        {
+            if (attackPokemon == BattleController.Instance.PlayerCurPokemonData)
+            {
+                TTUIPage.ShowPage<UIBattle_PlaySkillMiss>();
+            }
+            else
+            {
+                TTUIPage.ShowPage<UIBattle_EnemySkillMiss>();
+            }
+        }
+
+        public void ShowSkillUI()
+        {
+            if (attackPokemon == BattleController.Instance.PlayerCurPokemonData)
+            {
+                UIBattle_ShowPlaySkill page = (UIBattle_ShowPlaySkill)TTUIPage.allPages["UIBattle_ShowPlaySkill"];
+                page.Show(skill.sname);
+            }
+            else
+            {
+                UIBattle_ShowEnemySkill page = (UIBattle_ShowEnemySkill)TTUIPage.allPages["UIBattle_ShowEnemySkill"];
+                page.Show(skill.sname);
+            }
+        }
+    }
+    public sealed partial class UseSkill
     {
         public static void Attack(
             Skill skill,
@@ -25,6 +57,8 @@ namespace PokemonBattelePokemon
             BattlePokemonData DefencePokemon
             )
         {
+            if (null == AttackPokemon || null == DefencePokemon)
+                return;
             new UseSkill(skill, AttackPokemon, DefencePokemon);           
         }
 
@@ -59,10 +93,12 @@ namespace PokemonBattelePokemon
             
             if(IsSkillUseSuccess())
             {
+                ShowSkillUI();
+
                 UseSkillEffect();
                 UseSkillPP();
-                
-                if(IsSkillHitAim())
+
+                if (IsSkillHitAim())
                 {
                     UseSkillDamage();
                     var useSkillManager = ResourceController.Instance.useSkillManager.UseSkillDic;
@@ -72,7 +108,13 @@ namespace PokemonBattelePokemon
                     }
                     //UseSkillSpecialEffect();
                 }
-                
+                else
+                {
+                    ShowSkillMissUI();
+                    Debug.Log("技能未命中");
+                }
+                    
+
                 attackPokemonEntity.ReplaceBattlePokemonData(attackPokemon);
                 defencePokemonEntity.ReplaceBattlePokemonData(defencePokemon);
             }           
@@ -164,7 +206,7 @@ namespace PokemonBattelePokemon
         
         private IEnumerator DisableEffectGameObject(GameObject effect,int skillID)
         {
-            yield return new WaitForSeconds(2);
+            yield return new WaitForSeconds(BattleController.Instance.BattleTime);
             if (effect != null && effect.activeSelf)
             {
                 effect.SetActive(false);

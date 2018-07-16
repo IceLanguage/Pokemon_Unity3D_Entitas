@@ -97,6 +97,14 @@ public class UIBattle_PokemonInfos : TTUIPage
 
         if (PrePokemonData != pokemonData)
         {
+            if (null != PrePokemonData)
+            {
+                var Preentity = context.GetEntityWithBattlePokemonData(PrePokemonData);
+                var Preaction = Preentity.pokemonDataChangeEvent.Event;
+                Preaction -= Refresh;
+                Preentity.ReplacePokemonDataChangeEvent(Preaction);
+            }
+
             PrePokemonData = pokemonData;
             var entity= context.GetEntityWithBattlePokemonData(pokemonData);
             var action = entity.pokemonDataChangeEvent.Event;
