@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-using PokemonBattelePokemon;
+using PokemonBattele;
 
 public static class ObjectPoolController 
 {

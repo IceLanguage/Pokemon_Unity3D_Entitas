@@ -6,7 +6,7 @@ using TinyTeam.UI;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
-using PokemonBattelePokemon;
+using PokemonBattele;
 
 public class UI_PokemonBag : TTUIPage
 {

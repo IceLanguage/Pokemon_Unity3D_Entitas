@@ -1,4 +1,4 @@
-﻿using PokemonBattelePokemon;
+﻿using PokemonBattele;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

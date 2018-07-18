@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 using System;
 using System.IO;
 using System.Text;
-using PokemonBattelePokemon;
+using PokemonBattele;
 
 public class GetPokemonJson 
 {

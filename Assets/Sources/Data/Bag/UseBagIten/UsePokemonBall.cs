@@ -6,7 +6,7 @@ using UnityEngine;
 using DG.Tweening;
 using MyUnityEventDispatcher;
 
-namespace PokemonBattelePokemon
+namespace PokemonBattele
 {
     class UsePokemonBall : UseBagItem
     {

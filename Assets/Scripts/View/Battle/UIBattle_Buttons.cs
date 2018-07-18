@@ -5,7 +5,7 @@ using TinyTeam.UI;
 using UnityEngine.UI;
 using DG.Tweening;
 using MyUnityEventDispatcher;
-using PokemonBattelePokemon;
+using PokemonBattele;
 
 public class UIBattle_Buttons : TTUIPage {
 

@@ -19,3 +19,4 @@ MonoBehaviour:
   fullPP: 10
   att: 13
   effect: {fileID: 11400000, guid: ad5e341b6f501e74c9bbcfef757547dd, type: 2}
+  isUseForSelf: 1

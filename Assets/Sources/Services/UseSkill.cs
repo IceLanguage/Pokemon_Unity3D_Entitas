@@ -4,23 +4,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using TinyTeam.UI;
 
-namespace PokemonBattelePokemon
+namespace PokemonBattele
 {
-    public interface IUseSkillSpecialEffect
-    {
-        void UseSkillSpecialEffect();
-    }
-    public sealed partial class UseSkillManager
-    {
-        public Dictionary<int, IUseSkillSpecialEffect> UseSkillDic =
-            new Dictionary<int, IUseSkillSpecialEffect>();
-    }
-    public interface IShowUseSkillUI
-    {
-        void ShowSkillUI();
-        void ShowSkillMissUI();
-    }
-    public sealed partial class UseSkill : IShowUseSkillUI
+    
+
+    public sealed partial class UseSkill 
     {
         
         public void ShowSkillMissUI()
@@ -100,28 +88,34 @@ namespace PokemonBattelePokemon
 
                 if (IsSkillHitAim())
                 {
+                    if (IsIngnore())
+                    {
+                        Debug.Log(skill.sname +"没有效果");
+                        return;
+                    }
+                    
                     UseSkillDamage();
-                    var useSkillManager = ResourceController.Instance.useSkillManager.UseSkillDic;
+                    var useSkillManager =UseSkillEffectManager.UseSkillDic;
                     if (useSkillManager.ContainsKey(skill.SKillID))
                     {
-                        useSkillManager[skill.SKillID].UseSkillSpecialEffect();
+                        BattlePokemonData PokemonUseEffect = skill.isUseForSelf ? attackPokemon : defencePokemon;
+                        foreach(var effect in useSkillManager[skill.SKillID])
+                            effect.UseSkillSpecialEffect(PokemonUseEffect);
                     }
-                    //UseSkillSpecialEffect();
+                    if (PokemonType.火 == skill.att && AbnormalState.Frostbite == defencePokemon.Abnormal)
+                    {
+                        defencePokemon.SetAbnormalState(AbnormalState.Normal);
+                    }
                 }
                 else
                 {
                     ShowSkillMissUI();
-                    Debug.Log("技能未命中");
+                    Debug.Log(skill.sname + "技能未命中");
                 }
 
-
-                //attackPokemonEntity.ReplaceBattlePokemonData(attackPokemon);
-                //defencePokemonEntity.ReplaceBattlePokemonData(defencePokemon);
             }           
             
         }
-        //技能的特殊效果
-        //private void UseSkillSpecialEffect() { }
         /// <summary>
         /// 技能是否使用成功
         /// </summary>
@@ -133,9 +127,13 @@ namespace PokemonBattelePokemon
                 Debug.LogError("没有提前判断技能是否可以使用");
                 return false;
             }
-           //检测是否无法行动
-           //TODO
-            return true;
+           
+
+            if(attackPokemon.StateForAbnormal.CanAction(attackPokemon))
+            {
+                return true;
+            }
+            return false;
         }
 
         /// <summary>
@@ -218,6 +216,32 @@ namespace PokemonBattelePokemon
                 ObjectPoolController.SkillEffectsObjectPool[skillID] = effect;
             }
                 
+        }
+
+        private readonly static PokemonType[] IngnoreAttackPokemonType = new PokemonType[6]
+        {
+            PokemonType.格斗,PokemonType.一般,PokemonType.毒,PokemonType.电,PokemonType.地面,PokemonType.超能
+        };
+        private readonly static PokemonType[] IngnoreDefencePokemonType = new PokemonType[6]
+        {
+            PokemonType.幽灵,PokemonType.幽灵,PokemonType.钢,PokemonType.地面,PokemonType.飞行,PokemonType.恶
+        };
+        private bool IsIngnore()
+        {
+            for(int i=0;i<6;++i)
+            {
+                PokemonType a = IngnoreAttackPokemonType[i];
+                PokemonType b = IngnoreDefencePokemonType[i];
+                bool aflag = a == skill.att;
+                if(aflag)
+                {
+                    bool bflag = b == defencePokemon.MainPokemonType || b == defencePokemon.SecondPokemonType;
+                    if (bflag)
+                        return true;
+                }
+                
+            }
+            return false;
         }
     }
     

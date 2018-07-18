@@ -1,4 +1,4 @@
-﻿using PokemonBattelePokemon;
+﻿using PokemonBattele;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +23,38 @@ public class BattlePokemonData : PokemonBaseData
     public List<int> skills;
     public List<int> skillPPs;
     public Transform transform;
+    public AbnormalState Abnormal;
+    private StatModifiers statModifiers = new StatModifiers();
+    //异常状态
+    public PokemonState StateForAbnormal
+    {
+        get
+        {
+            return PokemonState.Abnormalstates[Abnormal];
+        }
+    }
+
+    public StatModifiers StatModifiers
+    {
+        get
+        {
+            return statModifiers;
+        }
+
+        set
+        {
+            statModifiers = value;
+            ReCalPokemonData();
+
+        }
+    }
+
+    //设置新的异常状态
+    public void SetAbnormalState(AbnormalState newState)
+    {
+        PokemonState.Abnormalstates[newState].Init(this);
+    }
+
     public BattlePokemonData(Pokemon pokemon)
     {
         this.pokemon = pokemon;
@@ -46,60 +78,73 @@ public class BattlePokemonData : PokemonBaseData
     private void DefaultAction() { }
     private void InitPokemonData()
     {
-       
-        MainPokemonType = race.pokemonMainType;
-        SecondPokemonType = race.pokemonSecondType;
+              
         curHealth = Health = PokemonCalculation.CalFullHealth(
             race.health, basestats.Health, IV.Health);
         if(Health<=0)
         {
             curHealth = Health = 1;
         }
-        PhysicPower = PokemonCalculation.CalCombatBasePower(
-            race.phyPower,
-            basestats.PhysicPower,
-            IV.PhysicPower,
-            nature.PhysicPowerAffect
-        );
-        PhysicDefence = PokemonCalculation.CalCombatBasePower(
-            race.phyDefence,
-            basestats.PhysicDefence,
-            IV.PhysicDefence,
-            nature.PhysicDefenceAffect
-        );
-        EnergyPower = PokemonCalculation.CalCombatBasePower(
-            race.energyPower,
-            basestats.EnergyPower,
-            IV.EnergyPower,
-            nature.EnergyPowerEffect
-        );
-        EnergyDefence = PokemonCalculation.CalCombatBasePower(
-            race.energyDefence,
-            basestats.EnergyDefence,
-            IV.EnergyDefence,
-            nature.EnergyDefenceEffect
-        );
-        Speed = PokemonCalculation.CalCombatBasePower(
-            race.speed,
-            basestats.Speed,
-            IV.Speed,
-            nature.SpeedAffect
-        );
-        skills = new List<int>(pokemon.skillList);
-        skillPPs = new List<int>();
         
+        skills = new List<int>(pokemon.skillList);
+        skillPPs = new List<int>();       
         skillPPs = skills
             .Select(
                 x => ResourceController.Instance.allSkillDic[x].FullPP)
             .ToList();
 
+        ReCalPokemonData();
     }
-    
-    public void Recover()
+
+    private void ReCalPokemonData()
     {
-        curHealth = Health;
+        MainPokemonType = race.pokemonMainType;
+        SecondPokemonType = race.pokemonSecondType;
+        PhysicPower = PokemonCalculation.CalCombatBasePower(
+            race.phyPower,
+            basestats.PhysicPower,
+            IV.PhysicPower,
+            nature.PhysicPowerAffect,
+            StatModifiers.ActualCorrection[StatModifiers.PhysicPower]
+        );
+        PhysicDefence = PokemonCalculation.CalCombatBasePower(
+            race.phyDefence,
+            basestats.PhysicDefence,
+            IV.PhysicDefence,
+            nature.PhysicDefenceAffect,
+            StatModifiers.ActualCorrection[StatModifiers.PhysicDefence]
+        );
+        EnergyPower = PokemonCalculation.CalCombatBasePower(
+            race.energyPower,
+            basestats.EnergyPower,
+            IV.EnergyPower,
+            nature.EnergyPowerEffect,
+            StatModifiers.ActualCorrection[StatModifiers.EnergyPower]
+        );
+        EnergyDefence = PokemonCalculation.CalCombatBasePower(
+            race.energyDefence,
+            basestats.EnergyDefence,
+            IV.EnergyDefence,
+            nature.EnergyDefenceEffect,
+            StatModifiers.ActualCorrection[StatModifiers.EnergyDefence]
+        );
+        Speed = PokemonCalculation.CalCombatBasePower(
+            race.speed,
+            basestats.Speed,
+            IV.Speed,
+            nature.SpeedAffect,
+            StatModifiers.ActualCorrection[StatModifiers.Speed]
+        );
         GameEntity entity = Contexts.sharedInstance.game.GetEntityWithBattlePokemonData(this);
         entity.ReplaceBattlePokemonData(this);
+    }
+    //恢复
+    public void Recover()
+    {
+        StatModifiers = new StatModifiers();
+        SetAbnormalState(AbnormalState.Normal);
+        InitPokemonData();
+        
     }
     
 }

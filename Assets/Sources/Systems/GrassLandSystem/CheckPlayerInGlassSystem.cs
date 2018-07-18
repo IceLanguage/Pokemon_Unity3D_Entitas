@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Entitas;
-using PokemonBattelePokemon;
+using PokemonBattele;
 using UnityEngine;
 
 class CheckPlayerInGrassSystem : IExecuteSystem

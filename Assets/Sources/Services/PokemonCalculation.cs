@@ -1,8 +1,9 @@
-﻿using PokemonBattelePokemon;
+﻿using PokemonBattele;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using UnityEngine;
 
 /// <summary>
 /// 精灵捕获或精灵属性和伤害数值的计算
@@ -33,10 +34,10 @@ public static class PokemonCalculation
     /// <param name="BaseStatVal"></param>
     /// <param name="IVVal"></param>
     /// <returns></returns>
-    public static int CalCombatBasePower(int raceVal, int BaseStatVal, int IVVal,float natureEffect)
+    public static int CalCombatBasePower(int raceVal, int BaseStatVal, int IVVal,float natureEffect,int statModifierEffect)
     {
 
-        return (int)(CalBase(raceVal, BaseStatVal, IVVal) * (natureEffect + 1));
+        return (int)(CalBase(raceVal, BaseStatVal, IVVal) * (natureEffect + 1)* statModifierEffect)/100;
     }
 
     /// <summary>
@@ -58,14 +59,6 @@ public static class PokemonCalculation
         {
             power = (float)attackPokemon.PhysicPower / defencePokemon.PhysicDefence;
 
-            ////考虑到灼烧状态对物攻的影响
-            //if (attakPokemon.hasAbnormalState &&
-            //    attakPokemon.abnormalState.abnormalState == AbnormalState.Burns)
-            //{
-            //    power /= 2;
-            //}
-
-
 
         }
         else if (skill.type == SkillType.特殊)
@@ -81,6 +74,20 @@ public static class PokemonCalculation
         typeInfos *= ResourceController.Instance.GetTypeInfo
             ((int)skill.att,
             (int)defencePokemon.SecondPokemonType);
+
+        if(typeInfos == 2f)
+        {
+            Debug.Log(skill.sname+"效果拔群");
+        }
+        else if (typeInfos == 4f)
+        {
+            Debug.Log(skill.sname + "效果超群");
+        }
+        else if(typeInfos<1f)
+        {
+            Debug.Log(skill.sname + "效果不太理想" +typeInfos);
+        }
+
         if (skill.att == attackPokemon.MainPokemonType ||
             skill.att == attackPokemon.SecondPokemonType)
         {

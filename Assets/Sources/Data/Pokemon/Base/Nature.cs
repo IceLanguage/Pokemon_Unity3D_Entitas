@@ -6,7 +6,7 @@ using UnityEngine;
 #if UNITY_EDITOR
 using MyAttribute;
 #endif
-namespace PokemonBattelePokemon
+namespace PokemonBattele
 {
     /// <summary>
     /// 性格

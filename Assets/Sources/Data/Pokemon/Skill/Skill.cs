@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
-namespace PokemonBattelePokemon
+namespace PokemonBattele
 {
     /// <summary>
     /// 技能
@@ -72,7 +72,10 @@ namespace PokemonBattelePokemon
         }
 
         public SkillEffect effect;
-       
+
+        //技能效果的作用对象
+        [SerializeField]
+        public bool isUseForSelf = false;
     }
 
     public enum SkillType

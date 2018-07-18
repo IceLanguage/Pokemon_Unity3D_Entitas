@@ -9,7 +9,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 using DG.Tweening;
-using PokemonBattelePokemon;
+using PokemonBattele;
 
 public class UIBattle_Pokemons : TTUIPage
 {

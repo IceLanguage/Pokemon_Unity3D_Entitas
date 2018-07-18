@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Entitas;
 using System.IO;
-using PokemonBattelePokemon;
+using PokemonBattele;
 using Newtonsoft.Json;
 using System;
 

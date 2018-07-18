@@ -1,7 +1,7 @@
 ﻿using DataFileManager;
 using Newtonsoft.Json;
 using OfficeOpenXml;
-using PokemonBattelePokemon;
+using PokemonBattele;
 using System;
 using System.Collections;
 using System.Collections.Generic;

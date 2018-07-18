@@ -1,5 +1,5 @@
 ﻿using DG.Tweening;
-using PokemonBattelePokemon;
+using PokemonBattele;
 using System;
 using System.Collections.Generic;
 using System.Linq;

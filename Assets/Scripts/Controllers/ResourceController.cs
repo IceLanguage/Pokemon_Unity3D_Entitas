@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json;
-using PokemonBattelePokemon;
+using PokemonBattele;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +22,6 @@ public partial class ResourceController : SingletonMonobehavior<ResourceControll
     public Dictionary<string, Item> ItemDic = new Dictionary<string, Item>();
     public float[,] TypeInf = new float[19, 19];
     public EncounterPokemon glassPokemons;
-    public UseSkillManager useSkillManager = new UseSkillManager();
     public Dictionary<string, UseBagItem> UseBagUItemDict = new Dictionary<string, UseBagItem>();
     private const string skillAssetPath = "SkillAsset/";
     private const string skillPoolPath = "SkillPoolConfig/";

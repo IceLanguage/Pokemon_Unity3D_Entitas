@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
-namespace PokemonBattelePokemon
+namespace PokemonBattele
 {
     [Serializable]
 #if UNITY_EDITOR

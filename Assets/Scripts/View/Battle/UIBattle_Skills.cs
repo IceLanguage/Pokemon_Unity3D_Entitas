@@ -8,7 +8,7 @@ using UnityEngine.Events;
 using UnityEngine.UI;
 using DG.Tweening;
 using MyUnityEventDispatcher;
-using PokemonBattelePokemon;
+using PokemonBattele;
 
 public class UIBattle_Skills:TTUIPage
 {
@@ -65,11 +65,6 @@ public class UIBattle_Skills:TTUIPage
 
     public override void Hide()
     {
-        //var entity = context.GetEntityWithBattlePokemonData(PrePokemonData);
-        //var action = entity.pokemonDataChangeEvent.Event;
-        //action -= Refresh;
-        //entity.ReplacePokemonDataChangeEvent(action);
-
         thisrect.DOAnchorPosY(-400, 0.01f);
 
     }

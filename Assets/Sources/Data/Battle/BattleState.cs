@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using UnityEngine.Events;
 
-namespace PokemonBattelePokemon
+namespace PokemonBattele
 {
     abstract class BattleState
     {

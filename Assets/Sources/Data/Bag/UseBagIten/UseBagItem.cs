@@ -5,7 +5,7 @@ using System.Text;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace PokemonBattelePokemon
+namespace PokemonBattele
 {
     public abstract class UseBagItem 
     {

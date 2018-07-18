@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-namespace PokemonBattelePokemon
+namespace PokemonBattele
 {
     public static partial class CatchPokemon
     {

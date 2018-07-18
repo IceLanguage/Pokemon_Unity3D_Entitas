@@ -9,7 +9,7 @@ using UnityEngine.UI;
 using DG.Tweening;
 using MyUnityEventDispatcher;
 using System.Collections;
-using PokemonBattelePokemon;
+using PokemonBattele;
 
 public class UIKnapscakPanel:TTUIPage
 {

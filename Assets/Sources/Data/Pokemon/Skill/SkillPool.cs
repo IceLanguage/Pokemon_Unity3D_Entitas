@@ -4,9 +4,12 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-namespace PokemonBattelePokemon
+namespace PokemonBattele
 {
 #if UNITY_EDITOR
+    /// <summary>
+    /// 精灵技能池
+    /// </summary>
     [CreateAssetMenu(fileName = "SkillPool", menuName = "ScriptableObjec/SkillPool")]
 #endif
     public class SkillPool :ScriptableObject

@@ -1,4 +1,4 @@
-﻿using PokemonBattelePokemon;
+﻿using PokemonBattele;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -220,7 +220,12 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
     /// </summary>
     private void UpdateBattleState()
     {
-       
+        if(!CanBattle)
+        {
+            return;
+        }
+
+        
         battleState = battleState.ChangeState();
     }
 
@@ -230,11 +235,7 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
     /// </summary>
     private void PlayerRound()
     {
-
         EnemyAction();
-
-
-
     }
 
     /// <summary>
@@ -337,11 +338,18 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
     IEnumerator WaitBattleAroundEnd()
     {
         yield return new WaitForSeconds(BattleTime);
+
+        PlayerCurPokemonData.StateForAbnormal.UpdateInPlayerAround(PlayerCurPokemonData);
+        EnemyCurPokemonData.StateForAbnormal.UpdateInPlayerAround(EnemyCurPokemonData);
+
         UpdatePokemonDatas();
+
         EnemyChooseSkillID = -1;
         PlayChooseSkillID = -1;
         PlayerChooseBagItemName = "";
         EnemyChooseBagItemName = "";
+
+       
         if (null != battleState && CanBattle)
             UpdateBattleState();
     }
@@ -391,7 +399,7 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
 
 
         }
-        else if(hashcode == EnemyCurPokemonData.ID)
+        else 
         {
             EnemyCurPokemonData = null;
             StartCoroutine(WaitBattleEnd());
