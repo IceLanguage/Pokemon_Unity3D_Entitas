@@ -16,13 +16,14 @@ public partial class ResourceController : SingletonMonobehavior<ResourceControll
     public Dictionary<NatureType, Nature> allNatureDic = new Dictionary<NatureType, Nature>();
     public Dictionary<int, Ability> allAbilityDic = new Dictionary<int, Ability>();
     public Dictionary<int, int> allCtachRateDic = new Dictionary<int, int>();
-    public Dictionary<int, Action> allBagItemEffectDic = new Dictionary<int, Action>();
-    public Dictionary<int, Item> allItemDic = new Dictionary<int, Item>();
+  
     public List<int> CanUsePokemonList = new List<int>();
     public Dictionary<int, SkillPool> PokemonSkillPoolDic = new Dictionary<int, SkillPool>();
+    public Dictionary<string, Item> ItemDic = new Dictionary<string, Item>();
     public float[,] TypeInf = new float[19, 19];
     public EncounterPokemon glassPokemons;
     public UseSkillManager useSkillManager = new UseSkillManager();
+    public Dictionary<string, UseBagItem> UseBagUItemDict = new Dictionary<string, UseBagItem>();
     private const string skillAssetPath = "SkillAsset/";
     private const string skillPoolPath = "SkillPoolConfig/";
 
@@ -56,13 +57,33 @@ public partial class ResourceController : SingletonMonobehavior<ResourceControll
         LoadPokemonNaturesData();
         LoadPokemonRacesData();
         LoadPokemonTypeInf();
-        LoadCatachRateData();
-        LoadBagItemData();      
+        LoadCatachRateData();    
         LoadCanUsePokemonList();
         LoadPokemonSkillsData();
         LoadPokemonSkillPools();
+        LoadItemData();
     }
+    public void LoadItemData()
+    {
+        try
+        {
+            TextAsset t = Resources.Load<TextAsset>("ReadTxt/BagItem");
+            Resources.UnloadUnusedAssets();
+            string json = t.text;
 
+            var nameList = JsonConvert.DeserializeObject<List<string>>(json);
+            foreach(string name in nameList)
+            {
+                ItemDic[name] = Resources.Load<Item>(
+                    new StringBuilder("BagItem/BagItemAsset/").Append(name).ToString());
+            }
+        }
+        catch (Exception e)
+        {
+            Debug.Log("精灵道具数据读取异常" + e.Message);
+        }
+        Debug.Log("精灵道具数据已加载");
+    }
     public void LoadPokemonSkillPools()
     {
         try
@@ -128,27 +149,6 @@ public partial class ResourceController : SingletonMonobehavior<ResourceControll
             Debug.Log("可使用精灵列表数据读取异常" + e.Message);
 
         }
-    }
-
-    public void LoadBagItemData()
-    {
-        try
-        {
-
-            TextAsset t = Resources.Load<TextAsset>("ReadTxt/BagItems");
-            Resources.UnloadUnusedAssets();
-            string json = t.text;
-
-            allItemDic = JsonConvert.DeserializeObject<Dictionary<int, Item>>(json);
-        }
-        catch (Exception e)
-        {
-            Debug.Log("道具数据读取异常" + e.Message);
-
-        }
-
-        allItemDic[124].Sprite = "BagItem/PokemonBall";
-        Debug.Log("道具数据已加载");
     }
 
 

@@ -8,6 +8,32 @@ using UnityEngine;
 
 class UIController:SingletonMonobehavior<UIController>
 {
+    private RectTransform canvas;
+    public RectTransform Canvas
+    {
+        get
+        {
+            if (null == canvas)
+            {
+                canvas = GameObject.Find("UIRoot").GetComponent<RectTransform>();
+            }
+            return canvas;
+        }
+    }
+
+    private Camera _camera;
+    public Camera UICamera
+    {
+        get
+        {
+            if (null == _camera)
+            {
+                Transform cam = Canvas.transform.Find("UICamera");
+                _camera = cam.GetComponent<Camera>();
+            }
+            return _camera;
+        }
+    }
     public Sprite border1, border2;
     private void OnEnable()
     {

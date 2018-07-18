@@ -11,7 +11,7 @@ public class BattlePokemonData : PokemonBaseData
     public static Dictionary<int, BattlePokemonData> Context = new Dictionary<int, BattlePokemonData>();
     public readonly int ID;
     protected readonly new int health;
-    private readonly Pokemon pokemon;
+    public readonly Pokemon pokemon;
     public int curHealth;
     public PokemonType MainPokemonType, SecondPokemonType;
     public AbilityType ShowAbility;

@@ -113,10 +113,10 @@ namespace PokemonBattelePokemon
                     ShowSkillMissUI();
                     Debug.Log("技能未命中");
                 }
-                    
 
-                attackPokemonEntity.ReplaceBattlePokemonData(attackPokemon);
-                defencePokemonEntity.ReplaceBattlePokemonData(defencePokemon);
+
+                //attackPokemonEntity.ReplaceBattlePokemonData(attackPokemon);
+                //defencePokemonEntity.ReplaceBattlePokemonData(defencePokemon);
             }           
             
         }
@@ -173,11 +173,16 @@ namespace PokemonBattelePokemon
             var pool = ObjectPoolController.SkillEffectsObjectPool;
             SkillEffect effect = skill.effect;
             Transform effectUseTransform ;
-            if (effect.IsUseSelf)
+
+            if (effect.IsUseSelf && attackPokemon == BattleController.Instance.PlayerCurPokemonData)
             {
                 effectUseTransform = BattleController.Instance.PlayerCurPokemonData.transform;
             }
-            else
+            else if(!effect.IsUseSelf && defencePokemon == BattleController.Instance.PlayerCurPokemonData)
+            {
+                effectUseTransform = BattleController.Instance.PlayerCurPokemonData.transform;
+            }
+            else 
             {
                 effectUseTransform = BattleController.Instance.EnemyCurPokemonData.transform;
             }

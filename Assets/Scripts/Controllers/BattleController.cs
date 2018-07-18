@@ -6,6 +6,7 @@ using System.Text;
 using UnityEngine;
 using MyUnityEventDispatcher;
 using System.Collections;
+using TinyTeam.UI;
 
 public sealed partial class BattleController : SingletonMonobehavior<BattleController>, IEndBattleEvent
 {
@@ -15,7 +16,7 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
 
     private List<BattlePokemonData> wildPokemons = new List<BattlePokemonData>();
     public List<BattlePokemonData> playPokemons = new List<BattlePokemonData>();
-    private List<GameObject> BattlePokemonsGameObejcts = new List<GameObject>();
+    //private List<GameObject> BattlePokemonsGameObejcts = new List<GameObject>();
     public BattlePokemonData PlayerCurPokemonData { get; private set; }
     public BattlePokemonData EnemyCurPokemonData { get; private set; }
 
@@ -25,12 +26,17 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
     private int PlayChooseSkillID = -1;
     private int EnemyChooseSkillID = -1;
 
-    public readonly float BattleTime = 2f;
+    public readonly float BattleTime = 3f;
+    public readonly float BattleInterval = 1f;
+    private string PlayerChooseBagItemName = "", EnemyChooseBagItemName = "";
+
     private void Start()
     {
         context = Contexts.sharedInstance.game;
         NotificationCenter<int>.Get().AddEventListener("UseSkill", PlayerPokemonUseSkill);
         NotificationCenter<int>.Get().AddEventListener("PokemonDeathMessage", PokemonDeathEvent);
+        NotificationCenter<string>.Get().AddEventListener("UseBagItem", PlayerUseBagItem);
+        NotificationCenter<int>.Get().AddEventListener("CatchPokemon", CatchPokemonResultEvent);
         EndBattleSystem.EndBattleEvent += EndBattleEvent;
 
         BattleStateForPlayer.InitEvent += PlayerRound;
@@ -95,8 +101,8 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
         quaternion.z = 0;
         PlayerController.Instance.transform.rotation = quaternion;
 
-        BattlePokemonsGameObejcts.Add(playerPokemon);
-        BattlePokemonsGameObejcts.Add(enemyPokemon);
+        //BattlePokemonsGameObejcts.Add(playerPokemon);
+        //BattlePokemonsGameObejcts.Add(enemyPokemon);
 
         //初始化精灵数据
         foreach(BattlePokemonData pokemon in playPokemons)
@@ -113,17 +119,14 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
     }
     public void EndBattleEvent()
     {
-        
-        
-        for (int i = BattlePokemonsGameObejcts.Count - 1; i >= 0; --i)
-        {
-            Destroy(BattlePokemonsGameObejcts[i]);
-            BattlePokemonsGameObejcts[i] = null;
-        }
-        BattlePokemonsGameObejcts = new List<GameObject>();
+
         //初始化精灵数据
         foreach (BattlePokemonData pokemon in playPokemons)
         {
+            pokemon.transform.gameObject.SetActive(false);
+            ObjectPoolController.PokemonObjectsPool[pokemon.race.raceid] =
+            pokemon.transform.gameObject;
+
             GameEntity entity = context.GetEntityWithBattlePokemonData(pokemon);
             Action action = entity.pokemonDataChangeEvent.Event;
             action = () => { };
@@ -132,6 +135,10 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
         }
         foreach (BattlePokemonData pokemon in wildPokemons)
         {
+            pokemon.transform.gameObject.SetActive(false);
+            ObjectPoolController.PokemonObjectsPool[pokemon.race.raceid] =
+            pokemon.transform.gameObject;
+
             GameEntity entity = context.GetEntityWithBattlePokemonData(pokemon);
             Action action = entity.pokemonDataChangeEvent.Event;
             action = () => { };
@@ -149,7 +156,7 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
     /// 我方精灵使用技能
     /// </summary>
     /// <param name="notific"></param>
-    public void PlayerPokemonUseSkill(Notification<int> notific)
+    private void PlayerPokemonUseSkill(Notification<int> notific)
     {
         int skillID = PlayerCurPokemonData.skills[notific.param];
         int pp = PlayerCurPokemonData.skillPPs[notific.param];
@@ -159,16 +166,38 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
             return;
         }
         PlayChooseSkillID = skillID;
-        battleState = battleState.ChangeState();
+        UpdateBattleState();
+        
 
        
     }
+    private void PlayerUseBagItem(Notification<string> notific)
+    {
+        PlayerChooseBagItemName = notific.param;
+        UpdateBattleState(); 
+    }
 
+    private void CatchPokemonResultEvent(Notification<int> notific)
+    {
+        
+        StartCoroutine(WaitBattleEnd());
+    }
+    /// <summary>
+    /// 更新战斗状态
+    /// </summary>
+    private void UpdateBattleState()
+    {
+       
+        battleState = battleState.ChangeState();
+    }
+
+    
     /// <summary>
     /// 玩家回合
     /// </summary>
     private void PlayerRound()
     {
+
         EnemyAction();
         int i = 0;
         for (i = 0; i < PlayerCurPokemonData.skills.Count; i++)
@@ -181,6 +210,8 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
             NotificationCenter<int>.Get().DispatchEvent("EnableSkillButton", i);
             i++;
         }
+
+
     }
 
     /// <summary>
@@ -188,60 +219,112 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
     /// </summary>
     private void BattleRound()
     {
+        //隐藏技能
         for(int i=0;i<4;i++)
         {
             NotificationCenter<int>.Get().DispatchEvent("DisableSkillButton", i);
         }
+        if (!CanBattle) return;
+        //互相攻击
         if(PlayerCurPokemonData.Speed>EnemyCurPokemonData.Speed)
         {
-            if (CanBattle&& ResourceController.Instance.allSkillDic.ContainsKey(PlayChooseSkillID))
-            {
-                Skill PlayerSkill = ResourceController.Instance.allSkillDic[PlayChooseSkillID];
-                if (null != PlayerSkill)
-                    UseSkill.Attack(PlayerSkill, PlayerCurPokemonData, EnemyCurPokemonData);
-            }
+            PlayerBattleAround();
             StartCoroutine(WaitEnemySkillUse());
 
         }
         else
         {
-            if (CanBattle && ResourceController.Instance.allSkillDic.ContainsKey(EnemyChooseSkillID))
-            {
-                Skill EnemySkill = ResourceController.Instance.allSkillDic[EnemyChooseSkillID];
-                if (null != EnemySkill)
-                    UseSkill.Attack(EnemySkill, EnemyCurPokemonData, PlayerCurPokemonData);
-            }
+            EnemyBattleAround();
             StartCoroutine(WaitPlayerSkillUse());
 
         }
         StartCoroutine(WaitBattleAroundEnd());
 
+
     }
+    /// <summary>
+    /// 更新玩家和精灵数据
+    /// </summary>
+    private void UpdatePokemonDatas()
+    {
+        foreach(var data in wildPokemons)
+        {
+            var entity = context.GetEntityWithBattlePokemonData(data);
+            entity.ReplaceBattlePokemonData(data);
+        }
+        foreach (var data in playPokemons)
+        {
+            var entity = context.GetEntityWithBattlePokemonData(data);
+            entity.ReplaceBattlePokemonData(data);
+        }
+        context.ReplacePlayerData(context.playerData.scriptableObject);
+    }
+
+    private void PlayerBattleAround()
+    {
+        if (CanBattle)
+        {
+            if(ResourceController.Instance.allSkillDic.ContainsKey(PlayChooseSkillID))
+            {
+                Skill PlayerSkill = ResourceController.Instance.allSkillDic[PlayChooseSkillID];
+                if (null != PlayerSkill)
+                    UseSkill.Attack(PlayerSkill, PlayerCurPokemonData, EnemyCurPokemonData);
+            }
+            
+            if(ResourceController.Instance.UseBagUItemDict.ContainsKey(PlayerChooseBagItemName))
+            {
+                UseBagItem use = ResourceController.Instance.UseBagUItemDict[PlayerChooseBagItemName];
+                if(null != use)
+                {
+                    use.Effect();
+                }
+            }
+        }
+    }
+
+    private void EnemyBattleAround()
+    {
+        if (CanBattle)
+        {
+            if (ResourceController.Instance.allSkillDic.ContainsKey(EnemyChooseSkillID))
+            {
+                Skill EnemySkill = ResourceController.Instance.allSkillDic[EnemyChooseSkillID];
+                if (null != EnemySkill)
+                    UseSkill.Attack(EnemySkill, EnemyCurPokemonData, PlayerCurPokemonData);
+            }
+
+            if (ResourceController.Instance.UseBagUItemDict.ContainsKey(EnemyChooseBagItemName))
+            {
+                UseBagItem use = ResourceController.Instance.UseBagUItemDict[EnemyChooseBagItemName];
+                if (null != use)
+                {
+                    use.Effect();
+                }
+            }
+        }
+
+    }
+
     IEnumerator WaitEnemySkillUse()
     {
-        yield return new WaitForSeconds(0.5f);
-        if (CanBattle && ResourceController.Instance.allSkillDic.ContainsKey(EnemyChooseSkillID))
-        {
-            Skill EnemySkill = ResourceController.Instance.allSkillDic[EnemyChooseSkillID];
-            if (null != EnemySkill)
-                UseSkill.Attack(EnemySkill, EnemyCurPokemonData, PlayerCurPokemonData);
-        }
+        yield return new WaitForSeconds(BattleInterval);
+        EnemyBattleAround();
     }
     IEnumerator WaitPlayerSkillUse()
     {
-        yield return new WaitForSeconds(0.5f);
-        if (CanBattle && ResourceController.Instance.allSkillDic.ContainsKey(PlayChooseSkillID))
-        {
-            Skill PlayerSkill = ResourceController.Instance.allSkillDic[PlayChooseSkillID];
-            if (null != PlayerSkill)
-                UseSkill.Attack(PlayerSkill, PlayerCurPokemonData, EnemyCurPokemonData);
-        }
+        yield return new WaitForSeconds(BattleInterval);
+        PlayerBattleAround();
     }
     IEnumerator WaitBattleAroundEnd()
     {
         yield return new WaitForSeconds(BattleTime);
-        if(null != battleState&&CanBattle)
-            battleState = battleState.ChangeState();
+        UpdatePokemonDatas();
+        EnemyChooseSkillID = -1;
+        PlayChooseSkillID = -1;
+        PlayerChooseBagItemName = "";
+        EnemyChooseBagItemName = "";
+        if (null != battleState && CanBattle)
+            UpdateBattleState();
     }
     /// <summary>
     /// 敌方行动
@@ -262,7 +345,10 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
 
         if(hashcode == PlayerCurPokemonData.ID)
         {
-            Destroy(PlayerCurPokemonData.transform.gameObject);
+            PlayerCurPokemonData.transform.gameObject.SetActive(false);
+            ObjectPoolController.PokemonObjectsPool[PlayerCurPokemonData.race.raceid] =
+            PlayerCurPokemonData.transform.gameObject;
+
             BattlePokemonData newCallPokemon = null;
             foreach (BattlePokemonData pokemon in playPokemons)
             {
@@ -293,9 +379,6 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
             //控制精灵和训练家朝向
             playerPokemon.transform.LookAt(EnemyCurPokemonData.transform);
 
-            BattlePokemonsGameObejcts.Add(playerPokemon);
-
-
 
         }
         else if(hashcode == EnemyCurPokemonData.ID)
@@ -307,7 +390,10 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
 
     private IEnumerator WaitBattleEnd()
     {
+        TTUIPage.ShowPage<UIBattleResult>();
         yield return new WaitForSeconds(BattleTime+0.5f);
         context.isBattleFlag = false;
     }
+
+    
 }

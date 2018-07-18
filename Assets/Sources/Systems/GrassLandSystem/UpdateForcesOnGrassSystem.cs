@@ -8,7 +8,7 @@ using UnityEngine;
 class UpdateForcesOnGrassSystem : ReactiveSystem<GameEntity>
 {
     private readonly GameContext context;
-    private const float WaveFrequency = 3.0f;
+    private const float WaveFrequency = 2.0f;
     private const float Resistance = 0.25f;
 
     

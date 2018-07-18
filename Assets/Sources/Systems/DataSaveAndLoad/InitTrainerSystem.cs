@@ -28,7 +28,7 @@ public class InitTrainerSystem : IInitializeSystem
         {
             trainer = JsonConvert.DeserializeObject<Trainer>(json);
         }
-        if (null == trainer|| null == trainer.pokemons|| 0 == trainer.pokemons.Count )
+        if (null == trainer || null == trainer.pokemons || 0 == trainer.pokemons.Count)
         {
             //如果没有精灵，就给一只皮卡丘和小火龙
             Pokemon Pikaqiu = PokemonFactory.BuildPokemon(25);
@@ -42,7 +42,14 @@ public class InitTrainerSystem : IInitializeSystem
             foreach (Pokemon pokemon in trainer.pokemons)
                 new BattlePokemonData(pokemon);
         }
-
+        if (null == trainer || null == trainer.bagItems|| 0 == trainer.bagItems.Count)
+        {
+            //如果道具背包没有物品，给5个精灵球
+            trainer.bagItems = new List<BagItems>()
+            {
+                BagItems.Build("精灵球",5)
+            };
+        }
         context.ReplacePlayerData(trainer);
 
     }

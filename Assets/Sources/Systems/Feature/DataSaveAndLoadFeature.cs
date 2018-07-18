@@ -10,5 +10,6 @@ class DataSaveAndLoadFeature:Feature
     {
         Add(new SavePlayerDataSystem(contexts));
         Add(new InitTrainerSystem(contexts));
+        Add(new InitBagItemEffectSystem());
     }
 }

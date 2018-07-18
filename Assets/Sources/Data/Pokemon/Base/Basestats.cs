@@ -9,19 +9,20 @@ namespace PokemonBattelePokemon
     /// <summary>
     /// 基础点数?努力值
     /// </summary>
+    [Serializable]
     public class Basestats: PokemonBaseData
     {
-
+        [SerializeField]
         public new int health=0;
-
+        [SerializeField]
         protected new  int physicPower = 0;
-
+        [SerializeField]
         protected new  int physicDefence = 0;
-
+        [SerializeField]
         protected new  int energyPower = 0;
-
+        [SerializeField]
         protected new int energyDefence = 0;
-
+        [SerializeField]
         protected new int speed = 0;
         /// <summary>
         /// 努力值总值

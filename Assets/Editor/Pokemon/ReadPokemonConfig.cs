@@ -232,9 +232,13 @@ public class ReadPokemonConfig :Editor
                         break;
 
                 }
-                Item item = new Item(id, name, itemType, description);
+                Item item = ScriptableObject.CreateInstance<Item>();
+                item.Description = description;
+                item.Name = name;
+                item.Type = itemType;
                 allItemDic[id] = item;
-                
+                AssetDatabase.CreateAsset(item, "Assets/BagItem/" + item.Name + ".asset");
+
             }
             catch (Exception e)
             {
@@ -244,8 +248,8 @@ public class ReadPokemonConfig :Editor
             
             id++;
         }
-        string json = JsonConvert.SerializeObject(allItemDic);
-        File.WriteAllText(BagItemJsonpath, json, Encoding.UTF8);
+        //string json = JsonConvert.SerializeObject(allItemDic);
+        //File.WriteAllText(BagItemJsonpath, json, Encoding.UTF8);
         Debug.Log("道具数据已加载");
     }
 

@@ -10,10 +10,33 @@ public static class PokemonFactory{
 	public static GameObject InitPokemon(int PokemonID)
 	{		
 		string path = new StringBuilder("PokemonPrefab/").Append(PokemonID).ToString();
-		GameObject prefab = Resources.Load<GameObject>(path);
-		return UnityEngine.Object.Instantiate(prefab);
+		GameObject objectinPool = ObjectPoolController.PokemonObjectsPool[PokemonID];
+		if(null == objectinPool||objectinPool.activeSelf)
+		{
+			GameObject prefab = Resources.Load<GameObject>(path);
+			return UnityEngine.Object.Instantiate(prefab);
+		}
+		objectinPool.SetActive(true);
+		LHCoroutine.CoroutineManager.DoCoroutine(StorePokemonBallInPool(objectinPool));
+		return objectinPool;
+
 	}
 
+	public static GameObject GetPokemonBall()
+	{
+		GameObject pokemonBallInPool = ObjectPoolController.PokemonBallObjectsPool.New();
+		if (null == pokemonBallInPool || pokemonBallInPool.activeSelf)
+		{
+			GameObject prefab = Resources.Load<GameObject>("PokemonPrefab/PokemonBall");
+			pokemonBallInPool = UnityEngine.Object.Instantiate(prefab, BattleController.Instance.transform);
+		}
+		else
+		{
+			pokemonBallInPool.SetActive(true);
+		}
+		LHCoroutine.CoroutineManager.DoCoroutine(StorePokemonBallInPool(pokemonBallInPool));
+		return pokemonBallInPool;
+	}
 
 	public static int GetPokemonFromEncounterPokemonScriptableObject(EncounterPokemon encounterPokemons)
 	{
@@ -60,5 +83,12 @@ public static class PokemonFactory{
 
 			par.Play();
 		}
+	}
+
+	static IEnumerator StorePokemonBallInPool(GameObject pokemonBall)
+	{
+		yield return new WaitForSeconds(1f);
+		pokemonBall.SetActive(false);
+		ObjectPoolController.PokemonBallObjectsPool.Store(pokemonBall);
 	}
 }
