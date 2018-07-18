@@ -62,17 +62,17 @@ class UIController:SingletonMonobehavior<UIController>
 
     private void CloseBattleUI()
     {
-        GameContext context = Contexts.sharedInstance.game;
-        GameEntity[] entities = context.GetGroup(GameMatcher.BattlePokemonData).GetEntities();
-        
 
         TTUIPage.ClosePage<UIBattle_Buttons>();
         TTUIPage.ClosePage<UIBattle_EnemyInfo>();
         TTUIPage.ClosePage<UIBattle_PokemonInfos>();
         TTUIPage.ClosePage<UIBattle_Skills>();
         TTUIPage.ClosePage<UIBattle_Pokemons>();
+        TTUIPage.ClosePage<UIKnapscakPanel>();
+
         TTUIPage.ShowPage<UI_PokemonBagIcon>();
         TTUIPage.ShowPage<UI_BagIcon>();
+        
 
         
     }

@@ -30,12 +30,37 @@ public class UIBattle_Skills:TTUIPage
         context = Contexts.sharedInstance.game;
         InitUnityComponents();
         NotificationCenter<int>.Get().AddEventListener("DisableSkillButton", DisableSkillButtonEvent);
-        NotificationCenter<int>.Get().AddEventListener("EnableSkillButton", EnableSkillButtonEvent);
+        //NotificationCenter<int>.Get().AddEventListener("EnableSkillButton", EnableSkillButtonEvent);
+        BattleStateForPlayer.InitEvent += PlayerRound;
+        BattleStateForBattle.InitEvent += BattleRound;
         Refresh();
         
     }
 
+    private void PlayerRound()
+    {
+        var PlayerCurPokemonData = BattleController.Instance.PlayerCurPokemonData;
+        int i = 0;
+        for (i = 0; i < PlayerCurPokemonData.skills.Count; i++)
+        {
+            if (PlayerCurPokemonData.skillPPs[i] > 0)
+                button_list[i].interactable = true;
+        }
+        while (i < 4)
+        {
+            button_list[i].interactable = true;
+            i++;
+        }
+    }
 
+    private void BattleRound()
+    {
+        //隐藏技能
+        for (int i = 0; i < 4; i++)
+        {
+            button_list[i].interactable = false;
+        }
+    }
 
 
     public override void Hide()
@@ -91,7 +116,6 @@ public class UIBattle_Skills:TTUIPage
             int j = i - 1;
             button_list[i-1].onClick.AddListener(() =>
             {
-               
                 NotificationCenter<int>.Get().DispatchEvent("UseSkill", j);
             });
         }
@@ -172,8 +196,8 @@ public class UIBattle_Skills:TTUIPage
         button_list[notific.param].interactable = false;
     }
 
-    private void EnableSkillButtonEvent(Notification<int> notific)
-    {
-        button_list[notific.param].interactable = true;
-    }
+    //private void EnableSkillButtonEvent(Notification<int> notific)
+    //{
+    //    button_list[notific.param].interactable = true;
+    //}
 }

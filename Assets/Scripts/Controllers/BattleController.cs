@@ -37,6 +37,7 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
         NotificationCenter<int>.Get().AddEventListener("PokemonDeathMessage", PokemonDeathEvent);
         NotificationCenter<string>.Get().AddEventListener("UseBagItem", PlayerUseBagItem);
         NotificationCenter<int>.Get().AddEventListener("CatchPokemon", CatchPokemonResultEvent);
+        NotificationCenter<int>.Get().AddEventListener("ExchangePokemon", ExchangePokemon);
         EndBattleSystem.EndBattleEvent += EndBattleEvent;
 
         BattleStateForPlayer.InitEvent += PlayerRound;
@@ -123,9 +124,13 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
         //初始化精灵数据
         foreach (BattlePokemonData pokemon in playPokemons)
         {
-            pokemon.transform.gameObject.SetActive(false);
-            ObjectPoolController.PokemonObjectsPool[pokemon.race.raceid] =
-            pokemon.transform.gameObject;
+            if(pokemon.transform!= null)
+            {
+                pokemon.transform.gameObject.SetActive(false);
+                ObjectPoolController.PokemonObjectsPool[pokemon.race.raceid] =
+                pokemon.transform.gameObject;
+            }
+           
 
             GameEntity entity = context.GetEntityWithBattlePokemonData(pokemon);
             Action action = entity.pokemonDataChangeEvent.Event;
@@ -182,6 +187,34 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
         
         StartCoroutine(WaitBattleEnd());
     }
+
+    private void ExchangePokemon(Notification<int> notific)
+    {
+        BattlePokemonData newCallPokemon = playPokemons[notific.param];
+        ExchangePokemon(newCallPokemon);
+        UpdateBattleState();
+    }
+
+    private void ExchangePokemon(BattlePokemonData newCallPokemon)
+    {
+        //回收精灵GameObject
+        PlayerCurPokemonData.transform.gameObject.SetActive(false);
+        ObjectPoolController.PokemonObjectsPool[PlayerCurPokemonData.race.raceid] =
+        PlayerCurPokemonData.transform.gameObject;
+
+        PlayerCurPokemonData = newCallPokemon;
+        PlayChooseSkillID = -1;
+
+        //召唤新的精灵
+        GameObject playerPokemon = PokemonFactory.InitPokemon(PlayerCurPokemonData.race.raceid);
+        playerPokemon.transform.position = PlayerPokemonTransform.position;
+        playerPokemon.transform.parent = PlayerPokemonTransform;
+        PokemonFactory.PokemonBallEffect(playerPokemon.transform.position);
+        PlayerCurPokemonData.transform = playerPokemon.transform;
+
+        //控制精灵和训练家朝向
+        playerPokemon.transform.LookAt(EnemyCurPokemonData.transform);
+    }
     /// <summary>
     /// 更新战斗状态
     /// </summary>
@@ -199,17 +232,7 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
     {
 
         EnemyAction();
-        int i = 0;
-        for (i = 0; i < PlayerCurPokemonData.skills.Count; i++)
-        {
-            if(PlayerCurPokemonData.skillPPs[i]>0)
-                NotificationCenter<int>.Get().DispatchEvent("EnableSkillButton", i);
-        }
-        while(i<4)
-        {
-            NotificationCenter<int>.Get().DispatchEvent("EnableSkillButton", i);
-            i++;
-        }
+
 
 
     }
@@ -219,11 +242,7 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
     /// </summary>
     private void BattleRound()
     {
-        //隐藏技能
-        for(int i=0;i<4;i++)
-        {
-            NotificationCenter<int>.Get().DispatchEvent("DisableSkillButton", i);
-        }
+
         if (!CanBattle) return;
         //互相攻击
         if(PlayerCurPokemonData.Speed>EnemyCurPokemonData.Speed)
@@ -345,9 +364,7 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
 
         if(hashcode == PlayerCurPokemonData.ID)
         {
-            PlayerCurPokemonData.transform.gameObject.SetActive(false);
-            ObjectPoolController.PokemonObjectsPool[PlayerCurPokemonData.race.raceid] =
-            PlayerCurPokemonData.transform.gameObject;
+            
 
             BattlePokemonData newCallPokemon = null;
             foreach (BattlePokemonData pokemon in playPokemons)
@@ -362,22 +379,15 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
 
             if(null == newCallPokemon)
             {
+                PlayerCurPokemonData.transform.gameObject.SetActive(false);
+                ObjectPoolController.PokemonObjectsPool[PlayerCurPokemonData.race.raceid] =
+                PlayerCurPokemonData.transform.gameObject;
                 PlayerCurPokemonData = null;
                 StartCoroutine(WaitBattleEnd());
                 return;
             }
-            PlayerCurPokemonData = newCallPokemon;
-            PlayChooseSkillID = -1;
 
-            //召唤新的精灵
-            GameObject playerPokemon = PokemonFactory.InitPokemon(PlayerCurPokemonData.race.raceid);
-            playerPokemon.transform.position = PlayerPokemonTransform.position;
-            playerPokemon.transform.parent = PlayerPokemonTransform;
-            PokemonFactory.PokemonBallEffect(playerPokemon.transform.position);
-            PlayerCurPokemonData.transform = playerPokemon.transform;
-
-            //控制精灵和训练家朝向
-            playerPokemon.transform.LookAt(EnemyCurPokemonData.transform);
+            ExchangePokemon(newCallPokemon);
 
 
         }

@@ -9,6 +9,7 @@ using UnityEngine.UI;
 using DG.Tweening;
 using MyUnityEventDispatcher;
 using System.Collections;
+using PokemonBattelePokemon;
 
 public class UIKnapscakPanel:TTUIPage
 {
@@ -160,5 +161,7 @@ public class UIKnapscakPanel:TTUIPage
         }
 
     }
+
+   
 
 }

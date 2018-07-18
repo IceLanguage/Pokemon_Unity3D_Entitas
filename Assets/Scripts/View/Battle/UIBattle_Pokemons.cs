@@ -22,9 +22,9 @@ public class UIBattle_Pokemons : TTUIPage
     private RectTransform thisrect;
 
     private List<GameObject> PokemonUIGameObjects = new List<GameObject>();
-    private List<Image> PokemonIcon_list=new List<Image>();
-    private List<Text> PokemonName_list=new List<Text>();
-    private List<Slider> PokemonHealth_list=new List<Slider>();
+    private List<Image> PokemonIcon_list = new List<Image>();
+    private List<Text> PokemonName_list = new List<Text>();
+    private List<Slider> PokemonHealth_list = new List<Slider>();
     private List<Text> PokemonHealthText_list = new List<Text>();
     private List<Text> PhysicPowerText_list = new List<Text>();
     private List<Text> PhysicDefenceText_list = new List<Text>();
@@ -45,7 +45,7 @@ public class UIBattle_Pokemons : TTUIPage
     private readonly Text[,] SkillNameText_list = new Text[6, 4];
     private readonly Text[,] SkillPPText_list = new Text[6, 4];
 
-    private readonly List<BattlePokemonData> prePokemonDatas = 
+    private readonly List<BattlePokemonData> prePokemonDatas =
         new List<BattlePokemonData>() { null, null, null, null, null, null };
 
     private GameContext context;
@@ -54,32 +54,30 @@ public class UIBattle_Pokemons : TTUIPage
         context = Contexts.sharedInstance.game;
         InitUnityComponents();
         Refresh();
-        
+
     }
 
     public override void Hide()
     {
-        //for(int i=0;i<6;i++)
-        //{
-        //    if (null == prePokemonDatas[i]) continue;
-        //    var entity = context.GetEntityWithBattlePokemonData(prePokemonDatas[i]);
-        //    var action = entity.pokemonDataChangeEvent.Event;
-        //    action -= Refresh;
-        //    entity.ReplacePokemonDataChangeEvent(action);
-        //}
-        
+
         thisrect.DOAnchorPosY(2000, 0.01f);
     }
     public override void Active()
     {
         thisrect.DOAnchorPosY(-2.1f, 0.01f);
- 
+
     }
-    
+
     public override void Refresh()
     {
         Show_UIBattle_Pokemons();
         Resources.UnloadUnusedAssets();
+    }
+
+    private void CallPokemon(int index)
+    {
+        Hide();
+        NotificationCenter<int>.Get().DispatchEvent("ExchangePokemon", index);
     }
     private void InitUnityComponents()
     {
@@ -119,7 +117,13 @@ public class UIBattle_Pokemons : TTUIPage
             CallPokemonButton_list.Add(transform.Find(
                 new StringBuilder(20)
                 .AppendFormat("Pokemon{0}", i)
-                .Append("/Icon").ToString()).GetComponent<Button>());          
+                .Append("/Icon").ToString()).GetComponent<Button>());
+
+            int k = i - 1;
+            CallPokemonButton_list[i - 1].onClick.AddListener
+            (
+                () => CallPokemon(k)
+            );
 
             PokemonName_list.Add(transform.Find(
                 new StringBuilder(20)
@@ -275,7 +279,7 @@ public class UIBattle_Pokemons : TTUIPage
                 SkillPokemonTypeText_list[i, j].text = skill.att.ToString();
                 SkillNameText_list[i, j].text = skill.sname;
                 StringBuilder sb = new StringBuilder(20);
-                sb.AppendFormat("{0}a{1}", skillPPs[i], skill.FullPP);
+                sb.AppendFormat("{0}a{1}", skillPPs[j], skill.FullPP);
                 SkillPPText_list[i, j].text = sb.ToString();
                 ShowUI(Skill1rect_list[i, j].gameObject);
             }

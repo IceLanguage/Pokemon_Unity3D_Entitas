@@ -5,6 +5,7 @@ using TinyTeam.UI;
 using UnityEngine.UI;
 using DG.Tweening;
 using MyUnityEventDispatcher;
+using PokemonBattelePokemon;
 
 public class UIBattle_Buttons : TTUIPage {
 
@@ -17,7 +18,10 @@ public class UIBattle_Buttons : TTUIPage {
    
     public override void Awake(GameObject go)
     {
+
         InitUnityComponents();
+        BattleStateForPlayer.InitEvent += PlayerRound;
+        BattleStateForBattle.InitEvent += BattleRound;
         Refresh();
     }
     public override void Active()
@@ -31,47 +35,36 @@ public class UIBattle_Buttons : TTUIPage {
         thisrect.DOAnchorPosX(350, 1);
     }
 
-    
+    private void PlayerRound()
+    {
+        BallButton.onClick.AddListener(CallPokemon);
+        RunButton.onClick.AddListener(Run);
+        BagButton.onClick.AddListener(OpenBag);
+    }
+    private void BattleRound()
+    {
+        BallButton.onClick.RemoveAllListeners();
+        RunButton.onClick.RemoveAllListeners();
+        BagButton.onClick.RemoveAllListeners();
+    }
 
     private void InitUnityComponents()
     {
-        if (null == thisrect )
-            thisrect = gameObject.GetComponent<RectTransform>();
+        thisrect = gameObject.GetComponent<RectTransform>();
 
-        if (null == BagButton )
-        {
-            BattleButton = transform.Find("Battle").GetComponent<Button>();
-            if (BattleButton.onClick.GetPersistentEventCount() > 0)
-                BattleButton.onClick.RemoveAllListeners();
-            BattleButton.onClick.AddListener(Battle);
-        }
+        BattleButton = transform.Find("Battle").GetComponent<Button>();
+        BattleButton.onClick.AddListener(Battle);
 
-        if (null == RunButton )
-        {
-            RunButton = this.transform.Find("Run").GetComponent<Button>();
-            if (RunButton.onClick.GetPersistentEventCount() > 0)
-                RunButton.onClick.RemoveAllListeners();
-            RunButton.onClick.AddListener(Run);
-        }
+        RunButton = this.transform.Find("Run").GetComponent<Button>();
 
-        if (null == BagButton )
-        {
-            BagButton = this.transform.Find("Bag").GetComponent<Button>();
-            if (BagButton.onClick.GetPersistentEventCount() > 0)
-                BagButton.onClick.RemoveAllListeners();
-            BagButton.onClick.AddListener(OpenBag);
-        }
 
-        if (null == BallButton)
-        {
-            BallButton = this.transform.Find("Ball").GetComponent<Button>();
-            if (BallButton.onClick.GetPersistentEventCount() > 0)
-                BallButton.onClick.RemoveAllListeners();
-            BallButton.onClick.AddListener(CallPokemon);
-        }
+        BagButton = this.transform.Find("Bag").GetComponent<Button>();
+
+        BallButton = this.transform.Find("Ball").GetComponent<Button>();
+    
     }
 
-   
+
 
     public void Battle()
     {
