@@ -59,7 +59,6 @@ class InitUseSkillSpecialEffectSystem : IInitializeSystem
         UseSkillEffectManager.UseSkillDic[172] = new List<IUseSkillSpecialEffect>()
         { new BurnsEffect(10) };
 
-        //气旋攻击 177 击中要害
 
         //污泥炸弹
         UseSkillEffectManager.UseSkillDic[188] = new List<IUseSkillSpecialEffect>()
@@ -73,8 +72,10 @@ class InitUseSkillSpecialEffectSystem : IInitializeSystem
         UseSkillEffectManager.UseSkillDic[209] = new List<IUseSkillSpecialEffect>()
         { new ParalysisEffect(30) };
 
-        //光合作用 235 恢复生命
-
+        //光合作用
+        UseSkillEffectManager.UseSkillDic[235] = new List<IUseSkillSpecialEffect>()
+        { new RecoverScaleHealthEffect(100,50) };
+        
         //暗影球
         UseSkillEffectManager.UseSkillDic[247] = new List<IUseSkillSpecialEffect>()
         { new ChangeEnergyDefenceStatModifiersEffect(20,1,false) };
@@ -84,7 +85,7 @@ class InitUseSkillSpecialEffectSystem : IInitializeSystem
         { new ChangeEnergyDefenceStatModifiersEffect(50,1,false) };
 
 
-        //火焰踢 击中要害率
+        //火焰踢
         UseSkillEffectManager.UseSkillDic[299] = new List<IUseSkillSpecialEffect>()
         {new BurnsEffect(10) };
 
@@ -93,14 +94,21 @@ class InitUseSkillSpecialEffectSystem : IInitializeSystem
 
         //银色旋风
         UseSkillEffectManager.UseSkillDic[318] = new List<IUseSkillSpecialEffect>()
-        {new ChangeAllStatModifiersEffect(10,1,true) };
+        {
+            new ChangePhysicPowerStatModifiersEffect(10,1,true),
+            new ChangePhysicDefenceStatModifiersEffect(10,1,true),
+            new ChangeEnergyPowerStatModifiersEffect(10,1,true),
+            new ChangeEnergyDefenceStatModifiersEffect(10,1,true),
+            new ChangeSpeedStatModifiersEffect(10,1,true)
+        };
 
 
-        //信号光束 324 混乱
+        //信号光束 
+        UseSkillEffectManager.UseSkillDic[324] = new List<IUseSkillSpecialEffect>()
+        {new ConfusionEffect(10) };
 
         //恶之波动  399 畏缩
 
-        //暗袭要害 400 要害
 
         //雪崩 419 如果本回合内被目标使用了攻击招式攻击并被造成了伤害，威力翻倍。
 
@@ -110,7 +118,8 @@ class InitUseSkillSpecialEffectSystem : IInitializeSystem
         {new BurnsEffect(10) };
 
         //泥巴炸弹 426
-        //30 % 几率令目标的命中率降低1级。
+        UseSkillEffectManager.UseSkillDic[426] = new List<IUseSkillSpecialEffect>()
+        {new ChangeHitRateStatModifiersEffect(30,1,false) };
 
         //流星群
         UseSkillEffectManager.UseSkillDic[434] = new List<IUseSkillSpecialEffect>()
@@ -144,9 +153,11 @@ class InitUseSkillSpecialEffectSystem : IInitializeSystem
         {new ChangePhysicDefenceStatModifiersEffect(100,3,true)};
 
         //暗黑爆破539
-        //40%几率令目标的命中率降低1级。
+        UseSkillEffectManager.UseSkillDic[539] = new List<IUseSkillSpecialEffect>()
+        {new ChangeHitRateStatModifiersEffect(40,1,false) };
 
         //暴风542
-        //暴风有30 % 的几率使目标陷入混乱状态。
+        UseSkillEffectManager.UseSkillDic[542] = new List<IUseSkillSpecialEffect>()
+        {new ConfusionEffect(30) };
     }
 }

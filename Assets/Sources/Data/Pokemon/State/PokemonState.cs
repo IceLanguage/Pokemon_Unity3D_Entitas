@@ -12,8 +12,9 @@ namespace PokemonBattele
     /// </summary>
      public class PokemonState
     {
-        public static Dictionary<AbnormalState, PokemonState> Abnormalstates = new
-            Dictionary<AbnormalState, PokemonState>();
+        
+
+        
 
         ////对战中发生的事
         //public virtual void UpdateInBattleAround(BattlePokemonData pokemon) { }
@@ -33,9 +34,7 @@ namespace PokemonBattele
         //进入状态时发生的变化，如果状态不允许进入可在这一步恢复状态
         public virtual void Init(BattlePokemonData pokemon)
         {
-            PokemonState.Abnormalstates[pokemon.Abnormal].LoseState(pokemon);
-            pokemon.Abnormal = AbnormalState.Normal;
-            Debug.Log(pokemon.Ename + "异常状态恢复了");
+            
         }
 
     }

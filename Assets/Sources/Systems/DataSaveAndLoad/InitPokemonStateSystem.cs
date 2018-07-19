@@ -9,11 +9,15 @@ class InitPokemonStateSystem : IInitializeSystem
 {
     public void Initialize()
     {
-        PokemonState.Abnormalstates[AbnormalState.Normal] = new PokemonState();
-        PokemonState.Abnormalstates[AbnormalState.Burns] = new BurnsState();
-        PokemonState.Abnormalstates[AbnormalState.Frostbite] = new FrostbiteState();
-        PokemonState.Abnormalstates[AbnormalState.Paralysis] = new ParalysisState();
-        PokemonState.Abnormalstates[AbnormalState.Poisoning] = new PoisonState();
-        PokemonState.Abnormalstates[AbnormalState.Sleeping] = new SleepState();
+        AbnormalState.Abnormalstates[AbnormalStateEnum.Normal] = new NormalAbnormalState();
+        AbnormalState.Abnormalstates[AbnormalStateEnum.Burns] = new BurnsState();
+        AbnormalState.Abnormalstates[AbnormalStateEnum.Frostbite] = new FrostbiteState();
+        AbnormalState.Abnormalstates[AbnormalStateEnum.Paralysis] = new ParalysisState();
+        AbnormalState.Abnormalstates[AbnormalStateEnum.Poisoning] = new PoisonState();
+        AbnormalState.Abnormalstates[AbnormalStateEnum.Sleeping] = new SleepState();
+        AbnormalState.Abnormalstates[AbnormalStateEnum.BadlyPoison] = new BadlyPoisonState();
+
+        ChangeStateForPokemon.ChangeStateForPokemons[ChangeStateEnumForPokemon.Confusion]
+            = new ConfusionState();
     }
 }

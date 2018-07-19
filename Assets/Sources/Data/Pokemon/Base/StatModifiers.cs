@@ -9,21 +9,29 @@ namespace PokemonBattele
     /// <summary>
     /// 能力阶级
     /// </summary>
-    public class StatModifiers:PokemonBaseData
+    public class StatModifiers
     {
-        [SerializeField]
-        public new int health = 0;
-        [SerializeField]
-        protected new int physicPower = 0;
-        [SerializeField]
-        protected new int physicDefence = 0;
-        [SerializeField]
-        protected new int energyPower = 0;
-        [SerializeField]
-        protected new int energyDefence = 0;
-        [SerializeField]
-        protected new int speed = 0;
 
+        [SerializeField]
+        protected int physicPower = 0;
+        [SerializeField]
+        protected int physicDefence = 0;
+        [SerializeField]
+        protected int energyPower = 0;
+        [SerializeField]
+        protected int energyDefence = 0;
+        [SerializeField]
+        protected int speed = 0;
+        [SerializeField]
+        protected int criticalHit_C = 0;
+
+        //命中率
+        public int HitRate = 0;
+
+        //回避率
+        public int AvoidanceRate = 0;
+
+        //等级-修正的百分比
         public readonly static Dictionary<int, int> ActualCorrection = new Dictionary<int, int>()
         {
             {-6,25},
@@ -40,34 +48,56 @@ namespace PokemonBattele
             { 5,350},
             { 6,400}
         };
+
+        //击中要害率 等级-修正
+        public readonly static Dictionary<int, float> criticalHit_C_To_B = new Dictionary<int, float>()
+        {
+            { -1,0},
+            { 0,1/16},
+            { 1,1/8},
+            { 2,1/4},
+            { 3,1/3},
+            { 4,1/2},
+        };
         /// <summary>
-        /// 设置努力值
-        /// 防止努力值超出范围
+        /// 设置基础属性修正
         /// </summary>
         /// <param name="value"></param>
         /// <param name="currentSetBase"></param>
         /// <returns></returns>
-        private int Set(int value)
+        private int SetBase(int value)
         {
             if (value < -6) return -6;
             if (value > 6) return 6;
             return value;
         }
 
-        public override int Health
+        /// <summary>
+        /// 设置击中要害率修正
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        private int SetC(int value)
+        {
+            if (value < -1) return -1;
+            if (value > 4) return 4;
+            return value;
+        }
+
+        public int CriticalHit
         {
             get
             {
-                return ActualCorrection[health];
+                return criticalHit_C;
             }
 
             set
             {
-                health = Set(value);
+                criticalHit_C = SetC(value);
             }
         }
 
-        public override int PhysicPower
+        public int PhysicPower
         {
             get
             {
@@ -76,11 +106,11 @@ namespace PokemonBattele
 
             set
             {
-                physicPower = Set(value);
+                physicPower = SetBase(value);
             }
         }
 
-        public override int PhysicDefence
+        public int PhysicDefence
         {
             get
             {
@@ -89,11 +119,11 @@ namespace PokemonBattele
 
             set
             {
-                physicDefence = Set(value);
+                physicDefence = SetBase(value);
             }
         }
 
-        public override int EnergyPower
+        public int EnergyPower
         {
             get
             {
@@ -102,11 +132,11 @@ namespace PokemonBattele
 
             set
             {
-                energyPower = Set(value);
+                energyPower = SetBase(value);
             }
         }
 
-        public override int EnergyDefence
+        public int EnergyDefence
         {
             get
             {
@@ -115,11 +145,11 @@ namespace PokemonBattele
 
             set
             {
-                energyDefence = Set(value);
+                energyDefence = SetBase(value);
             }
         }
 
-        public override int Speed
+        public int Speed
         {
             get
             {
@@ -128,7 +158,7 @@ namespace PokemonBattele
 
             set
             {
-                speed = Set(value);
+                speed = SetBase(value);
             }
         }
     }

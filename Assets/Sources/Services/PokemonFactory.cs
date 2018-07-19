@@ -17,7 +17,7 @@ public static class PokemonFactory{
 			return UnityEngine.Object.Instantiate(prefab);
 		}
 		objectinPool.SetActive(true);
-		LHCoroutine.CoroutineManager.DoCoroutine(StorePokemonBallInPool(objectinPool));
+		
 		return objectinPool;
 
 	}

@@ -30,7 +30,7 @@ public class UIBattle_PokemonInfos : TTUIPage
     private Text NatureText;
     private Text AbilityText;
     private Text PropsText;
-    private Image AbnormalStateImage;
+    private Image AbnormalStateEnumImage;
     private BattlePokemonData PrePokemonData;
     private GameContext context;
     public override void Awake(GameObject go)
@@ -75,7 +75,7 @@ public class UIBattle_PokemonInfos : TTUIPage
         NatureText = transform.Find("Race/Nature").GetComponent<Text>();
         AbilityText = transform.Find("Race/Ability").GetComponent<Text>();
         PropsText = transform.Find("Props/Name").GetComponent<Text>();
-        AbnormalStateImage = transform.Find("AbnormalState").GetComponent<Image>();
+        AbnormalStateEnumImage = transform.Find("AbnormalState").GetComponent<Image>();
     }
 
 
@@ -87,7 +87,7 @@ public class UIBattle_PokemonInfos : TTUIPage
 
         if(null == pokemonData)
         {
-            var entity = context.GetEntityWithBattlePokemonData(PrePokemonData);
+            var entity = PrePokemonData.entity;
             var action = entity.pokemonDataChangeEvent.Event;
             action -= Refresh;
             entity.ReplacePokemonDataChangeEvent(action);
@@ -99,14 +99,14 @@ public class UIBattle_PokemonInfos : TTUIPage
         {
             if (null != PrePokemonData)
             {
-                var Preentity = context.GetEntityWithBattlePokemonData(PrePokemonData);
+                var Preentity = PrePokemonData.entity;
                 var Preaction = Preentity.pokemonDataChangeEvent.Event;
                 Preaction -= Refresh;
                 Preentity.ReplacePokemonDataChangeEvent(Preaction);
             }
 
             PrePokemonData = pokemonData;
-            var entity= context.GetEntityWithBattlePokemonData(pokemonData);
+            var entity= pokemonData.entity;
             var action = entity.pokemonDataChangeEvent.Event;
             action += Refresh;
             entity.ReplacePokemonDataChangeEvent(action);
@@ -137,6 +137,20 @@ public class UIBattle_PokemonInfos : TTUIPage
 
         NatureText.text = pokemonData.nature.natureType.ToString();
         AbilityText.text = pokemonData.ShowAbility.ToString();
+
+        if(AbnormalStateEnum.Normal == pokemonData.Abnormal)
+        {
+            HideUI(AbnormalStateEnumImage.gameObject);
+        }
+        else
+        {
+            ShowUI(AbnormalStateEnumImage.gameObject);
+            AbnormalStateEnumImage.sprite =
+                Resources.Load<Sprite>(
+                    new StringBuilder(20)
+                        .AppendFormat("UIPrefab/AbnormalStateEnum/{0}",
+                        pokemonData.Abnormal).ToString());
+        }
     }
 
 }

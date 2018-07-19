@@ -18,7 +18,7 @@ namespace PokemonBattele
         {
             if(RandomService.game.Int(0,100)< probability)
             {
-                pokemon.SetAbnormalState(AbnormalState.Paralysis);
+                pokemon.SetAbnormalStateEnum(AbnormalStateEnum.Paralysis);
             }
         }
     }
@@ -33,7 +33,7 @@ namespace PokemonBattele
         {
             if (RandomService.game.Int(0, 100) < probability)
             {
-                pokemon.SetAbnormalState(AbnormalState.Burns);
+                pokemon.SetAbnormalStateEnum(AbnormalStateEnum.Burns);
             }
         }
     }
@@ -48,7 +48,7 @@ namespace PokemonBattele
         {
             if (RandomService.game.Int(0, 100) < probability)
             {
-                pokemon.SetAbnormalState(AbnormalState.Frostbite);
+                pokemon.SetAbnormalStateEnum(AbnormalStateEnum.Frostbite);
             }
         }
     }
@@ -63,7 +63,22 @@ namespace PokemonBattele
         {
             if (RandomService.game.Int(0, 100) < probability)
             {
-                pokemon.SetAbnormalState(AbnormalState.Poisoning);
+                pokemon.SetAbnormalStateEnum(AbnormalStateEnum.Poisoning);
+            }
+        }
+    }
+
+    class VeryToxicEffect : UseSkillEffectWithProbability
+    {
+        public VeryToxicEffect(int probability) : base(probability)
+        {
+
+        }
+        public override void UseSkillSpecialEffect(BattlePokemonData pokemon)
+        {
+            if (RandomService.game.Int(0, 100) < probability)
+            {
+                pokemon.SetAbnormalStateEnum(AbnormalStateEnum.BadlyPoison);
             }
         }
     }
@@ -78,7 +93,7 @@ namespace PokemonBattele
         {
             if (RandomService.game.Int(0, 100) < probability)
             {
-                pokemon.SetAbnormalState(AbnormalState.Sleeping);
+                pokemon.SetAbnormalStateEnum(AbnormalStateEnum.Sleeping);
             }
         }
     }

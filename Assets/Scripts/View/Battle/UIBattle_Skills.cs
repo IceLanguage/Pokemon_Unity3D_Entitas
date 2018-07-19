@@ -132,7 +132,7 @@ public class UIBattle_Skills:TTUIPage
         {
             if (null != PrePokemonData)
             {
-                var Preentity = context.GetEntityWithBattlePokemonData(PrePokemonData);
+                var Preentity = PrePokemonData.entity;
                 var Preaction = Preentity.pokemonDataChangeEvent.Event;
                 Preaction -= Refresh;
                 Preentity.ReplacePokemonDataChangeEvent(Preaction);
@@ -140,7 +140,7 @@ public class UIBattle_Skills:TTUIPage
 
             PrePokemonData = pokemonData;
 
-            var entity = context.GetEntityWithBattlePokemonData(pokemonData);
+            var entity = pokemonData.entity;
             var action = entity.pokemonDataChangeEvent.Event;
             action += Refresh;
             entity.ReplacePokemonDataChangeEvent(action);

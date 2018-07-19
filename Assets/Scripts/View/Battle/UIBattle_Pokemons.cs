@@ -38,7 +38,7 @@ public class UIBattle_Pokemons : TTUIPage
     private List<Text> PropsText_list = new List<Text>();
     private List<Image> BattleIcon_list = new List<Image>();
     private List<Button> CallPokemonButton_list = new List<Button>();
-    private List<Image> AbnormalState_list = new List<Image>();
+    private List<Image> AbnormalStateEnum_list = new List<Image>();
 
     private readonly RectTransform[,] Skill1rect_list = new RectTransform[6, 4];
     private readonly Text[,] SkillPokemonTypeText_list = new Text[6, 4];
@@ -183,11 +183,11 @@ public class UIBattle_Pokemons : TTUIPage
                 .Append("/BattleIcon").ToString()).GetComponent<Image>());
             HideUI(BattleIcon_list[i-1].gameObject);
 
-            AbnormalState_list.Add(transform.Find(
+            AbnormalStateEnum_list.Add(transform.Find(
                 new StringBuilder(20)
                 .AppendFormat("Pokemon{0}", i)
                 .Append("/AbnormalState").ToString()).GetComponent<Image>());
-            HideUI(AbnormalState_list[i - 1].gameObject);
+            HideUI(AbnormalStateEnum_list[i - 1].gameObject);
 
             for (int j = 1; j <= 4; j++)
             {
@@ -225,14 +225,14 @@ public class UIBattle_Pokemons : TTUIPage
             {
                 if (null != prePokemonDatas[i])
                 {
-                    var Preentity = context.GetEntityWithBattlePokemonData(prePokemonDatas[i]);
+                    var Preentity = prePokemonDatas[i].entity;
                     var Preaction = Preentity.pokemonDataChangeEvent.Event;
                     Preaction -= Refresh;
                     Preentity.ReplacePokemonDataChangeEvent(Preaction);
                 }
 
                 prePokemonDatas[i] = pokemonData;
-                var entity = context.GetEntityWithBattlePokemonData(pokemonData);
+                var entity = pokemonData.entity;
                 var action = entity.pokemonDataChangeEvent.Event;
                 action += Refresh;
                 entity.ReplacePokemonDataChangeEvent(action);
@@ -288,9 +288,23 @@ public class UIBattle_Pokemons : TTUIPage
                 HideUI(Skill1rect_list[i, j].gameObject);
                 ++j;
             }
+            if (AbnormalStateEnum.Normal == pokemonData.Abnormal)
+            {
+                HideUI(AbnormalStateEnum_list[i].gameObject);
+            }
+            else
+            {
+                ShowUI(AbnormalStateEnum_list[i].gameObject);
+                AbnormalStateEnum_list[i].sprite =
+                    Resources.Load<Sprite>(
+                        new StringBuilder(20)
+                            .AppendFormat("UIPrefab/AbnormalStateEnum/{0}",
+                            pokemonData.Abnormal).ToString());
+            }
 
-            
             ShowUI(PokemonUIGameObjects[i]);
+
+
         }
         for (; i < 6; i++)
         {

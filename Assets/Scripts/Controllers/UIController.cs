@@ -49,6 +49,7 @@ class UIController:SingletonMonobehavior<UIController>
 
         TTUIPage.ShowPage<UIBattle_ShowPlaySkill>();
         TTUIPage.ShowPage<UIBattle_ShowEnemySkill>();
+        TTUIPage.ShowPage<UICatchPokemon>();
     }
     private void ShowBattleUI()
     {

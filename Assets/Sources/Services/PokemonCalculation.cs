@@ -77,15 +77,15 @@ public static class PokemonCalculation
 
         if(typeInfos == 2f)
         {
-            Debug.Log(skill.sname+"效果拔群");
+            Debug.Log(skill.sname+ "效果拔群" + System.DateTime.Now);
         }
         else if (typeInfos == 4f)
         {
-            Debug.Log(skill.sname + "效果超群");
+            Debug.Log(skill.sname + "效果超群" + System.DateTime.Now);
         }
         else if(typeInfos<1f)
         {
-            Debug.Log(skill.sname + "效果不太理想" +typeInfos);
+            Debug.Log(skill.sname + "效果不太理想" + typeInfos + System.DateTime.Now);
         }
 
         if (skill.att == attackPokemon.MainPokemonType ||
@@ -94,6 +94,12 @@ public static class PokemonCalculation
             typeInfos *= 1.5f;
         }
         float resDamage = BaseDamage * typeInfos;
+
+        //击中要害
+        float CriticalHitProbability = StatModifiers.criticalHit_C_To_B
+            [attackPokemon.StatModifiers.CriticalHit + skill.CriticalHitC];
+        if (RandomService.game.Float(0, 1) < CriticalHitProbability)
+            resDamage *= 2;
 
         return (int)resDamage;
     }

@@ -18,6 +18,8 @@ namespace PokemonBattele
     public class Skill : ScriptableObject
     {
 
+        
+
         public int SKillID;
         [SerializeField]
 #if UNITY_EDITOR
@@ -75,7 +77,10 @@ namespace PokemonBattele
 
         //技能效果的作用对象
         [SerializeField]
-        public bool isUseForSelf = false;
+        public bool isUseForSelf;
+
+        //技能提升攻击要害率
+        public int CriticalHitC;
     }
 
     public enum SkillType

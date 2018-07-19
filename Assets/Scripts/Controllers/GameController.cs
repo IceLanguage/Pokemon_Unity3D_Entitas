@@ -9,6 +9,7 @@ public class GameController : SingletonMonobehavior<GameController>
 
     private void OnEnable()
     {
+        DebugHelper.Init();
         var contexts = Contexts.sharedInstance;
         _systems = new GameSystem(contexts);
     }
@@ -21,6 +22,10 @@ public class GameController : SingletonMonobehavior<GameController>
         if (null == _systems ) return;
         _systems.Execute();        
     }
+    private void FixedUpdate()
+    {
+        DebugHelper.FixedUpdate();
+}
     private void LateUpdate()
     {
         _systems.Cleanup();

@@ -43,6 +43,7 @@ public class BeginBattleSystem : ReactiveSystem<GameEntity>, IEndBattleEvent
     {        
         //初始化战斗场景精灵信息
         List<Pokemon> playPokemons = context.playerData.scriptableObject.pokemons;
+
         List<Pokemon> PreBattlePokemon = playPokemons.Count >= 6 ?
             playPokemons.GetRange(0, 6) : playPokemons;
         BattleController.Instance.InitPlayerPokemons(PreBattlePokemon);

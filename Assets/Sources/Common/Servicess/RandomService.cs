@@ -5,7 +5,6 @@ public class RandomService
 {
 
     public static RandomService game = new RandomService();
-    public static RandomService view = new RandomService();
 
     Random _random;
 

@@ -23,14 +23,33 @@ public class BattlePokemonData : PokemonBaseData
     public List<int> skills;
     public List<int> skillPPs;
     public Transform transform;
-    public AbnormalState Abnormal;
+    public AbnormalStateEnum Abnormal;
     private StatModifiers statModifiers = new StatModifiers();
+    public readonly GameEntity entity;
+    private List<ChangeStateEnumForPokemon> changeStates = new List<ChangeStateEnumForPokemon>();
+    public void AddChangeState(ChangeStateEnumForPokemon state)
+    {
+        if(!ChangeStateForPokemonEnums.Contains(state))
+
+        {
+            ChangeStateForPokemonEnums.Add(state);
+            ChangeStateForPokemon.ChangeStateForPokemons[state].Init(this);
+        }
+       
+    }
+    public List<ChangeStateEnumForPokemon> ChangeStateForPokemonEnums
+    {
+        get
+        {
+            return changeStates;
+        }
+    }
     //异常状态
     public PokemonState StateForAbnormal
     {
         get
         {
-            return PokemonState.Abnormalstates[Abnormal];
+            return AbnormalState.Abnormalstates[Abnormal];
         }
     }
 
@@ -50,9 +69,9 @@ public class BattlePokemonData : PokemonBaseData
     }
 
     //设置新的异常状态
-    public void SetAbnormalState(AbnormalState newState)
+    public void SetAbnormalStateEnum(AbnormalStateEnum newState)
     {
-        PokemonState.Abnormalstates[newState].Init(this);
+        AbnormalState.Abnormalstates[newState].Init(this);
     }
 
     public BattlePokemonData(Pokemon pokemon)
@@ -67,7 +86,7 @@ public class BattlePokemonData : PokemonBaseData
 
         InitPokemonData();
 
-        var entity = Contexts.sharedInstance.game.CreateEntity();
+        entity = Contexts.sharedInstance.game.CreateEntity();
         entity.AddBattlePokemonData(this);
         Action action = DefaultAction;
         entity.AddPokemonDataChangeEvent(action);
@@ -135,14 +154,14 @@ public class BattlePokemonData : PokemonBaseData
             nature.SpeedAffect,
             StatModifiers.ActualCorrection[StatModifiers.Speed]
         );
-        GameEntity entity = Contexts.sharedInstance.game.GetEntityWithBattlePokemonData(this);
-        entity.ReplaceBattlePokemonData(this);
+        if(entity != null)
+            entity.ReplaceBattlePokemonData(this);
     }
     //恢复
     public void Recover()
     {
         StatModifiers = new StatModifiers();
-        SetAbnormalState(AbnormalState.Normal);
+        SetAbnormalStateEnum(AbnormalStateEnum.Normal);
         InitPokemonData();
         
     }

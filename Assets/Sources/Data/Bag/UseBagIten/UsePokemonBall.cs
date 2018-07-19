@@ -50,8 +50,12 @@ namespace PokemonBattele
                         var trainer = context.playerData.scriptableObject;
                         trainer.pokemons.Add(pokemon.pokemon);
                         context.ReplacePlayerData(trainer);
+
+                        //通知结束对战
                         NotificationCenter<int>.Get().DispatchEvent("CatchPokemon", 1);
-                        
+
+                        //显示捕捉结果UI
+                        NotificationCenter<Pokemon>.Get().DispatchEvent("CatchPokemonResult", pokemon.pokemon);
                     }
                     else
                     {

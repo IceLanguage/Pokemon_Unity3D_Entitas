@@ -70,6 +70,21 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
         playPokemons = pokemons
             .Select(x => BattlePokemonData.Context[x.GetInstanceID()])
             .ToList();
+
+        //战斗中使用的精灵每个种族只能有一只
+        Dictionary<int, BattlePokemonData> map = new Dictionary<int, BattlePokemonData>();
+        int count = playPokemons.Count;
+        for (int i = count -1;i>=0;--i)
+        {
+            BattlePokemonData pokemonData = playPokemons[i];
+            if (!map.ContainsKey(pokemonData.race.raceid))
+                map.Add(pokemonData.race.raceid, pokemonData);
+            else
+            {
+                playPokemons.RemoveAt(i);
+            }
+        }
+
         if (0 == pokemons.Count)
         {
             Debug.LogError("没有精灵怎么打");
@@ -130,9 +145,9 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
                 ObjectPoolController.PokemonObjectsPool[pokemon.race.raceid] =
                 pokemon.transform.gameObject;
             }
-           
 
-            GameEntity entity = context.GetEntityWithBattlePokemonData(pokemon);
+
+            GameEntity entity = pokemon.entity;
             Action action = entity.pokemonDataChangeEvent.Event;
             action = () => { };
             entity.ReplacePokemonDataChangeEvent(action);
@@ -144,7 +159,7 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
             ObjectPoolController.PokemonObjectsPool[pokemon.race.raceid] =
             pokemon.transform.gameObject;
 
-            GameEntity entity = context.GetEntityWithBattlePokemonData(pokemon);
+            GameEntity entity = pokemon.entity;
             Action action = entity.pokemonDataChangeEvent.Event;
             action = () => { };
             entity.ReplacePokemonDataChangeEvent(action);
@@ -155,6 +170,7 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
         PlayerCurPokemonData = null;
         EnemyCurPokemonData = null;
         battleState = null;
+        Debug.Log("战斗结束");
     }
 
     /// <summary>
@@ -190,6 +206,7 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
 
     private void ExchangePokemon(Notification<int> notific)
     {
+        
         BattlePokemonData newCallPokemon = playPokemons[notific.param];
         ExchangePokemon(newCallPokemon);
         UpdateBattleState();
@@ -197,10 +214,24 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
 
     private void ExchangePokemon(BattlePokemonData newCallPokemon)
     {
+        Debug.Log(new StringBuilder(40)
+                            .AppendFormat("我方玩家将精灵{0}替换成了{1} {2}",
+                            PlayerCurPokemonData.Ename,newCallPokemon.Ename, System.DateTime.Now)
+                            .ToString());
+
         //回收精灵GameObject
         PlayerCurPokemonData.transform.gameObject.SetActive(false);
         ObjectPoolController.PokemonObjectsPool[PlayerCurPokemonData.race.raceid] =
         PlayerCurPokemonData.transform.gameObject;
+
+        //如果剧毒就重置计数
+        if (AbnormalStateEnum.BadlyPoison == PlayerCurPokemonData.Abnormal)
+        {
+            BadlyPoisonState.count[PlayerCurPokemonData.ID] = 1;
+        }
+
+        //能力阶级重置
+        PlayerCurPokemonData.StatModifiers = new StatModifiers();
 
         PlayerCurPokemonData = newCallPokemon;
         PlayChooseSkillID = -1;
@@ -214,6 +245,8 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
 
         //控制精灵和训练家朝向
         playerPokemon.transform.LookAt(EnemyCurPokemonData.transform);
+
+        
     }
     /// <summary>
     /// 更新战斗状态
@@ -235,6 +268,7 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
     /// </summary>
     private void PlayerRound()
     {
+        Debug.Log("开始进入准备回合");
         EnemyAction();
     }
 
@@ -244,7 +278,9 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
     private void BattleRound()
     {
 
+        
         if (!CanBattle) return;
+        Debug.Log("开始进入对战回合");
         //互相攻击
         if(PlayerCurPokemonData.Speed>EnemyCurPokemonData.Speed)
         {
@@ -269,12 +305,12 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
     {
         foreach(var data in wildPokemons)
         {
-            var entity = context.GetEntityWithBattlePokemonData(data);
+            var entity = data.entity;
             entity.ReplaceBattlePokemonData(data);
         }
         foreach (var data in playPokemons)
         {
-            var entity = context.GetEntityWithBattlePokemonData(data);
+            var entity = data.entity;
             entity.ReplaceBattlePokemonData(data);
         }
         context.ReplacePlayerData(context.playerData.scriptableObject);
@@ -282,9 +318,11 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
 
     private void PlayerBattleAround()
     {
+        
         if (CanBattle)
         {
-            if(ResourceController.Instance.allSkillDic.ContainsKey(PlayChooseSkillID))
+            Debug.Log("我方开始了行动");
+            if (ResourceController.Instance.allSkillDic.ContainsKey(PlayChooseSkillID))
             {
                 Skill PlayerSkill = ResourceController.Instance.allSkillDic[PlayChooseSkillID];
                 if (null != PlayerSkill)
@@ -306,6 +344,7 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
     {
         if (CanBattle)
         {
+            Debug.Log("敌方开始了行动");
             if (ResourceController.Instance.allSkillDic.ContainsKey(EnemyChooseSkillID))
             {
                 Skill EnemySkill = ResourceController.Instance.allSkillDic[EnemyChooseSkillID];
@@ -341,7 +380,16 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
 
         PlayerCurPokemonData.StateForAbnormal.UpdateInPlayerAround(PlayerCurPokemonData);
         EnemyCurPokemonData.StateForAbnormal.UpdateInPlayerAround(EnemyCurPokemonData);
+        foreach (var state in PlayerCurPokemonData.ChangeStateForPokemonEnums)
+        {
+            ChangeStateForPokemon.ChangeStateForPokemons[state].UpdateInPlayerAround(PlayerCurPokemonData);
 
+        }
+        foreach (var state in EnemyCurPokemonData.ChangeStateForPokemonEnums)
+        {
+            ChangeStateForPokemon.ChangeStateForPokemons[state].UpdateInPlayerAround(EnemyCurPokemonData);
+
+        }
         UpdatePokemonDatas();
 
         EnemyChooseSkillID = -1;
@@ -369,10 +417,12 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
     public void PokemonDeathEvent(Notification<int> notific)
     {
         int hashcode = notific.param;
-
+        if (!CanBattle) return;
         if(hashcode == PlayerCurPokemonData.ID)
         {
-            
+            Debug.Log(new StringBuilder(20)
+                .AppendFormat("我方精灵{0}不能继续作战了", PlayerCurPokemonData.Ename)
+                .ToString());
 
             BattlePokemonData newCallPokemon = null;
             foreach (BattlePokemonData pokemon in playPokemons)
@@ -399,8 +449,11 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
 
 
         }
-        else 
+        else if(hashcode == EnemyCurPokemonData.ID)
         {
+            Debug.Log(new StringBuilder(20)
+                .AppendFormat("敌方精灵{0}不能继续作战了", EnemyCurPokemonData.Ename)
+                .ToString());
             EnemyCurPokemonData = null;
             StartCoroutine(WaitBattleEnd());
         }

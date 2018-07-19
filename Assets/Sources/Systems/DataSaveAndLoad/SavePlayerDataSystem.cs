@@ -34,7 +34,7 @@ class SavePlayerDataSystem : ReactiveSystem<GameEntity>
 
     protected override bool Filter(GameEntity entity)
     {
-        return entity.playerData != null;
+        return entity.playerData != null &&! context.isBattleFlag;
     }
 
     protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)

@@ -21,7 +21,7 @@ public class UIBattle_EnemyInfo:TTUIPage
     private Text PokemonName;
     private Slider PokemonHealth;
     private Text PokemonHealthText;
-    private Image AbnormalStateImage;
+    private Image AbnormalStateEnumImage;
     private BattlePokemonData PrePokemonData;
 
     private GameContext context;
@@ -45,10 +45,7 @@ public class UIBattle_EnemyInfo:TTUIPage
 
     public override void Hide()
     {
-        //var entity = context.GetEntityWithBattlePokemonData(PrePokemonData);
-        //var action = entity.pokemonDataChangeEvent.Event;
-        //action -= Refresh;
-        //entity.ReplacePokemonDataChangeEvent(action);
+
 
         thisrect.DOAnchorPosX(1050, 1);
     }
@@ -59,7 +56,7 @@ public class UIBattle_EnemyInfo:TTUIPage
         PokemonName = transform.Find("Name").GetComponent<Text>();
         PokemonHealth = transform.Find("Blood").GetComponent<Slider>();
         PokemonHealthText = transform.Find("Blood/Health").GetComponent<Text>();
-        AbnormalStateImage = transform.Find("AbnormalState").GetComponent<Image>();
+        AbnormalStateEnumImage = transform.Find("AbnormalState").GetComponent<Image>();
     }
    
 
@@ -77,7 +74,7 @@ public class UIBattle_EnemyInfo:TTUIPage
         {
             if(null!= PrePokemonData)
             {
-                var Preentity = context.GetEntityWithBattlePokemonData(PrePokemonData);
+                var Preentity = PrePokemonData.entity;
                 var Preaction = Preentity.pokemonDataChangeEvent.Event;
                 Preaction -= Refresh;
                 Preentity.ReplacePokemonDataChangeEvent(Preaction);
@@ -86,7 +83,7 @@ public class UIBattle_EnemyInfo:TTUIPage
 
             PrePokemonData = pokemonData;
 
-            var entity = context.GetEntityWithBattlePokemonData(pokemonData);
+            var entity = pokemonData.entity;
             var action = entity.pokemonDataChangeEvent.Event;
             action += Refresh;
             entity.ReplacePokemonDataChangeEvent(action);
@@ -105,6 +102,20 @@ public class UIBattle_EnemyInfo:TTUIPage
              new StringBuilder(20)
                 .AppendFormat("{0}a{1}", curHealth, fullHealth).ToString();
         PokemonHealth.value = curHealth / (float)fullHealth;
+
+        if (AbnormalStateEnum.Normal == pokemonData.Abnormal)
+        {
+            HideUI(AbnormalStateEnumImage.gameObject);
+        }
+        else
+        {
+            ShowUI(AbnormalStateEnumImage.gameObject);
+            AbnormalStateEnumImage.sprite =
+                Resources.Load<Sprite>(
+                    new StringBuilder(20)
+                        .AppendFormat("UIPrefab/AbnormalStateEnum/{0}",
+                        pokemonData.Abnormal).ToString());
+        }
     }
 
 
