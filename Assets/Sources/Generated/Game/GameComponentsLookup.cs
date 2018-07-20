@@ -10,17 +10,19 @@ public static class GameComponentsLookup {
 
     public const int BattleFlag = 0;
     public const int BattlePokemonData = 1;
-    public const int GrassForces = 2;
-    public const int GrassMeshRender = 3;
-    public const int GrassPos = 4;
-    public const int PlayerData = 5;
-    public const int PokemonDataChangeEvent = 6;
+    public const int Destroy = 2;
+    public const int GrassForces = 3;
+    public const int GrassMeshRender = 4;
+    public const int GrassPos = 5;
+    public const int PlayerData = 6;
+    public const int PokemonDataChangeEvent = 7;
 
-    public const int TotalComponents = 7;
+    public const int TotalComponents = 8;
 
     public static readonly string[] componentNames = {
         "BattleFlag",
         "BattlePokemonData",
+        "Destroy",
         "GrassForces",
         "GrassMeshRender",
         "GrassPos",
@@ -31,6 +33,7 @@ public static class GameComponentsLookup {
     public static readonly System.Type[] componentTypes = {
         typeof(BattleFlagComponent),
         typeof(BattlePokemonDataComponent),
+        typeof(DestroyComponent),
         typeof(GrassForcesComponent),
         typeof(GrassMeshRenderComponent),
         typeof(GrassPosComponent),

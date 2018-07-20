@@ -51,11 +51,13 @@ namespace PokemonBattele
 
         public override void UpdateInPlayerAround(BattlePokemonData pokemon)
         {
-            DebugHelper.LogFormat("{0}因为烧伤受到了伤害", pokemon.Ename);
+            
 
-            pokemon.curHealth -= pokemon.Health / 16;
-            if (pokemon.curHealth < 0)
-                pokemon.curHealth = 0;
+            int h = pokemon.Health / 16;
+            h = Math.Min(h, pokemon.curHealth);
+            DebugHelper.LogFormat("{0}因为烧伤受到了{1}伤害", pokemon.Ename,h);
+            pokemon.curHealth -= h;
+
         }
 
         public override void LoseState(BattlePokemonData pokemon)
@@ -207,11 +209,11 @@ namespace PokemonBattele
 
         public override void UpdateInPlayerAround(BattlePokemonData pokemon)
         {
-            DebugHelper.LogFormat("{0}因为中毒受到了伤害 ", pokemon.Ename);
             
-            pokemon.curHealth -= pokemon.Health / 8;
-            if (pokemon.curHealth < 0)
-                pokemon.curHealth = 0;
+            int h = pokemon.Health / 8;
+            h = Math.Min(h, pokemon.curHealth);
+            DebugHelper.LogFormat("{0}因为中毒受到了{1}伤害", pokemon.Ename, h);
+            pokemon.curHealth -= h;
 
             if (1 == pokemon.curHealth)
             {
@@ -255,12 +257,10 @@ namespace PokemonBattele
         }
         public override void UpdateInPlayerAround(BattlePokemonData pokemon)
         {
-            DebugHelper.LogFormat("{0}因为剧毒受到了伤害,当前剧毒时间计数为{1}", pokemon.Ename, count[pokemon.ID]);
-            
-            pokemon.curHealth -= pokemon.Health / 16 * (count[pokemon.ID]++);
-            if (pokemon.curHealth < 0)
-                pokemon.curHealth = 0;
-
+            int h = pokemon.Health / 16 * (count[pokemon.ID]);
+            h = Math.Min(h, pokemon.curHealth);
+            DebugHelper.LogFormat("{0}因为剧毒受到了{1}伤害,当前剧毒时间计数为{2}", pokemon.Ename, h, count[pokemon.ID]++);
+            pokemon.curHealth -= h;
 
         }
     }

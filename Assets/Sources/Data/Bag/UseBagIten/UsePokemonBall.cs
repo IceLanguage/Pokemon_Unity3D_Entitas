@@ -35,53 +35,85 @@ namespace PokemonBattele
                 ,out shadeNum,out issuccess);
             DebugHelper.LogFormat("正在捕捉精灵{0}，精灵球振动了{1}次，最后捕捉{2}了",
                 pokemon.Ename, shadeNum,issuccess?"成功":"失败");
-     
 
-            //精灵球振动
-            //TODO
 
+            pokemon.transform.GetComponent<Rigidbody>().useGravity = false;
             //精灵变小
             pokemon.transform
-                .DOScale(0.1f,BattleController.Instance.BattleInterval/2)
+                .DOScale(0.01f,0.5f)
                 .OnComplete(
                 ()=> 
                 {
+                    Sequence mySequence = DOTween.Sequence();
+                    for (int i =0;i<shadeNum;++i)
+                    {
+                        mySequence.Append(pokemonBallInPool.transform.DOShakePosition(0.3f, new Vector3(-0.03f, 0.03f, 0.03f), 30));
+                        mySequence.AppendInterval(0.2f);
+                    }
+
+                    mySequence.AppendCallback(() =>
+                    {
+                        if (issuccess)
+                        {
+                            //捕捉精灵
+                            LHCoroutine.CoroutineManager.DoCoroutine(CatachPokeomon(pokemon.pokemon));
+
+                            //通知结束对战
+                            NotificationCenter<int>.Get().DispatchEvent("CatchPokemon", 1);
+
+
+                            //显示捕捉结果UI
+                            NotificationCenter<Pokemon>.Get().DispatchEvent("CatchPokemonResult", pokemon.pokemon);
+
+                            NotificationCenter<bool>.Get().DispatchEvent("BattlePause", false);
+                        }
+                        else
+                        {
+
+                            ReBack(pokemonBallInPool, pokemon);
+                        }
+                    });
+
                     
-                    if(issuccess)
-                    {
-                        //捕捉精灵
-                        LHCoroutine.CoroutineManager.DoCoroutine(CatachPokeomon(pokemon.pokemon));
-
-                        //通知结束对战
-                        NotificationCenter<int>.Get().DispatchEvent("CatchPokemon", 1);
-
-                        //显示捕捉结果UI
-                        NotificationCenter<Pokemon>.Get().DispatchEvent("CatchPokemonResult", pokemon.pokemon);
-                    }
-                    else
-                    {
-                        pokemon.transform.DOScale(1, BattleController.Instance.BattleInterval / 5);
-                    }
                 }
             );
 
         }
+        
+        
 
+        private void ReBack(GameObject pokemonBallInPool, BattlePokemonData pokemon)
+        {
+            pokemon.transform.DOScale(1, 0.5f).
+                        OnComplete(() =>
+                        {
+                            pokemon.transform.GetComponent<Rigidbody>().useGravity = true;
+                            PokemonFactory.StorePokemonBallInPool(pokemonBallInPool);
+                            NotificationCenter<bool>.Get().DispatchEvent("BattlePause", false);
+                        });
+        }
+        /// <summary>
+        /// 存储数据
+        /// </summary>
+        /// <param name="pokemon"></param>
+        /// <returns></returns>
         IEnumerator CatachPokeomon(Pokemon pokemon)
         {
-            
-            yield return new WaitWhile(IsBattleEnd);
             var context = Contexts.sharedInstance.game;
+            yield return new WaitWhile
+            (
+                () =>
+                {
+                    return context.isBattleFlag;
+                }
+            );
+
             var trainer = context.playerData.scriptableObject;
-            trainer.pokemons.Add(pokemon);
+            trainer.pokemons.Add(pokemon);           
             context.ReplacePlayerData(trainer);
 
         }
 
-        private bool IsBattleEnd()
 
-        {
-            return !Contexts.sharedInstance.game.isBattleFlag;
-        }
     }
 }

@@ -7,6 +7,7 @@ using UnityEngine;
 using MyUnityEventDispatcher;
 using System.Collections;
 using TinyTeam.UI;
+using Entitas;
 
 public sealed partial class BattleController : SingletonMonobehavior<BattleController>, IEndBattleEvent
 {
@@ -25,12 +26,12 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
     private int PlayChooseSkillID = -1;
     private int EnemyChooseSkillID = -1;
 
-    public readonly float BattleTime = 3f;
-    public readonly float BattleInterval = 1f;
+    public readonly float BattleTime = 6f;
+    //public readonly float BattleInterval = 3f;
     private string PlayerChooseBagItemName = "", EnemyChooseBagItemName = "";
 
     public int FirstHand = -1;
-
+    private bool BattlePause = false;
     private void Start()
     {
         context = Contexts.sharedInstance.game;
@@ -39,6 +40,7 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
         NotificationCenter<string>.Get().AddEventListener("UseBagItem", PlayerUseBagItem);
         NotificationCenter<int>.Get().AddEventListener("CatchPokemon", CatchPokemonResultEvent);
         NotificationCenter<int>.Get().AddEventListener("ExchangePokemon", ExchangePokemon);
+        NotificationCenter<bool>.Get().AddEventListener("BattlePause", StopBattlePause);
         EndBattleSystem.EndBattleEvent += EndBattleEvent;
 
         BattleStateForPlayer.InitEvent += PlayerRound;
@@ -171,6 +173,16 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
         PlayerCurPokemonData = null;
         EnemyCurPokemonData = null;
         battleState = null;
+
+        GameEntity[] entities = context.GetEntities(GameMatcher.BattlePokemonData);
+        var playerPokemons = context.playerData.scriptableObject.pokemons;
+        foreach (var e in entities)
+        {
+            if(!playerPokemons.Contains(e.battlePokemonData.data.pokemon))
+            {
+                e.isDestroy = true;
+            }
+        }
         
     }
 
@@ -202,10 +214,13 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
 
     private void CatchPokemonResultEvent(Notification<int> notific)
     {
-        
+        battleState = null;
         StartCoroutine(WaitBattleEnd());
     }
-
+    private void StopBattlePause(Notification<bool> notific)
+    {
+        BattlePause = notific.param;
+    }
     private void ExchangePokemon(Notification<int> notific)
     {
         if(PlayerCurPokemonData.ChangeStateForPokemonEnums.Contains(ChangeStateEnumForPokemon.CanNotEscape))
@@ -290,23 +305,67 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
         if (!CanBattle) return;
         DebugHelper.Log("开始进入对战回合");
 
+        StartCoroutine(IEBattleAround());
+
+        
+
+    }
+
+    IEnumerator IEBattleAround()
+    {
+        var wait = new WaitWhile
+        (
+            () =>
+            {
+                return BattlePause;
+            }
+        );
+        //我方玩家使用道具
+        
+        if (""!= PlayerChooseBagItemName&&ResourceController.Instance.UseBagUItemDict.ContainsKey(PlayerChooseBagItemName))
+        {
+            
+            UseBagItem use = ResourceController.Instance.UseBagUItemDict[PlayerChooseBagItemName];
+            if (null != use)
+            {
+                BattlePause = true;
+                use.Effect();
+            }
+        }
+        yield return wait;
+        if(CanBattle&&null!=battleState)
+        {
+            if ("" != EnemyChooseBagItemName && ResourceController.Instance.UseBagUItemDict.ContainsKey(EnemyChooseBagItemName))
+            {
+                UseBagItem use = ResourceController.Instance.UseBagUItemDict[EnemyChooseBagItemName];
+                if (null != use)
+                {
+                    BattlePause = true;
+                    use.Effect();
+                }
+            }
+        }
+        yield return wait;
         //互相攻击
-        if(PlayerCurPokemonData.Speed>EnemyCurPokemonData.Speed)
+        if (PlayerCurPokemonData.Speed > EnemyCurPokemonData.Speed)
         {
             FirstHand = PlayerCurPokemonData.ID;
             PlayerBattleAround();
-            StartCoroutine(WaitEnemySkillUse());
+            yield return wait;
+            EnemyBattleAround();
 
         }
         else
         {
             FirstHand = EnemyCurPokemonData.ID;
+            
             EnemyBattleAround();
-            StartCoroutine(WaitPlayerSkillUse());
+            yield return wait;
+            PlayerBattleAround();
 
         }
-        StartCoroutine(WaitBattleAroundEnd());
-
+        yield return wait;
+        BattleAroundEnd();
 
     }
     /// <summary>
@@ -329,9 +388,10 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
 
     private void PlayerBattleAround()
     {
-        
-        if (CanBattle)
+        UpdatePokemonDatas();
+        if (CanBattle&&null!=battleState)
         {
+            
             DebugHelper.Log("我方开始了行动");
             PlayerCurPokemonData.ChooseSkillType = SkillType.NULL;
 
@@ -347,27 +407,23 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
                 Skill PlayerSkill = ResourceController.Instance.allSkillDic[PlayChooseSkillID];
                 if (null != PlayerSkill)
                 {
+                    BattlePause = true;
                     PlayerCurPokemonData.ChooseSkillType = PlayerSkill.type;
                     UseSkill.Attack(PlayerSkill, PlayerCurPokemonData, EnemyCurPokemonData);
                 }
                     
             }
             
-            if(ResourceController.Instance.UseBagUItemDict.ContainsKey(PlayerChooseBagItemName))
-            {
-                UseBagItem use = ResourceController.Instance.UseBagUItemDict[PlayerChooseBagItemName];
-                if(null != use)
-                {
-                    use.Effect();
-                }
-            }
+            
         }
     }
 
     private void EnemyBattleAround()
     {
-        if (CanBattle)
+        UpdatePokemonDatas();
+        if (CanBattle && null != battleState)
         {
+           
             DebugHelper.Log("敌方开始了行动");
             EnemyCurPokemonData.ChooseSkillType = SkillType.NULL;
 
@@ -382,37 +438,20 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
                 Skill EnemySkill = ResourceController.Instance.allSkillDic[EnemyChooseSkillID];
                 if (null != EnemySkill)
                 {
+                    BattlePause = true;
                     EnemyCurPokemonData.ChooseSkillType = EnemySkill.type;
                     UseSkill.Attack(EnemySkill, EnemyCurPokemonData, PlayerCurPokemonData);
                 }
                     
             }
 
-            if (ResourceController.Instance.UseBagUItemDict.ContainsKey(EnemyChooseBagItemName))
-            {
-                UseBagItem use = ResourceController.Instance.UseBagUItemDict[EnemyChooseBagItemName];
-                if (null != use)
-                {
-                    use.Effect();
-                }
-            }
+            
         }
 
     }
 
-    IEnumerator WaitEnemySkillUse()
+    private void BattleAroundEnd()
     {
-        yield return new WaitForSeconds(BattleInterval);
-        EnemyBattleAround();
-    }
-    IEnumerator WaitPlayerSkillUse()
-    {
-        yield return new WaitForSeconds(BattleInterval);
-        PlayerBattleAround();
-    }
-    IEnumerator WaitBattleAroundEnd()
-    {
-        yield return new WaitForSeconds(BattleTime);
 
         PlayerCurPokemonData.StateForAbnormal.UpdateInPlayerAround(PlayerCurPokemonData);
         EnemyCurPokemonData.StateForAbnormal.UpdateInPlayerAround(EnemyCurPokemonData);
@@ -494,7 +533,7 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
         else if(hashcode == EnemyCurPokemonData.ID)
         {
             DebugHelper.LogFormat("敌方精灵{0}不能继续作战了", EnemyCurPokemonData.Ename);
-            EnemyCurPokemonData = null;
+            battleState = null;
             StartCoroutine(WaitBattleEnd());
         }
     }

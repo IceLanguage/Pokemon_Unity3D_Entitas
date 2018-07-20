@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TinyTeam.UI;
 using System.Text;
+using MyUnityEventDispatcher;
 
 namespace PokemonBattele
 {
@@ -51,7 +52,9 @@ namespace PokemonBattele
 			if (0 == AttackPokemon.curHealth) return;
 
 			
-			new UseSkill(skill, AttackPokemon, DefencePokemon);           
+			new UseSkill(skill, AttackPokemon, DefencePokemon);
+
+			LHCoroutine.CoroutineManager.DoCoroutine(WaitSKillUse());
 		}
 
 		private readonly Skill skill;
@@ -136,8 +139,15 @@ namespace PokemonBattele
 
 
 
-			}           
+			}
 			
+
+		}
+
+		static IEnumerator WaitSKillUse()
+		{
+			yield return new WaitForSeconds(1f);
+			NotificationCenter<bool>.Get().DispatchEvent("BattlePause", false);
 		}
 		/// <summary>
 		/// 技能是否使用成功

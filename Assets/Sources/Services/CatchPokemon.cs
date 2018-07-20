@@ -45,7 +45,7 @@ namespace PokemonBattele
                 for (shaderNum = 0; shaderNum < 3; shaderNum++)
                 {
                     int ran = RandomService.game.Int(0,_max);
-                    DebugHelper.LogFormat("捕捉{2}判定中Randim {0}:G {1}", ran, G, pokemon.Ename);
+                    DebugHelper.LogFormat("捕捉{2}判定中 Random: {0};G: {1}", ran, G, pokemon.Ename);
                     if (ran > G)
                     {
                         issuccess = false;

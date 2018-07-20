@@ -15,6 +15,7 @@ class SavePlayerDataSystem : ReactiveSystem<GameEntity>
     }
     protected override void Execute(List<GameEntity> entities)
     {
+        DebugHelper.Log("正在保存玩家数据");
         foreach(var entity in entities)
          {
             string json = JsonConvert.SerializeObject(entity.playerData.scriptableObject);
@@ -34,7 +35,7 @@ class SavePlayerDataSystem : ReactiveSystem<GameEntity>
 
     protected override bool Filter(GameEntity entity)
     {
-        return entity.playerData != null &&! context.isBattleFlag;
+        return entity.playerData != null &&!context.isBattleFlag;
     }
 
     protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)

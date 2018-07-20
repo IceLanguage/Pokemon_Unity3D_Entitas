@@ -34,7 +34,7 @@ public static class PokemonFactory{
 		{
 			pokemonBallInPool.SetActive(true);
 		}
-		LHCoroutine.CoroutineManager.DoCoroutine(StorePokemonBallInPool(pokemonBallInPool));
+		LHCoroutine.CoroutineManager.DoCoroutine(IEStorePokemonBallInPool(pokemonBallInPool));
 		return pokemonBallInPool;
 	}
 
@@ -85,10 +85,26 @@ public static class PokemonFactory{
 		}
 	}
 
-	static IEnumerator StorePokemonBallInPool(GameObject pokemonBall)
+	private static IEnumerator IEStorePokemonBallInPool(GameObject pokemonBall)
 	{
-		yield return new WaitForSeconds(1f);
-		pokemonBall.SetActive(false);
-		ObjectPoolController.PokemonBallObjectsPool.Store(pokemonBall);
+		yield return new WaitWhile
+		(
+			()=>
+				{
+					return Contexts.sharedInstance.game.isBattleFlag;
+				} 
+		);
+		StorePokemonBallInPool(pokemonBall);
+
+
+	}
+
+	public static void StorePokemonBallInPool(GameObject pokemonBall)
+	{
+		if (pokemonBall.activeSelf)
+		{
+			pokemonBall.SetActive(false);
+			ObjectPoolController.PokemonBallObjectsPool.Store(pokemonBall);
+		}
 	}
 }
