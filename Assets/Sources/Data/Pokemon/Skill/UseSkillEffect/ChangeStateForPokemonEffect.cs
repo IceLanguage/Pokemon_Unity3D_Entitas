@@ -7,7 +7,8 @@ namespace PokemonBattele
 {
     abstract class ChangeStateForPokemonEffect : UseSkillEffectWithProbability
     {
-        public ChangeStateForPokemonEffect(int probability) : base(probability)
+        
+        public ChangeStateForPokemonEffect(int probability,bool isUseSelf) : base(probability, isUseSelf)
         {
 
         }
@@ -15,7 +16,7 @@ namespace PokemonBattele
 
     class ConfusionEffect: ChangeStateForPokemonEffect
     {
-        public ConfusionEffect(int probability) : base(probability)
+        public ConfusionEffect(int probability) : base(probability,false)
         {
 
         }
@@ -28,7 +29,7 @@ namespace PokemonBattele
 
     class FlinchEffect : ChangeStateForPokemonEffect
     {
-        public FlinchEffect(int probability) : base(probability)
+        public FlinchEffect(int probability) : base(probability,false)
         {
 
         }
@@ -44,9 +45,11 @@ namespace PokemonBattele
     class RockWreckerEffect : ChangeStateForPokemonEffect
     {
         private readonly int skillID;
-        public RockWreckerEffect(int skillID,int probability) : base(probability)
+        
+        public RockWreckerEffect(int skillID,int probability) : base(probability,true)
         {
             this.skillID = skillID;
+
         }
 
         public override void Effect(BattlePokemonData pokemon)
@@ -60,9 +63,10 @@ namespace PokemonBattele
     class CanNotEscapeEffect : ChangeStateForPokemonEffect
     {
         public readonly int time;
-        public CanNotEscapeEffect(int probability,int time) : base(probability)
+        public CanNotEscapeEffect(int probability,int time) : base(probability,false)
         {
             this.time = time;
+
         }
 
         public override void Effect(BattlePokemonData pokemon)
@@ -76,14 +80,17 @@ namespace PokemonBattele
     class WaitNextAroundEffect : ChangeStateForPokemonEffect
     {
         public readonly int skillID;
-        public WaitNextAroundEffect(int skillID, int probability) : base(probability)
+        public WaitNextAroundEffect(int skillID, int probability) : base(probability,true)
         {
             this.skillID = skillID;
+
         }
 
         public override void Effect(BattlePokemonData pokemon)
         {
+
             NeedReplaceSKill.context[pokemon.ID] = skillID;
+            
             pokemon.AddChangeState(ChangeStateEnumForPokemon.WaitNextAround);
         }
 

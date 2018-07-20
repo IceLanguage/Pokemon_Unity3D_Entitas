@@ -10,7 +10,7 @@ namespace PokemonBattele
     /// </summary>
     class ParalysisEffect : UseSkillEffectWithProbability
     {
-        public ParalysisEffect(int probability):base(probability)
+        public ParalysisEffect(int probability):base(probability,false)
         {
 
         }
@@ -23,7 +23,7 @@ namespace PokemonBattele
 
     class BurnsEffect : UseSkillEffectWithProbability
     {
-        public BurnsEffect(int probability) : base(probability)
+        public BurnsEffect(int probability) : base(probability, false)
         {
 
         }
@@ -38,7 +38,7 @@ namespace PokemonBattele
 
     class FrostbiteEffect : UseSkillEffectWithProbability
     {
-        public FrostbiteEffect(int probability) : base(probability)
+        public FrostbiteEffect(int probability) : base(probability, false)
         {
 
         }
@@ -53,7 +53,7 @@ namespace PokemonBattele
 
     class PoisonEffect : UseSkillEffectWithProbability
     {
-        public PoisonEffect(int probability) : base(probability)
+        public PoisonEffect(int probability) : base(probability, false)
         {
 
         }
@@ -68,7 +68,7 @@ namespace PokemonBattele
 
     class VeryToxicEffect : UseSkillEffectWithProbability
     {
-        public VeryToxicEffect(int probability) : base(probability)
+        public VeryToxicEffect(int probability) : base(probability, false)
         {
 
         }
@@ -83,7 +83,7 @@ namespace PokemonBattele
 
     class SleepEffect : UseSkillEffectWithProbability
     {
-        public SleepEffect(int probability) : base(probability)
+        public SleepEffect(int probability) : base(probability, false)
         {
 
         }

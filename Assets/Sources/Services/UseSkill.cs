@@ -104,9 +104,20 @@ namespace PokemonBattele
 					var useSkillManager =UseSkillEffectManager.UseSkillDic;
 					if (useSkillManager.ContainsKey(skill.SKillID))
 					{
-						BattlePokemonData PokemonUseEffect = skill.isUseForSelf ? attackPokemon : defencePokemon;
+						
 						foreach(var effect in useSkillManager[skill.SKillID])
-							effect.UseSkillSpecialEffect(PokemonUseEffect);
+						{
+							if(effect.isUseSelf)
+							{
+								effect.UseSkillSpecialEffect(attackPokemon);
+
+							}
+							else
+							{
+								effect.UseSkillSpecialEffect(defencePokemon);
+							}
+						}
+							
 					}
 					if (PokemonType.火 == skill.att && AbnormalStateEnum.Frostbite == defencePokemon.Abnormal)
 					{
@@ -134,7 +145,7 @@ namespace PokemonBattele
 		/// <returns></returns>
 		private bool IsSkillUseSuccess()
 		{
-			if (attackPokemon.skillPPs[skillIndex] <= 0)
+			if (skillIndex>=4|| attackPokemon.skillPPs[skillIndex] <= 0)
 			{
 				Debug.LogError("没有提前判断技能是否可以使用");
 				return false;

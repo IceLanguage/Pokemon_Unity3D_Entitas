@@ -10,7 +10,7 @@ namespace PokemonBattele
     {
         protected readonly int ChangeNum;
         protected readonly bool isAdd;
-        public StatModifiersChangeEffect(int probability,int num,bool isAdd) : base(probability)
+        public StatModifiersChangeEffect(int probability,int num,bool isAdd,bool isUseSelf) : base(probability,isUseSelf)
         {
             ChangeNum = num;
             this.isAdd = isAdd;
@@ -20,7 +20,7 @@ namespace PokemonBattele
     abstract class StatModifiersSetEffect : UseSkillEffectWithProbability
     {
         protected readonly int value;
-        public StatModifiersSetEffect(int probability, int num) : base(probability)
+        public StatModifiersSetEffect(int probability, int num, bool isUseSelf) : base(probability,isUseSelf)
         {
             value = num;
         }
@@ -28,8 +28,8 @@ namespace PokemonBattele
     }
     class ChangePhysicPowerStatModifiersEffect : StatModifiersChangeEffect
     {
-        public ChangePhysicPowerStatModifiersEffect(int probability, int num, bool isAdd) 
-            : base(probability,num,isAdd)
+        public ChangePhysicPowerStatModifiersEffect(int probability, int num, bool isAdd, bool isUseSelf) 
+            : base(probability,num,isAdd,isUseSelf)
         {
         }
 
@@ -53,8 +53,8 @@ namespace PokemonBattele
 
     class ChangePhysicDefenceStatModifiersEffect : StatModifiersChangeEffect
     {
-        public ChangePhysicDefenceStatModifiersEffect(int probability, int num, bool isAdd)
-            : base(probability, num, isAdd)
+        public ChangePhysicDefenceStatModifiersEffect(int probability, int num, bool isAdd, bool isUseSelf)
+            : base(probability, num, isAdd,isUseSelf)
         {
         }
 
@@ -81,8 +81,8 @@ namespace PokemonBattele
 
     class ChangeEnergyPowerStatModifiersEffect : StatModifiersChangeEffect
     {
-        public ChangeEnergyPowerStatModifiersEffect(int probability, int num, bool isAdd)
-            : base(probability, num, isAdd)
+        public ChangeEnergyPowerStatModifiersEffect(int probability, int num, bool isAdd, bool isUseSelf)
+            : base(probability, num, isAdd,isUseSelf)
         {
         }
 
@@ -110,8 +110,8 @@ namespace PokemonBattele
 
     class ChangeEnergyDefenceStatModifiersEffect : StatModifiersChangeEffect
     {
-        public ChangeEnergyDefenceStatModifiersEffect(int probability, int num, bool isAdd)
-            : base(probability, num, isAdd)
+        public ChangeEnergyDefenceStatModifiersEffect(int probability, int num, bool isAdd, bool isUseSelf)
+            : base(probability, num, isAdd,isUseSelf)
         {
         }
 
@@ -139,8 +139,8 @@ namespace PokemonBattele
 
     class ChangeCriticalHitModifiersEffect : StatModifiersChangeEffect
     {
-        public ChangeCriticalHitModifiersEffect(int probability, int num, bool isAdd)
-            : base(probability, num, isAdd)
+        public ChangeCriticalHitModifiersEffect(int probability, int num, bool isAdd, bool isUseSelf)
+            : base(probability, num, isAdd,isUseSelf)
         {
         }
 
@@ -168,8 +168,8 @@ namespace PokemonBattele
 
     class ChangeSpeedStatModifiersEffect : StatModifiersChangeEffect
     {
-        public ChangeSpeedStatModifiersEffect(int probability, int num, bool isAdd)
-            : base(probability, num, isAdd)
+        public ChangeSpeedStatModifiersEffect(int probability, int num, bool isAdd, bool isUseSelf)
+            : base(probability, num, isAdd,isUseSelf)
         {
         }
 
@@ -196,8 +196,8 @@ namespace PokemonBattele
 
     class ChangeHitRateStatModifiersEffect : StatModifiersChangeEffect
     {
-        public ChangeHitRateStatModifiersEffect(int probability, int num, bool isAdd)
-            : base(probability, num, isAdd)
+        public ChangeHitRateStatModifiersEffect(int probability, int num, bool isAdd, bool isUseSelf)
+            : base(probability, num, isAdd,isUseSelf)
         {
         }
 
@@ -224,8 +224,8 @@ namespace PokemonBattele
 
     class ChangeAvoidanceRateStatModifiersEffect : StatModifiersChangeEffect
     {
-        public ChangeAvoidanceRateStatModifiersEffect(int probability, int num, bool isAdd)
-            : base(probability, num, isAdd)
+        public ChangeAvoidanceRateStatModifiersEffect(int probability, int num, bool isAdd, bool isUseSelf)
+            : base(probability, num, isAdd,isUseSelf)
         {
         }
 
@@ -253,8 +253,8 @@ namespace PokemonBattele
 
     class SetPhysicPowerStatModifiersEffect : StatModifiersSetEffect
     {
-        public SetPhysicPowerStatModifiersEffect(int probability, int num)
-            : base(probability, num)
+        public SetPhysicPowerStatModifiersEffect(int probability, int num, bool isUseSelf)
+            : base(probability, num,isUseSelf)
         {
         }
 
@@ -269,8 +269,8 @@ namespace PokemonBattele
     }
     class SetPhysicDefenceStatModifiersEffect : StatModifiersSetEffect
     {
-        public SetPhysicDefenceStatModifiersEffect(int probability, int num)
-            : base(probability, num)
+        public SetPhysicDefenceStatModifiersEffect(int probability, int num, bool isUseSelf)
+            : base(probability, num,isUseSelf)
         {
         }
 
@@ -286,10 +286,11 @@ namespace PokemonBattele
 
     class SetEnergyPowerStatModifiersEffect : StatModifiersSetEffect
     {
-        public SetEnergyPowerStatModifiersEffect(int probability, int num)
-            : base(probability, num)
+        public SetEnergyPowerStatModifiersEffect(int probability, int num, bool isUseSelf)
+            : base(probability, num, isUseSelf)
         {
         }
+    
 
         public override void Effect(BattlePokemonData pokemon)
         {
@@ -303,8 +304,8 @@ namespace PokemonBattele
     }
     class SetEnergyDefenceStatModifiersEffect : StatModifiersSetEffect
     {
-        public SetEnergyDefenceStatModifiersEffect(int probability, int num)
-            : base(probability, num)
+        public SetEnergyDefenceStatModifiersEffect(int probability, int num, bool isUseSelf)
+            : base(probability, num, isUseSelf)
         {
         }
 
@@ -320,8 +321,8 @@ namespace PokemonBattele
 
     class SetSpeedStatModifiersEffect : StatModifiersSetEffect
     {
-        public SetSpeedStatModifiersEffect(int probability, int num)
-            : base(probability, num)
+        public SetSpeedStatModifiersEffect(int probability, int num, bool isUseSelf)
+            : base(probability, num, isUseSelf)
         {
         }
 

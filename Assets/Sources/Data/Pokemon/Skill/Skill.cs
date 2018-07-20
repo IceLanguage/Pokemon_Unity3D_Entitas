@@ -77,13 +77,13 @@ namespace PokemonBattele
 
         //技能效果的作用对象
         [SerializeField]
-        public bool isUseForSelf;
+        //public bool isUseForSelf;
 
         //技能提升攻击要害率
         public int CriticalHitC;
 
         //是否需要蓄力
-        public bool needPowerStorage;
+        //public bool needPowerStorage;
     }
 
     public enum SkillType

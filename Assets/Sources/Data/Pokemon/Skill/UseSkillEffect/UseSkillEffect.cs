@@ -11,23 +11,26 @@ namespace PokemonBattele
     }
     public static partial class UseSkillEffectManager
     {
-        public static Dictionary<int, List<IUseSkillSpecialEffect>> UseSkillDic =
-            new Dictionary<int, List<IUseSkillSpecialEffect>>();
+        public static Dictionary<int, List<UseSkillEffectWithProbability>> UseSkillDic =
+            new Dictionary<int, List<UseSkillEffectWithProbability>>();
     }
 
     public abstract class UseSkillEffectWithProbability : IUseSkillSpecialEffect
     {
         protected readonly int probability;
-        public UseSkillEffectWithProbability(int probability)
+        public readonly bool isUseSelf;
+        public UseSkillEffectWithProbability(int probability,bool isUseSelf)
         {
             this.probability = probability;
+            this.isUseSelf = isUseSelf;
         }
         public virtual void UseSkillSpecialEffect(BattlePokemonData pokemon)
         {
-            if (RandomService.game.Int(0, 100) < probability)
+            if (-1 == probability)
                 Effect(pokemon);
-            else if(-1 == probability)
+            else if (RandomService.game.Int(0, 100) < probability)
                 Effect(pokemon);
+           
         }
 
         public abstract void Effect(BattlePokemonData pokemon);

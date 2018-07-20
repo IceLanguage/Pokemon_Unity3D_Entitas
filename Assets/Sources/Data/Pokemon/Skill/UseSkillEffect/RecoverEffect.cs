@@ -8,7 +8,7 @@ namespace PokemonBattele
     abstract class RecoverEffect : UseSkillEffectWithProbability
     {
         protected int recoverValue;
-        public RecoverEffect(int probability,int recoverValue) : base(probability)
+        public RecoverEffect(int probability,int recoverValue) : base(probability,true)
         {
             
         }
@@ -24,7 +24,11 @@ namespace PokemonBattele
         public override void Effect(BattlePokemonData pokemon)
         {
             float scale = recoverValue / 100f;
-            pokemon.curHealth += (int)(pokemon.Health * scale);
+            DebugHelper.Log(scale);
+            DebugHelper.Log(pokemon.Health * scale);
+            int h = (int)(pokemon.Health * scale);
+            DebugHelper.LogFormat("{0}的生命恢复了{1}",pokemon.Ename,h);
+            pokemon.curHealth += h;
             if (pokemon.curHealth > pokemon.Health)
                 pokemon.curHealth = pokemon.Health;
         }
