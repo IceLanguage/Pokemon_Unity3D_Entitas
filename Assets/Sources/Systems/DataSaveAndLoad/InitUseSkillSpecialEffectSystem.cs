@@ -29,7 +29,9 @@ class InitUseSkillSpecialEffectSystem : IInitializeSystem
         UseSkillEffectManager.UseSkillDic[61] = new List<IUseSkillSpecialEffect>()
         { new ChangePhysicPowerStatModifiersEffect(10,1,false) };
 
-        //花瓣舞80 //连续多回合攻击
+        //花瓣舞
+        UseSkillEffectManager.UseSkillDic[80] = new List<IUseSkillSpecialEffect>()
+        { new RockWreckerEffect(80,-1) };
 
         //电击
         UseSkillEffectManager.UseSkillDic[84] = new List<IUseSkillSpecialEffect>()
@@ -47,13 +49,17 @@ class InitUseSkillSpecialEffectSystem : IInitializeSystem
         UseSkillEffectManager.UseSkillDic[87] = new List<IUseSkillSpecialEffect>()
         { new ParalysisEffect(30) };
 
-        //神鸟猛击143 //准备一回合
+        //神鸟猛击 
+        UseSkillEffectManager.UseSkillDic[143] = new List<IUseSkillSpecialEffect>()
+        { new FlinchEffect(30),new WaitNextAroundEffect(143,-1) };
 
         //泡沫
         UseSkillEffectManager.UseSkillDic[145] = new List<IUseSkillSpecialEffect>()
         { new ChangeSpeedStatModifiersEffect(10,1,false) };
 
-        //岩崩157 畏惧
+        //岩崩
+        UseSkillEffectManager.UseSkillDic[157] = new List<IUseSkillSpecialEffect>()
+        { new FlinchEffect(30) };
 
         //火焰轮
         UseSkillEffectManager.UseSkillDic[172] = new List<IUseSkillSpecialEffect>()
@@ -74,7 +80,7 @@ class InitUseSkillSpecialEffectSystem : IInitializeSystem
 
         //光合作用
         UseSkillEffectManager.UseSkillDic[235] = new List<IUseSkillSpecialEffect>()
-        { new RecoverScaleHealthEffect(100,50) };
+        { new RecoverScaleHealthEffect(-1,50) };
         
         //暗影球
         UseSkillEffectManager.UseSkillDic[247] = new List<IUseSkillSpecialEffect>()
@@ -87,10 +93,11 @@ class InitUseSkillSpecialEffectSystem : IInitializeSystem
 
         //火焰踢
         UseSkillEffectManager.UseSkillDic[299] = new List<IUseSkillSpecialEffect>()
-        {new BurnsEffect(10) };
+        { new BurnsEffect(10) };
 
         //加农水炮 308
-        //玩家在接下来的一回合内无法作出包括使出招式、使用道具、逃走、替换宝可梦的任何指令。
+        UseSkillEffectManager.UseSkillDic[308] = new List<IUseSkillSpecialEffect>()
+        {new CanNotEscapeEffect(-1,1) };
 
         //银色旋风
         UseSkillEffectManager.UseSkillDic[318] = new List<IUseSkillSpecialEffect>()
@@ -107,15 +114,16 @@ class InitUseSkillSpecialEffectSystem : IInitializeSystem
         UseSkillEffectManager.UseSkillDic[324] = new List<IUseSkillSpecialEffect>()
         {new ConfusionEffect(10) };
 
-        //恶之波动  399 畏缩
-
+        //恶之波动 
+        UseSkillEffectManager.UseSkillDic[399] = new List<IUseSkillSpecialEffect>()
+        { new FlinchEffect(20) };
 
         //雪崩 419 如果本回合内被目标使用了攻击招式攻击并被造成了伤害，威力翻倍。
+        //UseSkill.cs配置
 
-        //火焰牙 424
-        //火焰牙有10 % 的几率使目标陷入畏缩状态。
+        //火焰牙 
         UseSkillEffectManager.UseSkillDic[424] = new List<IUseSkillSpecialEffect>()
-        {new BurnsEffect(10) };
+        {new BurnsEffect(10),new FlinchEffect(10) };
 
         //泥巴炸弹 426
         UseSkillEffectManager.UseSkillDic[426] = new List<IUseSkillSpecialEffect>()
@@ -129,8 +137,9 @@ class InitUseSkillSpecialEffectSystem : IInitializeSystem
         UseSkillEffectManager.UseSkillDic[435] = new List<IUseSkillSpecialEffect>()
         {new ParalysisEffect(30) };
 
-        //岩石炮439
-        //玩家在接下来的一回合内无法作出包括使出招式、使用道具、逃走、替换宝可梦的任何指令。
+        //岩石炮
+         UseSkillEffectManager.UseSkillDic[439] = new List<IUseSkillSpecialEffect>()
+        {new CanNotEscapeEffect(-1,1) };
 
         //充电光束
         UseSkillEffectManager.UseSkillDic[451] = new List<IUseSkillSpecialEffect>()
@@ -150,14 +159,14 @@ class InitUseSkillSpecialEffectSystem : IInitializeSystem
 
         //棉花防守
         UseSkillEffectManager.UseSkillDic[538] = new List<IUseSkillSpecialEffect>()
-        {new ChangePhysicDefenceStatModifiersEffect(100,3,true)};
+        {new ChangePhysicDefenceStatModifiersEffect(-1,3,true)};
 
         //暗黑爆破539
         UseSkillEffectManager.UseSkillDic[539] = new List<IUseSkillSpecialEffect>()
-        {new ChangeHitRateStatModifiersEffect(40,1,false) };
+        { new ChangeHitRateStatModifiersEffect(40,1,false) };
 
         //暴风542
         UseSkillEffectManager.UseSkillDic[542] = new List<IUseSkillSpecialEffect>()
-        {new ConfusionEffect(30) };
+        { new ConfusionEffect(30) };
     }
 }

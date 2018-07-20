@@ -27,6 +27,7 @@ public class BattlePokemonData : PokemonBaseData
     private StatModifiers statModifiers = new StatModifiers();
     public readonly GameEntity entity;
     private List<ChangeStateEnumForPokemon> changeStates = new List<ChangeStateEnumForPokemon>();
+    public SkillType ChooseSkillType;
     public void AddChangeState(ChangeStateEnumForPokemon state)
     {
         if(!ChangeStateForPokemonEnums.Contains(state))
@@ -36,6 +37,15 @@ public class BattlePokemonData : PokemonBaseData
             ChangeStateForPokemon.ChangeStateForPokemons[state].Init(this);
         }
        
+    }
+    public void RemoveChangeState(ChangeStateEnumForPokemon state)
+    {
+        if (ChangeStateForPokemonEnums.Contains(state))
+
+        {
+            ChangeStateForPokemonEnums.Remove(state);
+        }
+
     }
     public List<ChangeStateEnumForPokemon> ChangeStateForPokemonEnums
     {

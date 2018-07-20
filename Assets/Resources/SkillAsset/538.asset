@@ -20,3 +20,5 @@ MonoBehaviour:
   att: 12
   effect: {fileID: 11400000, guid: 516b134dae66539409347a97e6b19e0a, type: 2}
   isUseForSelf: 1
+  CriticalHitC: 0
+  needPowerStorage: 0

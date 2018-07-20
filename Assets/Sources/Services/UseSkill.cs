@@ -49,6 +49,8 @@ namespace PokemonBattele
 			if (null == AttackPokemon || null == DefencePokemon)
 				return;
 			if (0 == AttackPokemon.curHealth) return;
+
+			
 			new UseSkill(skill, AttackPokemon, DefencePokemon);           
 		}
 
@@ -120,6 +122,9 @@ namespace PokemonBattele
 
 				}
 
+
+
+
 			}           
 			
 		}
@@ -141,14 +146,17 @@ namespace PokemonBattele
 			{
 				
 				flag = true;
-				foreach(var state in attackPokemon.ChangeStateForPokemonEnums)
+				int cout = attackPokemon.ChangeStateForPokemonEnums.Count;
+				for (int i = cout - 1; i >= 0; --i)
 				{
-					if(!ChangeStateForPokemon.ChangeStateForPokemons[state].CanAction(attackPokemon))
+					var state = attackPokemon.ChangeStateForPokemonEnums[i];
+					if (!ChangeStateForPokemon.ChangeStateForPokemons[state].CanAction(attackPokemon))
 					{
 						flag = false;
-						break;
+						
 					}
 				}
+				
 				
 
 			}
@@ -161,6 +169,7 @@ namespace PokemonBattele
 		/// <returns></returns>
 		private bool IsSkillHitAim()
 		{
+			if (skill.hitRate == 0) return true;
 			int A = skill.hitRate * 255 / 100;
 			int B = attackPokemon.StatModifiers.HitRate - defencePokemon.StatModifiers.AvoidanceRate;
 			if (B > 6) B = 6;
@@ -177,6 +186,19 @@ namespace PokemonBattele
 		private void UseSkillDamage()
 		{
 			int damage = PokemonCalculation.CalDamage(attackPokemon, defencePokemon, skill);
+
+			if (419 == skill.SKillID)
+			{
+				if (BattleController.Instance.FirstHand == defencePokemon.ID)
+				{
+					if (SkillType.物理 == defencePokemon.ChooseSkillType||
+						SkillType.特殊 == defencePokemon.ChooseSkillType)
+					{
+						DebugHelper.Log("因为雪崩的技能效果,本回合内被目标使用了攻击招式攻击并被造成了伤害，威力翻倍");
+					}
+				}
+			}
+				
 
 			DebugHelper.LogFormat("{0}的技能{1}对{2}造成{3}伤害", attackPokemon.Ename, skill.sname,defencePokemon.Ename, damage);
 

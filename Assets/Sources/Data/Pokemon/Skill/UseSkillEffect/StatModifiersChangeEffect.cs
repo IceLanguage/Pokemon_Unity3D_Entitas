@@ -32,24 +32,23 @@ namespace PokemonBattele
             : base(probability,num,isAdd)
         {
         }
-        public override void UseSkillSpecialEffect(BattlePokemonData pokemon)
+
+        public override void Effect(BattlePokemonData pokemon)
         {
-            if (RandomService.game.Int(0, 100) < probability)
+            if (isAdd)
             {
-                if(isAdd)
-                {
-                    pokemon.StatModifiers.PhysicPower += ChangeNum;
-                    Debug.Log(pokemon.Ename + "物攻上升" + ChangeNum + System.DateTime.Now);
-                }
-                    
-                else
-                {
-                    pokemon.StatModifiers.PhysicPower -= ChangeNum;
-                    Debug.Log(pokemon.Ename + "物攻下降" + ChangeNum + System.DateTime.Now);
-                }
-                    
+                pokemon.StatModifiers.PhysicPower += ChangeNum;
+                DebugHelper.LogFormat("{0}物攻上升{1}", pokemon.Ename, ChangeNum);
+            }
+
+            else
+            {
+                pokemon.StatModifiers.PhysicPower -= ChangeNum;
+                DebugHelper.LogFormat("{0}物攻下降{1}", pokemon.Ename, ChangeNum);
             }
         }
+
+
     }
 
     class ChangePhysicDefenceStatModifiersEffect : StatModifiersChangeEffect
@@ -58,24 +57,26 @@ namespace PokemonBattele
             : base(probability, num, isAdd)
         {
         }
-        public override void UseSkillSpecialEffect(BattlePokemonData pokemon)
+
+        public override void Effect(BattlePokemonData pokemon)
         {
-            if (RandomService.game.Int(0, 100) < probability)
+            if (isAdd)
             {
-                if (isAdd)
-                {
-                    pokemon.StatModifiers.PhysicDefence += ChangeNum;
-                    Debug.Log(pokemon.Ename + "物防上升" + ChangeNum + System.DateTime.Now);
-                }
-                    
-                else
-                {
-                    pokemon.StatModifiers.PhysicDefence -= ChangeNum;
-                    Debug.Log(pokemon.Ename + "物防下降" + ChangeNum + System.DateTime.Now);
-                }
-                    
+                pokemon.StatModifiers.PhysicDefence += ChangeNum;
+
+                DebugHelper.LogFormat("{0}物防上升{1}", pokemon.Ename, ChangeNum);
+            }
+
+            else
+            {
+                pokemon.StatModifiers.PhysicDefence -= ChangeNum;
+
+                DebugHelper.LogFormat("{0}物防下降{1}", pokemon.Ename, ChangeNum);
+
             }
         }
+
+
     }
 
     class ChangeEnergyPowerStatModifiersEffect : StatModifiersChangeEffect
@@ -84,24 +85,27 @@ namespace PokemonBattele
             : base(probability, num, isAdd)
         {
         }
-        public override void UseSkillSpecialEffect(BattlePokemonData pokemon)
+
+        public override void Effect(BattlePokemonData pokemon)
         {
-            if (RandomService.game.Int(0, 100) < probability)
+            if (isAdd)
             {
-                if (isAdd)
-                {
-                    pokemon.StatModifiers.EnergyPower += ChangeNum;
-                    Debug.Log(pokemon.Ename + "特攻上升" + ChangeNum + System.DateTime.Now);
-                }
-                    
-                else
-                {
-                    pokemon.StatModifiers.EnergyPower -= ChangeNum;
-                    Debug.Log(pokemon.Ename + "特攻下降" + ChangeNum + System.DateTime.Now);
-                }
-                    
+                pokemon.StatModifiers.EnergyPower += ChangeNum;
+
+                DebugHelper.LogFormat("{0}特攻上升{1}", pokemon.Ename, ChangeNum);
+
+            }
+
+            else
+            {
+                pokemon.StatModifiers.EnergyPower -= ChangeNum;
+
+                DebugHelper.LogFormat("{0}特攻下降{1}", pokemon.Ename, ChangeNum);
+;
             }
         }
+
+
     }
 
     class ChangeEnergyDefenceStatModifiersEffect : StatModifiersChangeEffect
@@ -110,24 +114,27 @@ namespace PokemonBattele
             : base(probability, num, isAdd)
         {
         }
-        public override void UseSkillSpecialEffect(BattlePokemonData pokemon)
+
+        public override void Effect(BattlePokemonData pokemon)
         {
-            if (RandomService.game.Int(0, 100) < probability)
+            if (isAdd)
             {
-                if (isAdd)
-                {
-                    pokemon.StatModifiers.EnergyDefence += ChangeNum;
-                    Debug.Log(pokemon.Ename + "特防上升" + ChangeNum + System.DateTime.Now);
-                }
-                   
-                else
-                {
-                    pokemon.StatModifiers.EnergyDefence -= ChangeNum;
-                    Debug.Log(pokemon.Ename + "特防下降" + ChangeNum + System.DateTime.Now);
-                }
-                    
+                pokemon.StatModifiers.EnergyDefence += ChangeNum;
+
+                DebugHelper.LogFormat("{0}特防上升{1}", pokemon.Ename, ChangeNum);
+
+            }
+
+            else
+            {
+                pokemon.StatModifiers.EnergyDefence -= ChangeNum;
+
+                DebugHelper.LogFormat("{0}特防下降{1}", pokemon.Ename, ChangeNum);
+
             }
         }
+
+
     }
 
     class ChangeCriticalHitModifiersEffect : StatModifiersChangeEffect
@@ -137,24 +144,26 @@ namespace PokemonBattele
         {
         }
 
-        public override void UseSkillSpecialEffect(BattlePokemonData pokemon)
+        public override void Effect(BattlePokemonData pokemon)
         {
-            if (RandomService.game.Int(0, 100) < probability)
+            if (isAdd)
             {
-                if (isAdd)
-                {
-                    pokemon.StatModifiers.CriticalHit += 1;
-                    Debug.Log(pokemon.Ename + "击中要害概率上升" + ChangeNum + System.DateTime.Now);
-                }
+                pokemon.StatModifiers.CriticalHit += 1;
 
-                else
-                {
-                    pokemon.StatModifiers.CriticalHit -= 1;
-                    Debug.Log(pokemon.Ename + "击中要害概率下降" + ChangeNum + System.DateTime.Now);
-                }
+                DebugHelper.LogFormat("{0}击中要害概率上升{1}", pokemon.Ename, ChangeNum);
+
+            }
+
+            else
+            {
+                pokemon.StatModifiers.CriticalHit -= 1;
+
+                DebugHelper.LogFormat("{0}击中要害概率下降{1}", pokemon.Ename, ChangeNum);
 
             }
         }
+
+
     }
 
     class ChangeSpeedStatModifiersEffect : StatModifiersChangeEffect
@@ -163,24 +172,26 @@ namespace PokemonBattele
             : base(probability, num, isAdd)
         {
         }
-        public override void UseSkillSpecialEffect(BattlePokemonData pokemon)
+
+        public override void Effect(BattlePokemonData pokemon)
         {
-            if (RandomService.game.Int(0, 100) < probability)
+            if (isAdd)
             {
-                if (isAdd)
-                {
-                    pokemon.StatModifiers.Speed += ChangeNum;
-                    Debug.Log(pokemon.Ename + "速度上升" + ChangeNum + System.DateTime.Now);
-                }
-                    
-                else
-                {
-                    pokemon.StatModifiers.Speed -= ChangeNum;
-                    Debug.Log(pokemon.Ename + "速度下降" + ChangeNum + System.DateTime.Now);
-                }
-                    
+                pokemon.StatModifiers.Speed += ChangeNum;
+
+                DebugHelper.LogFormat("{0}速度上升{1}", pokemon.Ename, ChangeNum);
+
+            }
+
+            else
+            {
+                pokemon.StatModifiers.Speed -= ChangeNum;
+
+                DebugHelper.LogFormat("{0}速度下降{1}", pokemon.Ename, ChangeNum);
+
             }
         }
+
     }
 
     class ChangeHitRateStatModifiersEffect : StatModifiersChangeEffect
@@ -189,24 +200,26 @@ namespace PokemonBattele
             : base(probability, num, isAdd)
         {
         }
-        public override void UseSkillSpecialEffect(BattlePokemonData pokemon)
-        {
-            if (RandomService.game.Int(0, 100) < probability)
-            {
-                if (isAdd)
-                {
-                    pokemon.StatModifiers.HitRate += ChangeNum;
-                    Debug.Log(pokemon.Ename + "命中率上升" + ChangeNum + System.DateTime.Now);
-                }
 
-                else
-                {
-                    pokemon.StatModifiers.HitRate -= ChangeNum;
-                    Debug.Log(pokemon.Ename + "命中率下降" + ChangeNum + System.DateTime.Now);
-                }
+        public override void Effect(BattlePokemonData pokemon)
+        {
+            if (isAdd)
+            {
+                pokemon.StatModifiers.HitRate += ChangeNum;
+
+                DebugHelper.LogFormat("{0}命中率上升{1}", pokemon.Ename, ChangeNum);
+
+            }
+
+            else
+            {
+                pokemon.StatModifiers.HitRate -= ChangeNum;
+
+                DebugHelper.LogFormat("{0}命中率下降{1}", pokemon.Ename, ChangeNum);
 
             }
         }
+
     }
 
     class ChangeAvoidanceRateStatModifiersEffect : StatModifiersChangeEffect
@@ -215,24 +228,27 @@ namespace PokemonBattele
             : base(probability, num, isAdd)
         {
         }
-        public override void UseSkillSpecialEffect(BattlePokemonData pokemon)
-        {
-            if (RandomService.game.Int(0, 100) < probability)
-            {
-                if (isAdd)
-                {
-                    pokemon.StatModifiers.AvoidanceRate += ChangeNum;
-                    Debug.Log(pokemon.Ename + "回避率上升" + ChangeNum + System.DateTime.Now);
-                }
 
-                else
-                {
-                    pokemon.StatModifiers.AvoidanceRate -= ChangeNum;
-                    Debug.Log(pokemon.Ename + "回避率下降" + ChangeNum + System.DateTime.Now);
-                }
+        public override void Effect(BattlePokemonData pokemon)
+        {
+            if (isAdd)
+            {
+                pokemon.StatModifiers.AvoidanceRate += ChangeNum;
+
+                DebugHelper.LogFormat("{0}回避率上升{1}", pokemon.Ename, ChangeNum);
+
+            }
+
+            else
+            {
+                pokemon.StatModifiers.AvoidanceRate -= ChangeNum;
+
+                DebugHelper.LogFormat("{0}回避率下降{1}", pokemon.Ename, ChangeNum);
 
             }
         }
+
+
     }
 
     class SetPhysicPowerStatModifiersEffect : StatModifiersSetEffect
@@ -241,14 +257,15 @@ namespace PokemonBattele
             : base(probability, num)
         {
         }
-        public override void UseSkillSpecialEffect(BattlePokemonData pokemon)
+
+        public override void Effect(BattlePokemonData pokemon)
         {
-            if (RandomService.game.Int(0, 100) < probability)
-            {
-                pokemon.StatModifiers.PhysicPower = value;
-                Debug.Log(pokemon.Ename + "物攻等级变更为" + value + System.DateTime.Now);
-            }
+            pokemon.StatModifiers.PhysicPower = value;
+
+            DebugHelper.LogFormat("{0}物攻等级变更为{1}", pokemon.Ename, value);
+
         }
+
     }
     class SetPhysicDefenceStatModifiersEffect : StatModifiersSetEffect
     {
@@ -256,14 +273,15 @@ namespace PokemonBattele
             : base(probability, num)
         {
         }
-        public override void UseSkillSpecialEffect(BattlePokemonData pokemon)
+
+        public override void Effect(BattlePokemonData pokemon)
         {
-            if (RandomService.game.Int(0, 100) < probability)
-            {
-                pokemon.StatModifiers.PhysicDefence = value;
-                Debug.Log(pokemon.Ename + "物防等级变更为" + value + System.DateTime.Now);
-            }
+            pokemon.StatModifiers.PhysicDefence = value;
+
+            DebugHelper.LogFormat("{0}物防等级变更为{1}", pokemon.Ename, value);
+
         }
+
     }
 
     class SetEnergyPowerStatModifiersEffect : StatModifiersSetEffect
@@ -272,14 +290,16 @@ namespace PokemonBattele
             : base(probability, num)
         {
         }
-        public override void UseSkillSpecialEffect(BattlePokemonData pokemon)
+
+        public override void Effect(BattlePokemonData pokemon)
         {
-            if (RandomService.game.Int(0, 100) < probability)
-            {
-                pokemon.StatModifiers.EnergyPower = value;
-                Debug.Log(pokemon.Ename + "特攻等级变更为" + value + System.DateTime.Now);
-            }
+            pokemon.StatModifiers.EnergyPower = value;
+
+            DebugHelper.LogFormat("{0}特攻等级变更为{1}", pokemon.Ename, value);
+
         }
+
+
     }
     class SetEnergyDefenceStatModifiersEffect : StatModifiersSetEffect
     {
@@ -287,14 +307,15 @@ namespace PokemonBattele
             : base(probability, num)
         {
         }
-        public override void UseSkillSpecialEffect(BattlePokemonData pokemon)
+
+        public override void Effect(BattlePokemonData pokemon)
         {
-            if (RandomService.game.Int(0, 100) < probability)
-            {
-                pokemon.StatModifiers.EnergyDefence = value;
-                Debug.Log(pokemon.Ename + "特防等级变更为" + value + System.DateTime.Now);
-            }
+            pokemon.StatModifiers.EnergyDefence = value;
+
+            DebugHelper.LogFormat("{0}特防等级变更为{1}", pokemon.Ename, value);
+ 
         }
+
     }
 
     class SetSpeedStatModifiersEffect : StatModifiersSetEffect
@@ -303,13 +324,15 @@ namespace PokemonBattele
             : base(probability, num)
         {
         }
-        public override void UseSkillSpecialEffect(BattlePokemonData pokemon)
+
+        public override void Effect(BattlePokemonData pokemon)
         {
-            if (RandomService.game.Int(0, 100) < probability)
-            {
-                pokemon.StatModifiers.Speed = value;
-                Debug.Log(pokemon.Ename + "速度等级变更为" + value + System.DateTime.Now);
-            }
+            pokemon.StatModifiers.Speed = value;
+
+            DebugHelper.LogFormat("{0}速度等级变更为{1}", pokemon.Ename, value);
+          
         }
+
+
     }
 }

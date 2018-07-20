@@ -81,13 +81,17 @@ namespace PokemonBattele
 
         //技能提升攻击要害率
         public int CriticalHitC;
+
+        //是否需要蓄力
+        public bool needPowerStorage;
     }
 
     public enum SkillType
     {
         物理,
         特殊,
-        变化
+        变化,
+        NULL
     }
 
     

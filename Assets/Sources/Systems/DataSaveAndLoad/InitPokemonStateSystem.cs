@@ -19,5 +19,13 @@ class InitPokemonStateSystem : IInitializeSystem
 
         ChangeStateForPokemon.ChangeStateForPokemons[ChangeStateEnumForPokemon.Confusion]
             = new ConfusionState();
+        ChangeStateForPokemon.ChangeStateForPokemons[ChangeStateEnumForPokemon.Flinch]
+           = new FlinchState();
+        ChangeStateForPokemon.ChangeStateForPokemons[ChangeStateEnumForPokemon.RockWrecker]
+           = new RockWreckerState(true);
+        ChangeStateForPokemon.ChangeStateForPokemons[ChangeStateEnumForPokemon.CanNotEscape]
+           = new CanNotEscapeState();
+        ChangeStateForPokemon.ChangeStateForPokemons[ChangeStateEnumForPokemon.WaitNextAround]
+          = new WaitNextAroundState(true);
     }
 }

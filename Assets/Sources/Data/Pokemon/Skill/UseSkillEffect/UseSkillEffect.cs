@@ -22,6 +22,14 @@ namespace PokemonBattele
         {
             this.probability = probability;
         }
-        public abstract void UseSkillSpecialEffect(BattlePokemonData pokemon);
+        public virtual void UseSkillSpecialEffect(BattlePokemonData pokemon)
+        {
+            if (RandomService.game.Int(0, 100) < probability)
+                Effect(pokemon);
+            else if(-1 == probability)
+                Effect(pokemon);
+        }
+
+        public abstract void Effect(BattlePokemonData pokemon);
     }
 }

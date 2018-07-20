@@ -29,6 +29,8 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
     public readonly float BattleInterval = 1f;
     private string PlayerChooseBagItemName = "", EnemyChooseBagItemName = "";
 
+    public int FirstHand = -1;
+
     private void Start()
     {
         context = Contexts.sharedInstance.game;
@@ -206,8 +208,16 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
 
     private void ExchangePokemon(Notification<int> notific)
     {
-        
-        BattlePokemonData newCallPokemon = playPokemons[notific.param];
+        if(PlayerCurPokemonData.ChangeStateForPokemonEnums.Contains(ChangeStateEnumForPokemon.CanNotEscape))
+        {
+            //不允许逃脱
+            DebugHelper.LogFormat("当前精灵{0}处于逃脱状态，不允许替换精灵", PlayerCurPokemonData.Ename);
+
+            return;
+        }
+
+
+        BattlePokemonData newCallPokemon = playPokemons[notific.param];       
         ExchangePokemon(newCallPokemon);
         UpdateBattleState();
     }
@@ -243,8 +253,7 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
 
         //控制精灵和训练家朝向
         playerPokemon.transform.LookAt(EnemyCurPokemonData.transform);
-
-        
+ 
     }
     /// <summary>
     /// 更新战斗状态
@@ -284,12 +293,14 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
         //互相攻击
         if(PlayerCurPokemonData.Speed>EnemyCurPokemonData.Speed)
         {
+            FirstHand = PlayerCurPokemonData.ID;
             PlayerBattleAround();
             StartCoroutine(WaitEnemySkillUse());
 
         }
         else
         {
+            FirstHand = EnemyCurPokemonData.ID;
             EnemyBattleAround();
             StartCoroutine(WaitPlayerSkillUse());
 
@@ -322,12 +333,24 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
         if (CanBattle)
         {
             DebugHelper.Log("我方开始了行动");
-  
+            PlayerCurPokemonData.ChooseSkillType = SkillType.NULL;
+
+            if (NeedReplaceSKill.context.ContainsKey(PlayerCurPokemonData.ID))
+            {
+                PlayChooseSkillID = NeedReplaceSKill.context[PlayerCurPokemonData.ID];
+            }
+
             if (ResourceController.Instance.allSkillDic.ContainsKey(PlayChooseSkillID))
             {
+                
+
                 Skill PlayerSkill = ResourceController.Instance.allSkillDic[PlayChooseSkillID];
                 if (null != PlayerSkill)
+                {
+                    PlayerCurPokemonData.ChooseSkillType = PlayerSkill.type;
                     UseSkill.Attack(PlayerSkill, PlayerCurPokemonData, EnemyCurPokemonData);
+                }
+                    
             }
             
             if(ResourceController.Instance.UseBagUItemDict.ContainsKey(PlayerChooseBagItemName))
@@ -346,12 +369,23 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
         if (CanBattle)
         {
             DebugHelper.Log("敌方开始了行动");
+            EnemyCurPokemonData.ChooseSkillType = SkillType.NULL;
 
+            if(NeedReplaceSKill.context.ContainsKey(EnemyCurPokemonData.ID))
+            {
+                EnemyChooseSkillID = NeedReplaceSKill.context[EnemyCurPokemonData.ID];
+            }
             if (ResourceController.Instance.allSkillDic.ContainsKey(EnemyChooseSkillID))
             {
+                
+
                 Skill EnemySkill = ResourceController.Instance.allSkillDic[EnemyChooseSkillID];
                 if (null != EnemySkill)
+                {
+                    EnemyCurPokemonData.ChooseSkillType = EnemySkill.type;
                     UseSkill.Attack(EnemySkill, EnemyCurPokemonData, PlayerCurPokemonData);
+                }
+                    
             }
 
             if (ResourceController.Instance.UseBagUItemDict.ContainsKey(EnemyChooseBagItemName))
@@ -383,13 +417,13 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
         PlayerCurPokemonData.StateForAbnormal.UpdateInPlayerAround(PlayerCurPokemonData);
         EnemyCurPokemonData.StateForAbnormal.UpdateInPlayerAround(EnemyCurPokemonData);
         int cout = PlayerCurPokemonData.ChangeStateForPokemonEnums.Count;
-        for(int i =0;i<cout;++i)
+        for(int i = cout-1; i>=0;--i)
         {
             var state = PlayerCurPokemonData.ChangeStateForPokemonEnums[i];
             ChangeStateForPokemon.ChangeStateForPokemons[state].UpdateInPlayerAround(PlayerCurPokemonData);
         }
         cout = EnemyCurPokemonData.ChangeStateForPokemonEnums.Count;
-        for (int i = 0; i < cout; ++i)
+        for (int i = cout - 1; i >= 0; --i)
         {
             var state = EnemyCurPokemonData.ChangeStateForPokemonEnums[i];
             ChangeStateForPokemon.ChangeStateForPokemons[state].UpdateInPlayerAround(PlayerCurPokemonData);

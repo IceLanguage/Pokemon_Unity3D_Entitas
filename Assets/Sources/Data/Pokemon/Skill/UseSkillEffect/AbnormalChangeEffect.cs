@@ -14,12 +14,10 @@ namespace PokemonBattele
         {
 
         }
-        public override void UseSkillSpecialEffect(BattlePokemonData pokemon)
+
+        public override void Effect(BattlePokemonData pokemon)
         {
-            if(RandomService.game.Int(0,100)< probability)
-            {
-                pokemon.SetAbnormalStateEnum(AbnormalStateEnum.Paralysis);
-            }
+            pokemon.SetAbnormalStateEnum(AbnormalStateEnum.Paralysis);
         }
     }
 
@@ -29,13 +27,13 @@ namespace PokemonBattele
         {
 
         }
-        public override void UseSkillSpecialEffect(BattlePokemonData pokemon)
+
+        public override void Effect(BattlePokemonData pokemon)
         {
-            if (RandomService.game.Int(0, 100) < probability)
-            {
-                pokemon.SetAbnormalStateEnum(AbnormalStateEnum.Burns);
-            }
+            pokemon.SetAbnormalStateEnum(AbnormalStateEnum.Burns);
         }
+
+
     }
 
     class FrostbiteEffect : UseSkillEffectWithProbability
@@ -44,13 +42,13 @@ namespace PokemonBattele
         {
 
         }
-        public override void UseSkillSpecialEffect(BattlePokemonData pokemon)
+
+        public override void Effect(BattlePokemonData pokemon)
         {
-            if (RandomService.game.Int(0, 100) < probability)
-            {
-                pokemon.SetAbnormalStateEnum(AbnormalStateEnum.Frostbite);
-            }
+            pokemon.SetAbnormalStateEnum(AbnormalStateEnum.Frostbite);
         }
+
+
     }
 
     class PoisonEffect : UseSkillEffectWithProbability
@@ -59,13 +57,13 @@ namespace PokemonBattele
         {
 
         }
-        public override void UseSkillSpecialEffect(BattlePokemonData pokemon)
+
+        public override void Effect(BattlePokemonData pokemon)
         {
-            if (RandomService.game.Int(0, 100) < probability)
-            {
-                pokemon.SetAbnormalStateEnum(AbnormalStateEnum.Poisoning);
-            }
+            pokemon.SetAbnormalStateEnum(AbnormalStateEnum.Poisoning);
         }
+
+
     }
 
     class VeryToxicEffect : UseSkillEffectWithProbability
@@ -74,13 +72,13 @@ namespace PokemonBattele
         {
 
         }
-        public override void UseSkillSpecialEffect(BattlePokemonData pokemon)
+
+        public override void Effect(BattlePokemonData pokemon)
         {
-            if (RandomService.game.Int(0, 100) < probability)
-            {
-                pokemon.SetAbnormalStateEnum(AbnormalStateEnum.BadlyPoison);
-            }
+            pokemon.SetAbnormalStateEnum(AbnormalStateEnum.BadlyPoison);
         }
+
+
     }
 
     class SleepEffect : UseSkillEffectWithProbability
@@ -89,12 +87,11 @@ namespace PokemonBattele
         {
 
         }
-        public override void UseSkillSpecialEffect(BattlePokemonData pokemon)
+
+        public override void Effect(BattlePokemonData pokemon)
         {
-            if (RandomService.game.Int(0, 100) < probability)
-            {
-                pokemon.SetAbnormalStateEnum(AbnormalStateEnum.Sleeping);
-            }
+            pokemon.SetAbnormalStateEnum(AbnormalStateEnum.Sleeping);
         }
+
     }
 }

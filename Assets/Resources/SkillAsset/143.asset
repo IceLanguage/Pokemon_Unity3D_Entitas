@@ -19,3 +19,6 @@ MonoBehaviour:
   fullPP: 5
   att: 3
   effect: {fileID: 11400000, guid: c55ac5877f592664897802af1fd68a47, type: 2}
+  isUseForSelf: 0
+  CriticalHitC: 1
+  needPowerStorage: 1

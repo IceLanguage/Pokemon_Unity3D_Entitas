@@ -21,16 +21,13 @@ namespace PokemonBattele
 
         }
 
-        public override void UseSkillSpecialEffect(BattlePokemonData pokemon)
+        public override void Effect(BattlePokemonData pokemon)
         {
-            if (RandomService.game.Int(0, 100) < probability)
-            {
-                float scale = recoverValue / 100f;
-                pokemon.curHealth += (int)(pokemon.Health * scale);
-                if (pokemon.curHealth > pokemon.Health)
-                    pokemon.curHealth = pokemon.Health;
-            }
-            
+            float scale = recoverValue / 100f;
+            pokemon.curHealth += (int)(pokemon.Health * scale);
+            if (pokemon.curHealth > pokemon.Health)
+                pokemon.curHealth = pokemon.Health;
         }
+
     }
 }
