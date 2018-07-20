@@ -403,14 +403,14 @@ public class ReadPokemonConfig :Editor
         NatureType natureType;
         Base6 upBase;
         Base6 downBase;
-        string natureName;
+
         for (int n = worksheet.Dimension.End.Row; row <= n; row++)
         {
             EditorUtility.DisplayCancelableProgressBar("读取精灵性格数据", (row - 1) + "/" + (n - 1), (float)row / (n - 1));
 
             try
             {
-                natureName = cells[row, 1].Value.ToString();
+                string natureName = cells[row, 1].Value.ToString();
                 natureType = (NatureType)Enum.Parse(typeof(NatureType), cells[row, 1].Value.ToString());
                 if (cells[row, 4].Value.ToString() == "—" || cells[row, 4].Value.ToString() == "—")
                 {

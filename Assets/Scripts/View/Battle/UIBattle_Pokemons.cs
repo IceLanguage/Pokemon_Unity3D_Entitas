@@ -295,11 +295,18 @@ public class UIBattle_Pokemons : TTUIPage
             else
             {
                 ShowUI(AbnormalStateEnum_list[i].gameObject);
-                AbnormalStateEnum_list[i].sprite =
+                if(pokemonData.curHealth>0)
+                    AbnormalStateEnum_list[i].sprite =
                     Resources.Load<Sprite>(
                         new StringBuilder(20)
                             .AppendFormat("UIPrefab/AbnormalStateEnum/{0}",
                             pokemonData.Abnormal).ToString());
+                else
+                    AbnormalStateEnum_list[i].sprite =
+                    Resources.Load<Sprite>(
+                        new StringBuilder(20)
+                            .AppendFormat("UIPrefab/AbnormalStateEnum/{0}",
+                            "death").ToString());
             }
 
             ShowUI(PokemonUIGameObjects[i]);

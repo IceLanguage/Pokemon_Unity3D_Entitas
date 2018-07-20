@@ -16,7 +16,6 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
 
     private List<BattlePokemonData> wildPokemons = new List<BattlePokemonData>();
     public List<BattlePokemonData> playPokemons = new List<BattlePokemonData>();
-    //private List<GameObject> BattlePokemonsGameObejcts = new List<GameObject>();
     public BattlePokemonData PlayerCurPokemonData { get; private set; }
     public BattlePokemonData EnemyCurPokemonData { get; private set; }
 
@@ -170,7 +169,7 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
         PlayerCurPokemonData = null;
         EnemyCurPokemonData = null;
         battleState = null;
-        Debug.Log("战斗结束");
+        
     }
 
     /// <summary>
@@ -187,6 +186,7 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
             return;
         }
         PlayChooseSkillID = skillID;
+        DebugHelper.LogFormat("你选择使用了技能{0}",ResourceController.Instance.allSkillDic[PlayChooseSkillID].sname);
         UpdateBattleState();
         
 
@@ -214,10 +214,8 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
 
     private void ExchangePokemon(BattlePokemonData newCallPokemon)
     {
-        Debug.Log(new StringBuilder(40)
-                            .AppendFormat("我方玩家将精灵{0}替换成了{1} {2}",
-                            PlayerCurPokemonData.Ename,newCallPokemon.Ename, System.DateTime.Now)
-                            .ToString());
+
+        DebugHelper.LogFormat("我方玩家将精灵{0}替换成了{1}", PlayerCurPokemonData.Ename, newCallPokemon.Ename);
 
         //回收精灵GameObject
         PlayerCurPokemonData.transform.gameObject.SetActive(false);
@@ -268,7 +266,8 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
     /// </summary>
     private void PlayerRound()
     {
-        Debug.Log("开始进入准备回合");
+        DebugHelper.Log("开始进入准备回合");
+
         EnemyAction();
     }
 
@@ -280,7 +279,8 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
 
         
         if (!CanBattle) return;
-        Debug.Log("开始进入对战回合");
+        DebugHelper.Log("开始进入对战回合");
+
         //互相攻击
         if(PlayerCurPokemonData.Speed>EnemyCurPokemonData.Speed)
         {
@@ -321,7 +321,8 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
         
         if (CanBattle)
         {
-            Debug.Log("我方开始了行动");
+            DebugHelper.Log("我方开始了行动");
+  
             if (ResourceController.Instance.allSkillDic.ContainsKey(PlayChooseSkillID))
             {
                 Skill PlayerSkill = ResourceController.Instance.allSkillDic[PlayChooseSkillID];
@@ -344,7 +345,8 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
     {
         if (CanBattle)
         {
-            Debug.Log("敌方开始了行动");
+            DebugHelper.Log("敌方开始了行动");
+
             if (ResourceController.Instance.allSkillDic.ContainsKey(EnemyChooseSkillID))
             {
                 Skill EnemySkill = ResourceController.Instance.allSkillDic[EnemyChooseSkillID];
@@ -380,16 +382,19 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
 
         PlayerCurPokemonData.StateForAbnormal.UpdateInPlayerAround(PlayerCurPokemonData);
         EnemyCurPokemonData.StateForAbnormal.UpdateInPlayerAround(EnemyCurPokemonData);
-        foreach (var state in PlayerCurPokemonData.ChangeStateForPokemonEnums)
+        int cout = PlayerCurPokemonData.ChangeStateForPokemonEnums.Count;
+        for(int i =0;i<cout;++i)
         {
+            var state = PlayerCurPokemonData.ChangeStateForPokemonEnums[i];
             ChangeStateForPokemon.ChangeStateForPokemons[state].UpdateInPlayerAround(PlayerCurPokemonData);
-
         }
-        foreach (var state in EnemyCurPokemonData.ChangeStateForPokemonEnums)
+        cout = EnemyCurPokemonData.ChangeStateForPokemonEnums.Count;
+        for (int i = 0; i < cout; ++i)
         {
-            ChangeStateForPokemon.ChangeStateForPokemons[state].UpdateInPlayerAround(EnemyCurPokemonData);
-
+            var state = EnemyCurPokemonData.ChangeStateForPokemonEnums[i];
+            ChangeStateForPokemon.ChangeStateForPokemons[state].UpdateInPlayerAround(PlayerCurPokemonData);
         }
+
         UpdatePokemonDatas();
 
         EnemyChooseSkillID = -1;
@@ -407,7 +412,11 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
     private void EnemyAction()
     {
         int index = RandomService.game.Int(0, EnemyCurPokemonData.skills.Count);
+        
         EnemyChooseSkillID = EnemyCurPokemonData.skills[index];
+        DebugHelper.LogFormat("野外的精灵{0}选择使用了技能{1}",
+            EnemyCurPokemonData.Ename,
+            ResourceController.Instance.allSkillDic[EnemyChooseSkillID].sname);
     }
 
     /// <summary>
@@ -420,9 +429,8 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
         if (!CanBattle) return;
         if(hashcode == PlayerCurPokemonData.ID)
         {
-            Debug.Log(new StringBuilder(20)
-                .AppendFormat("我方精灵{0}不能继续作战了", PlayerCurPokemonData.Ename)
-                .ToString());
+            DebugHelper.LogFormat("我方精灵{0}不能继续作战了", PlayerCurPokemonData.Ename);
+
 
             BattlePokemonData newCallPokemon = null;
             foreach (BattlePokemonData pokemon in playPokemons)
@@ -451,9 +459,7 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
         }
         else if(hashcode == EnemyCurPokemonData.ID)
         {
-            Debug.Log(new StringBuilder(20)
-                .AppendFormat("敌方精灵{0}不能继续作战了", EnemyCurPokemonData.Ename)
-                .ToString());
+            DebugHelper.LogFormat("敌方精灵{0}不能继续作战了", EnemyCurPokemonData.Ename);
             EnemyCurPokemonData = null;
             StartCoroutine(WaitBattleEnd());
         }
@@ -461,6 +467,13 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
 
     private IEnumerator WaitBattleEnd()
     {
+        string winer = "敌方";
+        if(null == EnemyCurPokemonData)
+        {
+            winer = "我方";
+        }
+        DebugHelper.LogFormat("战斗结束，{0}取得了胜利",winer);
+
         TTUIPage.ShowPage<UIBattleResult>();
         yield return new WaitForSeconds(BattleTime+0.5f);
         context.isBattleFlag = false;

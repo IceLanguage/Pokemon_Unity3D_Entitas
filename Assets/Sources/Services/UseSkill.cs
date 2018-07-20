@@ -80,9 +80,10 @@ namespace PokemonBattele
 				}
 
 			}
-			
-			if(IsSkillUseSuccess())
+			DebugHelper.LogFormat("{0}尝试使用技能{1}攻击{2}", attackPokemon.Ename, skill.sname, defencePokemon.Ename);
+			if (IsSkillUseSuccess())
 			{
+				DebugHelper.LogFormat("{0}成功使用技能{1}攻击{2}", attackPokemon.Ename, skill.sname, defencePokemon.Ename);
 				ShowSkillUI();
 
 				UseSkillEffect();
@@ -92,10 +93,8 @@ namespace PokemonBattele
 				{
 					if (IsIngnore())
 					{
-						Debug.Log(new StringBuilder(40)
-							.AppendFormat("{0}的技能{1}对{2}没有效果 {3}",
-							attackPokemon.Ename, skill.sname,defencePokemon.Ename, System.DateTime.Now)
-							.ToString());
+						DebugHelper.LogFormat("{0}的技能{1}对{2}没有效果", attackPokemon.Ename, skill.sname, defencePokemon.Ename);
+
 						return;
 					}
 					
@@ -109,16 +108,16 @@ namespace PokemonBattele
 					}
 					if (PokemonType.火 == skill.att && AbnormalStateEnum.Frostbite == defencePokemon.Abnormal)
 					{
+						DebugHelper.LogFormat("{0}的烧伤状态因为{1}的冰属性技能{2}解除了", defencePokemon.Ename, attackPokemon.Ename, skill.sname);
 						defencePokemon.SetAbnormalStateEnum(AbnormalStateEnum.Normal);
 					}
 				}
 				else
 				{
 					ShowSkillMissUI();
-					Debug.Log(new StringBuilder(40)
-							.AppendFormat("{0}的技能{1}没有命中{2} {3}",
-							attackPokemon.Ename, skill.sname, defencePokemon.Ename, System.DateTime.Now)
-							.ToString());
+
+					DebugHelper.LogFormat("{0}的技能{1}没有命中{2}", attackPokemon.Ename, skill.sname, defencePokemon.Ename);
+
 				}
 
 			}           
@@ -167,10 +166,9 @@ namespace PokemonBattele
 			if (B > 6) B = 6;
 			if (B < -6) B = -6;
 			int P = A * StatModifiers.ActualCorrection[B]/100;
-			Debug.Log(new StringBuilder(40)
-							.AppendFormat("{0}的技能{1}的命中率为{2} {3}",
-							attackPokemon.Ename, skill.sname, P / 255f, System.DateTime.Now)
-							.ToString());
+
+			DebugHelper.LogFormat("{0}的技能{1}的命中率为{2}", attackPokemon.Ename, skill.sname, P / 255f);
+
 			return RandomService.game.Int(0, 255) <= P;
 		}
 		/// <summary>
@@ -179,7 +177,9 @@ namespace PokemonBattele
 		private void UseSkillDamage()
 		{
 			int damage = PokemonCalculation.CalDamage(attackPokemon, defencePokemon, skill);
-			
+
+			DebugHelper.LogFormat("{0}的技能{1}对{2}造成{3}伤害", attackPokemon.Ename, skill.sname,defencePokemon.Ename, damage);
+
 			defencePokemon.curHealth -= damage;
 			if (defencePokemon.curHealth < 0)
 				defencePokemon.curHealth = 0;

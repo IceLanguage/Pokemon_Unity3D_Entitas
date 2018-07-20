@@ -132,7 +132,7 @@ namespace PokemonBattele
             }
         }
         //种族
-        public int raceID = 1;
+        public int raceID;
         private Race race;
 
         /// <summary>

@@ -12,7 +12,7 @@ class CheckPlayerInGrassSystem : IExecuteSystem
     private readonly Transform player;
     private List<Vector3> GrassPosList = new List<Vector3>();
     private Rigidbody PlayerRigidbody;
-    private const float EncounterPokemonProbability = 0.3f;
+    private const float EncounterPokemonProbability = 0.2f;
     public CheckPlayerInGrassSystem(Contexts contexts,Transform player)
     {
         context = contexts.game;
@@ -103,6 +103,7 @@ class CheckPlayerInGrassSystem : IExecuteSystem
                 int PokemonID = PokemonFactory.GetPokemonFromEncounterPokemonScriptableObject(GrassPokemons);
                 Pokemon pokemom = PokemonFactory.BuildPokemon(PokemonID);
                 BattleController.Instance.InitWildPokemon(pokemom);
+                DebugHelper.LogFormat("你在草地遭遇了精灵{0}", pokemom.ename);
                 context.isBattleFlag = true;
             }
         }

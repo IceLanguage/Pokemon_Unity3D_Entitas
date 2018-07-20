@@ -45,16 +45,16 @@ namespace PokemonBattele
             bool flag = RandomService.game.Int(0, 3) >= 1;
             if (!flag)
             {
-                Debug.Log(new StringBuilder(30)
-              .AppendFormat("{0}混乱了进攻失败，并对自己造成了伤害 {1}",
-                  pokemon.Ename, System.DateTime.Now)
-              .ToString());
+
+                DebugHelper.LogFormat("{0}混乱了进攻失败，并对自己造成了伤害", pokemon.Ename);
+
 
                 int damage = PokemonCalculation.CalDamage(pokemon, pokemon, DefaultSkill);
                 pokemon.curHealth -= damage;
                 if (pokemon.curHealth < 0)
                     pokemon.curHealth = 0;
             }
+            
             return flag;
         }
 
@@ -65,16 +65,22 @@ namespace PokemonBattele
 
         public override void LoseState(BattlePokemonData pokemon)
         {
+            DebugHelper.LogFormat("{0}混乱状态解除", pokemon.Ename);
             count.Remove(pokemon.ID);
             pokemon.ChangeStateForPokemonEnums.Remove(ChangeStateEnumForPokemon.Confusion);
         }
 
         public override void UpdateInPlayerAround(BattlePokemonData pokemon)
         {
+
             if (0 == --count[pokemon.ID])
             {
                 LoseState(pokemon);
 
+            }
+            else
+            {
+                DebugHelper.LogFormat("{0}还需要{1}回合解除混乱状态", pokemon.Ename, count[pokemon.ID]);
             }
         }
     }

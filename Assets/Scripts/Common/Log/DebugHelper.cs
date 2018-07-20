@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using System.Text;
 
 public static class DebugHelper 
 {
     static Queue<LogItem> m_vLogs;
     static FileInfo m_logFileInfo;
-    static bool m_isInited;
+    static bool m_isInited = false;
 
     //static DebugHelper()
     //{
@@ -16,7 +17,7 @@ public static class DebugHelper
 
    public static void FixedUpdate()
     {
-        if (m_isInited)
+        if (!m_isInited)
         {
             return;
         }
@@ -32,7 +33,7 @@ public static class DebugHelper
         m_isInited = true;
         // 创建文件
         DateTime timeNow = DateTime.Now;
-        string path = Application.persistentDataPath + "/GameLog" + timeNow.ToString("yyyyMMddHHmmss") + ".txt";
+        string path = Application.persistentDataPath + "/GameLog/" + timeNow.ToString("yyyyMMddHHmmss") + ".txt";
         m_logFileInfo = new FileInfo(path);
         var sw = m_logFileInfo.CreateText();
         sw.WriteLine("[{0}] - {1}", Application.productName, timeNow.ToString("yyyy/MM/dd HH:mm:ss"));
@@ -72,14 +73,28 @@ public static class DebugHelper
 
     private static void OnLogMessage(string condition, string stackTrace, LogType type)
     {
-        m_vLogs.Enqueue(new LogItem()
-        {
-            messageString = condition,
-            stackTrace = stackTrace,
-            logType = type,
-            time = DateTime.Now
-        });
+        if(type == LogType.Log)
+            m_vLogs.Enqueue(new LogItem()
+            {
+                messageString = condition,
+                stackTrace = stackTrace,
+                logType = type,
+                time = DateTime.Now
+            });
     }
+
+    static public void Log(object message)
+    {
+        Debug.LogFormat("{1}\n[{0}]\n", System.DateTime.Now, message);
+    }
+
+    public static void LogFormat(string format, params object[] args)
+    {
+        format = new StringBuilder(100).AppendFormat("{1}\n[{0}]\n", System.DateTime.Now, format).ToString();
+        
+        Debug.LogFormat(format, args);
+    }
+
 }
 
 public struct LogItem

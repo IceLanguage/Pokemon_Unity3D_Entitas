@@ -4,9 +4,9 @@ using System;
 [Serializable]
 public class GrassPosConfig : ScriptableObject
 {
-    public List<float> GrassPosxList = new List<float>();
-    public List<float> GrassPosyList = new List<float>();
-    public List<float> GrassPoszList = new List<float>();
+    public List<float> GrassPosxList ;
+    public List<float> GrassPosyList;
+    public List<float> GrassPoszList ;
 
     public List<Vector3> GetGrassPos()
     {

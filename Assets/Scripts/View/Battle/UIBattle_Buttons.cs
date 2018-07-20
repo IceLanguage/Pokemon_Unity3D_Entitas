@@ -75,6 +75,7 @@ public class UIBattle_Buttons : TTUIPage {
 
     public void Run()
     {
+        DebugHelper.Log("你选择了逃跑，对方取得了战斗的胜利");
         Contexts.sharedInstance.game.isBattleFlag = false;
     }
 

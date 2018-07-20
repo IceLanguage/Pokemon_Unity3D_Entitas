@@ -5,6 +5,7 @@ using System.Text;
 using UnityEngine;
 using DG.Tweening;
 using MyUnityEventDispatcher;
+using System.Collections;
 
 namespace PokemonBattele
 {
@@ -13,6 +14,8 @@ namespace PokemonBattele
         public float CatachCorrection = 1;
         public override void Effect()
         {
+            DebugHelper.Log("你选择使用了精灵球");
+
             var pokemon = BattleController.Instance.EnemyCurPokemonData;
 
             //精灵球和精灵球特效
@@ -30,8 +33,9 @@ namespace PokemonBattele
                 this.CatachCorrection,
                 1
                 ,out shadeNum,out issuccess);
-            Debug.Log("捕捉精灵" + pokemon.Ename +
-                "振动" + shadeNum + "次" + issuccess);
+            DebugHelper.LogFormat("正在捕捉精灵{0}，精灵球振动了{1}次，最后捕捉{2}了",
+                pokemon.Ename, shadeNum,issuccess?"成功":"失败");
+     
 
             //精灵球振动
             //TODO
@@ -45,11 +49,8 @@ namespace PokemonBattele
                     
                     if(issuccess)
                     {
-                        //对战结束
-                        var context = Contexts.sharedInstance.game;
-                        var trainer = context.playerData.scriptableObject;
-                        trainer.pokemons.Add(pokemon.pokemon);
-                        context.ReplacePlayerData(trainer);
+                        //捕捉精灵
+                        LHCoroutine.CoroutineManager.DoCoroutine(CatachPokeomon(pokemon.pokemon));
 
                         //通知结束对战
                         NotificationCenter<int>.Get().DispatchEvent("CatchPokemon", 1);
@@ -64,6 +65,23 @@ namespace PokemonBattele
                 }
             );
 
+        }
+
+        IEnumerator CatachPokeomon(Pokemon pokemon)
+        {
+            
+            yield return new WaitWhile(IsBattleEnd);
+            var context = Contexts.sharedInstance.game;
+            var trainer = context.playerData.scriptableObject;
+            trainer.pokemons.Add(pokemon);
+            context.ReplacePlayerData(trainer);
+
+        }
+
+        private bool IsBattleEnd()
+
+        {
+            return !Contexts.sharedInstance.game.isBattleFlag;
         }
     }
 }

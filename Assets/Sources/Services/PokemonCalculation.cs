@@ -77,15 +77,17 @@ public static class PokemonCalculation
 
         if(typeInfos == 2f)
         {
-            Debug.Log(skill.sname+ "效果拔群" + System.DateTime.Now);
+            DebugHelper.LogFormat("{0}的{1}技能对{2}而言效果拔群", attackPokemon.Ename, skill.sname, defencePokemon.Ename);
+
         }
         else if (typeInfos == 4f)
         {
-            Debug.Log(skill.sname + "效果超群" + System.DateTime.Now);
+            DebugHelper.LogFormat("{0}的{1}技能对{2}而言效果超群", attackPokemon.Ename, skill.sname, defencePokemon.Ename);
         }
         else if(typeInfos<1f)
         {
-            Debug.Log(skill.sname + "效果不太理想" + typeInfos + System.DateTime.Now);
+            DebugHelper.LogFormat("{0}的{1}技能对{2}而言效果不太理想", attackPokemon.Ename, skill.sname, defencePokemon.Ename);
+
         }
 
         if (skill.att == attackPokemon.MainPokemonType ||
@@ -99,7 +101,11 @@ public static class PokemonCalculation
         float CriticalHitProbability = StatModifiers.criticalHit_C_To_B
             [attackPokemon.StatModifiers.CriticalHit + skill.CriticalHitC];
         if (RandomService.game.Float(0, 1) < CriticalHitProbability)
+        {
+            DebugHelper.LogFormat("{0}的{1}技能击中了要害", attackPokemon.Ename, skill.sname);
             resDamage *= 2;
+        }
+            
 
         return (int)resDamage;
     }

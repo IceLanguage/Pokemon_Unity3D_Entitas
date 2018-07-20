@@ -26,7 +26,7 @@ public class GrassPosConfigEditor:MonoBehaviour
 
 
         Handles.color = Color.red;
-        GUIStyle style = new GUIStyle();
+        //GUIStyle style = new GUIStyle();
 
         for (int i = 0; i < count; i++)
         {

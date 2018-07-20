@@ -36,11 +36,12 @@ namespace PokemonBattele
         public override void Init(BattlePokemonData pokemon)
         {
             AbnormalState.Abnormalstates[pokemon.Abnormal].LoseState(pokemon);
+            if(AbnormalStateEnum.Normal!=pokemon.Abnormal)
+                DebugHelper.LogFormat("{0}异常状态恢复了", pokemon.Ename);
             pokemon.Abnormal = AbnormalStateEnum.Normal;
-            Debug.Log(new StringBuilder(30)
-                .AppendFormat("{0}异常状态恢复了 {1}",
-                    pokemon.Ename , System.DateTime.Now)
-                .ToString());
+            
+            
+
         }
     }
 
@@ -50,10 +51,8 @@ namespace PokemonBattele
 
         public override void UpdateInPlayerAround(BattlePokemonData pokemon)
         {
-            Debug.Log(new StringBuilder(30)
-                .AppendFormat("{0}因为烧伤受到了伤害 {1}",
-                    pokemon.Ename, System.DateTime.Now)
-                .ToString());
+            DebugHelper.LogFormat("{0}因为烧伤受到了伤害", pokemon.Ename);
+
             pokemon.curHealth -= pokemon.Health / 16;
             if (pokemon.curHealth < 0)
                 pokemon.curHealth = 0;
@@ -62,6 +61,7 @@ namespace PokemonBattele
         public override void LoseState(BattlePokemonData pokemon)
         {
             pokemon.PhysicPower *= 2;
+            DebugHelper.LogFormat("{0}灼烧状态解除,物攻恢复了", pokemon.Ename);
         }
 
         public override void Init(BattlePokemonData pokemon)
@@ -79,10 +79,8 @@ namespace PokemonBattele
             {
                 AbnormalState.Abnormalstates[pokemon.Abnormal].LoseState(pokemon);
                 pokemon.Abnormal = AbnormalStateEnum.Burns;
-                Debug.Log(new StringBuilder(30)
-                .AppendFormat("{0}灼烧了 {1}",
-                    pokemon.Ename, System.DateTime.Now)
-                .ToString());
+                DebugHelper.LogFormat("{0}灼烧了,物攻降低了一半", pokemon.Ename);
+
                 pokemon.PhysicPower /= 2;
             }
 
@@ -99,14 +97,13 @@ namespace PokemonBattele
             bool isfalg = RandomService.game.Float(0, 5) < 1;
             if (isfalg)
             {
+                DebugHelper.LogFormat("{0}冰冻状态解除", pokemon.Ename);
                 pokemon.SetAbnormalStateEnum(AbnormalStateEnum.Normal);
             }
             else
             {
-                Debug.Log(new StringBuilder(30)
-               .AppendFormat("{0}冰冻了无法行动 {1}",
-                   pokemon.Ename, System.DateTime.Now)
-               .ToString());
+                DebugHelper.LogFormat("{0}冰冻了无法行动", pokemon.Ename);
+        
             }
             return isfalg;
         }
@@ -126,10 +123,8 @@ namespace PokemonBattele
             {
                 AbnormalState.Abnormalstates[pokemon.Abnormal].LoseState(pokemon);
                 pokemon.Abnormal = AbnormalStateEnum.Frostbite;
-                Debug.Log(new StringBuilder(30)
-               .AppendFormat("{0}冰冻了 {1}",
-                   pokemon.Ename, System.DateTime.Now)
-               .ToString());
+                DebugHelper.LogFormat("{0}冰冻了", pokemon.Ename);
+         
             }
 
         }
@@ -143,6 +138,7 @@ namespace PokemonBattele
 
         public override void LoseState(BattlePokemonData pokemon)
         {
+            DebugHelper.LogFormat("{0}麻痹状态解除，速度恢复了", pokemon.Ename);
             pokemon.Speed *= 2;
         }
 
@@ -151,10 +147,8 @@ namespace PokemonBattele
             bool flag = RandomService.game.Float(0, 4) < 1;
             if(!flag)
             {
-                Debug.Log(new StringBuilder(30)
-               .AppendFormat("{0}麻痹了无法行动 {1}",
-                   pokemon.Ename, System.DateTime.Now)
-               .ToString());
+                DebugHelper.LogFormat("{0}麻痹了无法行动", pokemon.Ename);
+               
             }
             return flag;
         }
@@ -174,10 +168,8 @@ namespace PokemonBattele
             {
                 AbnormalState.Abnormalstates[pokemon.Abnormal].LoseState(pokemon);
                 pokemon.Abnormal = AbnormalStateEnum.Paralysis;
-                Debug.Log(new StringBuilder(30)
-               .AppendFormat("{0}麻痹了 {1}",
-                   pokemon.Ename, System.DateTime.Now)
-               .ToString());
+                DebugHelper.LogFormat("{0}麻痹了，速度减半", pokemon.Ename);
+         
                 pokemon.Speed /= 2;
             }
         }
@@ -203,20 +195,20 @@ namespace PokemonBattele
             {
                 AbnormalState.Abnormalstates[pokemon.Abnormal].LoseState(pokemon);
                 pokemon.Abnormal = AbnormalStateEnum.Poisoning;
-                Debug.Log(new StringBuilder(30)
-               .AppendFormat("{0}中毒了 {1}",
-                   pokemon.Ename, System.DateTime.Now)
-               .ToString());
+                DebugHelper.LogFormat("{0}中毒了", pokemon.Ename);
+                
             }
         }
 
+        public override void LoseState(BattlePokemonData pokemon)
+        {
+            DebugHelper.LogFormat("{0}中毒状态解除", pokemon.Ename);
+        }
 
         public override void UpdateInPlayerAround(BattlePokemonData pokemon)
         {
-            Debug.Log(new StringBuilder(30)
-               .AppendFormat("{0}因为中毒受到了伤害 {1}",
-                   pokemon.Ename, System.DateTime.Now)
-               .ToString());
+            DebugHelper.LogFormat("{0}因为中毒受到了伤害 ", pokemon.Ename);
+            
             pokemon.curHealth -= pokemon.Health / 8;
             if (pokemon.curHealth < 0)
                 pokemon.curHealth = 0;
@@ -249,22 +241,22 @@ namespace PokemonBattele
             {
                 AbnormalState.Abnormalstates[pokemon.Abnormal].LoseState(pokemon);
                 pokemon.Abnormal = AbnormalStateEnum.BadlyPoison;
-                Debug.Log(new StringBuilder(30)
-               .AppendFormat("{0}中剧毒了 {1}",
-                   pokemon.Ename, System.DateTime.Now)
-               .ToString());
+                DebugHelper.LogFormat("{0}中剧毒了", pokemon.Ename);
+                
 
                 count[pokemon.ID] = 1;
             }
         }
 
-
+        public override void LoseState(BattlePokemonData pokemon)
+        {
+            count.Remove(pokemon.ID);
+            DebugHelper.LogFormat("{0}剧毒状态解除", pokemon.Ename);
+        }
         public override void UpdateInPlayerAround(BattlePokemonData pokemon)
         {
-            Debug.Log(new StringBuilder(30)
-               .AppendFormat("{0}因为剧毒受到了伤害 {1}",
-                   pokemon.Ename, System.DateTime.Now)
-               .ToString());
+            DebugHelper.LogFormat("{0}因为剧毒受到了伤害,当前剧毒时间计数为{1}", pokemon.Ename, count[pokemon.ID]);
+            
             pokemon.curHealth -= pokemon.Health / 16 * (count[pokemon.ID]++);
             if (pokemon.curHealth < 0)
                 pokemon.curHealth = 0;
@@ -282,16 +274,15 @@ namespace PokemonBattele
         {
             AbnormalState.Abnormalstates[pokemon.Abnormal].LoseState(pokemon);
             pokemon.Abnormal = AbnormalStateEnum.Sleeping;
-            Debug.Log(new StringBuilder(30)
-               .AppendFormat("{0}睡着了 {1}",
-                   pokemon.Ename, System.DateTime.Now)
-               .ToString());
+            DebugHelper.LogFormat("{0}睡着了,还有{1}回合醒来", pokemon.Ename,SleepTimeDict[pokemon.ID]);
+            
 
             SleepTimeDict[pokemon.ID] = RandomService.game.Int(1, 4);
         }
 
         public override void LoseState(BattlePokemonData pokemon)
         {
+            DebugHelper.LogFormat("{0}醒来了", pokemon.Ename);
             SleepTimeDict.Remove(pokemon.ID);
         }
 
@@ -307,10 +298,8 @@ namespace PokemonBattele
             bool flag = 0 == SleepTimeDict[pokemon.ID];
             if(!flag)
             {
-                Debug.Log(new StringBuilder(30)
-               .AppendFormat("{0}还在睡觉不能行动 {1}",
-                   pokemon.Ename, System.DateTime.Now)
-               .ToString());
+                DebugHelper.LogFormat("{0}还在睡觉不能行动,还有{1}回合醒来", pokemon.Ename, SleepTimeDict[pokemon.ID]);
+                
             }
             return flag;
         }
