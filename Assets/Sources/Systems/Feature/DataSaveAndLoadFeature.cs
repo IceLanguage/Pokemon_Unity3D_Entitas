@@ -8,10 +8,12 @@ class DataSaveAndLoadFeature:Feature
 {
     public DataSaveAndLoadFeature(Contexts contexts)
     {
-        Add(new SavePlayerDataSystem(contexts));
-        Add(new InitTrainerSystem(contexts));
+        
         Add(new InitBagItemEffectSystem());
         Add(new InitUseSkillSpecialEffectSystem());
         Add(new InitPokemonStateSystem());
+        Add(new InitAbilityImpactSystem());
+        Add(new SavePlayerDataSystem(contexts));
+        Add(new InitTrainerSystem(contexts));
     }
 }

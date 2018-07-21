@@ -148,7 +148,7 @@ public class UIBattle_PokemonInfos : TTUIPage
             AbnormalStateEnumImage.sprite =
                 Resources.Load<Sprite>(
                     new StringBuilder(20)
-                        .AppendFormat("UIPrefab/AbnormalStateEnum/{0}",
+                        .AppendFormat("UIPrefab/AbnormalState/{0}",
                         pokemonData.Abnormal).ToString());
         }
     }

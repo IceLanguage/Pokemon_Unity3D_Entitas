@@ -26,7 +26,7 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
     private int PlayChooseSkillID = -1;
     private int EnemyChooseSkillID = -1;
 
-    public readonly float BattleTime = 6f;
+    public readonly float BattleTime = 2f;
     //public readonly float BattleInterval = 3f;
     private string PlayerChooseBagItemName = "", EnemyChooseBagItemName = "";
 
@@ -132,7 +132,14 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
         {
             pokemon.Recover();
         }
-       
+        //考虑特性
+        if (AbilityManager.AbilityImpacts.ContainsKey(PlayerCurPokemonData.ShowAbility))
+            AbilityManager.AbilityImpacts[PlayerCurPokemonData.ShowAbility]
+                .OnBeCalled(PlayerCurPokemonData);
+        //考虑特性
+        if (AbilityManager.AbilityImpacts.ContainsKey(EnemyCurPokemonData.ShowAbility))
+            AbilityManager.AbilityImpacts[EnemyCurPokemonData.ShowAbility]
+                .OnBeCalled(EnemyCurPokemonData);
         battleState = new BattleStateForPlayer();
         
     }
@@ -199,6 +206,18 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
             NotificationCenter<int>.Get().DispatchEvent("DisableSkillButton", notific.param);
             return;
         }
+        if(DisableSkill.context.ContainsKey(PlayerCurPokemonData.ID))
+        {
+            int disableskillID = DisableSkill.context[PlayerCurPokemonData.ID];
+            for(int i=0;i< PlayerCurPokemonData.skills.Count;++i)
+            {
+                if(disableskillID == PlayerCurPokemonData.skills[i])
+                {
+                    NotificationCenter<int>.Get().DispatchEvent("DisableSkillButton", i);
+                    return;
+                }
+            }
+        }
         PlayChooseSkillID = skillID;
         DebugHelper.LogFormat("你选择使用了技能{0}",ResourceController.Instance.allSkillDic[PlayChooseSkillID].sname);
         UpdateBattleState();
@@ -256,6 +275,11 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
         //能力阶级重置
         PlayerCurPokemonData.StatModifiers = new StatModifiers();
 
+        //考虑特性
+        if (AbilityManager.AbilityImpacts.ContainsKey(PlayerCurPokemonData.ShowAbility))
+            AbilityManager.AbilityImpacts[PlayerCurPokemonData.ShowAbility]
+                .OnLeave(PlayerCurPokemonData);
+
         PlayerCurPokemonData = newCallPokemon;
         PlayChooseSkillID = -1;
 
@@ -268,6 +292,13 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
 
         //控制精灵和训练家朝向
         playerPokemon.transform.LookAt(EnemyCurPokemonData.transform);
+
+        //考虑特性
+        if (AbilityManager.AbilityImpacts.ContainsKey(PlayerCurPokemonData.ShowAbility))
+            AbilityManager.AbilityImpacts[PlayerCurPokemonData.ShowAbility]
+                .OnBeCalled(PlayerCurPokemonData);
+
+        TTUIPage.ShowPage<UIBattle_PokemonInfos>();
  
     }
     /// <summary>
@@ -347,22 +378,35 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
         }
         yield return wait;
         //互相攻击
-        if (PlayerCurPokemonData.Speed > EnemyCurPokemonData.Speed)
+        if(PlayChooseSkillID!=-1&&EnemyChooseSkillID!=-1)
+        {
+            if (PlayerCurPokemonData.Speed > EnemyCurPokemonData.Speed)
+            {
+                FirstHand = PlayerCurPokemonData.ID;
+                PlayerBattleAround();
+                yield return wait;
+                EnemyBattleAround();
+
+            }
+            else
+            {
+                FirstHand = EnemyCurPokemonData.ID;
+
+                EnemyBattleAround();
+                yield return wait;
+                PlayerBattleAround();
+
+            }
+        }
+        else if(-1== PlayChooseSkillID && -1!= EnemyChooseSkillID)
+        {
+            FirstHand = EnemyCurPokemonData.ID;
+            EnemyBattleAround();
+        }
+        else if (-1 == EnemyChooseSkillID && -1 != PlayChooseSkillID)
         {
             FirstHand = PlayerCurPokemonData.ID;
             PlayerBattleAround();
-            yield return wait;
-            EnemyBattleAround();
-
-        }
-        else
-        {
-            FirstHand = EnemyCurPokemonData.ID;
-            
-            EnemyBattleAround();
-            yield return wait;
-            PlayerBattleAround();
-
         }
         yield return wait;
         BattleAroundEnd();
@@ -521,7 +565,7 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
                 PlayerCurPokemonData.transform.gameObject.SetActive(false);
                 ObjectPoolController.PokemonObjectsPool[PlayerCurPokemonData.race.raceid] =
                 PlayerCurPokemonData.transform.gameObject;
-                PlayerCurPokemonData = null;
+                battleState = null;
                 StartCoroutine(WaitBattleEnd());
                 return;
             }
@@ -541,7 +585,7 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
     private IEnumerator WaitBattleEnd()
     {
         string winer = "敌方";
-        if(null == EnemyCurPokemonData)
+        if(null == EnemyCurPokemonData||EnemyCurPokemonData.curHealth<=0)
         {
             winer = "我方";
         }

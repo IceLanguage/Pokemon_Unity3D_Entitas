@@ -100,11 +100,13 @@ class CheckPlayerInGrassSystem : IExecuteSystem
             float p = EncounterPokemonProbability * DetectGrassNum;
             if(RandomService.game.Float(0,100)<p)
             {
-                int PokemonID = PokemonFactory.GetPokemonFromEncounterPokemonScriptableObject(GrassPokemons);
-                Pokemon pokemom = PokemonFactory.BuildPokemon(PokemonID);
+                //int PokemonID = PokemonFactory.GetPokemonFromEncounterPokemonScriptableObject(GrassPokemons);
+                Pokemon pokemom = PokemonFactory.BuildPokemon(GrassPokemons);
                 BattleController.Instance.InitWildPokemon(pokemom);
                 DebugHelper.LogFormat("你在草地遭遇了精灵{0}", pokemom.ename);
                 context.isBattleFlag = true;
+
+               
             }
         }
     }

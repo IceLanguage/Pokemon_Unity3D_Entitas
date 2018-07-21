@@ -27,5 +27,8 @@ class InitPokemonStateSystem : IInitializeSystem
            = new CanNotEscapeState();
         ChangeStateForPokemon.ChangeStateForPokemons[ChangeStateEnumForPokemon.WaitNextAround]
           = new WaitNextAroundState(true);
+        ChangeStateForPokemon.ChangeStateForPokemons[ChangeStateEnumForPokemon.DisableSkill]
+          = new DisableSkillState();
+        
     }
 }
