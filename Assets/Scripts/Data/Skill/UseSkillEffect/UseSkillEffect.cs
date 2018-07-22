@@ -7,7 +7,9 @@ namespace PokemonBattele
 {
     public interface IUseSkillSpecialEffect
     {
+        void BattleStartEffect(BattlePokemonData pokemon, ref bool canEnd);
         void UseSkillSpecialEffect(BattlePokemonData pokemon);
+        void HitEffect(BattlePokemonData pokemon);
     }
     public static partial class UseSkillEffectManager
     {
@@ -24,15 +26,17 @@ namespace PokemonBattele
             this.probability = probability;
             this.isUseSelf = isUseSelf;
         }
+       
         public virtual void UseSkillSpecialEffect(BattlePokemonData pokemon)
         {
+            
             if (-1 == probability)
-                Effect(pokemon);
+                HitEffect(pokemon);
             else if (RandomService.game.Int(0, 100) < probability)
-                Effect(pokemon);
+                HitEffect(pokemon);
            
         }
-
-        public abstract void Effect(BattlePokemonData pokemon);
+        public virtual void BattleStartEffect(BattlePokemonData pokemon, ref bool canEnd) { }
+        public virtual void HitEffect(BattlePokemonData pokemon) { }
     }
 }

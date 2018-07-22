@@ -15,7 +15,13 @@ namespace PokemonBattele
 
         }
 
-        public override void Effect(BattlePokemonData pokemon)
+        public override void BattleStartEffect(BattlePokemonData pokemon, ref bool canEnd)
+        {
+           
+        }
+
+
+        public override void HitEffect(BattlePokemonData pokemon)
         {
             pokemon.SetAbnormalStateEnum(AbnormalStateEnum.Paralysis);
         }
@@ -28,12 +34,15 @@ namespace PokemonBattele
 
         }
 
-        public override void Effect(BattlePokemonData pokemon)
+        public override void BattleStartEffect(BattlePokemonData pokemon, ref bool canEnd)
+        {
+            
+        }
+
+        public override void HitEffect(BattlePokemonData pokemon)
         {
             pokemon.SetAbnormalStateEnum(AbnormalStateEnum.Burns);
         }
-
-
     }
 
     class FrostbiteEffect : UseSkillEffectWithProbability
@@ -43,12 +52,16 @@ namespace PokemonBattele
 
         }
 
-        public override void Effect(BattlePokemonData pokemon)
+        public override void BattleStartEffect(BattlePokemonData pokemon, ref bool canEnd)
         {
-            pokemon.SetAbnormalStateEnum(AbnormalStateEnum.Frostbite);
+            
         }
 
 
+        public override void HitEffect(BattlePokemonData pokemon)
+        {
+            pokemon.SetAbnormalStateEnum(AbnormalStateEnum.Frostbite);
+        }
     }
 
     class PoisonEffect : UseSkillEffectWithProbability
@@ -58,12 +71,17 @@ namespace PokemonBattele
 
         }
 
-        public override void Effect(BattlePokemonData pokemon)
+        public override void BattleStartEffect(BattlePokemonData pokemon, ref bool canEnd)
         {
-            pokemon.SetAbnormalStateEnum(AbnormalStateEnum.Poisoning);
+            
         }
 
 
+
+        public override void HitEffect(BattlePokemonData pokemon)
+        {
+            pokemon.SetAbnormalStateEnum(AbnormalStateEnum.Poisoning);
+        }
     }
 
     class VeryToxicEffect : UseSkillEffectWithProbability
@@ -73,12 +91,14 @@ namespace PokemonBattele
 
         }
 
-        public override void Effect(BattlePokemonData pokemon)
+        public override void BattleStartEffect(BattlePokemonData pokemon, ref bool canEnd)
+        {
+           
+        }
+        public override void HitEffect(BattlePokemonData pokemon)
         {
             pokemon.SetAbnormalStateEnum(AbnormalStateEnum.BadlyPoison);
         }
-
-
     }
 
     class SleepEffect : UseSkillEffectWithProbability
@@ -88,10 +108,14 @@ namespace PokemonBattele
 
         }
 
-        public override void Effect(BattlePokemonData pokemon)
+        public override void BattleStartEffect(BattlePokemonData pokemon, ref bool canEnd)
+        {
+            
+        }
+
+        public override void HitEffect(BattlePokemonData pokemon)
         {
             pokemon.SetAbnormalStateEnum(AbnormalStateEnum.Sleeping);
         }
-
     }
 }
