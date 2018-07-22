@@ -45,6 +45,8 @@ namespace PokemonBattele
                 ()=> 
                 {
                     Sequence mySequence = DOTween.Sequence();
+
+                    //精灵球振动
                     for (int i =0;i<shadeNum;++i)
                     {
                         mySequence.Append(pokemonBallInPool.transform.DOShakePosition(0.3f, new Vector3(-0.03f, 0.03f, 0.03f), 30));
@@ -69,8 +71,14 @@ namespace PokemonBattele
                         }
                         else
                         {
-
-                            ReBack(pokemonBallInPool, pokemon);
+                            pokemon.transform.DOScale(1, 0.5f).
+                            OnComplete(() =>
+                            {
+                                pokemon.transform.GetComponent<Rigidbody>().useGravity = true;
+                                PokemonFactory.StorePokemonBallInPool(pokemonBallInPool);
+                                NotificationCenter<bool>.Get().DispatchEvent("BattlePause", false);
+                            });
+                            
                         }
                     });
 
@@ -79,19 +87,7 @@ namespace PokemonBattele
             );
 
         }
-        
-        
 
-        private void ReBack(GameObject pokemonBallInPool, BattlePokemonData pokemon)
-        {
-            pokemon.transform.DOScale(1, 0.5f).
-                        OnComplete(() =>
-                        {
-                            pokemon.transform.GetComponent<Rigidbody>().useGravity = true;
-                            PokemonFactory.StorePokemonBallInPool(pokemonBallInPool);
-                            NotificationCenter<bool>.Get().DispatchEvent("BattlePause", false);
-                        });
-        }
         /// <summary>
         /// 存储数据
         /// </summary>
