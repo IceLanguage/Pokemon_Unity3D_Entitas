@@ -72,7 +72,7 @@ namespace PokemonBattele
 			this.skill = skill;
 			attackPokemon = AttackPokemon;
 			defencePokemon = DefencePokemon;
-
+		   
 			GameContext context = Contexts.sharedInstance.game;
 			GameEntity attackPokemonEntity = attackPokemon.entity;
 			GameEntity defencePokemonEntity = defencePokemon.entity;
@@ -95,12 +95,32 @@ namespace PokemonBattele
 
 			if (IsSkillUseSuccess())
 			{
+				
+				
 				DebugHelper.LogFormat("{0}成功使用技能{1}攻击{2}", attackPokemon.Ename, skill.sname, defencePokemon.Ename);
 				ShowSkillUI();
 
 				UseSkillEffect();
 				UseSkillPP();
 
+				bool endUseSkill = false;
+				var useSkillManager = UseSkillEffectManager.UseSkillDic;
+				if (useSkillManager.ContainsKey(skill.SKillID))
+				{
+					foreach (var effect in useSkillManager[skill.SKillID])
+					{
+						if (effect.isUseSelf)
+						{
+							effect.BattleStartEffect(attackPokemon, ref endUseSkill);
+
+						}
+						else
+						{
+							effect.BattleStartEffect(defencePokemon, ref endUseSkill);
+						}
+					}
+				}
+				if (endUseSkill) return;
 				if (IsSkillHitAim())
 				{
 					if (IsIngnore())
@@ -109,9 +129,10 @@ namespace PokemonBattele
 
 						return;
 					}
-					
+
 					UseSkillDamage();
-					var useSkillManager =UseSkillEffectManager.UseSkillDic;
+
+					
 					if (useSkillManager.ContainsKey(skill.SKillID))
 					{
 						
@@ -129,13 +150,19 @@ namespace PokemonBattele
 						}
 							
 					}
+
+
+
 					if (PokemonType.火 == skill.att &&
 						AbnormalStateEnum.Frostbite == defencePokemon.Abnormal &&
-						AbilityType.储水!= defencePokemon.ShowAbility)
+						AbilityType.储水 != defencePokemon.ShowAbility)
 					{
 						DebugHelper.LogFormat("{0}的烧伤状态因为{1}的冰属性技能{2}解除了", defencePokemon.Ename, attackPokemon.Ename, skill.sname);
 						defencePokemon.SetAbnormalStateEnum(AbnormalStateEnum.Normal);
 					}
+
+
+						
 				}
 				else
 				{
@@ -192,6 +219,7 @@ namespace PokemonBattele
 				
 
 			}
+		
 			return flag;
 		}
 

@@ -33,27 +33,30 @@ namespace PokemonBattele
         {
         }
 
-        public override void Effect(BattlePokemonData pokemon)
+        public override void BattleStartEffect(BattlePokemonData pokemon, ref bool canEnd)
+        {
+            
+        }
+
+        public override void HitEffect(BattlePokemonData pokemon)
         {
             StatModifiers stat = pokemon.StatModifiers;
             if (isAdd)
             {
-                
+
                 stat.PhysicPower += ChangeNum;
-           
+
                 DebugHelper.LogFormat("{0}物攻上升{1}", pokemon.Ename, ChangeNum);
             }
 
             else
             {
                 stat.PhysicPower -= ChangeNum;
-            
+
                 DebugHelper.LogFormat("{0}物攻下降{1}", pokemon.Ename, ChangeNum);
             }
             pokemon.StatModifiers = stat;
         }
-
-
     }
 
     class ChangePhysicDefenceStatModifiersEffect : StatModifiersChangeEffect
@@ -63,12 +66,18 @@ namespace PokemonBattele
         {
         }
 
-        public override void Effect(BattlePokemonData pokemon)
+        public override void BattleStartEffect(BattlePokemonData pokemon, ref bool canEnd)
+        {
+            
+        }
+
+
+        public override void HitEffect(BattlePokemonData pokemon)
         {
             StatModifiers stat = pokemon.StatModifiers;
             if (isAdd)
             {
-                stat.PhysicDefence+= ChangeNum;
+                stat.PhysicDefence += ChangeNum;
 
 
                 DebugHelper.LogFormat("{0}物防上升{1}", pokemon.Ename, ChangeNum);
@@ -84,8 +93,6 @@ namespace PokemonBattele
             }
             pokemon.StatModifiers = stat;
         }
-
-
     }
 
     class ChangeEnergyPowerStatModifiersEffect : StatModifiersChangeEffect
@@ -95,7 +102,13 @@ namespace PokemonBattele
         {
         }
 
-        public override void Effect(BattlePokemonData pokemon)
+        public override void BattleStartEffect(BattlePokemonData pokemon, ref bool canEnd)
+        {
+            
+        }
+
+
+        public override void HitEffect(BattlePokemonData pokemon)
         {
             StatModifiers stat = pokemon.StatModifiers;
             if (isAdd)
@@ -117,8 +130,6 @@ namespace PokemonBattele
             }
             pokemon.StatModifiers = stat;
         }
-
-
     }
 
     class ChangeEnergyDefenceStatModifiersEffect : StatModifiersChangeEffect
@@ -128,7 +139,13 @@ namespace PokemonBattele
         {
         }
 
-        public override void Effect(BattlePokemonData pokemon)
+        public override void BattleStartEffect(BattlePokemonData pokemon, ref bool canEnd)
+        {
+           
+        }
+
+
+        public override void HitEffect(BattlePokemonData pokemon)
         {
             StatModifiers stat = pokemon.StatModifiers;
             if (isAdd)
@@ -142,15 +159,13 @@ namespace PokemonBattele
             else
             {
                 stat.EnergyDefence -= ChangeNum;
-               
+
 
                 DebugHelper.LogFormat("{0}特防下降{1}", pokemon.Ename, ChangeNum);
 
             }
             pokemon.StatModifiers = stat;
         }
-
-
     }
 
     class ChangeCriticalHitModifiersEffect : StatModifiersChangeEffect
@@ -160,13 +175,20 @@ namespace PokemonBattele
         {
         }
 
-        public override void Effect(BattlePokemonData pokemon)
+        public override void BattleStartEffect(BattlePokemonData pokemon, ref bool canEnd)
+        {
+           
+        }
+
+
+
+        public override void HitEffect(BattlePokemonData pokemon)
         {
             StatModifiers stat = pokemon.StatModifiers;
             if (isAdd)
             {
-                stat.CriticalHit += ChangeNum ;
-                
+                stat.CriticalHit += ChangeNum;
+
 
                 DebugHelper.LogFormat("{0}击中要害概率上升{1}", pokemon.Ename, ChangeNum);
 
@@ -182,8 +204,6 @@ namespace PokemonBattele
             }
             pokemon.StatModifiers = stat;
         }
-
-
     }
 
     class ChangeSpeedStatModifiersEffect : StatModifiersChangeEffect
@@ -193,13 +213,19 @@ namespace PokemonBattele
         {
         }
 
-        public override void Effect(BattlePokemonData pokemon)
+        public override void BattleStartEffect(BattlePokemonData pokemon, ref bool canEnd)
+        {
+           
+        }
+
+
+        public override void HitEffect(BattlePokemonData pokemon)
         {
             StatModifiers stat = pokemon.StatModifiers;
             if (isAdd)
             {
                 stat.Speed += ChangeNum;
-                
+
 
                 DebugHelper.LogFormat("{0}速度上升{1}", pokemon.Ename, ChangeNum);
 
@@ -214,7 +240,6 @@ namespace PokemonBattele
             }
             pokemon.StatModifiers = stat;
         }
-
     }
 
     class ChangeHitRateStatModifiersEffect : StatModifiersChangeEffect
@@ -224,7 +249,12 @@ namespace PokemonBattele
         {
         }
 
-        public override void Effect(BattlePokemonData pokemon)
+        public override void BattleStartEffect(BattlePokemonData pokemon, ref bool canEnd)
+        {
+            
+        }
+
+        public override void HitEffect(BattlePokemonData pokemon)
         {
             StatModifiers stat = pokemon.StatModifiers;
             if (isAdd)
@@ -244,7 +274,6 @@ namespace PokemonBattele
             }
             pokemon.StatModifiers = stat;
         }
-
     }
 
     class ChangeAvoidanceRateStatModifiersEffect : StatModifiersChangeEffect
@@ -254,7 +283,13 @@ namespace PokemonBattele
         {
         }
 
-        public override void Effect(BattlePokemonData pokemon)
+        public override void BattleStartEffect(BattlePokemonData pokemon, ref bool canEnd)
+        {
+            
+        }
+
+
+        public override void HitEffect(BattlePokemonData pokemon)
         {
             StatModifiers stat = pokemon.StatModifiers;
             if (isAdd)
@@ -274,8 +309,6 @@ namespace PokemonBattele
             }
             pokemon.StatModifiers = stat;
         }
-
-
     }
 
     class SetPhysicPowerStatModifiersEffect : StatModifiersSetEffect
@@ -285,15 +318,19 @@ namespace PokemonBattele
         {
         }
 
-        public override void Effect(BattlePokemonData pokemon)
+        public override void BattleStartEffect(BattlePokemonData pokemon, ref bool canEnd)
+        {
+            
+        }
+
+
+        public override void HitEffect(BattlePokemonData pokemon)
         {
             StatModifiers stat = pokemon.StatModifiers;
             stat.PhysicPower = value;
             pokemon.StatModifiers = stat;
             DebugHelper.LogFormat("{0}物攻等级变更为{1}", pokemon.Ename, value);
-
         }
-
     }
     class SetPhysicDefenceStatModifiersEffect : StatModifiersSetEffect
     {
@@ -302,16 +339,19 @@ namespace PokemonBattele
         {
         }
 
-        public override void Effect(BattlePokemonData pokemon)
+        public override void BattleStartEffect(BattlePokemonData pokemon, ref bool canEnd)
+        {
+           
+        }
+
+        public override void HitEffect(BattlePokemonData pokemon)
         {
             StatModifiers stat = pokemon.StatModifiers;
             stat.PhysicDefence = value;
             pokemon.StatModifiers = stat;
 
             DebugHelper.LogFormat("{0}物防等级变更为{1}", pokemon.Ename, value);
-
         }
-
     }
 
     class SetEnergyPowerStatModifiersEffect : StatModifiersSetEffect
@@ -320,19 +360,20 @@ namespace PokemonBattele
             : base(probability, num, isUseSelf)
         {
         }
-    
 
-        public override void Effect(BattlePokemonData pokemon)
+        public override void BattleStartEffect(BattlePokemonData pokemon, ref bool canEnd)
+        {
+          
+        }
+
+        public override void HitEffect(BattlePokemonData pokemon)
         {
             StatModifiers stat = pokemon.StatModifiers;
             stat.EnergyPower = value;
             pokemon.StatModifiers = stat;
 
             DebugHelper.LogFormat("{0}特攻等级变更为{1}", pokemon.Ename, value);
-
         }
-
-
     }
     class SetEnergyDefenceStatModifiersEffect : StatModifiersSetEffect
     {
@@ -341,16 +382,19 @@ namespace PokemonBattele
         {
         }
 
-        public override void Effect(BattlePokemonData pokemon)
+        public override void BattleStartEffect(BattlePokemonData pokemon, ref bool canEnd)
+        {
+           
+        }
+
+        public override void HitEffect(BattlePokemonData pokemon)
         {
             StatModifiers stat = pokemon.StatModifiers;
             stat.EnergyDefence = value;
             pokemon.StatModifiers = stat;
 
             DebugHelper.LogFormat("{0}特防等级变更为{1}", pokemon.Ename, value);
- 
         }
-
     }
 
     class SetSpeedStatModifiersEffect : StatModifiersSetEffect
@@ -360,7 +404,12 @@ namespace PokemonBattele
         {
         }
 
-        public override void Effect(BattlePokemonData pokemon)
+        public override void BattleStartEffect(BattlePokemonData pokemon, ref bool canEnd)
+        {
+            
+        }
+
+        public override void HitEffect(BattlePokemonData pokemon)
         {
             StatModifiers stat = pokemon.StatModifiers;
             stat.Speed = value;
@@ -368,9 +417,6 @@ namespace PokemonBattele
 
 
             DebugHelper.LogFormat("{0}速度等级变更为{1}", pokemon.Ename, value);
-          
         }
-
-
     }
 }

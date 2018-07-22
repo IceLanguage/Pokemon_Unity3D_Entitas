@@ -78,13 +78,12 @@ namespace PokemonBattele
         {
             if(1 == count[pokemon.ID])
             {
-                count[pokemon.ID] = 0;
-                return false;
+                LoseState(pokemon);
+                return true;
 
             }
-            LoseState(pokemon);
-            return true;
-            
+            return false;
+
         }
 
         public override void LoseState(BattlePokemonData pokemon)

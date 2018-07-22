@@ -531,6 +531,10 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
         int index = RandomService.game.Int(0, EnemyCurPokemonData.skills.Count);
         
         EnemyChooseSkillID = EnemyCurPokemonData.skills[index];
+        if (NeedReplaceSKill.context.ContainsKey(EnemyCurPokemonData.ID))
+        {
+            EnemyChooseSkillID = NeedReplaceSKill.context[EnemyCurPokemonData.ID];
+        }
         DebugHelper.LogFormat("野外的精灵{0}选择使用了技能{1}",
             EnemyCurPokemonData.Ename,
             ResourceController.Instance.allSkillDic[EnemyChooseSkillID].sname);
@@ -543,7 +547,7 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
     public void PokemonDeathEvent(Notification<int> notific)
     {
         int hashcode = notific.param;
-        if (!CanBattle) return;
+        if (!CanBattle||null==battleState) return;
         if(hashcode == PlayerCurPokemonData.ID)
         {
             DebugHelper.LogFormat("我方精灵{0}不能继续作战了", PlayerCurPokemonData.Ename);
