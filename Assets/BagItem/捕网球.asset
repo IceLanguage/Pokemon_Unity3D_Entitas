@@ -14,4 +14,4 @@ MonoBehaviour:
   Name: "\u6355\u7F51\u7403"
   Type: 0
   Description: "\u6709\u70B9\u4E0E\u4F17\u4E0D\u540C\u7684\u7403\u3002\u80FD\u5F88\u5BB9\u6613\u5730\u6355\u6349\u6C34\u5C5E\u6027\u548C\u866B\u5C5E\u6027\u7684\u5B9D\u53EF\u68A6\u3002"
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: 079954f8c45c0234eab679692223135a, type: 3}

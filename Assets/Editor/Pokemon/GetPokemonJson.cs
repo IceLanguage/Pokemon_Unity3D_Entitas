@@ -39,11 +39,16 @@ public class GetPokemonJson
         const string path = "Assets/Resources/ReadTxt/BagItem.json";
         var list = SearchGameObject.SearchGameObjectList<Item>("Assets/BagItem");
         List<string> nameList = list.Select(x => x.Name).ToList();
-        foreach(var e in list)
+        var list2 = SearchGameObject.SearchGameObjectList<Item>("Assets/Resources/BagItem/BagItemAsset");
+        int i = 0;
+        foreach (Item e in list)
         {
-            
+            EditorUtility.DisplayCancelableProgressBar("复制道具数据", i + "/" + list.Count, (float)i / list.Count);
+            Item other = list2.Find(x => x.Name == e.Name);
+            if (e.Equals(other)) continue;
             AssetDatabase.CreateAsset(e.Clone(), "Assets/Resources/BagItem/BagItemAsset/" + e.Name+ ".asset");
         }
+        EditorUtility.ClearProgressBar();
         var str = JsonConvert.SerializeObject(nameList);
         File.WriteAllText(path, str, Encoding.UTF8);
     }

@@ -51,10 +51,8 @@ namespace PokemonBattele
 				return;
 			if (0 == AttackPokemon.curHealth) return;
 
-			
 			new UseSkill(skill, AttackPokemon, DefencePokemon);
-
-			
+		
 			LHCoroutine.CoroutineManager.DoCoroutine(WaitSKillUse(AttackPokemon, skill));
 		}
 
@@ -140,12 +138,12 @@ namespace PokemonBattele
 						{
 							if(effect.isUseSelf)
 							{
-								effect.UseSkillSpecialEffect(attackPokemon);
+								effect.SpecialEffect(attackPokemon);
 
 							}
 							else
 							{
-								effect.UseSkillSpecialEffect(defencePokemon);
+								effect.SpecialEffect(defencePokemon);
 							}
 						}
 							

@@ -58,13 +58,33 @@ public class Item :ScriptableObject
         item.sprite = sprite;
         return item;
     }
-
-
-    //得到提示框应该显示的内容
-    public virtual string GetToolTipText() 
+    public override int GetHashCode()
     {
-        string type="";
-        switch(Type)
+        return Description.GetHashCode() + Name.GetHashCode() + Type.GetHashCode() + sprite.GetHashCode();
+    }
+    public override bool Equals(object other)
+    {
+        if (other == null) return false;
+        if (this.GetType() != other.GetType()) return false;
+        return Equals((Item)other);
+
+    }
+    public bool Equals(Item obj)
+    {
+        if (obj == null) return false;
+        if (ReferenceEquals(this, obj)) return true;
+        if (this.GetType() != obj.GetType()) return false;
+        if (!base.Equals(obj)) return false;
+        return (Description.Equals(obj.Description) &&
+            (Name.Equals(obj.Name))) &&
+            (Type.Equals(obj.Type))&&
+            (sprite == obj.sprite);
+
+    }
+    public override string ToString()
+    {
+        string type = "";
+        switch (Type)
         {
             case ItemType.CarryingProps:
                 type = "携带物品";
@@ -79,7 +99,7 @@ public class Item :ScriptableObject
                 type = "树果";
                 break;
         }
-        string text= string.Format(
+        string text = string.Format(
             "<color=magenta >{0}</color>\n" +
             "<color=yellow><size=10>介绍：{1}</size></color>\n" +
             "<color=green><size=12>物品类型：{2}</size></color>\n",
@@ -88,4 +108,5 @@ public class Item :ScriptableObject
             type);
         return text;
     }
+
 }

@@ -1,0 +1,13 @@
+ManifestFileVersion: 0
+CRC: 307339188
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: bagitems
+      Dependencies: {}
+    Info_1:
+      Name: skills
+      Dependencies: {}
+    Info_2:
+      Name: pokemonskillpools
+      Dependencies: {}

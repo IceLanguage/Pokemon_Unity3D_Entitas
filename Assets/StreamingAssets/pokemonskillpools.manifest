@@ -1,0 +1,44 @@
+ManifestFileVersion: 0
+CRC: 1789761459
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: c876788f48a1047718f033c1fb58119d
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: b09970dbdffb2239f94d72aaaf733760
+HashAppended: 0
+ClassTypes:
+- Class: 114
+  Script: {fileID: 11500000, guid: a50cdf53153d6ae479ec824d067b6833, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+Assets:
+- Assets/Skill/SkillPoolAsset/82.asset
+- Assets/Skill/SkillPoolAsset/131.asset
+- Assets/Skill/SkillPoolAsset/4.asset
+- Assets/Skill/SkillPoolAsset/25.asset
+- Assets/Skill/SkillPoolAsset/65.asset
+- Assets/Skill/SkillPoolAsset/7.asset
+- Assets/Skill/SkillPoolAsset/76.asset
+- Assets/Skill/SkillPoolAsset/1.asset
+- Assets/Skill/SkillPoolAsset/68.asset
+- Assets/Skill/SkillPoolAsset/142.asset
+- Assets/Skill/SkillPoolAsset/95.asset
+- Assets/Skill/SkillPoolAsset/135.asset
+- Assets/Skill/SkillPoolAsset/134.asset
+- Assets/Skill/SkillPoolAsset/9.asset
+- Assets/Skill/SkillPoolAsset/8.asset
+- Assets/Skill/SkillPoolAsset/130.asset
+- Assets/Skill/SkillPoolAsset/15.asset
+- Assets/Skill/SkillPoolAsset/94.asset
+- Assets/Skill/SkillPoolAsset/2.asset
+- Assets/Skill/SkillPoolAsset/91.asset
+- Assets/Skill/SkillPoolAsset/80.asset
+- Assets/Skill/SkillPoolAsset/3.asset
+- Assets/Skill/SkillPoolAsset/18.asset
+- Assets/Skill/SkillPoolAsset/5.asset
+- Assets/Skill/SkillPoolAsset/6.asset
+- Assets/Skill/SkillPoolAsset/136.asset
+- Assets/Skill/SkillPoolAsset/143.asset
+Dependencies: []
