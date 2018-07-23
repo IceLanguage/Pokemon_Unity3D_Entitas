@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using PokemonBattele;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -52,83 +53,126 @@ public partial class ResourceController : SingletonMonobehavior<ResourceControll
 
     private void Start()
     {
+        StartCoroutine(LoadPokemonSkillsData());
+        StartCoroutine(LoadItemData());
+        StartCoroutine(LoadPokemonSkillPools());
+
         LoadPokemonAbilitysData();
         LoadPokemonNaturesData();
         LoadPokemonRacesData();
         LoadPokemonTypeInf();
         LoadCatachRateData();    
         LoadCanUsePokemonList();
-        LoadPokemonSkillsData();
-        LoadPokemonSkillPools();
-        LoadItemData();
+       
+        
+       
     }
-    public void LoadItemData()
-    {
-        try
-        {
-            TextAsset t = Resources.Load<TextAsset>("ReadTxt/BagItem");
-            Resources.UnloadUnusedAssets();
-            string json = t.text;
 
-            var nameList = JsonConvert.DeserializeObject<List<string>>(json);
-            foreach(string name in nameList)
+
+    IEnumerator LoadItemData()
+    {
+        using (WWW www = new WWW(Application.streamingAssetsPath + "/bagitems"))
+
+        {
+            yield return www;
+            string[] names = www.assetBundle.GetAllAssetNames();
+            foreach (string name in names)
             {
-                ItemDic[name] = Resources.Load<Item>(
-                    new StringBuilder("BagItem/BagItemAsset/").Append(name).ToString());
+                AssetBundleRequest request = www.assetBundle.LoadAssetAsync<Item>(name);
+                yield return request;
+                Item item = request.asset as Item;
+                if (null != item)
+                    ItemDic[item.Name] = item; 
+
             }
+            AssetBundle.UnloadAllAssetBundles(false);
         }
-        catch (Exception e)
-        {
-            Debug.Log("精灵道具数据读取异常" + e.Message);
-        }
-        Debug.Log("精灵道具数据已加载");
     }
-    public void LoadPokemonSkillPools()
+
+    IEnumerator LoadPokemonSkillsData()
     {
-        try
-        {
-            TextAsset t = Resources.Load<TextAsset>("Config/SkillPoolConfig");
-            Resources.UnloadUnusedAssets();
-            string json = t.text;
+        using (WWW www = new WWW(Application.streamingAssetsPath + "/skills"))
 
-            PokemonSkillPoolDic = JsonConvert.DeserializeObject<Dictionary<int, SkillPool>>(json);
-        }
-        catch (Exception e)
         {
-            Debug.Log("精灵技能池数据读取异常" + e.Message);
+            yield return www;
+            string[] names = www.assetBundle.GetAllAssetNames();
+            foreach (string name in names)
+            {
+                AssetBundleRequest request = www.assetBundle.LoadAssetAsync<Skill>(name);
+                yield return request;
+                Skill skill = request.asset as Skill;
+                if (null != skill)
+                    allSkillDic[skill.SKillID] = skill;
+
+            }
+            AssetBundle.UnloadAllAssetBundles(false);
         }
-        Debug.Log("精灵技能池数据已加载");
     }
-    public void LoadPokemonSkillsData()
+    IEnumerator LoadPokemonSkillPools()
     {
-        try
+        using (WWW www = new WWW(Application.streamingAssetsPath + "/pokemonSkillPools"))
+
         {
+            yield return www;
+            string[] names = www.assetBundle.GetAllAssetNames();
+            foreach (string name in names)
+            {
+                AssetBundleRequest request = www.assetBundle.LoadAssetAsync<SkillPool>(name);
+                yield return request;
+                SkillPool skillPool = request.asset as SkillPool;
+                if (null != skillPool)
+                    PokemonSkillPoolDic[skillPool.PokemonID] = skillPool;
 
-
-            TextAsset t = Resources.Load<TextAsset>("ReadTxt/PokemonSkills");
-            Resources.UnloadUnusedAssets();
-            string json = t.text;
-
-            allSkillDic = JsonConvert.DeserializeObject<Dictionary<int, Skill>>(json);
-
-            
-
+            }
+            AssetBundle.UnloadAllAssetBundles(false);
         }
-        catch (Exception e)
-        {
-            Debug.Log("精灵技能数据读取异常" + e.Message);
-        }
-
-        var list = allSkillDic.Values.ToList();
-        foreach (Skill skill in list)
-        {
-            
-            Skill newskill = Resources.Load<Skill>(
-                new StringBuilder(skillAssetPath).Append(skill.SKillID.ToString()).ToString());
-            allSkillDic[skill.SKillID] = newskill;
-        }
-        Debug.Log("精灵技能数据已加载");
     }
+    //public void LoadPokemonSkillPools()
+    //{
+    //    try
+    //    {
+    //        TextAsset t = Resources.Load<TextAsset>("Config/SkillPoolConfig");
+    //        Resources.UnloadUnusedAssets();
+    //        string json = t.text;
+
+    //        PokemonSkillPoolDic = JsonConvert.DeserializeObject<Dictionary<int, SkillPool>>(json);
+    //    }
+    //    catch (Exception e)
+    //    {
+    //        Debug.Log("精灵技能池数据读取异常" + e.Message);
+    //    }
+    //    Debug.Log("精灵技能池数据已加载");
+    //}
+    //public void LoadPokemonSkillsData()
+    //{
+    //    try
+    //    {
+
+
+    //        TextAsset t = Resources.Load<TextAsset>("ReadTxt/PokemonSkills");
+    //        Resources.UnloadUnusedAssets();
+    //        string json = t.text;
+
+    //        allSkillDic = JsonConvert.DeserializeObject<Dictionary<int, Skill>>(json);
+
+
+
+    //    }
+    //    catch (Exception e)
+    //    {
+    //        Debug.Log("精灵技能数据读取异常" + e.Message);
+    //    }
+
+    //    var list = allSkillDic.Values.ToList();
+    //    foreach (Skill skill in list)
+    //    {
+
+    //        Skill newskill = Resources.Load<Skill>(
+    //            new StringBuilder(skillAssetPath).Append(skill.SKillID.ToString()).ToString());
+    //        allSkillDic[skill.SKillID] = newskill;
+    //    }
+    //    Debug.Log("精灵技能数据已加载");
+    //}
 
 
 

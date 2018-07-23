@@ -10,6 +10,6 @@ class InitBagItemEffectSystem : IInitializeSystem
     public void Initialize()
     {
         var dict = ResourceController.Instance.UseBagUItemDict;
-        dict["精灵球"] = new UsePokemonBall();
+        dict["精灵球"] = new UsePokemonBall(true,false,false,false);
     }
 }

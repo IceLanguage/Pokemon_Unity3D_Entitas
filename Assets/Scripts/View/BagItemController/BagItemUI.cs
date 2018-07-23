@@ -110,7 +110,7 @@ public class BagItemUI : MonoBehaviour,
         if (this.transform.childCount > 0)
         {
             if (null == ItemUI.Item ) return;
-            string toolTipText = ItemUI.Item.GetToolTipText();
+            string toolTipText = ItemUI.Item.ToString();
             //Contexts.sharedInstance.game.ReplaceToolTipString
             //    (toolTipText, RectTransform.anchoredPosition);
         }

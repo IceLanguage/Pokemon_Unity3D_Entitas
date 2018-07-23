@@ -357,7 +357,7 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
         {
             
             UseBagItem use = ResourceController.Instance.UseBagUItemDict[PlayerChooseBagItemName];
-            if (null != use)
+            if (null != use&&use.canUseInBattle)
             {
                 BattlePause = true;
                 use.Effect();
@@ -369,7 +369,7 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
             if ("" != EnemyChooseBagItemName && ResourceController.Instance.UseBagUItemDict.ContainsKey(EnemyChooseBagItemName))
             {
                 UseBagItem use = ResourceController.Instance.UseBagUItemDict[EnemyChooseBagItemName];
-                if (null != use)
+                if (null != use && use.canUseInBattle)
                 {
                     BattlePause = true;
                     use.Effect();

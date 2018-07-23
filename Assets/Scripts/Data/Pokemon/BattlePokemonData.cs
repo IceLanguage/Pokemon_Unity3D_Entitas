@@ -1,5 +1,6 @@
 ﻿using PokemonBattele;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -212,7 +213,7 @@ public class BattlePokemonData : PokemonBaseData
         ShowAbility = pokemon.ShowAbility;
         Ename = pokemon.Ename;
 
-        InitPokemonData();
+        LHCoroutine.CoroutineManager.DoCoroutine(InitPokemonData());
 
         entity = Contexts.sharedInstance.game.CreateEntity();
         entity.AddBattlePokemonData(this);
@@ -223,9 +224,14 @@ public class BattlePokemonData : PokemonBaseData
         Context[ID] = this;
     }
     private void DefaultAction() { }
-    private void InitPokemonData()
+    private IEnumerator InitPokemonData()
     {
-              
+        yield return new WaitWhile
+        (() =>
+            {
+                return ResourceController.Instance.allSkillDic.Count<612;
+            }
+        );   
         curHealth = Health = PokemonCalculation.CalFullHealth(
             race.health, basestats.Health, IV.Health);
         if(Health<=0)
@@ -288,6 +294,7 @@ public class BattlePokemonData : PokemonBaseData
     //恢复
     public void Recover()
     {
+        LastUseSkillID = -1;
         increase = new Increase();
         StatModifiers = new StatModifiers();
         SetAbnormalStateEnum(AbnormalStateEnum.Normal);

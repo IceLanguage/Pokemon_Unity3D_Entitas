@@ -51,10 +51,8 @@ namespace PokemonBattele
 				return;
 			if (0 == AttackPokemon.curHealth) return;
 
-			
 			new UseSkill(skill, AttackPokemon, DefencePokemon);
-
-			
+		
 			LHCoroutine.CoroutineManager.DoCoroutine(WaitSKillUse(AttackPokemon, skill));
 		}
 
