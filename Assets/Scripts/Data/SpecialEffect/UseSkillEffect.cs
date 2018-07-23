@@ -5,29 +5,29 @@ using System.Text;
 
 namespace PokemonBattele
 {
-    public interface IUseSkillSpecialEffect
+    public interface ISpecialEffect
     {
         void BattleStartEffect(BattlePokemonData pokemon, ref bool canEnd);
-        void UseSkillSpecialEffect(BattlePokemonData pokemon);
+        void SpecialEffect(BattlePokemonData pokemon);
         void HitEffect(BattlePokemonData pokemon);
     }
     public static partial class UseSkillEffectManager
     {
-        public static Dictionary<int, List<UseSkillEffectWithProbability>> UseSkillDic =
-            new Dictionary<int, List<UseSkillEffectWithProbability>>();
+        public static Dictionary<int, List<EffectWithProbability>> UseSkillDic =
+            new Dictionary<int, List<EffectWithProbability>>();
     }
 
-    public abstract class UseSkillEffectWithProbability : IUseSkillSpecialEffect
+    public abstract class EffectWithProbability : ISpecialEffect
     {
         protected readonly int probability;
         public readonly bool isUseSelf;
-        public UseSkillEffectWithProbability(int probability,bool isUseSelf)
+        public EffectWithProbability(int probability,bool isUseSelf)
         {
             this.probability = probability;
             this.isUseSelf = isUseSelf;
         }
        
-        public virtual void UseSkillSpecialEffect(BattlePokemonData pokemon)
+        public virtual void SpecialEffect(BattlePokemonData pokemon)
         {
             
             if (-1 == probability)

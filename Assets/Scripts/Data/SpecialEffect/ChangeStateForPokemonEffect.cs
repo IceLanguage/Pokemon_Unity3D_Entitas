@@ -5,7 +5,7 @@ using System.Text;
 
 namespace PokemonBattele
 {
-    abstract class ChangeStateForPokemonEffect : UseSkillEffectWithProbability
+    abstract class ChangeStateForPokemonEffect : EffectWithProbability
     {
         
         public ChangeStateForPokemonEffect(int probability,bool isUseSelf) : base(probability, isUseSelf)

@@ -27,11 +27,12 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
     private int EnemyChooseSkillID = -1;
 
     public readonly float BattleTime = 2f;
-    //public readonly float BattleInterval = 3f;
+    
     private string PlayerChooseBagItemName = "", EnemyChooseBagItemName = "";
 
     public int FirstHand = -1;
     private bool BattlePause = false;
+    public int BattleAroundCount = 0;
     private void Start()
     {
         context = Contexts.sharedInstance.game;
@@ -46,6 +47,7 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
         BattleStateForPlayer.InitEvent += PlayerRound;
         BattleStateForBattle.InitEvent += BattleRound;
     }
+    
     public bool CanBattle
     {
         get
@@ -119,9 +121,6 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
         quaternion.x = 0;
         quaternion.z = 0;
         PlayerController.Instance.transform.rotation = quaternion;
-
-        //BattlePokemonsGameObejcts.Add(playerPokemon);
-        //BattlePokemonsGameObejcts.Add(enemyPokemon);
 
         //初始化精灵数据
         foreach(BattlePokemonData pokemon in playPokemons)
@@ -322,7 +321,7 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
     private void PlayerRound()
     {
         DebugHelper.Log("开始进入准备回合");
-
+        BattleAroundCount++;
         EnemyAction();
     }
 
@@ -360,7 +359,10 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
             if (null != use&&use.canUseInBattle)
             {
                 BattlePause = true;
-                use.Effect();
+                if(!use.UseForPlay)
+                    use.Effect(EnemyCurPokemonData);
+                else
+                    use.Effect(PlayerCurPokemonData);
             }
         }
         yield return wait;
@@ -372,7 +374,10 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
                 if (null != use && use.canUseInBattle)
                 {
                     BattlePause = true;
-                    use.Effect();
+                    if (use.UseForPlay)
+                        use.Effect(EnemyCurPokemonData);
+                    else
+                        use.Effect(PlayerCurPokemonData);
                 }
             }
         }

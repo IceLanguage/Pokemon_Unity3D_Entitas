@@ -138,12 +138,12 @@ namespace PokemonBattele
 						{
 							if(effect.isUseSelf)
 							{
-								effect.UseSkillSpecialEffect(attackPokemon);
+								effect.SpecialEffect(attackPokemon);
 
 							}
 							else
 							{
-								effect.UseSkillSpecialEffect(defencePokemon);
+								effect.SpecialEffect(defencePokemon);
 							}
 						}
 							

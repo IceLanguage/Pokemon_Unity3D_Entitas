@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace PokemonBattele
 {
-    abstract class StatModifiersChangeEffect:UseSkillEffectWithProbability
+    abstract class StatModifiersChangeEffect:EffectWithProbability
     {
         protected readonly int ChangeNum;
         protected readonly bool isAdd;
@@ -17,7 +17,7 @@ namespace PokemonBattele
         }
 
     }
-    abstract class StatModifiersSetEffect : UseSkillEffectWithProbability
+    abstract class StatModifiersSetEffect : EffectWithProbability
     {
         protected readonly int value;
         public StatModifiersSetEffect(int probability, int num, bool isUseSelf) : base(probability,isUseSelf)

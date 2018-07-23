@@ -11,22 +11,19 @@ namespace PokemonBattele
 {
     class UsePokemonBall : UseBagItem
     {
-        public UsePokemonBall
-            (bool canUseInBattle,
-            bool canUseOutBattle,
-            bool NotNeedUseButEffect,
-            bool UseWhilePokemonCarry) :
-            base(canUseInBattle,canUseOutBattle,NotNeedUseButEffect, UseWhilePokemonCarry)
+        public UsePokemonBall(float CatachCorrection = 1,string BagItemName = "精灵球") :
+            base(true,false,false,false,false, BagItemName)
         {
-
+            this.CatachCorrection = CatachCorrection;
         }
-        public float CatachCorrection = 1;
-        public string BagItemName = "精灵球";
-        public override void Effect()
-        {
-            DebugHelper.LogFormat("你选择使用了{0}", BagItemName);
+        public float CatachCorrection { get; protected set; }
 
-            var pokemon = BattleController.Instance.EnemyCurPokemonData;
+       
+        protected virtual void ChangeCatachCorrection(BattlePokemonData pokemon) { }
+        public override void Effect(BattlePokemonData pokemon)
+        {
+            ChangeCatachCorrection(pokemon);
+            DebugHelper.LogFormat("你选择使用了{0}", BagItemName);
 
             //精灵球和精灵球特效
             GameObject pokemonBallInPool = PokemonFactory.GetPokemonBall();

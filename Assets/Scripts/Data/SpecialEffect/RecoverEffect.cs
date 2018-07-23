@@ -5,7 +5,7 @@ using System.Text;
 
 namespace PokemonBattele
 {
-    abstract class RecoverEffect : UseSkillEffectWithProbability
+    abstract class RecoverEffect : EffectWithProbability
     {
         protected int recoverValue;
         public RecoverEffect(int probability,int recoverValue) : base(probability,true)

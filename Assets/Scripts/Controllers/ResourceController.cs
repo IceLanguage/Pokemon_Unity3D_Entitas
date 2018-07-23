@@ -127,53 +127,6 @@ public partial class ResourceController : SingletonMonobehavior<ResourceControll
             AssetBundle.UnloadAllAssetBundles(false);
         }
     }
-    //public void LoadPokemonSkillPools()
-    //{
-    //    try
-    //    {
-    //        TextAsset t = Resources.Load<TextAsset>("Config/SkillPoolConfig");
-    //        Resources.UnloadUnusedAssets();
-    //        string json = t.text;
-
-    //        PokemonSkillPoolDic = JsonConvert.DeserializeObject<Dictionary<int, SkillPool>>(json);
-    //    }
-    //    catch (Exception e)
-    //    {
-    //        Debug.Log("精灵技能池数据读取异常" + e.Message);
-    //    }
-    //    Debug.Log("精灵技能池数据已加载");
-    //}
-    //public void LoadPokemonSkillsData()
-    //{
-    //    try
-    //    {
-
-
-    //        TextAsset t = Resources.Load<TextAsset>("ReadTxt/PokemonSkills");
-    //        Resources.UnloadUnusedAssets();
-    //        string json = t.text;
-
-    //        allSkillDic = JsonConvert.DeserializeObject<Dictionary<int, Skill>>(json);
-
-
-
-    //    }
-    //    catch (Exception e)
-    //    {
-    //        Debug.Log("精灵技能数据读取异常" + e.Message);
-    //    }
-
-    //    var list = allSkillDic.Values.ToList();
-    //    foreach (Skill skill in list)
-    //    {
-
-    //        Skill newskill = Resources.Load<Skill>(
-    //            new StringBuilder(skillAssetPath).Append(skill.SKillID.ToString()).ToString());
-    //        allSkillDic[skill.SKillID] = newskill;
-    //    }
-    //    Debug.Log("精灵技能数据已加载");
-    //}
-
 
 
     public void LoadCanUsePokemonList()
