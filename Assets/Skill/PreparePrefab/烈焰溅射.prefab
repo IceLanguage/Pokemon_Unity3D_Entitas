@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 19800000}
   - component: {fileID: 19900000}
   - component: {fileID: 11400000}
+  - component: {fileID: 114919610369183316}
   m_Layer: 0
   m_Name: White Lines
   m_TagString: FxTemporaire
@@ -30,6 +31,7 @@ GameObject:
   - component: {fileID: 19900002}
   - component: {fileID: 11400002}
   - component: {fileID: 114368369901135034}
+  - component: {fileID: 114357605044912006}
   m_Layer: 0
   m_Name: "\u70C8\u7130\u6E85\u5C04"
   m_TagString: FxTemporaire
@@ -47,6 +49,7 @@ GameObject:
   - component: {fileID: 400004}
   - component: {fileID: 19800004}
   - component: {fileID: 19900004}
+  - component: {fileID: 114387104005326194}
   m_Layer: 0
   m_Name: SmokeXZ
   m_TagString: Untagged
@@ -64,6 +67,7 @@ GameObject:
   - component: {fileID: 400006}
   - component: {fileID: 19800006}
   - component: {fileID: 19900006}
+  - component: {fileID: 114912071266849616}
   m_Layer: 0
   m_Name: Smoke
   m_TagString: Untagged
@@ -81,6 +85,7 @@ GameObject:
   - component: {fileID: 400008}
   - component: {fileID: 10800000}
   - component: {fileID: 11400004}
+  - component: {fileID: 114780129127215012}
   m_Layer: 0
   m_Name: Light
   m_TagString: Untagged
@@ -99,6 +104,7 @@ GameObject:
   - component: {fileID: 19800008}
   - component: {fileID: 19900008}
   - component: {fileID: 11400006}
+  - component: {fileID: 114415131991564986}
   m_Layer: 0
   m_Name: BurntGround
   m_TagString: Untagged
@@ -13720,7 +13726,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startSizeY:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 1
       minScalar: 1
       maxCurve:
@@ -13761,7 +13767,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startSizeZ:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 1
       minScalar: 1
       maxCurve:
@@ -17155,6 +17161,17 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 100002}
   m_IsPrefabParent: 1
+--- !u!114 &114357605044912006
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06ef307eeb7d09a439a1725c96075e58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114368369901135034
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -17167,3 +17184,58 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delay: 1
+--- !u!114 &114387104005326194
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06ef307eeb7d09a439a1725c96075e58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114415131991564986
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06ef307eeb7d09a439a1725c96075e58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114780129127215012
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06ef307eeb7d09a439a1725c96075e58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114912071266849616
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06ef307eeb7d09a439a1725c96075e58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114919610369183316
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06ef307eeb7d09a439a1725c96075e58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

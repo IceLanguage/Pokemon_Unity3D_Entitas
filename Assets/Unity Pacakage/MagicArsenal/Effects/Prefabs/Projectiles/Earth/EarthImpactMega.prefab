@@ -130,6 +130,7 @@ GameObject:
   - component: {fileID: 8233770}
   - component: {fileID: 19913670}
   - component: {fileID: 19849836}
+  - component: {fileID: 114384455485575748}
   m_Layer: 0
   m_Name: EarthImpactMega
   m_TagString: Untagged
@@ -10451,7 +10452,7 @@ ParticleSystem:
         m_RotationOrder: 0
     startSizeY:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 1
       minScalar: 1
       maxCurve:
@@ -10492,7 +10493,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startSizeZ:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 1
       minScalar: 1
       maxCurve:
@@ -23795,7 +23796,26 @@ Prefab:
       propertyPath: InitialModule.startSize.minScalar
       value: 0.5500
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: InitialModule.startSize.minScalar
+      value: 0.5500
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: InitialModule.startSize.minScalar
+      value: 0.5500
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 198426}
   m_IsPrefabParent: 1
+--- !u!114 &114384455485575748
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 198426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06ef307eeb7d09a439a1725c96075e58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

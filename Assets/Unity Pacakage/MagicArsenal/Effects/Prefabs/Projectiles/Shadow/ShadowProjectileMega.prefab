@@ -77,6 +77,7 @@ GameObject:
   - component: {fileID: 8241818}
   - component: {fileID: 19948740}
   - component: {fileID: 19860954}
+  - component: {fileID: 114838561261499538}
   m_Layer: 0
   m_Name: ShadowProjectileMega
   m_TagString: Untagged
@@ -10858,7 +10859,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotationX:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 1
       minScalar: 0
       maxCurve:
@@ -10899,7 +10900,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotationY:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 1
       minScalar: 0
       maxCurve:
@@ -20838,3 +20839,14 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 145700}
   m_IsPrefabParent: 1
+--- !u!114 &114838561261499538
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 145700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06ef307eeb7d09a439a1725c96075e58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

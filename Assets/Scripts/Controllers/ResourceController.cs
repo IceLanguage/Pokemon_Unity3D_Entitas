@@ -31,6 +31,8 @@ public partial class ResourceController : SingletonMonobehavior<ResourceControll
 
     private const string Pokemondatapath = "Data/pokemon/";
     private const string Datapath = "Data/trainer/";
+
+    public bool LOADITEM, LOADSKILL, LOADSKILLPOOL;
     public string UserName
     {
         get
@@ -53,9 +55,10 @@ public partial class ResourceController : SingletonMonobehavior<ResourceControll
 
     private void Start()
     {
+        StartCoroutine(LoadPokemonSkillPools());
         StartCoroutine(LoadPokemonSkillsData());
         StartCoroutine(LoadItemData());
-        StartCoroutine(LoadPokemonSkillPools());
+       
 
         LoadPokemonAbilitysData();
         LoadPokemonNaturesData();
@@ -85,6 +88,8 @@ public partial class ResourceController : SingletonMonobehavior<ResourceControll
                     ItemDic[item.Name] = item; 
 
             }
+            DebugHelper.LogFormat("背包物品数据已加载");
+            LOADITEM = true;
             AssetBundle.UnloadAllAssetBundles(false);
         }
     }
@@ -105,7 +110,9 @@ public partial class ResourceController : SingletonMonobehavior<ResourceControll
                     allSkillDic[skill.SKillID] = skill;
 
             }
-            AssetBundle.UnloadAllAssetBundles(false);
+            LOADSKILL = true;
+            DebugHelper.LogFormat("技能数据已加载");
+            //AssetBundle.UnloadAllAssetBundles(false);
         }
     }
     IEnumerator LoadPokemonSkillPools()
@@ -124,6 +131,8 @@ public partial class ResourceController : SingletonMonobehavior<ResourceControll
                     PokemonSkillPoolDic[skillPool.PokemonID] = skillPool;
 
             }
+            DebugHelper.LogFormat("技能池数据已加载");
+            LOADSKILLPOOL = true;
             AssetBundle.UnloadAllAssetBundles(false);
         }
     }

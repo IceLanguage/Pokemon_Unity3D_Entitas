@@ -44,13 +44,16 @@ class UIController:SingletonMonobehavior<UIController>
 
     private void Start()
     {
-        TTUIPage.ShowPage<UI_PokemonBagIcon>();
-        TTUIPage.ShowPage<UI_BagIcon>();
+        
 
         TTUIPage.ShowPage<UIBattle_ShowPlaySkill>();
         TTUIPage.ShowPage<UIBattle_ShowEnemySkill>();
         TTUIPage.ShowPage<UICatchPokemon>();
+        TTUIPage.ShowPage<UI_PokemonBagIcon>();
+        TTUIPage.ShowPage<UI_BagIcon>();
+        
     }
+
     private void ShowBattleUI()
     {
         TTUIPage.ShowPage<UIBattle_Buttons>();

@@ -27,6 +27,7 @@ GameObject:
   - component: {fileID: 8253770}
   - component: {fileID: 19977234}
   - component: {fileID: 19829940}
+  - component: {fileID: 114858681125941832}
   m_Layer: 0
   m_Name: ArcaneProjectileTiny
   m_TagString: Untagged
@@ -7111,7 +7112,22 @@ Prefab:
       propertyPath: RotationModule.curve.minScalar
       value: 6.9813
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: RotationModule.curve.minScalar
+      value: 6.9813
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 130552}
   m_IsPrefabParent: 1
+--- !u!114 &114858681125941832
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 130552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06ef307eeb7d09a439a1725c96075e58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

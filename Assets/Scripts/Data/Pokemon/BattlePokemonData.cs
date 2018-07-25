@@ -298,6 +298,7 @@ public class BattlePokemonData : PokemonBaseData
         increase = new Increase();
         StatModifiers = new StatModifiers();
         SetAbnormalStateEnum(AbnormalStateEnum.Normal);
+        curHealth = Health;
         InitPokemonData();
         
     }

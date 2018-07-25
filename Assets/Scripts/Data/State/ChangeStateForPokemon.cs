@@ -248,13 +248,12 @@ namespace PokemonBattele
                 if (pokemon.curHealth < 0)
                     pokemon.curHealth = 0;
             }
-            
+
             return flag;
         }
 
         public override void Init(BattlePokemonData pokemon)
         {
-
             count[pokemon.ID] = RandomService.game.Int(1, 5);
         }
 
@@ -268,7 +267,7 @@ namespace PokemonBattele
         public override void UpdateInPlayerAround(BattlePokemonData pokemon)
         {
 
-            if (0 == --count[pokemon.ID])
+            if (!count.ContainsKey(pokemon.ID)|| 0 == --count[pokemon.ID])
             {
                 LoseState(pokemon);
 

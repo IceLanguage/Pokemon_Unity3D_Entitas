@@ -32,6 +32,8 @@ public class UI_PokemonBagIcon:TTUIPage
     }
     private void OpenBag()
     {
+        var e = ResourceController.Instance;
+        if (!e.LOADITEM || !e.LOADSKILL || !e.LOADSKILLPOOL) return;
         ShowPage<UI_PokemonBag>();
     }
 }

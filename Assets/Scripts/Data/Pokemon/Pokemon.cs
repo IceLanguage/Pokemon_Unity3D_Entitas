@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,6 +17,42 @@ namespace PokemonBattele
         {
             
             if (raceID < 1 || raceID > ResourceController.Instance.allRaceDic.Count) return;
+            LHCoroutine.CoroutineManager.DoCoroutine(Init(raceID));
+            //this.raceID = raceID;
+            //skillList = new List<int>();
+            //isMan = UnityEngine.Random.Range(-1, 1) >= 0;
+            //basestats = new Basestats();
+            //iv = new IndividualValues();
+            //var nature = PokeNature;
+            //var name = Ename;
+            //if(!ResourceController.Instance.PokemonSkillPoolDic.ContainsKey(raceID))
+            //{
+            //    skillList = new List<int>();
+            //    return;
+            //}
+            //SkillPool skillPool = ResourceController.Instance.PokemonSkillPoolDic[raceID];
+            //if(null == skillPool)
+            //{
+            //    skillList = new List<int>();
+            //    return;
+            //}
+            //int skillCount = skillPool.Skills.Count;
+            //if (skillCount <= 4)
+            //    skillList = new List<int>(skillPool.Skills);
+            //else
+            //{
+            //    skillList = new List<int>();
+            //    while (skillList.Count<4)
+            //    {
+            //        int skillid = skillPool.Skills[UnityEngine.Random.Range(0, skillCount)];
+            //        if (!skillList.Contains(skillid))
+            //            skillList.Add(skillid);
+            //    }
+            //}
+
+        }
+        private IEnumerator Init(int raceID)
+        {
             this.raceID = raceID;
             skillList = new List<int>();
             isMan = UnityEngine.Random.Range(-1, 1) >= 0;
@@ -23,33 +60,27 @@ namespace PokemonBattele
             iv = new IndividualValues();
             var nature = PokeNature;
             var name = Ename;
-            if(!ResourceController.Instance.PokemonSkillPoolDic.ContainsKey(raceID))
+            yield return new WaitWhile(() =>
             {
-                skillList = new List<int>();
-                return;
-            }
+                return !ResourceController.Instance.PokemonSkillPoolDic.ContainsKey(raceID);
+            });
+            
             SkillPool skillPool = ResourceController.Instance.PokemonSkillPoolDic[raceID];
-            if(null == skillPool)
-            {
-                skillList = new List<int>();
-                return;
-            }
+            
             int skillCount = skillPool.Skills.Count;
             if (skillCount <= 4)
                 skillList = new List<int>(skillPool.Skills);
             else
             {
                 skillList = new List<int>();
-                while (skillList.Count<4)
+                while (skillList.Count < 4)
                 {
                     int skillid = skillPool.Skills[UnityEngine.Random.Range(0, skillCount)];
                     if (!skillList.Contains(skillid))
                         skillList.Add(skillid);
                 }
             }
-
         }
-
         private void UpdataRace()
         {
             if (raceID <= 0 || raceID > ResourceController.Instance.allRaceDic.Count)

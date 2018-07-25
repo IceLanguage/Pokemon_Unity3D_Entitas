@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 198805191498286650}
   - component: {fileID: 199133876966830620}
   - component: {fileID: 114350448476093354}
+  - component: {fileID: 114921853845993432}
   m_Layer: 0
   m_Name: "\u5947\u5999\u7A7A\u95F4"
   m_TagString: Untagged
@@ -192,6 +193,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delay: 1
+--- !u!114 &114921853845993432
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1388787685605754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06ef307eeb7d09a439a1725c96075e58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!198 &198067974544910908
 ParticleSystem:
   m_ObjectHideFlags: 1

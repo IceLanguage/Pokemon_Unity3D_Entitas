@@ -62,6 +62,7 @@ GameObject:
   - component: {fileID: 8200000}
   - component: {fileID: 19904290}
   - component: {fileID: 19880026}
+  - component: {fileID: 114620969037624050}
   m_Layer: 0
   m_Name: FrostImpactSmall
   m_TagString: Untagged
@@ -13742,3 +13743,14 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 100010}
   m_IsPrefabParent: 1
+--- !u!114 &114620969037624050
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06ef307eeb7d09a439a1725c96075e58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

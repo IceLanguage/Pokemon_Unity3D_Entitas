@@ -30,6 +30,8 @@ public class UI_BagIcon : TTUIPage {
     }
     private void OpenBag()
     {
+        var e = ResourceController.Instance;
+        if (!e.LOADITEM || !e.LOADSKILL || !e.LOADSKILLPOOL) return;
         ShowPage<UIKnapscakPanel>();
     }
 }
