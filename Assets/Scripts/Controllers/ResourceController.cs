@@ -11,6 +11,7 @@ public partial class ResourceController : SingletonMonobehavior<ResourceControll
     public Material grassMaterial;
     public Material DefaultMaterial;
     public ParticleSystem PokemonShowParticle;
+    public Texture2D glassTexture;
 
     public Dictionary<int, Skill> allSkillDic = new Dictionary<int, Skill>();
     public Dictionary<int, Race> allRaceDic = new Dictionary<int, Race>();

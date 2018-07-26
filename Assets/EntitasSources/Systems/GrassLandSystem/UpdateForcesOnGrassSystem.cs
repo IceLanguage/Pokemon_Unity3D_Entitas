@@ -8,16 +8,14 @@ using UnityEngine;
 class UpdateForcesOnGrassSystem : ReactiveSystem<GameEntity>
 {
     private readonly GameContext context;
-    private const float WaveFrequency = 2.0f;
-    private const float Resistance = 0.25f;
+    private const float WaveFrequency = 1.0f;
+    private const float Resistance = 0.1f;
 
     
     public UpdateForcesOnGrassSystem(Contexts contexts) : base(contexts.game)
     {
         context = contexts.game;
     }
-
-   
 
     private float EaseOutExpo(float start, float end, float value)
     {

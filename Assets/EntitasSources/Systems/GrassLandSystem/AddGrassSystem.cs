@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Entitas;
 using Entitas.Unity;
 using UnityEngine;
+using System.Linq;
 
 /// <summary>
 /// 草地生成系统
@@ -19,30 +20,38 @@ public class AddGrassSystem : ReactiveSystem<GameEntity>
     private Mesh m;    
     private List<Vector3> verts = new List<Vector3>();
 
-    private const int terrainSize = 1;
-    private const int grassCountPerPatch = 1;
-
+    //private const int terrainSize = 1;
+    //private const int grassCountPerPatch = 10;
+    //private readonly Vector3[] points = new Vector3[100];
+    private readonly TerrainData terrainData;
     public AddGrassSystem(Contexts contexts, Material grassMat) : base(contexts.game)
     {
         _context = contexts.game;
-        this.grassMat = new Material(grassMat);
-
+        this.grassMat = grassMat;//new Material(grassMat);
+       // terrainData = GameObject.FindWithTag("Terrain").GetComponent<Terrain>().terrainData;
+        //for (int i = 0; i < 10; ++i)
+        //{
+        //    for (int j = 0; j < 10; ++j)
+        //    {
+        //        points[i * 10 + j] = new Vector3(-0.5f + 0.1f * i, 0, -0.5f + 0.1f * j);
+        //    }
+        //}
     }
 
     protected override void Execute(List<GameEntity> entities)
     {
-        foreach (GameEntity e in entities)
-        {
-            Vector3 grassPos = e.grassPos.pos;
-            if (!e.hasGrassForces)
-                e.AddGrassForces(new List<Force>());
+        //foreach (GameEntity e in entities)
+        //{
+        //    //Vector3 grassPos = e.grassPos.pos;
 
-            
-            
+        //    //if (!e.hasGrassForces)
+        //    //    e.AddGrassForces(new List<Force>());
 
-            GenerateGrassField(grassPos, e);
-        }
+        //    //InstateGrassLand(grassPos, e);
+        //}
         
+
+
     }
 
     protected override bool Filter(GameEntity entity)
@@ -55,122 +64,116 @@ public class AddGrassSystem : ReactiveSystem<GameEntity>
         return context.CreateCollector(GameMatcher.GrassPos);
     }
 
-    /// <summary>
-    /// 草地生成
-    /// </summary>
-    /// <param name="x"></param>
-    /// <param name="z"></param>
-    private void GenerateGrassField(Vector3 pos, GameEntity entity)
-    {     
-        randomService.Initialize(System.DateTime.Now.Millisecond);
-        List<int> indices = new List<int>();
-        for (int i = 0; i < 65000; i++)
-        {
-            indices.Add(i);
-        }
+    ///// <summary>
+    ///// 草地生成
+    ///// </summary>
+    ///// <param name="x"></param>
+    ///// <param name="z"></param>
+    //private void GenerateGrassField(Vector3 pos, GameEntity entity)
+    //{     
+    //    InstateGrassLand(pos, entity);
+    //}
 
-        Vector3 startPosition = new Vector3(0, 0, 0);
-        Vector3 patchSize = new Vector3(1, 0, 1);
+    ///// <summary>
+    ///// 生成草地GameObject
+    ///// </summary>
+    ///// <param name="pos"></param>
+    ///// <param name="entity"></param>
+    //private void InstateGrassLand(Vector3 pos, GameEntity entity)
+    //{
+    //    GameObject grassGo = new GameObject("Grass");
+    //    grassGo.transform.position = pos;
+    //    grassGo.transform.parent = GrassLand;
+    //    BuildMesh();
+    //    mf = grassGo.AddComponent<MeshFilter>();
+    //    _renderer = grassGo.AddComponent<MeshRenderer>();
+    //    _renderer.sharedMaterial = grassMat;
+    //    mf.mesh = m;
 
-        for (int x = 0; x < terrainSize; x++)
-        {
-            for (int y = 0; y < terrainSize; y++)
-            {
-                GenerateGrass(startPosition, patchSize);
-                startPosition.x += patchSize.x;
-            }
+    //    entity.AddGrassMeshRender(_renderer);
+    //}
 
-            startPosition.x = 0;
-            startPosition.z += patchSize.z;
-        }
+    //private void BuildMesh()
+    //{
+    //    Vector3[] vertices = new Vector3[13 * 100];
+    //    Vector2[] uvs = new Vector2[13 * 100];
+    //    Vector3[] normals = new Vector3[13 * 100];
+    //    int[] triangles = new int[66 * 100];
 
+    //    float offsetV = 1f / 6f;
 
-        while (verts.Count > 65000)
-        {
-            m = new Mesh
-            {
-                vertices = verts.GetRange(0, 65000).ToArray()
-            };
-            m.SetIndices(indices.ToArray(), MeshTopology.Points, 0);
+    //    Vector3 root = Vector3.zero;
+    //    int[] show = new int[100];
+    //    for (int i = 0; i < 100; i++)
+    //    {
+    //        show[i] = RandomService.game.Int(0, 3);
+    //    }
+    //    for (int k = 0; k < 100; k++)
+    //    {
+    //        // if (show[k] == 1) continue;
+    //        float width = 0.03f * RandomService.game.Float(0.5f, 1.5f);
+    //        float height = 1f * RandomService.game.Float(0.5f, 1.5f);
+    //        float currentV = 0f;
+    //        float currentVertexHeight = 0;
+    //        root = points[k];
+    //        for (int i = 0; i < 12; i++)
+    //        {
+    //            normals[13 * k + i] = Vector3.forward;
+    //            if (i % 2 == 0)
+    //            {
+    //                vertices[13 * k + i] = new Vector3(root.x - width, root.y + currentVertexHeight, root.z);
+    //                uvs[13 * k + i] = new Vector2(0, currentV);
+    //            }
+    //            else
+    //            {
+    //                vertices[13 * k + i] = new Vector3(root.x + width, root.y + currentVertexHeight, root.z);
+    //                uvs[13 * k + i] = new Vector2(1, currentV);
 
-            InstateGrassLand(pos, entity);
-            verts.RemoveRange(0, 65000);
-            return;
-        }
-
-        m = new Mesh
-        {
-            vertices = verts.ToArray()
-        };
-        m.SetIndices(indices.GetRange(0, verts.Count).ToArray(), MeshTopology.Points, 0);
-        InstateGrassLand(pos, entity);
-    }
-
-    /// <summary>
-    /// 生成草地GameObject
-    /// </summary>
-    /// <param name="pos"></param>
-    /// <param name="entity"></param>
-    private void InstateGrassLand(Vector3 pos, GameEntity entity)
-    {
-        GameObject grassGo = new GameObject("Grass");
-        grassGo.transform.position = pos;
-        grassGo.transform.parent = GrassLand;
-        //entity.AddGrass(grassGo);
-
-        //grassGo.Link(entity, _context);
-        
-
-        mf = grassGo.AddComponent<MeshFilter>();
-        _renderer = grassGo.AddComponent<MeshRenderer>();
-        _renderer.sharedMaterial = new Material(grassMat);
-        mf.mesh = m;
-
-        //随机设置草地高度
-        if (_renderer.sharedMaterial.HasProperty("_Height"))
-        {
-            _renderer.sharedMaterial.SetFloat("_Height", randomService.Float(1f, 1.5f));
-        }
-
-        //随机设置草宽度
-        if (_renderer.sharedMaterial.HasProperty("_Width"))
-        {
-            _renderer.sharedMaterial.SetFloat("_Width", randomService.Float(0.01f, 0.03f));
-        }
-        entity.AddGrassMeshRender(_renderer);
-    }
+    //                currentV += offsetV;
+    //                currentVertexHeight = currentV * height;
+    //            }
+    //        }
+    //        float randomB = RandomService.game.Float(-1f, 1f);
+    //        vertices[13 * k + 12] = new Vector3
+    //            (root.x + randomB * width,
+    //            root.y + currentVertexHeight + RandomService.game.Float(0.01f, offsetV / 3f),
+    //            root.z);
+    //        uvs[13 * k + 12] = new Vector2(0, 1);
+    //        normals[13 * k + 12] = Vector3.forward;
 
 
-    /// <summary>
-    /// 生成草地节点
-    /// </summary>
-    /// <param name="startPosition"></param>
-    /// <param name="patchSize"></param>
-    private void GenerateGrass(Vector3 startPosition, Vector3 patchSize)
-    {
-        for (var i = 0; i < grassCountPerPatch; i++)
-        {
-            var randomizedZDistance = randomService.Float(0, 1) * patchSize.z;
-            var randomizedXDistance = randomService.Float(0, 1) * patchSize.x;
+    //        int j = 0;
+    //        for (int p = 0; p < 11; p++)
+    //        {
+    //            triangles[66 * k + j++] = 13 * k + p;
+    //            triangles[66 * k + j++] = 13 * k + p + 2;
+    //            triangles[66 * k + j++] = 13 * k + p + 1;
 
-            int indexX = (int)((startPosition.x + randomizedXDistance));
-            int indexZ = (int)((startPosition.z + randomizedZDistance));
+    //        }
+    //        for (int p = 0; p < 11; p++)
+    //        {
+    //            triangles[66 * k + j++] = 13 * k + p;
+    //            triangles[66 * k + j++] = 13 * k + p + 1;
+    //            triangles[66 * k + j++] = 13 * k + p + 2;
 
-            if (indexX >= terrainSize)
-            {
-                indexX = (int)terrainSize - 1;
-            }
+    //        }
+    //        float angle = RandomService.game.Float(0, 90);
+    //        Quaternion q = Quaternion.AngleAxis(angle, Vector3.up);
+    //        Matrix4x4 matrix = Matrix4x4.TRS(Vector3.zero, q, Vector3.one);
+    //        for (int i = 0; i < 13; ++i)
+    //        {
+    //            vertices[13 * k + i] = matrix.MultiplyPoint3x4(vertices[13 * k + i]);
+    //        }
 
-            if (indexZ >= terrainSize)
-            {
-                indexZ = (int)terrainSize - 1;
-            }
+    //    }
 
-            Vector3 currentPosition = new Vector3(startPosition.x + randomizedXDistance, 0, startPosition.z + randomizedZDistance);
-
-            this.verts.Add(currentPosition);
-        }
-    }
-
+    //    m = new Mesh()
+    //    {
+    //        vertices = vertices ,
+    //        uv = uvs,
+    //        triangles = triangles,
+    //        normals = normals
+    //    };
+    //}
 
 }

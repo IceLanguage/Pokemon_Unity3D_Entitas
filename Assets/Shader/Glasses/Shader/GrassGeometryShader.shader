@@ -68,6 +68,8 @@
 			{
 				
 				v2g o;
+
+
 				o.pos = v.vertex;
 				o.norm = v.normal;
 				o.uv = v.texcoord;
@@ -242,4 +244,5 @@
 		}
 		
 	}
+	
 }

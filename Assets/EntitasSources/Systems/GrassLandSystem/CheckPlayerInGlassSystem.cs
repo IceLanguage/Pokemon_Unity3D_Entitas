@@ -66,39 +66,39 @@ class CheckPlayerInGrassSystem : IExecuteSystem
             if (false == isDetected)
                 continue;
             DetectGrassNum++;
-            GameEntity GrassEntity = context.GetEntityWithGrassPos(GrassPos);
+            //GameEntity GrassEntity = context.GetEntityWithGrassPos(GrassPos);
 
-            //施加力
-            List<Force> forceList = GrassEntity.grassForces.forceList;
+            ////施加力
+            //List<Force> forceList = GrassEntity.grassForces.forceList;
 
-            //和玩家运行方向相同的一个力
-            Vector3 force = PlayerRigidbody.velocity;
-            force.x = Mathf.Min(1, force.x);
-            force.y = Mathf.Min(1, force.y);
-            force.z = Mathf.Min(1, force.z);
-            force = Vector3.Normalize(force);
-            forceList.Add(new Force(force));
+            ////和玩家运行方向相同的一个力
+            //Vector3 force = PlayerRigidbody.velocity;
+            //force.x = Mathf.Min(1, force.x);
+            //force.y = Mathf.Min(1, force.y);
+            //force.z = Mathf.Min(1, force.z);
+            //force = Vector3.Normalize(force);
+            //forceList.Add(new Force(force));
 
-            //草地被拨开的力
-            Vector3 direction = GrassPos - playPos;
-            Vector3 left = new Vector3(force.z, 0, -force.x);
-            force = new Vector3(force.z, 0, -force.x);
-            if (Vector3.Dot(direction, left) <= 0)
-            {
-                force = new Vector3(-force.z, 0, force.x);
-            }
-            force = Vector3.Normalize(force);
-            forceList.Add(new Force(force));
+            ////草地被拨开的力
+            //Vector3 direction = GrassPos - playPos;
+            //Vector3 left = new Vector3(force.z, 0, -force.x);
+            //force = new Vector3(force.z, 0, -force.x);
+            //if (Vector3.Dot(direction, left) <= 0)
+            //{
+            //    force = new Vector3(-force.z, 0, force.x);
+            //}
+            //force = Vector3.Normalize(force);
+            //forceList.Add(new Force(force));
 
-            //更新草的受力
-            GrassEntity.ReplaceGrassForces(forceList);
+            ////更新草的受力
+            //GrassEntity.ReplaceGrassForces(forceList);
         }
 
         //遭遇精灵
-        if(0 < DetectGrassNum&&Vector3.Magnitude(PlayerRigidbody.velocity)>0.3f)
+        if (0 < DetectGrassNum && Vector3.Magnitude(PlayerRigidbody.velocity) > 0.3f)
         {
             float p = EncounterPokemonProbability * DetectGrassNum;
-            if(RandomService.game.Float(0,100)<p)
+            if (RandomService.game.Float(0, 100) < p)
             {
                 //int PokemonID = PokemonFactory.GetPokemonFromEncounterPokemonScriptableObject(GrassPokemons);
                 Pokemon pokemom = PokemonFactory.BuildPokemon(GrassPokemons);
@@ -106,7 +106,7 @@ class CheckPlayerInGrassSystem : IExecuteSystem
                 DebugHelper.LogFormat("你在草地遭遇了精灵{0}", pokemom.ename);
                 context.isBattleFlag = true;
 
-               
+
             }
         }
     }
