@@ -8,10 +8,10 @@ using System.Text;
 using UnityEngine;
 public partial class ResourceController : SingletonMonobehavior<ResourceController>
 {
-    public Material grassMaterial;
-    public Material DefaultMaterial;
+    //public Material grassMaterial;
+    //public Material DefaultMaterial;
     public ParticleSystem PokemonShowParticle;
-    public Texture2D glassTexture;
+    public GameObject glassPrefab;
 
     public Dictionary<int, Skill> allSkillDic = new Dictionary<int, Skill>();
     public Dictionary<int, Race> allRaceDic = new Dictionary<int, Race>();

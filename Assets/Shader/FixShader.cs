@@ -15,7 +15,7 @@ public class FixShader : MonoBehaviour
 
         Renderer[] Renders = GetComponentsInChildren<Renderer>();
         int length = Renders.Length;
-        Debug.Log(length);
+
         for (int i = 0; i < length; i++)
         {
             int count = Renders[i].materials.Length;

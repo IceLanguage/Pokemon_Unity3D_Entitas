@@ -24,10 +24,10 @@ public class AddGrassSystem : ReactiveSystem<GameEntity>
     //private const int grassCountPerPatch = 10;
     //private readonly Vector3[] points = new Vector3[100];
     private readonly TerrainData terrainData;
-    public AddGrassSystem(Contexts contexts, Material grassMat) : base(contexts.game)
+    public AddGrassSystem(Contexts contexts) : base(contexts.game)
     {
         _context = contexts.game;
-        this.grassMat = grassMat;//new Material(grassMat);
+       // this.grassMat = grassMat;//new Material(grassMat);
        // terrainData = GameObject.FindWithTag("Terrain").GetComponent<Terrain>().terrainData;
         //for (int i = 0; i < 10; ++i)
         //{
@@ -40,16 +40,18 @@ public class AddGrassSystem : ReactiveSystem<GameEntity>
 
     protected override void Execute(List<GameEntity> entities)
     {
-        //foreach (GameEntity e in entities)
-        //{
-        //    //Vector3 grassPos = e.grassPos.pos;
+        foreach (GameEntity e in entities)
+        {
+            Vector3 grassPos = e.grassPos.pos;
 
-        //    //if (!e.hasGrassForces)
-        //    //    e.AddGrassForces(new List<Force>());
+            //if (!e.hasGrassForces)
+            //    e.AddGrassForces(new List<Force>());
 
-        //    //InstateGrassLand(grassPos, e);
-        //}
-        
+            //InstateGrassLand(grassPos, e);
+            GameObject glass = UnityEngine.Object.Instantiate(ResourceController.Instance.glassPrefab, GrassLand);
+            glass.transform.position = grassPos;
+        }
+
 
 
     }
