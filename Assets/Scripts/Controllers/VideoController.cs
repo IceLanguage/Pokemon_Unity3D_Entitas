@@ -21,30 +21,32 @@ class VideoController:MonoBehaviour
     }
     IEnumerator LoadScene()
     {
-        int displayProgress = 0;
-        int toProgress = 0;
+        //int displayProgress = 0;
+        //int toProgress = 0;
 
        var  async = SceneManager.LoadSceneAsync("01-main");
 
         async.allowSceneActivation = false;
 
-        while (async.progress < 0.9f)
-        {
-            toProgress = (int)async.progress * 100;
-            while (displayProgress < toProgress)
-            {
-                ++displayProgress;
+        //while (async.progress < 0.9f)
+        //{
+        //    toProgress = (int)async.progress * 100;
+        //    while (displayProgress < toProgress)
+        //    {
+        //        ++displayProgress;
 
-                yield return new WaitForEndOfFrame();
-            }
-        }
-        toProgress = 100;
-        while (displayProgress < toProgress)
-        {
-            ++displayProgress;
+        //        //yield return new WaitForEndOfFrame();
+        //    }
+        //}
+        //toProgress = 100;
+        //while (displayProgress < toProgress)
+        //{
+        //    ++displayProgress;
 
-            yield return new WaitForEndOfFrame();
-        }
+        //    yield return new WaitForEndOfFrame();
+        //}
+
+     
         async.allowSceneActivation = true;
 
         

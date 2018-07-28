@@ -7293,7 +7293,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotationX:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 1
       minScalar: 0
       maxCurve:
@@ -7334,7 +7334,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotationY:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 1
       minScalar: 0
       maxCurve:
@@ -13925,6 +13925,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Name
       value: ShadowParticles
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: InitialModule.startSpeed.minScalar
+      value: 1.0000
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: InitialModule.startSize.minScalar
+      value: 0.1000
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: InitialModule.startSpeed.minScalar

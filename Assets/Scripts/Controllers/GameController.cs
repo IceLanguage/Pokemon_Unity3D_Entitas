@@ -9,7 +9,7 @@ public class GameController : SingletonMonobehavior<GameController>
 
     private void OnEnable()
     {
-        DebugHelper.Init();
+        //DebugHelper.Init();
         StartCoroutine(InitGameSystem());
     }
     IEnumerator InitGameSystem()
@@ -24,10 +24,6 @@ public class GameController : SingletonMonobehavior<GameController>
         _systems = new GameSystem(contexts);
         _systems.Initialize();
     }
-    //private void Start()
-    //{
-    //    _systems.Initialize();
-    //}
     private void Update()
     {
         if (null == _systems ) return;
@@ -35,16 +31,19 @@ public class GameController : SingletonMonobehavior<GameController>
     }
     private void FixedUpdate()
     {
-        DebugHelper.FixedUpdate();
+        //DebugHelper.FixedUpdate();
 }
     private void LateUpdate()
     {
         if (null == _systems ) return;
         _systems.Cleanup();
+        if(Time.frameCount % 50 == 0)
+            System.GC.Collect();
     }
     protected override void OnDestroy()
     {
-        _systems.TearDown();
+        if (null != _systems) return;
+            _systems.TearDown();
         Resources.UnloadUnusedAssets();
     }
 

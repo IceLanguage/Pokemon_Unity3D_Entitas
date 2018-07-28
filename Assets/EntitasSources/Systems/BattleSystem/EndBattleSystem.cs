@@ -34,13 +34,11 @@ public class EndBattleSystem : ReactiveSystem<GameEntity>
 
     IEnumerator PreEndBattle()
     {
-        yield return new WaitForSeconds(1f);
-        if(context.isBattleFlag)
-            CoroutineManager.DoCoroutine(PreEndBattle());
-        else
+        yield return new WaitWhile(() =>
         {
-            EndBattleEvent();
-        }          
+            return context.isBattleFlag;
+        });
+        EndBattleEvent();
     }
 
 }

@@ -10456,7 +10456,7 @@ ParticleSystem:
         m_RotationOrder: 0
     startSizeY:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 1
       minScalar: 1
       maxCurve:
@@ -10497,7 +10497,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startSizeZ:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 1
       minScalar: 1
       maxCurve:
@@ -17188,6 +17188,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Range
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: InitialModule.startSpeed.minScalar
+      value: 9.0000
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: InitialModule.startSize.minScalar
+      value: 1.3000
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: InitialModule.startSpeed.minScalar

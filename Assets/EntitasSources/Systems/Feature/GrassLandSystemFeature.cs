@@ -12,7 +12,7 @@ internal class GrassLandSystemFeature:Feature
 {
     public GrassLandSystemFeature(Contexts context)
     {
-        Add(new HideGrassSystem(context));
+        //Add(new HideGrassSystem(context));
         //Add(new UpdateForcesOnGrassSystem(context));      
         Add(new AddGrassSystem(context));
         Add(new LoadGrassPosSystem(context));

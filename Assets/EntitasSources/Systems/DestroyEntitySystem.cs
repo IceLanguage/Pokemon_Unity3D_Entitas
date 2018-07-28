@@ -1,32 +1,43 @@
 ﻿using System.Collections.Generic;
 using Entitas;
 
-public sealed class DestroyEntitySystem : ICleanupSystem
+public sealed class DestroyEntitySystem : ReactiveSystem<GameEntity>, ICleanupSystem
 {
 
-    readonly IGroup<GameEntity> _group;
-    readonly List<GameEntity> _buffer = new List<GameEntity>();
+    //readonly IGroup<GameEntity> _group;
+    List<GameEntity> PreDestoryEntities = new List<GameEntity>(30);
 
-    public DestroyEntitySystem(Contexts contexts)
+    public DestroyEntitySystem(Contexts contexts):base(contexts.game)
     {
-        _group = contexts.game.GetGroup(GameMatcher.Destroy);
+       
     }
 
     public void Cleanup()
     {
-        var enumerator = _group.GetEntities(_buffer).GetEnumerator();
-        try
+        if (0 == PreDestoryEntities.Count) return;
+        foreach(var entity in PreDestoryEntities)
         {
-            while (enumerator.MoveNext())
-            {
-                enumerator.Current.Destroy();
+            entity.Destroy();
+        }
+        PreDestoryEntities = new List<GameEntity>(30);
 
-            }
-        }
-        finally
-        {
-            enumerator.Dispose();
-        }
-       
+    }
+
+    protected override void Execute(List<GameEntity> entities)
+    {
+       foreach(var entity in entities)
+       {
+            PreDestoryEntities.Add(entity);
+       }
+    }
+
+    protected override bool Filter(GameEntity entity)
+    {
+        return entity.isDestroy;
+    }
+
+    protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
+    {
+        return context.CreateCollector(GameMatcher.Destroy);
     }
 }

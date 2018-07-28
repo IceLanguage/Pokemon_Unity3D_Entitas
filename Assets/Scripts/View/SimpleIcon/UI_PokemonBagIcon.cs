@@ -24,7 +24,7 @@ public class UI_PokemonBagIcon:TTUIPage
     }
     public override void Active()
     {
-        rectTransform.DOAnchorPosY(-250, 0.1f);
+        rectTransform.DOAnchorPosY(-240, 0.1f);
     }
     public override void Hide()
     {

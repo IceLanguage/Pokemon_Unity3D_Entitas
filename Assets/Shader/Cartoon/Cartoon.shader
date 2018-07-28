@@ -127,46 +127,46 @@ Shader "LHShader/Cartoon"
 			}
 			ENDCG
 		}
-		pass {//附加点光源的pass渲染
-			Tags{ "LightMode" = "ForwardAdd" }
-			Blend One One
-			Cull Back
-			ZWrite Off
-			CGPROGRAM
-			#pragma vertex vert
-			#pragma fragment frag
-			#include "UnityCG.cginc"
+		//pass {//附加点光源的pass渲染
+		//	Tags{ "LightMode" = "ForwardAdd" }
+		//	Blend One One
+		//	Cull Back
+		//	ZWrite Off
+		//	CGPROGRAM
+		//	#pragma vertex vert
+		//	#pragma fragment frag
+		//	#include "UnityCG.cginc"
 
-			fixed4 _LightColor0;
-			fixed4 _Color;
-			half _Steps;
-			half _ToonEffect;
+		//	fixed4 _LightColor0;
+		//	fixed4 _Color;
+		//	half _Steps;
+		//	half _ToonEffect;
 
-			struct v2f {
-				fixed4 pos:SV_POSITION;
-				fixed3 lightDir:TEXCOORD0;
-				fixed3 viewDir:TEXCOORD1;
-				fixed3 normal:TEXCOORD2;
-			};
+		//	struct v2f {
+		//		fixed4 pos:SV_POSITION;
+		//		fixed3 lightDir:TEXCOORD0;
+		//		fixed3 viewDir:TEXCOORD1;
+		//		fixed3 normal:TEXCOORD2;
+		//	};
 
-			v2f vert(appdata_full v) {
-				v2f o;
-				o.pos = UnityObjectToClipPos(v.vertex);
-				o.normal = v.normal;
-				o.viewDir = ObjSpaceViewDir(v.vertex);
-				o.lightDir = _WorldSpaceLightPos0 - v.vertex;
+		//	v2f vert(appdata_full v) {
+		//		v2f o;
+		//		o.pos = UnityObjectToClipPos(v.vertex);
+		//		o.normal = v.normal;
+		//		o.viewDir = ObjSpaceViewDir(v.vertex);
+		//		o.lightDir = _WorldSpaceLightPos0 - v.vertex;
 
-				return o;
-			}
-			fixed4 frag(v2f i) :COLOR
-			{
-				fixed4 c = 1;
+		//		return o;
+		//	}
+		//	fixed4 frag(v2f i) :COLOR
+		//	{
+		//		fixed4 c = 1;
 
-				fixed4 ambient =fixed4(UNITY_LIGHTMODEL_AMBIENT.xyz,1.0);
-				c = _Color * _LightColor0*(ambient);//求出最终颜色
-				return c;
-			}
-				ENDCG
-		}
+		//		fixed4 ambient =fixed4(UNITY_LIGHTMODEL_AMBIENT.xyz,1.0);
+		//		c = _Color * _LightColor0*(ambient);//求出最终颜色
+		//		return c;
+		//	}
+		//		ENDCG
+		//}
 	}
 }

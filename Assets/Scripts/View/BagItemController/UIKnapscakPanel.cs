@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using TinyTeam.UI;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using DG.Tweening;
 using MyUnityEventDispatcher;
 using System.Collections;
-using PokemonBattele;
 
 public class UIKnapscakPanel:TTUIPage
 {

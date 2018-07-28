@@ -1,9 +1,4 @@
 ﻿using PokemonBattele;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using UnityEngine;
 
 /// <summary>
 /// 精灵捕获或精灵属性和伤害数值的计算

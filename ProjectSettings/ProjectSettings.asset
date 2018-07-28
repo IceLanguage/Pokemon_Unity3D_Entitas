@@ -7,7 +7,7 @@ PlayerSettings:
   productGUID: 072ca427d181d794693e49059feb214c
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
-  defaultScreenOrientation: 4
+  defaultScreenOrientation: 3
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
@@ -49,7 +49,7 @@ PlayerSettings:
   m_StereoRenderingPath: 0
   m_ActiveColorSpace: 0
   m_MTRendering: 1
-  m_StackTraceTypes: 010000000100000001000000010000000100000001000000
+  m_StackTraceTypes: 020000000200000002000000020000000200000001000000
   iosShowActivityIndicatorOnLoading: -1
   androidShowActivityIndicatorOnLoading: -1
   tizenShowActivityIndicatorOnLoading: -1
@@ -156,7 +156,7 @@ PlayerSettings:
   m_ColorGamuts: 00000000
   targetPixelDensity: 30
   resolutionScalingMode: 0
-  androidSupportedAspectRatio: 1
+  androidSupportedAspectRatio: 0
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
     Android: com.PokemonBattle
@@ -247,7 +247,7 @@ PlayerSettings:
   androidSplashScreen: {fileID: 0}
   AndroidKeystoreName: 
   AndroidKeyaliasName: 
-  AndroidTVCompatibility: 1
+  AndroidTVCompatibility: 0
   AndroidIsGame: 1
   AndroidEnableTango: 0
   androidEnableBanner: 1
@@ -545,7 +545,7 @@ PlayerSettings:
   psmSplashimage: {fileID: 0}
   splashScreenBackgroundSourceLandscape: {fileID: 0}
   splashScreenBackgroundSourcePortrait: {fileID: 0}
-  spritePackerPolicy: 
+  spritePackerPolicy: DefaultPackerPolicy
   webGLMemorySize: 256
   webGLExceptionSupport: 1
   webGLNameFilesAsHashes: 0

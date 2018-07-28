@@ -28,6 +28,8 @@ public partial class ResourceController : SingletonMonobehavior<ResourceControll
     private const string skillAssetPath = "SkillAsset/";
     private const string skillPoolPath = "SkillPoolConfig/";
 
+    public static string WWW_STREAM_ASSET_PATH;
+
 
 
     private const string Pokemondatapath = "Data/pokemon/";
@@ -56,6 +58,12 @@ public partial class ResourceController : SingletonMonobehavior<ResourceControll
 
     private void Start()
     {
+        WWW_STREAM_ASSET_PATH =
+#if UNITY_ANDROID
+            Application.streamingAssetsPath;      // 路径与上面不同，安卓直接用这个
+#else
+            "file://" + Application.streamingAssetsPath;  // 反而其他平台加file://
+#endif
         StartCoroutine(LoadPokemonSkillPools());
         StartCoroutine(LoadPokemonSkillsData());
         StartCoroutine(LoadItemData());
@@ -75,7 +83,7 @@ public partial class ResourceController : SingletonMonobehavior<ResourceControll
 
     IEnumerator LoadItemData()
     {
-        using (WWW www = new WWW(Application.streamingAssetsPath + "/bagitems"))
+        using (WWW www = new WWW(WWW_STREAM_ASSET_PATH + "/bagitems"))
 
         {
             yield return www;
@@ -97,7 +105,7 @@ public partial class ResourceController : SingletonMonobehavior<ResourceControll
 
     IEnumerator LoadPokemonSkillsData()
     {
-        using (WWW www = new WWW(Application.streamingAssetsPath + "/skills"))
+        using (WWW www = new WWW(WWW_STREAM_ASSET_PATH + "/skills"))
 
         {
             yield return www;
@@ -113,12 +121,12 @@ public partial class ResourceController : SingletonMonobehavior<ResourceControll
             }
             LOADSKILL = true;
             DebugHelper.LogFormat("技能数据已加载");
-            //AssetBundle.UnloadAllAssetBundles(false);
+            AssetBundle.UnloadAllAssetBundles(false);
         }
     }
     IEnumerator LoadPokemonSkillPools()
     {
-        using (WWW www = new WWW(Application.streamingAssetsPath + "/pokemonSkillPools"))
+        using (WWW www = new WWW(WWW_STREAM_ASSET_PATH + "/pokemonskillpools"))
 
         {
             yield return www;
