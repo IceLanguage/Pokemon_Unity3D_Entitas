@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 54067926851431652}
   - component: {fileID: 114042996557938058}
   - component: {fileID: 114572754393303472}
+  - component: {fileID: 114881453779834912}
   m_Layer: 0
   m_Name: "\u5CA9\u77F3\u70AE"
   m_TagString: Untagged
@@ -94,6 +95,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delay: 1
+--- !u!114 &114881453779834912
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1117901497805666}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06ef307eeb7d09a439a1725c96075e58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!135 &135961933303713342
 SphereCollider:
   m_ObjectHideFlags: 1

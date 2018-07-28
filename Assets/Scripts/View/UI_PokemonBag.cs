@@ -257,6 +257,11 @@ public class UI_PokemonBag : TTUIPage
         List<int> skills = pokemon.skills;
         List<int> skillPps = pokemon.skillPPs;
         int i;
+        if (null == skills)
+        {
+            Hide();
+            return;
+        }
         for(i=0;i<skills.Count&&i<4;i++)
         {
             Skill skill = ResourceController.Instance.allSkillDic[skills[i]];

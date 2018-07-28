@@ -4,7 +4,7 @@
     {
         Add(new DestroyEntitySystem(contexts));
         Add(new DataSaveAndLoadFeature(contexts));
-        Add(new GrassLandSystemFeature(contexts, ResourceController.Instance.grassMaterial));
+        Add(new GrassLandSystemFeature(contexts));
         Add(new BattleSystemFeature(contexts));
     }
 }

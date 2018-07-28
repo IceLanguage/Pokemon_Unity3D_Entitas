@@ -45,15 +45,15 @@ public class ItemUI : MonoBehaviour
 
     void Update()
     {
-        if (this.transform.localScale.x != targetScale)//设置物品动画
-        {
-            float scaleTemp = Mathf.Lerp(this.transform.localScale.x, targetScale, smothing*Time.deltaTime);
-            this.transform.localScale = new Vector3(scaleTemp, scaleTemp, scaleTemp);
-            if (Mathf.Abs(transform.localScale.x-targetScale) < 0.02f)//插值运算达不到临界值，比较耗性能，加上临界值判断能更好的控制
-            {
-                this.transform.localScale = new Vector3(targetScale, targetScale, targetScale);
-            }
-        }
+        //if (this.transform.localScale.x != targetScale)//设置物品动画
+        //{
+        //    float scaleTemp = Mathf.Lerp(this.transform.localScale.x, targetScale, smothing*Time.deltaTime);
+        //    this.transform.localScale = new Vector3(scaleTemp, scaleTemp, scaleTemp);
+        //    if (Mathf.Abs(transform.localScale.x-targetScale) < 0.02f)//插值运算达不到临界值，比较耗性能，加上临界值判断能更好的控制
+        //    {
+        //        this.transform.localScale = new Vector3(targetScale, targetScale, targetScale);
+        //    }
+        //}
     }
 
     /// <summary>

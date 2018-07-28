@@ -8,9 +8,10 @@ using System.Text;
 using UnityEngine;
 public partial class ResourceController : SingletonMonobehavior<ResourceController>
 {
-    public Material grassMaterial;
-    public Material DefaultMaterial;
+    //public Material grassMaterial;
+    //public Material DefaultMaterial;
     public ParticleSystem PokemonShowParticle;
+    public GameObject glassPrefab;
 
     public Dictionary<int, Skill> allSkillDic = new Dictionary<int, Skill>();
     public Dictionary<int, Race> allRaceDic = new Dictionary<int, Race>();
@@ -27,10 +28,14 @@ public partial class ResourceController : SingletonMonobehavior<ResourceControll
     private const string skillAssetPath = "SkillAsset/";
     private const string skillPoolPath = "SkillPoolConfig/";
 
+    public static string WWW_STREAM_ASSET_PATH;
+
 
 
     private const string Pokemondatapath = "Data/pokemon/";
     private const string Datapath = "Data/trainer/";
+
+    public bool LOADITEM, LOADSKILL, LOADSKILLPOOL;
     public string UserName
     {
         get
@@ -53,9 +58,16 @@ public partial class ResourceController : SingletonMonobehavior<ResourceControll
 
     private void Start()
     {
+        WWW_STREAM_ASSET_PATH =
+#if UNITY_ANDROID
+            Application.streamingAssetsPath;      // 路径与上面不同，安卓直接用这个
+#else
+            "file://" + Application.streamingAssetsPath;  // 反而其他平台加file://
+#endif
+        StartCoroutine(LoadPokemonSkillPools());
         StartCoroutine(LoadPokemonSkillsData());
         StartCoroutine(LoadItemData());
-        StartCoroutine(LoadPokemonSkillPools());
+       
 
         LoadPokemonAbilitysData();
         LoadPokemonNaturesData();
@@ -71,7 +83,7 @@ public partial class ResourceController : SingletonMonobehavior<ResourceControll
 
     IEnumerator LoadItemData()
     {
-        using (WWW www = new WWW(Application.streamingAssetsPath + "/bagitems"))
+        using (WWW www = new WWW(WWW_STREAM_ASSET_PATH + "/bagitems"))
 
         {
             yield return www;
@@ -85,13 +97,15 @@ public partial class ResourceController : SingletonMonobehavior<ResourceControll
                     ItemDic[item.Name] = item; 
 
             }
+            DebugHelper.LogFormat("背包物品数据已加载");
+            LOADITEM = true;
             AssetBundle.UnloadAllAssetBundles(false);
         }
     }
 
     IEnumerator LoadPokemonSkillsData()
     {
-        using (WWW www = new WWW(Application.streamingAssetsPath + "/skills"))
+        using (WWW www = new WWW(WWW_STREAM_ASSET_PATH + "/skills"))
 
         {
             yield return www;
@@ -105,12 +119,14 @@ public partial class ResourceController : SingletonMonobehavior<ResourceControll
                     allSkillDic[skill.SKillID] = skill;
 
             }
+            LOADSKILL = true;
+            DebugHelper.LogFormat("技能数据已加载");
             AssetBundle.UnloadAllAssetBundles(false);
         }
     }
     IEnumerator LoadPokemonSkillPools()
     {
-        using (WWW www = new WWW(Application.streamingAssetsPath + "/pokemonSkillPools"))
+        using (WWW www = new WWW(WWW_STREAM_ASSET_PATH + "/pokemonskillpools"))
 
         {
             yield return www;
@@ -124,6 +140,8 @@ public partial class ResourceController : SingletonMonobehavior<ResourceControll
                     PokemonSkillPoolDic[skillPool.PokemonID] = skillPool;
 
             }
+            DebugHelper.LogFormat("技能池数据已加载");
+            LOADSKILLPOOL = true;
             AssetBundle.UnloadAllAssetBundles(false);
         }
     }

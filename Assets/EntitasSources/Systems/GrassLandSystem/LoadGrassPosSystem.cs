@@ -35,13 +35,13 @@ internal class LoadGrassPosSystem : IInitializeSystem
         {
             GameEntity entity = _context.CreateEntity();
 
-            //草地位置稍有偏移
-            Vector3 grassPos = new Vector3(
-                RandomService.game.Float(-0.1f, 0.1f) + pos.x,
-                0f,
-                RandomService.game.Float(-0.1f, 0.1f) + pos.z);
+            ////草地位置稍有偏移
+            //Vector3 grassPos = new Vector3(
+            //    RandomService.game.Float(-0.1f, 0.1f) + pos.x,
+            //    0f,
+            //    RandomService.game.Float(-0.1f, 0.1f) + pos.z);
 
-            entity.AddGrassPos(grassPos);
+            entity.AddGrassPos(pos);
         }
 
     }

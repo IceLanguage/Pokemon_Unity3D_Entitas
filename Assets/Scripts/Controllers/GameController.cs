@@ -1,7 +1,7 @@
 ﻿using Entitas;
 using Invector.CharacterController;
 using UnityEngine;
-
+using System.Collections;
 public class GameController : SingletonMonobehavior<GameController>
 {
 
@@ -9,12 +9,19 @@ public class GameController : SingletonMonobehavior<GameController>
 
     private void OnEnable()
     {
-        DebugHelper.Init();
+        //DebugHelper.Init();
+        StartCoroutine(InitGameSystem());
+    }
+    IEnumerator InitGameSystem()
+    {
+        var e = ResourceController.Instance;
+        yield return new WaitWhile(() =>
+        {
+           
+            return !e.LOADITEM || !e.LOADSKILL || !e.LOADSKILLPOOL;
+        });
         var contexts = Contexts.sharedInstance;
         _systems = new GameSystem(contexts);
-    }
-    private void Start()
-    {
         _systems.Initialize();
     }
     private void Update()
@@ -24,15 +31,19 @@ public class GameController : SingletonMonobehavior<GameController>
     }
     private void FixedUpdate()
     {
-        DebugHelper.FixedUpdate();
+        //DebugHelper.FixedUpdate();
 }
     private void LateUpdate()
     {
+        if (null == _systems ) return;
         _systems.Cleanup();
+        if(Time.frameCount % 50 == 0)
+            System.GC.Collect();
     }
     protected override void OnDestroy()
     {
-        _systems.TearDown();
+        if (null != _systems) return;
+            _systems.TearDown();
         Resources.UnloadUnusedAssets();
     }
 

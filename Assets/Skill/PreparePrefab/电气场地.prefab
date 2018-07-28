@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 198722871386355970}
   - component: {fileID: 199446751249402458}
   - component: {fileID: 114638682945819034}
+  - component: {fileID: 114631602974565614}
   m_Layer: 0
   m_Name: "\u7535\u6C14\u573A\u5730"
   m_TagString: Untagged
@@ -242,6 +243,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotateVector: {x: 0, y: 0, z: 360}
   rotateSpace: 0
+--- !u!114 &114631602974565614
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1038377737737050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06ef307eeb7d09a439a1725c96075e58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114638682945819034
 MonoBehaviour:
   m_ObjectHideFlags: 1

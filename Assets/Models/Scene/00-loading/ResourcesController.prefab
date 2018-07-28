@@ -43,7 +43,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4548466527677694
 Transform:
   m_ObjectHideFlags: 1
@@ -82,11 +82,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38f0655ccdf1f6a408dd40500b0fb92a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  grassMaterial: {fileID: 2100000, guid: bd6d02eb25769ea4c8da44c7caccd45b, type: 2}
-  DefaultMaterial: {fileID: 2100000, guid: df5358bc628291140a3d9737afa44c3d, type: 2}
   PokemonShowParticle: {fileID: 198790632317191282}
+  glassPrefab: {fileID: 1407746782068890, guid: d3477390facf12c4385b2cf6f1a57920,
+    type: 2}
   CanUsePokemonList: 
-  glassPokemons: {fileID: 11400000, guid: f67a23ea43f37ba4da0441309e02709d, type: 2}
+  glassPokemons: {fileID: 11400000, guid: 17853e13e6ae7484f8eaa2cb2c08a426, type: 2}
+  LOADITEM: 0
+  LOADSKILL: 0
+  LOADSKILLPOOL: 0
 --- !u!198 &198790632317191282
 ParticleSystem:
   m_ObjectHideFlags: 1

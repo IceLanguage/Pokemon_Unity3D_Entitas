@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4750714899840096}
   - component: {fileID: 198721448141091470}
   - component: {fileID: 199655171421343088}
+  - component: {fileID: 114118889082727956}
   m_Layer: 0
   m_Name: GroundLine
   m_TagString: Untagged
@@ -38,6 +39,7 @@ GameObject:
   - component: {fileID: 4350105440083596}
   - component: {fileID: 198554016461087524}
   - component: {fileID: 199471719514911360}
+  - component: {fileID: 114653481832319744}
   m_Layer: 0
   m_Name: BigGlow
   m_TagString: Untagged
@@ -73,6 +75,7 @@ GameObject:
   - component: {fileID: 198512318399161784}
   - component: {fileID: 199134806343502234}
   - component: {fileID: 114738127047929958}
+  - component: {fileID: 114920933740385242}
   m_Layer: 0
   m_Name: "\u84C4\u80FD\u7130\u88AD"
   m_TagString: Untagged
@@ -90,6 +93,7 @@ GameObject:
   - component: {fileID: 4571285749971232}
   - component: {fileID: 198073109287337474}
   - component: {fileID: 199587066968069208}
+  - component: {fileID: 114762262496602616}
   m_Layer: 0
   m_Name: VerticalLine
   m_TagString: Untagged
@@ -166,6 +170,28 @@ Transform:
   m_Father: {fileID: 4350105440083596}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114118889082727956
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1001005442273144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06ef307eeb7d09a439a1725c96075e58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114653481832319744
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1265957979920390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06ef307eeb7d09a439a1725c96075e58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114738127047929958
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -178,6 +204,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delay: 1
+--- !u!114 &114762262496602616
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1843228334697630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06ef307eeb7d09a439a1725c96075e58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114920933740385242
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1590707085961428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06ef307eeb7d09a439a1725c96075e58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!198 &198072229860268862
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -3743,7 +3791,7 @@ ParticleSystem:
         m_RotationOrder: 0
     startSizeY:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 2
       scalar: 1
       minScalar: 1
       maxCurve:
@@ -3784,7 +3832,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startSizeZ:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 2
       scalar: 1
       minScalar: 1
       maxCurve:
