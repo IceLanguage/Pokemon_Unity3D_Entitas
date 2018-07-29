@@ -248,7 +248,7 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
 
             return;
         }
-
+        TTUIPage.ShowPage<UIBattle_Skills>();
 
         BattlePokemonData newCallPokemon = playPokemons[notific.param];       
         ExchangePokemon(newCallPokemon);
@@ -597,6 +597,7 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
         if(null == EnemyCurPokemonData||EnemyCurPokemonData.curHealth<=0)
         {
             winer = "我方";
+            WinResoult();
         }
         DebugHelper.LogFormat("战斗结束，{0}取得了胜利",winer);
 
@@ -605,5 +606,32 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
         context.isBattleFlag = false;
     }
 
-    
+    /// <summary>
+    /// 获胜后的奖励
+    /// </summary>
+    private void WinResoult()
+    {
+        var bagitems = ResourceController.Instance.UseBagUItemDict.Keys;
+        var trainer = context.playerData.scriptableObject;
+        var trainerBagItems = trainer.bagItems;
+        int randomIndex = RandomService.game.Int(0, bagitems.Count);
+        int i = 0;
+        string itemName = "";
+        foreach (var item in bagitems)
+        {
+            if(i++ == randomIndex)
+            {
+                itemName = item;
+                break;
+            }
+        }
+        if(bagitems.Contains(itemName))
+        {
+            int itemCount = RandomService.game.Int(1, 5);
+            DebugHelper.LogFormat("玩家获得 {0} {1}个", itemName, itemCount);
+            trainerBagItems.Add(BagItems.Build(itemName,itemCount ));
+            context.ReplacePlayerData(trainer);
+
+        }
+    }
 }
