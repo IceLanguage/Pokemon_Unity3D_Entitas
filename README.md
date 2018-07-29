@@ -11,4 +11,4 @@ Develop a Pokemon game based on Unity Engine
 
 ## 游戏展示
 
-![游戏展示](http://p9sfkx5v1.bkt.clouddn.com/PokemonBattle.gif)
+![游戏展示](http://p9sfkx5v1.bkt.clouddn.com/2018-07-29_20-49-23.gif)
