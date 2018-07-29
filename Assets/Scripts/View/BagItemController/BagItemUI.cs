@@ -113,6 +113,9 @@ public class BagItemUI : MonoBehaviour,
             string toolTipText = ItemUI.Item.ToString();
             //Contexts.sharedInstance.game.ReplaceToolTipString
             //    (toolTipText, RectTransform.anchoredPosition);
+            NotificationCenter<ToolTipMessage>.Get()
+                .DispatchEvent("UIToolTip"
+                ,new ToolTipMessage(toolTipText, RectTransform.anchoredPosition));
         }
     }
 

@@ -44,8 +44,8 @@ class UIController:SingletonMonobehavior<UIController>
 
     private void Start()
     {
-        
 
+        TTUIPage.ShowPage<UIToolTip>();
         TTUIPage.ShowPage<UIBattle_ShowPlaySkill>();
         TTUIPage.ShowPage<UIBattle_ShowEnemySkill>();
         TTUIPage.ShowPage<UICatchPokemon>();
@@ -59,6 +59,7 @@ class UIController:SingletonMonobehavior<UIController>
         TTUIPage.ShowPage<UIBattle_Buttons>();
         TTUIPage.ShowPage<UIBattle_EnemyInfo>();
         TTUIPage.ShowPage<UIBattle_PokemonInfos>();
+        
 
         TTUIPage.ClosePage<UI_PokemonBagIcon>();
         TTUIPage.ClosePage<UI_BagIcon>();
