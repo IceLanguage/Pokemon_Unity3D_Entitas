@@ -19,9 +19,9 @@ class InitBagItemEffectSystem : IInitializeSystem
         dict["先机球"] = new UseQuickBall();
         dict["计时球"] = new UseTimerBall();
 
-        dict["力量强化"] = new UseBattleProp("力量强化",
-            new ChangePhysicPowerStatModifiersEffect(-1, 2, true, true));
-        dict["防御强化"] = new UseBattleProp("防御强化",
-            new ChangePhysicDefenceStatModifiersEffect(-1, 2, true, true));
+        //dict["力量强化"] = new UseBattleProp("力量强化",
+        //    new ChangePhysicPowerStatModifiersEffect(-1, 2, true, true));
+        //dict["防御强化"] = new UseBattleProp("防御强化",
+        //    new ChangePhysicDefenceStatModifiersEffect(-1, 2, true, true));
     }
 }

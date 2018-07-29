@@ -447,7 +447,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d629371fd243af46a1eb9596de1032f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Log: 0
 --- !u!20 &1958018579 stripped
 Camera:
   m_PrefabParentObject: {fileID: 20864264484997500, guid: 83c812b3c9c34c0428c70fd3bbf3a3cd,

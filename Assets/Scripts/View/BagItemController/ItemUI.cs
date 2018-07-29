@@ -150,39 +150,39 @@ public class ItemUI : MonoBehaviour
         this.SetItem(itemUI.Items);
     }
 
-    /// <summary>
-    /// 使用物品
-    /// </summary>
-    public void UseItem()
-    {
+    ///// <summary>
+    ///// 使用物品
+    ///// </summary>
+    //public void UseItem()
+    //{
         
-        if(Item.Type!=ItemType.CarryingProps)
-        {
-            //UnityAction action;
-            //ResourceController.Instance.BagItemUseEffectDic.TryGetValue(Item.ID,out action);
-            //if (null == action) return;
-            //var playerEntity = Contexts.sharedInstance.game.playerTransformEntity;
-            //var bagItems = playerEntity.bagItem.bagItems;
+    //    if(Item.Type!=ItemType.CarryingProps)
+    //    {
+    //        //UnityAction action;
+    //        //ResourceController.Instance.BagItemUseEffectDic.TryGetValue(Item.ID,out action);
+    //        //if (null == action) return;
+    //        //var playerEntity = Contexts.sharedInstance.game.playerTransformEntity;
+    //        //var bagItems = playerEntity.bagItem.bagItems;
 
-            //var dic = bagItems;
-            //dic[Item.ID]--;
+    //        //var dic = bagItems;
+    //        //dic[Item.ID]--;
 
-            //var e = Contexts.sharedInstance.game.CreateEntity();
-            //e.AddUseItemEvent(dic, action);
-            //e.AddName(Item.Name);
+    //        //var e = Contexts.sharedInstance.game.CreateEntity();
+    //        //e.AddUseItemEvent(dic, action);
+    //        //e.AddName(Item.Name);
 
-            //var playPokemon = playerEntity.onBattlingPokemon.entity;
+    //        //var playPokemon = playerEntity.onBattlingPokemon.entity;
 
-            //Contexts.sharedInstance.game.CreateEntity().AddBattleCommand(playPokemon, e, true);
+    //        //Contexts.sharedInstance.game.CreateEntity().AddBattleCommand(playPokemon, e, true);
 
 
 
-        }
-        else
-        {
-            Debug.Log("携带物品无法在对战中使用");
-        }
-    }
+    //    }
+    //    else
+    //    {
+    //        Debug.Log("携带物品无法在对战中使用");
+    //    }
+    //}
 
     
 }

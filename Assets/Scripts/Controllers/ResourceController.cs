@@ -59,15 +59,15 @@ public partial class ResourceController : SingletonMonobehavior<ResourceControll
     private void Start()
     {
         WWW_STREAM_ASSET_PATH =
-#if UNITY_ANDROID
+#if UNITY_ANDROID&&!UNITY_EDITOR
             Application.streamingAssetsPath;      // 路径与上面不同，安卓直接用这个
 #else
             "file://" + Application.streamingAssetsPath;  // 反而其他平台加file://
 #endif
         StartCoroutine(LoadPokemonSkillPools());
-        StartCoroutine(LoadPokemonSkillsData());
         StartCoroutine(LoadItemData());
-       
+        StartCoroutine(LoadPokemonSkillsData());
+
 
         LoadPokemonAbilitysData();
         LoadPokemonNaturesData();
@@ -76,8 +76,8 @@ public partial class ResourceController : SingletonMonobehavior<ResourceControll
         LoadCatachRateData();    
         LoadCanUsePokemonList();
        
-        
-       
+
+
     }
 
 
@@ -110,6 +110,22 @@ public partial class ResourceController : SingletonMonobehavior<ResourceControll
         {
             yield return www;
             string[] names = www.assetBundle.GetAllAssetNames();
+            //foreach(int pokemonID in CanUsePokemonList)
+            //{
+            //    var skillPool = PokemonSkillPoolDic[pokemonID].Skills;
+            //    foreach(int skillID in skillPool)
+            //    {
+            //        string skillName = allSkillDic[skillID].sname;
+            //        if(names.Contains(skillName))
+            //        {
+            //            AssetBundleRequest request = www.assetBundle.LoadAssetAsync<Skill>(skillName);
+            //            yield return request;
+            //            Skill skill = request.asset as Skill;
+            //            if (null != skill)
+            //                allSkillDic[skill.SKillID] = skill;
+            //        }
+            //    }
+            //}
             foreach (string name in names)
             {
                 AssetBundleRequest request = www.assetBundle.LoadAssetAsync<Skill>(name);
@@ -143,6 +159,7 @@ public partial class ResourceController : SingletonMonobehavior<ResourceControll
             DebugHelper.LogFormat("技能池数据已加载");
             LOADSKILLPOOL = true;
             AssetBundle.UnloadAllAssetBundles(false);
+           
         }
     }
 

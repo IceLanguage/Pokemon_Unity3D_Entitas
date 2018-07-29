@@ -193,7 +193,7 @@ public class UI_PokemonBag : TTUIPage
     {
         int i;
         int pokemonID = 1;
-        for (i = 0; i < trainerData.pokemons.Count; i++)
+        for (i = 0; i < trainerData.pokemons.Count&&i<6; i++)
         {
             pokemonID = trainerData.pokemons[i].raceID;
             ShowUI(PokemonIcons[i].gameObject);

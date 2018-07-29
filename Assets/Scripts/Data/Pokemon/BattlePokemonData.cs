@@ -149,6 +149,14 @@ public class BattlePokemonData : PokemonBaseData
         }
 
     }
+    public void ClearChangeStates()
+    {
+        int count = changeStates.Count;
+        for(int i =count-1;i>=0;i--)
+        {
+            RemoveChangeState(changeStates[i]);
+        }
+    }
     public List<ChangeStateEnumForPokemon> ChangeStateForPokemonEnums
     {
         get
@@ -290,6 +298,8 @@ public class BattlePokemonData : PokemonBaseData
         );
         if(entity != null)
             entity.ReplaceBattlePokemonData(this);
+        var playData = Contexts.sharedInstance.game.playerData.scriptableObject;
+        Contexts.sharedInstance.game.ReplacePlayerData(playData);
     }
     //恢复
     public void Recover()
@@ -298,6 +308,7 @@ public class BattlePokemonData : PokemonBaseData
         increase = new Increase();
         StatModifiers = new StatModifiers();
         SetAbnormalStateEnum(AbnormalStateEnum.Normal);
+        ClearChangeStates();
         curHealth = Health;
         InitPokemonData();
         
