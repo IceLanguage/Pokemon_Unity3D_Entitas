@@ -119,6 +119,8 @@ public class UIKnapscakPanel:TTUIPage
         if (Input.mousePosition.x > Screen.width *0.7f &&
            isPick && pickUI != null)
         {
+            //取消拾取UI的状态
+            isPick = false;
 
             //非战斗时的操作
             if (!context.isBattleFlag)
@@ -128,9 +130,9 @@ public class UIKnapscakPanel:TTUIPage
             }
 
 
-            //取消拾取UI的状态
+           
             pickUI.SetLocalPosition(new Vector2(30, -30));
-            isPick = false;
+           
             
 
             

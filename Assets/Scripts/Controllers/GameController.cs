@@ -37,8 +37,8 @@ public class GameController : SingletonMonobehavior<GameController>
     {
         if (null == _systems ) return;
         _systems.Cleanup();
-        if(Time.frameCount % 50 == 0)
-            System.GC.Collect();
+        // if(Time.frameCount % 50 == 0)
+        //     System.GC.Collect();
     }
     protected override void OnDestroy()
     {

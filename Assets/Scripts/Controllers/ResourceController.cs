@@ -8,23 +8,21 @@ using System.Text;
 using UnityEngine;
 public partial class ResourceController : SingletonMonobehavior<ResourceController>
 {
-    //public Material grassMaterial;
-    //public Material DefaultMaterial;
     public ParticleSystem PokemonShowParticle;
     public GameObject glassPrefab;
 
-    public Dictionary<int, Skill> allSkillDic = new Dictionary<int, Skill>();
-    public Dictionary<int, Race> allRaceDic = new Dictionary<int, Race>();
-    public Dictionary<NatureType, Nature> allNatureDic = new Dictionary<NatureType, Nature>();
-    public Dictionary<int, Ability> allAbilityDic = new Dictionary<int, Ability>();
-    public Dictionary<int, int> allCtachRateDic = new Dictionary<int, int>();
+    public SortedDictionary<int, Skill> allSkillDic = new SortedDictionary<int, Skill>();
+    public SortedDictionary<int, Race> allRaceDic = new SortedDictionary<int, Race>();
+    public SortedDictionary<NatureType, Nature> allNatureDic = new SortedDictionary<NatureType, Nature>();
+    public SortedDictionary<int, Ability> allAbilityDic = new SortedDictionary<int, Ability>();
+    public SortedDictionary<int, int> allCtachRateDic = new SortedDictionary<int, int>();
   
-    public List<int> CanUsePokemonList = new List<int>();
-    public Dictionary<int, SkillPool> PokemonSkillPoolDic = new Dictionary<int, SkillPool>();
-    public Dictionary<string, Item> ItemDic = new Dictionary<string, Item>();
+    public List<int> CanUsePokemonList = new List<int>(100);
+    public SortedDictionary<int, SkillPool> PokemonSkillPoolDic = new SortedDictionary<int, SkillPool>();
+    public Dictionary<string, Item> ItemDic = new Dictionary<string, Item>(300);
     public float[,] TypeInf = new float[19, 19];
     public EncounterPokemon glassPokemons;
-    public Dictionary<string, UseBagItem> UseBagUItemDict = new Dictionary<string, UseBagItem>();
+    public Dictionary<string, UseBagItem> UseBagUItemDict = new Dictionary<string, UseBagItem>(300);
     private const string skillAssetPath = "SkillAsset/";
     private const string skillPoolPath = "SkillPoolConfig/";
 
@@ -68,7 +66,6 @@ public partial class ResourceController : SingletonMonobehavior<ResourceControll
         StartCoroutine(LoadItemData());
         StartCoroutine(LoadPokemonSkillsData());
 
-
         LoadPokemonAbilitysData();
         LoadPokemonNaturesData();
         LoadPokemonRacesData();
@@ -110,22 +107,7 @@ public partial class ResourceController : SingletonMonobehavior<ResourceControll
         {
             yield return www;
             string[] names = www.assetBundle.GetAllAssetNames();
-            //foreach(int pokemonID in CanUsePokemonList)
-            //{
-            //    var skillPool = PokemonSkillPoolDic[pokemonID].Skills;
-            //    foreach(int skillID in skillPool)
-            //    {
-            //        string skillName = allSkillDic[skillID].sname;
-            //        if(names.Contains(skillName))
-            //        {
-            //            AssetBundleRequest request = www.assetBundle.LoadAssetAsync<Skill>(skillName);
-            //            yield return request;
-            //            Skill skill = request.asset as Skill;
-            //            if (null != skill)
-            //                allSkillDic[skill.SKillID] = skill;
-            //        }
-            //    }
-            //}
+
             foreach (string name in names)
             {
                 AssetBundleRequest request = www.assetBundle.LoadAssetAsync<Skill>(name);
@@ -133,6 +115,7 @@ public partial class ResourceController : SingletonMonobehavior<ResourceControll
                 Skill skill = request.asset as Skill;
                 if (null != skill)
                     allSkillDic[skill.SKillID] = skill;
+                
 
             }
             LOADSKILL = true;
@@ -174,6 +157,7 @@ public partial class ResourceController : SingletonMonobehavior<ResourceControll
             string json = t.text;
 
             CanUsePokemonList = JsonConvert.DeserializeObject<List<int>>(json);
+            CanUsePokemonList.TrimExcess();
         }
         catch (Exception e)
         {
@@ -192,7 +176,8 @@ public partial class ResourceController : SingletonMonobehavior<ResourceControll
             Resources.UnloadUnusedAssets();
             string json = t.text;
 
-            allCtachRateDic = JsonConvert.DeserializeObject<Dictionary<int, int>>(json);
+            allCtachRateDic = JsonConvert.DeserializeObject<SortedDictionary<int, int>>(json);
+          
         }
         catch (Exception e)
         {
@@ -213,7 +198,7 @@ public partial class ResourceController : SingletonMonobehavior<ResourceControll
             Resources.UnloadUnusedAssets();
             string json = t.text;
 
-            allRaceDic = JsonConvert.DeserializeObject<Dictionary<int, Race>>(json);
+            allRaceDic = JsonConvert.DeserializeObject<SortedDictionary<int, Race>>(json);
         }
         catch (Exception e)
         {
@@ -238,7 +223,7 @@ public partial class ResourceController : SingletonMonobehavior<ResourceControll
             Resources.UnloadUnusedAssets();
             string json = t.text;
 
-            allNatureDic = JsonConvert.DeserializeObject<Dictionary<NatureType, Nature>>(json);
+            allNatureDic = JsonConvert.DeserializeObject<SortedDictionary<NatureType, Nature>>(json);
         }
         catch (Exception e)
         {
@@ -257,7 +242,7 @@ public partial class ResourceController : SingletonMonobehavior<ResourceControll
             Resources.UnloadUnusedAssets();
             string json = t.text;
 
-            allAbilityDic = JsonConvert.DeserializeObject<Dictionary<int, Ability>>(json);
+            allAbilityDic = JsonConvert.DeserializeObject<SortedDictionary<int, Ability>>(json);
         }
         catch (Exception e)
         {

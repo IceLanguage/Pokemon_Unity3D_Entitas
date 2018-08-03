@@ -18,6 +18,7 @@ public class GetPokemonJson
         const string path = "Assets/Resources/Config/AllPokemons.json";
         var list = SearchPokemon()
             .Where(x => "" != x)
+            .Distinct()
             .ToList()
             .ConvertAll(x => Convert.ToInt32(x));
         var str = JsonConvert.SerializeObject(list);

@@ -50,7 +50,7 @@ public class ObjectPool_Dict<Key, Value>
     where Key : struct
     where Value : class, new()
 {
-    private Dictionary<Key, ObjectPool_Queue<Value>> m_objectDic;
+    private SortedDictionary<Key, ObjectPool_Queue<Value>> m_objectDic;
     private readonly Action<Value> m_ResetAction;
     private readonly Action<Value> m_InitAction;
 
@@ -58,7 +58,7 @@ public class ObjectPool_Dict<Key, Value>
         ResetAction = null, Action<Value> OnetimeInitAction = null)
     {
         //m_MaxTIme = initialBufferSize;
-        m_objectDic = new Dictionary<Key, ObjectPool_Queue<Value>>();
+        m_objectDic = new SortedDictionary<Key, ObjectPool_Queue<Value>>();
 
         m_ResetAction = ResetAction;
         m_InitAction = OnetimeInitAction;

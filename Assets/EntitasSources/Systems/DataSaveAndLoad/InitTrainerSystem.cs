@@ -34,7 +34,7 @@ public class InitTrainerSystem : IInitializeSystem
             Pokemon Pikaqiu = PokemonFactory.BuildPokemon(25);
 
             Pokemon Charmander = PokemonFactory.BuildPokemon(4);
-            trainer.pokemons = new List<Pokemon>() { Pikaqiu, Charmander };
+            trainer.pokemons = new List<Pokemon>(6) { Pikaqiu, Charmander };
 
         }
         else
@@ -45,7 +45,7 @@ public class InitTrainerSystem : IInitializeSystem
         if (null == trainer || null == trainer.bagItems|| 0 == trainer.bagItems.Count)
         {
             //如果道具背包没有物品，给5个精灵球
-            trainer.bagItems = new List<BagItems>()
+            trainer.bagItems = new List<BagItems>(24)
             {
                 BagItems.Build("精灵球",5)
             };
