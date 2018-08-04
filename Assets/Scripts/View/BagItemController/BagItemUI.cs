@@ -58,7 +58,7 @@ public class BagItemUI : MonoBehaviour,
     private void StoreItem(Notification<BagItems> notific)
     {
         BagItems param = notific.param;
-        if (null == param || "" == param.ItemName||0 == param.count)
+        if (null == param || 0 == param.ItemName.Length|| 0 == param.count)
         {
             if (ItemUI != null)
             {

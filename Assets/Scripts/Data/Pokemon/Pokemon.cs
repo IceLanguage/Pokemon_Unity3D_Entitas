@@ -111,7 +111,7 @@ namespace PokemonBattele
         {
             get
             {
-                if (ename == ""||ename == null) ename = Name;
+                if (ename == null||ename.Length == 0) ename = Name;
                 return ename;
             }
 

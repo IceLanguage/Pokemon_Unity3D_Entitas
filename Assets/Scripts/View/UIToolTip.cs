@@ -71,7 +71,7 @@ public class UIToolTip :TTUIPage
     public override void Active()
     {
         
-        if(contentText.text!="")
+        if(contentText.text!=null&& contentText.text.Length>0)
             this.targetAlpha = 1;
     }
 
@@ -100,7 +100,7 @@ public class UIToolTip :TTUIPage
         string text = message.str;
         this.toolTipText.text = text;
         this.contentText.text = text;
-        if (text == "")
+        if (text != null&& 0 == text.Length)
         {
             Hide();
             return;

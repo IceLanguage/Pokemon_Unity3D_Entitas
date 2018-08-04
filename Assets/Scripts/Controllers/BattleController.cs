@@ -368,7 +368,7 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
         );
         //我方玩家使用道具
         
-        if (""!= PlayerChooseBagItemName&&ResourceController.Instance.UseBagUItemDict.ContainsKey(PlayerChooseBagItemName))
+        if (null!= PlayerChooseBagItemName&& PlayerChooseBagItemName .Length>0&& ResourceController.Instance.UseBagUItemDict.ContainsKey(PlayerChooseBagItemName))
         {
             
             UseBagItem use = ResourceController.Instance.UseBagUItemDict[PlayerChooseBagItemName];
@@ -384,7 +384,7 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
         yield return wait;
         if(CanBattle&&null!=battleState)
         {
-            if ("" != EnemyChooseBagItemName && ResourceController.Instance.UseBagUItemDict.ContainsKey(EnemyChooseBagItemName))
+            if (null != EnemyChooseBagItemName&& EnemyChooseBagItemName.Length>0 && ResourceController.Instance.UseBagUItemDict.ContainsKey(EnemyChooseBagItemName))
             {
                 UseBagItem use = ResourceController.Instance.UseBagUItemDict[EnemyChooseBagItemName];
                 if (null != use && use.canUseInBattle)
