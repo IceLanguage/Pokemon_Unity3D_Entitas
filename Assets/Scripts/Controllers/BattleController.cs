@@ -15,8 +15,8 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
     public Transform PlayerPokemonTransform;
     public Transform EnemyPokemonTransform;
 
-    private List<BattlePokemonData> wildPokemons = new List<BattlePokemonData>();
-    public List<BattlePokemonData> playPokemons = new List<BattlePokemonData>();
+    private List<BattlePokemonData> wildPokemons = new List<BattlePokemonData>(6);
+    public List<BattlePokemonData> playPokemons = new List<BattlePokemonData>(6);
     public BattlePokemonData PlayerCurPokemonData { get; private set; }
     public BattlePokemonData EnemyCurPokemonData { get; private set; }
 
@@ -77,18 +77,34 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
             .ToList();
 
         //战斗中使用的精灵每个种族只能有一只
-        Dictionary<int, BattlePokemonData> map = new Dictionary<int, BattlePokemonData>();
+        HashSet<int> battlePokemons = new HashSet<int>();
         int count = playPokemons.Count;
-        for (int i = count -1;i>=0;--i)
+        for (int i = count - 1; i >= 0; --i)
         {
             BattlePokemonData pokemonData = playPokemons[i];
-            if (!map.ContainsKey(pokemonData.race.raceid))
-                map.Add(pokemonData.race.raceid, pokemonData);
-            else
+            int raceid = pokemonData.race.raceid;
+            if(battlePokemons.Contains(raceid))
             {
                 playPokemons.RemoveAt(i);
+               
+            }
+            else
+            {
+                battlePokemons.Add(raceid);
             }
         }
+        //Dictionary<int, BattlePokemonData> map = new Dictionary<int, BattlePokemonData>();
+        //int count = playPokemons.Count;
+        //for (int i = count -1;i>=0;--i)
+        //{
+        //    BattlePokemonData pokemonData = playPokemons[i];
+        //    if (!map.ContainsKey(pokemonData.race.raceid))
+        //        map.Add(pokemonData.race.raceid, pokemonData);
+        //    else
+        //    {
+        //        playPokemons.RemoveAt(i);
+        //    }
+        //}
 
         if (0 == pokemons.Count)
         {
@@ -174,8 +190,8 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
             entity.ReplacePokemonDataChangeEvent(action);
             pokemon.Recover();
         }
-        wildPokemons = new List<BattlePokemonData>();
-        playPokemons = new List<BattlePokemonData>();
+        wildPokemons = new List<BattlePokemonData>(6);
+        playPokemons = new List<BattlePokemonData>(6);
         PlayerCurPokemonData = null;
         EnemyCurPokemonData = null;
         battleState = null;
@@ -352,7 +368,7 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
         );
         //我方玩家使用道具
         
-        if (""!= PlayerChooseBagItemName&&ResourceController.Instance.UseBagUItemDict.ContainsKey(PlayerChooseBagItemName))
+        if (null!= PlayerChooseBagItemName&& PlayerChooseBagItemName .Length>0&& ResourceController.Instance.UseBagUItemDict.ContainsKey(PlayerChooseBagItemName))
         {
             
             UseBagItem use = ResourceController.Instance.UseBagUItemDict[PlayerChooseBagItemName];
@@ -368,7 +384,7 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
         yield return wait;
         if(CanBattle&&null!=battleState)
         {
-            if ("" != EnemyChooseBagItemName && ResourceController.Instance.UseBagUItemDict.ContainsKey(EnemyChooseBagItemName))
+            if (null != EnemyChooseBagItemName&& EnemyChooseBagItemName.Length>0 && ResourceController.Instance.UseBagUItemDict.ContainsKey(EnemyChooseBagItemName))
             {
                 UseBagItem use = ResourceController.Instance.UseBagUItemDict[EnemyChooseBagItemName];
                 if (null != use && use.canUseInBattle)

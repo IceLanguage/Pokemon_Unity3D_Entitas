@@ -14,13 +14,13 @@ using UnityEngine;
 public class ReadPokemonConfig :Editor
 {
 
-    private static Dictionary<int, Skill> allSkillDic = new Dictionary<int, Skill>();
-    public static Dictionary<int, Race> allRaceDic = new Dictionary<int, Race>();
-    private static Dictionary<NatureType, Nature> allNatureDic = new Dictionary<NatureType, Nature>();
-    private static Dictionary<int, Ability> allAbilityDic = new Dictionary<int, Ability>();
-    private static Dictionary<int, int> allCatchRateDic = new Dictionary<int, int>();
+    private static SortedDictionary<int, Skill> allSkillDic = new SortedDictionary<int, Skill>();
+    public static SortedDictionary<int, Race> allRaceDic = new SortedDictionary<int, Race>();
+    private static SortedDictionary<NatureType, Nature> allNatureDic = new SortedDictionary<NatureType, Nature>();
+    private static SortedDictionary<int, Ability> allAbilityDic = new SortedDictionary<int, Ability>();
+    private static SortedDictionary<int, int> allCatchRateDic = new SortedDictionary<int, int>();
  
-    private static Dictionary<int, Item> allItemDic = new Dictionary<int, Item>();
+    private static SortedDictionary<int, Item> allItemDic = new SortedDictionary<int, Item>();
     /// <summary>
     ///属性克制表 key为[攻击方,防守方]
     /// </summary>
@@ -175,7 +175,7 @@ public class ReadPokemonConfig :Editor
                             ReadCatchRateFromExcel(worksheet);
                             break;
                         case "道具":
-                            ReadBagItemsFromExcel(worksheet);
+                            //ReadBagItemsFromExcel(worksheet);
                             break;
                     }
 
@@ -236,6 +236,7 @@ public class ReadPokemonConfig :Editor
                 item.Description = description;
                 item.Name = name;
                 item.Type = itemType;
+                
                 allItemDic[id] = item;
                 AssetDatabase.CreateAsset(item, "Assets/BagItem/" + item.Name + ".asset");
 

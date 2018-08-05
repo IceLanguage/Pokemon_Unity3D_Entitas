@@ -10,7 +10,7 @@ namespace PokemonBattele
     /// </summary>
     public static class NeedReplaceSKill
     {
-        public static Dictionary<int, int> context = new Dictionary<int, int>();
+        public static Dictionary<int, int> context = new Dictionary<int, int>(10);
     }
 
     /// <summary>
@@ -18,6 +18,6 @@ namespace PokemonBattele
     /// </summary>
     public static class DisableSkill
     {
-        public static Dictionary<int, int> context = new Dictionary<int, int>();
+        public static Dictionary<int, int> context = new Dictionary<int, int>(10);
     }
 }
