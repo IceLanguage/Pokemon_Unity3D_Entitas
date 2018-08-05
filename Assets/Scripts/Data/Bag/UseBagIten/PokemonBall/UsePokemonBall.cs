@@ -22,8 +22,9 @@ namespace PokemonBattele
         protected virtual void ChangeCatachCorrection(BattlePokemonData pokemon) { }
         public override void Effect(BattlePokemonData pokemon)
         {
-            ChangeCatachCorrection(pokemon);
+            
             DebugHelper.LogFormat("你选择使用了{0}", BagItemName);
+            ChangeCatachCorrection(pokemon);
 
             //精灵球和精灵球特效
             GameObject pokemonBallInPool = PokemonFactory.GetPokemonBall();

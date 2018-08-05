@@ -44,7 +44,6 @@ class CheckPlayerInGrassSystem : IExecuteSystem
             grassPosList = context.GetEntities(GameMatcher.GrassPos)
             .Select(x => x.grassPos.pos)
             .ToArray();
-            Debug.Log(grassPosList);
         }
             
        

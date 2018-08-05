@@ -44,7 +44,7 @@ class UIController:SingletonMonobehavior<UIController>
 
     private void Start()
     {
-
+        //TTUIPage.ShowPage<UI_ShowINFO>();
         TTUIPage.ShowPage<UIToolTip>();
         TTUIPage.ShowPage<UIBattle_ShowPlaySkill>();
         TTUIPage.ShowPage<UIBattle_ShowEnemySkill>();
