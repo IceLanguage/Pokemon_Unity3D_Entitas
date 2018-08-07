@@ -11,11 +11,11 @@ public partial class ResourceController : SingletonMonobehavior<ResourceControll
     public ParticleSystem PokemonShowParticle;
     public GameObject glassPrefab;
 
-    public SortedDictionary<int, Skill> allSkillDic = new SortedDictionary<int, Skill>();
-    public SortedDictionary<int, Race> allRaceDic = new SortedDictionary<int, Race>();
-    public SortedDictionary<NatureType, Nature> allNatureDic = new SortedDictionary<NatureType, Nature>();
-    public SortedDictionary<int, Ability> allAbilityDic = new SortedDictionary<int, Ability>();
-    public SortedDictionary<int, int> allCtachRateDic = new SortedDictionary<int, int>();
+    public Dictionary<int, Skill> allSkillDic = new Dictionary<int, Skill>();
+    public Dictionary<int, Race> allRaceDic = new Dictionary<int, Race>();
+    public Dictionary<NatureType, Nature> allNatureDic = new Dictionary<NatureType, Nature>();
+    public Dictionary<int, Ability> allAbilityDic = new Dictionary<int, Ability>();
+    public Dictionary<int, int> allCtachRateDic = new Dictionary<int, int>();
   
     public List<int> CanUsePokemonList = new List<int>(100);
     public SortedDictionary<int, SkillPool> PokemonSkillPoolDic = new SortedDictionary<int, SkillPool>();
@@ -176,7 +176,7 @@ public partial class ResourceController : SingletonMonobehavior<ResourceControll
             Resources.UnloadUnusedAssets();
             string json = t.text;
 
-            allCtachRateDic = JsonConvert.DeserializeObject<SortedDictionary<int, int>>(json);
+            allCtachRateDic = JsonConvert.DeserializeObject<Dictionary<int, int>>(json);
           
         }
         catch (Exception e)
@@ -198,7 +198,7 @@ public partial class ResourceController : SingletonMonobehavior<ResourceControll
             Resources.UnloadUnusedAssets();
             string json = t.text;
 
-            allRaceDic = JsonConvert.DeserializeObject<SortedDictionary<int, Race>>(json);
+            allRaceDic = JsonConvert.DeserializeObject<Dictionary<int, Race>>(json);
         }
         catch (Exception e)
         {
@@ -223,7 +223,7 @@ public partial class ResourceController : SingletonMonobehavior<ResourceControll
             Resources.UnloadUnusedAssets();
             string json = t.text;
 
-            allNatureDic = JsonConvert.DeserializeObject<SortedDictionary<NatureType, Nature>>(json);
+            allNatureDic = JsonConvert.DeserializeObject<Dictionary<NatureType, Nature>>(json);
         }
         catch (Exception e)
         {
@@ -242,7 +242,7 @@ public partial class ResourceController : SingletonMonobehavior<ResourceControll
             Resources.UnloadUnusedAssets();
             string json = t.text;
 
-            allAbilityDic = JsonConvert.DeserializeObject<SortedDictionary<int, Ability>>(json);
+            allAbilityDic = JsonConvert.DeserializeObject<Dictionary<int, Ability>>(json);
         }
         catch (Exception e)
         {
