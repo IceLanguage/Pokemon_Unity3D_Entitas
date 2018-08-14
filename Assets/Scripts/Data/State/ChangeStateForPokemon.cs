@@ -254,6 +254,7 @@ namespace PokemonBattele
 
         public override void Init(BattlePokemonData pokemon)
         {
+            DebugHelper.LogFormat("{0}混乱了", pokemon.Ename);
             count[pokemon.ID] = RandomService.game.Int(1, 5);
         }
 

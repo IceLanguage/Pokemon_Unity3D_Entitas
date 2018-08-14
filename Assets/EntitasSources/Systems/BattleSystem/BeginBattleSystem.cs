@@ -10,6 +10,7 @@ public class BeginBattleSystem : ReactiveSystem<GameEntity>, IEndBattleEvent
 {
     readonly GameContext context;
     public static Action BeginBattleEvent;
+    private readonly PlayerPrefs playerPrefs = new PlayerPrefs();
     public BeginBattleSystem(Contexts contexts):base (contexts.game)
     {
         context = contexts.game;
@@ -34,7 +35,7 @@ public class BeginBattleSystem : ReactiveSystem<GameEntity>, IEndBattleEvent
         TOUCH_Controller.Instance.EnableroatateStick();
 
         //存储玩家当前位置
-        new PlayerPrefs().SetVector3("playPrePos",
+        playerPrefs.SetVector3("playPrePos",
             PlayerController.Instance.transform.position);
         
     }

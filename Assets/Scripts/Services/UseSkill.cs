@@ -258,7 +258,11 @@ namespace PokemonBattele
 
 			int P = A * StatModifiers.ActualCorrection[B]/100;
 
-			DebugHelper.LogFormat("{0}的技能{1}的命中率为{2}", attackPokemon.Ename, skill.sname, P / 255f);
+			
+			DebugHelper.Log(new StringBuilder(40)
+				.AppendFormat("{0}的技能{1}的命中率为", attackPokemon.Ename, skill.sname)
+				.Append(P / 255f)
+				.ToString());
 
 			bool res = RandomService.game.Int(0, 255) <= P;
 			//考虑特性
@@ -377,7 +381,7 @@ namespace PokemonBattele
 		
 		private IEnumerator DisableEffectGameObject(GameObject effect,int skillID)
 		{
-			yield return new WaitForSeconds(BattleController.Instance.BattleTime);
+			yield return new WaitForSeconds(BattleController.BattleTime);
 			if (effect != null && effect.activeSelf)
 			{
 				effect.SetActive(false);

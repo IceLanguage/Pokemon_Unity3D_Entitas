@@ -12,13 +12,8 @@ public class AddGrassSystem : ReactiveSystem<GameEntity>
 {
     readonly Transform GrassLand = new GameObject("GrassLand").transform;
     readonly GameContext _context;
-    //readonly Material grassMat;
-    //readonly RandomService randomService = new RandomService();
 
-    //private MeshFilter mf;
-    //private MeshRenderer _renderer;
-    //private Mesh m;
-
+    private GameObject[] gos;
     private List<GameObject> grassGameObjects = new List<GameObject>(200);
     public AddGrassSystem(Contexts contexts) : base(contexts.game)
     {
@@ -38,8 +33,8 @@ public class AddGrassSystem : ReactiveSystem<GameEntity>
             glass.transform.position = grassPos;
             
         }
+        gos = grassGameObjects.ToArray();
 
-        var gos = grassGameObjects.ToArray();
         StaticBatchingUtility.Combine(gos, GrassLand.gameObject);// 静态合并
         grassGameObjects = new List<GameObject>(200);
 

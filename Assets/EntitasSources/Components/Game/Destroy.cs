@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 
 [Game]
-class DestroyComponent : IComponent
+struct DestroyComponent : IComponent
 {
 
 }

@@ -9,7 +9,7 @@ using UnityEngine;
 
 public class EndBattleSystem : ReactiveSystem<GameEntity>
 {
-    readonly GameContext context;
+    private readonly GameContext context;
     public static Action EndBattleEvent;
    
     public EndBattleSystem(Contexts contexts) : base(contexts.game)
@@ -31,6 +31,7 @@ public class EndBattleSystem : ReactiveSystem<GameEntity>
     {
         return context.CreateCollector(GameMatcher.BattleFlag);
     }
+   
 
     IEnumerator PreEndBattle()
     {

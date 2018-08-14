@@ -1,7 +1,7 @@
 ﻿using PokemonBattele;
 using System;
 using System.Collections.Generic;
-using System.Linq;
+//using System.Linq;
 using System.Text;
 using UnityEngine;
 using MyUnityEventDispatcher;
@@ -26,13 +26,15 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
     private int PlayChooseSkillID = -1;
     private int EnemyChooseSkillID = -1;
 
-    public readonly float BattleTime = 2f;
+    public static readonly float BattleTime = 2f;
     
     private string PlayerChooseBagItemName = "", EnemyChooseBagItemName = "";
 
     public int FirstHand = -1;
-    private bool BattlePause = false;
+    private static bool BattlePause = false;
     public int BattleAroundCount = 0;
+
+    private Trainer trainer;
     private void Start()
     {
         context = Contexts.sharedInstance.game;
@@ -46,6 +48,9 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
 
         BattleStateForPlayer.InitEvent += PlayerRound;
         BattleStateForBattle.InitEvent += BattleRound;
+
+        
+        var trainer = context.playerData.scriptableObject;
     }
     
     public bool CanBattle
@@ -57,9 +62,12 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
     }
     public void InitWildPokemon(params Pokemon[] pokemons)
     {
-        wildPokemons = new List<Pokemon>(pokemons)
-            .Select(x=>BattlePokemonData.Context[x.GetInstanceID()])
-            .ToList();           
+        wildPokemons.Clear();
+        foreach(Pokemon pokemon in pokemons)
+        {
+            wildPokemons.Add(BattlePokemonData.Context[pokemon.GetInstanceID()]);
+        }
+          
         if (0 == pokemons.Length)
         {
             Debug.LogWarning("没有野生精灵怎么打");
@@ -69,15 +77,18 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
 
         EnemyCurPokemonData = wildPokemons[0];
     }
+
+    //战斗中使用的精灵每个种族只能有一只
+    HashSet<int> battlePokemons = new HashSet<int>();
     public void InitPlayerPokemons(List<Pokemon> pokemons)
     {
-       
-        playPokemons = pokemons
-            .Select(x => BattlePokemonData.Context[x.GetInstanceID()])
-            .ToList();
+        playPokemons.Clear();
+        foreach (Pokemon pokemon in pokemons)
+        {
+            playPokemons.Add(BattlePokemonData.Context[pokemon.GetInstanceID()]);
+        }
 
-        //战斗中使用的精灵每个种族只能有一只
-        HashSet<int> battlePokemons = new HashSet<int>();
+        battlePokemons.Clear();
         int count = playPokemons.Count;
         for (int i = count - 1; i >= 0; --i)
         {
@@ -93,18 +104,6 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
                 battlePokemons.Add(raceid);
             }
         }
-        //Dictionary<int, BattlePokemonData> map = new Dictionary<int, BattlePokemonData>();
-        //int count = playPokemons.Count;
-        //for (int i = count -1;i>=0;--i)
-        //{
-        //    BattlePokemonData pokemonData = playPokemons[i];
-        //    if (!map.ContainsKey(pokemonData.race.raceid))
-        //        map.Add(pokemonData.race.raceid, pokemonData);
-        //    else
-        //    {
-        //        playPokemons.RemoveAt(i);
-        //    }
-        //}
 
         if (0 == pokemons.Count)
         {
@@ -356,16 +355,16 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
         
 
     }
-
-    IEnumerator IEBattleAround()
-    {
-        var wait = new WaitWhile
+    private WaitWhile waitBattlePauseEnd = new WaitWhile
         (
             () =>
             {
                 return BattlePause;
             }
         );
+    IEnumerator IEBattleAround()
+    {
+        
         //我方玩家使用道具
         
         if (null!= PlayerChooseBagItemName&& PlayerChooseBagItemName .Length>0&& ResourceController.Instance.UseBagUItemDict.ContainsKey(PlayerChooseBagItemName))
@@ -381,7 +380,7 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
                     use.Effect(PlayerCurPokemonData);
             }
         }
-        yield return wait;
+        yield return waitBattlePauseEnd;
         if(CanBattle&&null!=battleState)
         {
             if (null != EnemyChooseBagItemName&& EnemyChooseBagItemName.Length>0 && ResourceController.Instance.UseBagUItemDict.ContainsKey(EnemyChooseBagItemName))
@@ -397,7 +396,7 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
                 }
             }
         }
-        yield return wait;
+        yield return waitBattlePauseEnd;
         //互相攻击
         if(PlayChooseSkillID!=-1&&EnemyChooseSkillID!=-1)
         {
@@ -405,7 +404,7 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
             {
                 FirstHand = PlayerCurPokemonData.ID;
                 PlayerBattleAround();
-                yield return wait;
+                yield return waitBattlePauseEnd;
                 EnemyBattleAround();
 
             }
@@ -414,7 +413,7 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
                 FirstHand = EnemyCurPokemonData.ID;
 
                 EnemyBattleAround();
-                yield return wait;
+                yield return waitBattlePauseEnd;
                 PlayerBattleAround();
 
             }
@@ -429,7 +428,7 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
             FirstHand = PlayerCurPokemonData.ID;
             PlayerBattleAround();
         }
-        yield return wait;
+        yield return waitBattlePauseEnd;
         BattleAroundEnd();
 
     }
@@ -606,11 +605,12 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
             StartCoroutine(WaitBattleEnd());
         }
     }
-
+    private WaitForSeconds endBattleWait = new WaitForSeconds(BattleTime);
+    string winer = "敌方";
     private IEnumerator WaitBattleEnd()
     {
-        string winer = "敌方";
-        if(null == EnemyCurPokemonData||EnemyCurPokemonData.curHealth<=0)
+        winer = "敌方";
+        if (null == EnemyCurPokemonData||EnemyCurPokemonData.curHealth<=0)
         {
             winer = "我方";
             WinResoult();
@@ -618,17 +618,17 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
         DebugHelper.LogFormat("战斗结束，{0}取得了胜利",winer);
 
         TTUIPage.ShowPage<UIBattleResult>();
-        yield return new WaitForSeconds(BattleTime+0.5f);
+        yield return endBattleWait;
         context.isBattleFlag = false;
     }
-
+    private Dictionary<string, UseBagItem>.KeyCollection bagitems;
     /// <summary>
     /// 获胜后的奖励
     /// </summary>
     private void WinResoult()
     {
-        var bagitems = ResourceController.Instance.UseBagUItemDict.Keys;
-        var trainer = context.playerData.scriptableObject;
+        if(null == bagitems)
+            bagitems = ResourceController.Instance.UseBagUItemDict.Keys;
         var trainerBagItems = trainer.bagItems;
         int randomIndex = RandomService.game.Int(0, bagitems.Count);
         int i = 0;
@@ -641,11 +641,15 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
                 break;
             }
         }
-        if(bagitems.Contains(itemName))
+        if(ResourceController.Instance.UseBagUItemDict.ContainsKey(itemName))
         {
-            int itemCount = RandomService.game.Int(1, 5);
+            int itemCount = RandomService.game.Int(1, 6);
             DebugHelper.LogFormat("玩家获得 {0} {1}个", itemName, itemCount);
-            trainerBagItems.Add(BagItems.Build(itemName,itemCount ));
+            var item = trainerBagItems.Find(x => x.ItemName == itemName);
+            if (null == item)
+                trainerBagItems.Add(BagItems.Build(itemName, itemCount));
+            else
+                item.count += itemCount; 
             context.ReplacePlayerData(trainer);
 
         }

@@ -113,6 +113,7 @@ namespace PokemonBattele
             );
 
             var trainer = context.playerData.scriptableObject;
+            
             trainer.pokemons.Add(pokemon);           
             context.ReplacePlayerData(trainer);
 

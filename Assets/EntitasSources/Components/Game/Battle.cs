@@ -8,7 +8,7 @@ using UnityEngine;
 
 [Unique]
 [Game]
-public sealed class BattleFlagComponent : IComponent
+public struct BattleFlagComponent : IComponent
 {
 }
 
