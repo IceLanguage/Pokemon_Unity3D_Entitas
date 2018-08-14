@@ -644,7 +644,13 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
         if(ResourceController.Instance.UseBagUItemDict.ContainsKey(itemName))
         {
             int itemCount = RandomService.game.Int(1, 6);
-            DebugHelper.LogFormat("玩家获得 {0} {1}个", itemName, itemCount);
+            DebugHelper.Log(
+                new StringBuilder(30)
+               .AppendFormat("玩家获得 {0}", itemName)
+               .Append(itemCount)
+               .Append("个")
+               .ToString());
+          
             var item = trainerBagItems.Find(x => x.ItemName == itemName);
             if (null == item)
                 trainerBagItems.Add(BagItems.Build(itemName, itemCount));

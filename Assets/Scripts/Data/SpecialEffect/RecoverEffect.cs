@@ -27,7 +27,12 @@ namespace PokemonBattele
 
             int h = (int)(pokemon.Health * scale);
             h = Math.Min(h, pokemon.Health - pokemon.curHealth);
-            DebugHelper.LogFormat("{0}的生命恢复了{1}", pokemon.Ename, h);
+            DebugHelper.Log(
+              new StringBuilder(40)
+              .AppendFormat("{0}的生命恢复了", pokemon.Ename)
+              .Append(h)
+              .ToString());
+            
             pokemon.curHealth += h;
             if (pokemon.curHealth > pokemon.Health)
                 pokemon.curHealth = pokemon.Health;

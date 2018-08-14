@@ -177,7 +177,12 @@ namespace PokemonBattele
             }
             else
             {
-                DebugHelper.LogFormat("{0}还需要{1}回合解除大闹一番状态", pokemon.Ename, count[pokemon.ID]);
+                DebugHelper.Log(
+                new StringBuilder(40)
+                .AppendFormat("{0}还需要", pokemon.Ename)
+                .Append(count[pokemon.ID])
+                .Append("回合解除大闹一番状态")
+                .ToString());
             }
         }
     }

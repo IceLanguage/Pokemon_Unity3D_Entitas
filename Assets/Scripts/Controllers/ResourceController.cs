@@ -91,7 +91,7 @@ public partial class ResourceController : SingletonMonobehavior<ResourceControll
                     ItemDic[item.Name] = item; 
 
             }
-            DebugHelper.LogFormat("背包物品数据已加载");
+            DebugHelper.Log("背包物品数据已加载");
             LOADITEM = true;
             AssetBundle.UnloadAllAssetBundles(false);
         }
@@ -116,7 +116,7 @@ public partial class ResourceController : SingletonMonobehavior<ResourceControll
 
             }
             LOADSKILL = true;
-            DebugHelper.LogFormat("技能数据已加载");
+            DebugHelper.Log("技能数据已加载");
             AssetBundle.UnloadAllAssetBundles(false);
         }
     }
@@ -136,7 +136,7 @@ public partial class ResourceController : SingletonMonobehavior<ResourceControll
                     PokemonSkillPoolDic[skillPool.PokemonID] = skillPool;
 
             }
-            DebugHelper.LogFormat("技能池数据已加载");
+            DebugHelper.Log("技能池数据已加载");
             LOADSKILLPOOL = true;
             AssetBundle.UnloadAllAssetBundles(false);
            

@@ -15,7 +15,12 @@ namespace PokemonBattele
             int h = self.Health / 3;
             h = Math.Min(h, self.Health - self.curHealth);
             self.curHealth += h;
-            DebugHelper.LogFormat("{0}具有再生力特性，交换下场时，恢复{1}生命", self.Ename, h);
+            DebugHelper.Log(
+                new StringBuilder(40)
+                .AppendFormat("{0}具有再生力特性，交换下场时，恢复", self.Ename)
+                .Append(h)
+                .Append("生命")
+                .ToString());
         }
     }
 }

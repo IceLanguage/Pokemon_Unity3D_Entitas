@@ -38,5 +38,12 @@ namespace PokemonBattele
         }
         public virtual void BattleStartEffect(BattlePokemonData pokemon, ref bool canEnd) { }
         public virtual void HitEffect(BattlePokemonData pokemon) { }
+        protected string Log(string pokemonName, string s, int num)
+        {
+            return new StringBuilder(40)
+              .AppendFormat("{0}{1}", pokemonName, s)
+              .Append(num)
+              .ToString();
+        }
     }
 }

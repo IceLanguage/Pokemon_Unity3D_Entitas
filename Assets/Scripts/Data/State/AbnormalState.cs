@@ -62,7 +62,13 @@ namespace PokemonBattele
                     (
                         pokemon, ref h
                     );
-            DebugHelper.LogFormat("{0}因为烧伤受到了{1}伤害", pokemon.Ename,h);
+            DebugHelper.Log(
+                new StringBuilder(40)
+                .AppendFormat("{0}因为烧伤受到了", pokemon.Ename)
+                .Append(h)
+                .Append("伤害")
+                .ToString());
+            
             pokemon.curHealth -= h;
 
         }
@@ -245,7 +251,12 @@ namespace PokemonBattele
                     (
                         pokemon, ref h
                     );
-            DebugHelper.LogFormat("{0}因为中毒受到了{1}伤害", pokemon.Ename, h);
+            DebugHelper.Log(
+               new StringBuilder(40)
+               .AppendFormat("{0}因为中毒受到了", pokemon.Ename)
+               .Append(h)
+               .Append("伤害")
+               .ToString());
             pokemon.curHealth -= h;
 
             if (1 == pokemon.curHealth)
@@ -299,7 +310,13 @@ namespace PokemonBattele
                     (
                         pokemon, ref h
                     );
-            DebugHelper.LogFormat("{0}因为剧毒受到了{1}伤害,当前剧毒时间计数为{2}", pokemon.Ename, h, count[pokemon.ID]++);
+            DebugHelper.Log(
+                new StringBuilder(40)
+                .AppendFormat("{0}因为剧毒受到了", pokemon.Ename)
+                .Append(h)
+                .Append("伤害,当前剧毒时间计数为")
+                .Append(count[pokemon.ID]++)
+                .ToString());
             pokemon.curHealth -= h;
 
         }
@@ -314,8 +331,13 @@ namespace PokemonBattele
         {
             AbnormalState.Abnormalstates[pokemon.Abnormal].LoseState(pokemon);
             pokemon.Abnormal = AbnormalStateEnum.Sleeping;
-            DebugHelper.LogFormat("{0}睡着了,还有{1}回合醒来", pokemon.Ename,SleepTimeDict[pokemon.ID]);
-            
+            DebugHelper.Log(
+                new StringBuilder(40)
+                .AppendFormat("{0}睡着了,还有", pokemon.Ename)
+                .Append(SleepTimeDict[pokemon.ID])
+                .Append("回合醒来")
+                .ToString());
+
 
             SleepTimeDict[pokemon.ID] = RandomService.game.Int(1, 4);
         }
@@ -338,8 +360,13 @@ namespace PokemonBattele
             bool flag = 0 == SleepTimeDict[pokemon.ID];
             if(!flag)
             {
-                DebugHelper.LogFormat("{0}还在睡觉不能行动,还有{1}回合醒来", pokemon.Ename, SleepTimeDict[pokemon.ID]);
-                
+                DebugHelper.Log(
+                 new StringBuilder(40)
+                 .AppendFormat("{0}还在睡觉不能行动,还有", pokemon.Ename)
+                 .Append(SleepTimeDict[pokemon.ID])
+                 .Append("回合醒来")
+                 .ToString());
+
             }
             return flag;
         }

@@ -302,9 +302,15 @@ namespace PokemonBattele
 					}
 				}
 			}
-				
 
-			DebugHelper.LogFormat("{0}的技能{1}对{2}造成{3}伤害", attackPokemon.Ename, skill.sname,defencePokemon.Ename, damage);
+
+
+			DebugHelper.Log(
+			   new StringBuilder(40)
+			   .AppendFormat("{0}的技能{1}对{2}造成", attackPokemon.Ename, skill.sname, defencePokemon.Ename)
+			   .Append(damage)
+			   .Append("伤害")
+			   .ToString());
 
 			//考虑特性
 			if (AbilityManager.AbilityImpacts.ContainsKey(defencePokemon.ShowAbility))

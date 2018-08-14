@@ -41,9 +41,13 @@ namespace PokemonBattele
                 this.CatachCorrection,
                 1
                 ,out shadeNum,out issuccess);
-            DebugHelper.LogFormat("正在捕捉精灵{0}，{3}振动了{1}次，最后捕捉{2}了",
-                pokemon.Ename, shadeNum,issuccess?"成功":"失败", BagItemName);
-
+            
+            DebugHelper.Log(
+               new StringBuilder(40)
+               .AppendFormat("正在捕捉精灵{0}，{1}振动了", pokemon.Ename, BagItemName)
+               .Append(shadeNum)
+               .AppendFormat("次，最后捕捉{0}了", issuccess ? "成功" : "失败")
+               .ToString());
 
             pokemon.transform.GetComponent<Rigidbody>().useGravity = false;
             //精灵变小
