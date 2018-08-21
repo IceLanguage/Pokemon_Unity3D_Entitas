@@ -50,7 +50,7 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
         BattleStateForBattle.InitEvent += BattleRound;
 
         
-        //var trainer = context.playerData.scriptableObject;
+        //
     }
     
     public bool CanBattle
@@ -155,7 +155,7 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
             AbilityManager.AbilityImpacts[EnemyCurPokemonData.ShowAbility]
                 .OnBeCalled(EnemyCurPokemonData);
         battleState = new BattleStateForPlayer();
-        
+        trainer = context.playerData.scriptableObject;
     }
     public void EndBattleEvent()
     {
