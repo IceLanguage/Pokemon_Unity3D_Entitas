@@ -50,7 +50,7 @@ public sealed partial class BattleController : SingletonMonobehavior<BattleContr
         BattleStateForBattle.InitEvent += BattleRound;
 
         
-        var trainer = context.playerData.scriptableObject;
+        //var trainer = context.playerData.scriptableObject;
     }
     
     public bool CanBattle

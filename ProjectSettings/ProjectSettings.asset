@@ -11,7 +11,7 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: DefaultCompany
+  companyName: DefaultCompany2
   productName: Pokemon_Unity3D_Entitas
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
@@ -39,7 +39,7 @@ PlayerSettings:
     width: 1
     height: 1
   m_SplashScreenLogos: []
-  m_VirtualRealitySplashScreen: {fileID: 2800000, guid: ef963ceaff171e2419fca7b528e4c962,
+  m_VirtualRealitySplashScreen: {fileID: 2800000, guid: 163a86c078adc7644b739aae18adc326,
     type: 3}
   m_HolographicTrackingLossScreen: {fileID: 0}
   defaultScreenWidth: 1024
@@ -160,6 +160,7 @@ PlayerSettings:
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
     Android: com.PokemonBattle
+    Standalone: com.Company.Pokemon
   buildNumber: {}
   AndroidBundleVersionCode: 1
   AndroidMinSdkVersion: 16
@@ -262,7 +263,7 @@ PlayerSettings:
   - m_BuildTarget: 
     m_Icons:
     - serializedVersion: 2
-      m_Icon: {fileID: 2800000, guid: ef963ceaff171e2419fca7b528e4c962, type: 3}
+      m_Icon: {fileID: 2800000, guid: 163a86c078adc7644b739aae18adc326, type: 3}
       m_Width: 128
       m_Height: 128
       m_Kind: 0
