@@ -21,6 +21,18 @@ namespace PokemonBattele
         BadlyPoison
     }
 
+    public class AbnormalStateEnum_EnumComare : IEqualityComparer<AbnormalStateEnum>
+    {
+        public bool Equals(AbnormalStateEnum x, AbnormalStateEnum y)
+        {
+            return x == y;
+        }
+
+        public int GetHashCode(AbnormalStateEnum obj)
+        {
+            return (int)obj;
+        }
+    }
     /// <summary>
     /// 异常变化
     /// </summary>

@@ -18,6 +18,19 @@ namespace PokemonBattele
         WaitNextAround,
         DisableSkill
     }
+
+    public class ChangeStateEnumForPokemon_EnumComare : IEqualityComparer<ChangeStateEnumForPokemon>
+    {
+        public bool Equals(ChangeStateEnumForPokemon x, ChangeStateEnumForPokemon y)
+        {
+            return x == y;
+        }
+
+        public int GetHashCode(ChangeStateEnumForPokemon obj)
+        {
+            return (int)obj;
+        }
+    }
     //向精灵施加的状态变化
     abstract class ChangeStateForPokemon : ChangeState
     {

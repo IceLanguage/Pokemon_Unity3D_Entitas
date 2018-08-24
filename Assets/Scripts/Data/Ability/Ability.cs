@@ -29,7 +29,18 @@ namespace PokemonBattele
         
 
     }
+    public class AbilityType_EnumComare : IEqualityComparer<AbilityType>
+    {
+        public bool Equals(AbilityType x, AbilityType y)
+        {
+            return x == y;
+        }
 
+        public int GetHashCode(AbilityType obj)
+        {
+            return (int)obj;
+        }
+    }
     public enum AbilityType
     {
         NULL=0

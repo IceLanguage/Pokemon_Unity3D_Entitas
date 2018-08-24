@@ -112,4 +112,17 @@ namespace PokemonBattele
         内敛,
         乐天
     }
+
+    public class NatureType_EnumComare : IEqualityComparer<NatureType>
+    {
+        public bool Equals(NatureType x, NatureType y)
+        {
+            return x == y;
+        }
+
+        public int GetHashCode(NatureType obj)
+        {
+            return (int)obj;
+        }
+    }
 }
